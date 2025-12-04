@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,6 +37,32 @@
 
   .btn-tertiary {
     @apply btn border-none shadow-none text-muted hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
+  }
+
+  .serena-headline-lg {
+    @apply font-serena text-white text-[1.6rem] leading-[1.75rem] font-normal tracking-[0.0375rem];
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.75);
+    animation: serena-slide-in 0.8s ease-out forwards;
+  }
+
+  .serena-headline-md {
+    @apply font-serena text-white text-[1.2rem] leading-[1.75rem] font-normal tracking-[0.0375rem];
+    animation: serena-slide-in 0.8s ease-out forwards;
+  }
+
+  .serena-headline-md-highlight {
+    @apply font-serena text-white text-[0.75rem] leading-[1rem] font-light tracking-[0.025rem];
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 1);
+    animation: serena-slide-in 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+  }
+
+  .serena-button {
+    @apply font-serena text-white text-sm font-light tracking-[0.0375rem];
+  }
+
+  .serena-hero-media {
+    animation: serena-scale-up 1s ease-out forwards;
   }
 }
 
@@ -90,3 +118,37 @@
 .dd *:first-child {
   margin-top: 0;
 }
+
+@keyframes serena-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+
+  30% {
+    opacity: 0.3;
+  }
+
+  70% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes serena-scale-up {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
