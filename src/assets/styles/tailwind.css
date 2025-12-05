@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -19,6 +21,20 @@
   }
   .text-muted {
     color: var(--aw-color-text-muted);
+  }
+  
+  /* Serena Gradient Text */
+  .serena-gradient-text {
+    @apply bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent;
+  }
+  
+  /* Glassmorphism Effects */
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-[20px] border border-white/15 rounded-3xl;
+  }
+  
+  .glass-card-premium {
+    @apply backdrop-blur-[42px] bg-gradient-to-b from-[rgba(43,255,255,0.12)] via-[rgba(43,255,255,0.04)] to-[rgba(43,255,255,0.07)] border border-[rgba(43,255,255,0.32)] rounded-[32px];
   }
 }
 
@@ -148,6 +164,55 @@
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes serena-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes serena-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes serena-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(202, 241, 248, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(202, 241, 248, 0.8);
+  }
+}
+
+@keyframes serena-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive adjustments for Serena */
+@media (max-width: 768px) {
+  .serena-headline-lg {
+    @apply text-[1.5rem] leading-[1.6rem];
+  }
+  
+  .serena-headline-md {
+    @apply text-[1rem] leading-[1.4rem];
   }
 }
 

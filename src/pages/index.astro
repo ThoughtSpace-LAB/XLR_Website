@@ -1,94 +1,598 @@
 ---
 import Layout from '~/layouts/Layout.astro';
 
-import heroBg from '~/assets/images/serena/Hero_BG.png';
-import heroBg2 from '~/assets/images/serena/Hero_BG_2.png';
-import heroVideo from '~/assets/images/serena/Hero_BG_vid.mp4?url';
+import heroBg from '~/assets/images/serena/hero-bg.jpg';
+import mainBg from '~/assets/images/serena/main-bg.jpg';
+import gradientBall from '~/assets/images/serena/gradient-ball.png';
 import logoIcon from '~/assets/icons/serena/LOGO.svg?url';
 import nextIcon from '~/assets/icons/serena/icon-next.svg?url';
+import moonPhase1 from '~/assets/icons/serena/moon-phase-1.png';
+import moonPhase2 from '~/assets/icons/serena/moon-phase-2.png';
+import iconLoader from '~/assets/icons/serena/icon-loader.svg?url';
+import iconSend from '~/assets/icons/serena/icon-send.svg?url';
+import iconAnalysis from '~/assets/icons/serena/icon-analysis.svg?url';
+import iconMoonCard from '~/assets/icons/serena/icon-moon-card.svg?url';
+import pricingBasic from '~/assets/icons/serena/pricing-basic.svg?url';
+import pricingPremium from '~/assets/icons/serena/pricing-premium.svg?url';
+import iconTick from '~/assets/icons/serena/icon-tick.svg?url';
+import iconX from '~/assets/icons/serena/icon-x.svg?url';
+import iconInstagram from '~/assets/icons/serena/icon-instagram.svg?url';
+import iconLinkedin from '~/assets/icons/serena/icon-linkedin.svg?url';
 
 const metadata = {
-  title: 'SERENA — 您的私人神谕应用',
-  description: 'SERENA 通过直觉式提示和个性化洞察，为生活中的每个瞬间提供更清晰的方向。',
+  title: 'SERENA — Your Personal Oracle App',
+  description: 'SERENA provides clarity, answers, and guidance through intuitive prompts and personalized insights.',
   ignoreTitleTemplate: true,
 };
 
 const letters = ['S', 'E', 'R', 'E', 'N', 'A'];
+
+const howItWorksSteps = [
+  {
+    num: '01',
+    title: 'The Intent',
+    description: 'Anchoring your intent into the cosmic data stream. Simply ask your question to begin the alignment process. Our interface connects directly to celestial algorithms.',
+  },
+  {
+    num: '02',
+    title: 'Energy Analysis',
+    description: 'Our AI engine weaves ancient algorithms with real-time star charts to calculate your unique spiritual coordinates, processing thousands of celestial data points.',
+  },
+  {
+    num: '03',
+    title: 'The Revelation',
+    description: 'Clarity revealed through a personalized spiritual reading, delivered with crystal clear insight. Your destiny mapped out in high fidelity resolution.',
+  },
+];
+
+const featureCards = [
+  {
+    subtitle: 'Foresight Beyond the Moment',
+    title: 'Sense the Hidden',
+    description: 'This system helps you notice what others overlook. Whether it\'s a business about to shift, a partner growing distant, or a plan losing energy, it lets you see the quiet premonitions of what\'s to come.',
+  },
+  {
+    subtitle: 'Discover the Door Behind the Wall',
+    title: 'Life Foresight',
+    description: 'This feature illuminates those hidden openings — a career pivot, an unexpected connection, a decision that could turn failure into freedom. It helps you recognize that destiny often hides behind detours.',
+  },
+  {
+    subtitle: 'Move Ahead of Time',
+    title: 'Reveal Opportunities',
+    description: 'This feature allows you to plan with awareness — to choose your timing, your alliances, your moments of silence. In love, in business, in every crossroad, you can act not reactively, but with composure and clarity.',
+  },
+];
+
+const basicFeatures = [
+  'Entry-level spiritual readings',
+  'Basic daily guidance',
+  'Communication tools',
+  'Reporting and analytics',
+];
+
+const premiumFeatures = [
+  'No daily limits',
+  'Priority response',
+  'Premium insights & advanced predictions',
+];
 ---
 
 <Layout metadata={metadata}>
-  <div class="relative min-h-screen bg-white flex flex-col items-center text-white font-serena overflow-hidden">
-    <header class="w-full px-4 py-6 md:px-8 absolute top-0 z-20 flex justify-center">
-      <div class="w-full max-w-4xl h-14 relative opacity-95 bg-white/10 rounded-full shadow-lg outline outline-1 outline-offset-[-1px] outline-white/25 backdrop-blur">
-        <div class="w-full h-full flex justify-between items-center px-6 md:px-12">
-          <div class="flex items-center gap-3">
-            <img src={logoIcon} alt="Serena logo" class="h-6 w-6 object-contain" loading="lazy" decoding="async" />
-            <span class="font-semibold text-lg tracking-[0.2em]">SERENA</span>
+  <div class="relative bg-white flex flex-col text-white font-serena overflow-x-hidden">
+    
+    <!-- Section 1: Landing Page / Hero -->
+    <section class="relative min-h-screen flex flex-col">
+      <!-- Navigation -->
+      <header class="w-full px-4 py-6 md:px-[18px] md:py-[30px] absolute top-0 z-30 flex justify-center">
+        <div class="w-full max-w-[900px] h-14 relative opacity-[0.98] bg-white/[0.14] rounded-full shadow-[0px_8px_24px_0px_rgba(0,0,0,0.15)] border border-white/25 backdrop-blur-md">
+          <div class="w-full h-full flex justify-between items-center px-6">
+            <div class="flex items-center gap-5 opacity-90">
+              <img src={logoIcon} alt="Serena logo" class="h-[25px] w-[25px] object-contain" loading="lazy" decoding="async" />
+              <span class="font-bold text-xs tracking-[1.8px] uppercase">SERENA</span>
+            </div>
+            <nav class="hidden md:flex items-center justify-center gap-0 text-[13px] tracking-[0.325px] text-white/70">
+              <a href="#feature" class="w-[120px] text-center hover:text-white transition-colors">FEATURE</a>
+              <a href="#price" class="w-[105px] text-center hover:text-white transition-colors">PRICE</a>
+              <a href="#certification" class="w-[120px] text-center hover:text-white transition-colors">CERTIFICATION</a>
+            </nav>
+            <button
+              type="button"
+              class="h-[39.5px] px-[18px] bg-white/20 rounded-full border border-white/20 shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/30 transition-all text-[13px]"
+            >
+              Log in
+            </button>
           </div>
-          <nav class="hidden md:flex items-center gap-12 text-xs tracking-[0.35em]">
-            <a href="#feature" class="uppercase hover:underline">Feature</a>
-            <a href="#price" class="uppercase hover:underline">Price</a>
-            <a href="#certification" class="uppercase hover:underline">Certification</a>
-          </nav>
-          <button
-            type="button"
-            class="inline-flex w-24 h-9 items-center justify-center bg-black/20 rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/20 hover:outline hover:outline-white transition"
-          >
-            <span class="serena-button">Log in</span>
-          </button>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <div class="pointer-events-none absolute top-32 md:top-36 left-1/2 -translate-x-1/2 grid grid-cols-2 grid-rows-3 gap-8 md:gap-12 place-items-center z-10 w-full max-w-xs sm:max-w-sm">
-      {letters.map((letter) => (
-        <span class="serena-headline-md" aria-hidden="true">{letter}</span>
-      ))}
-    </div>
-
-    <section class="w-full flex-1 relative bg-black flex flex-col justify-end items-center overflow-hidden pt-32">
-      <picture class="absolute inset-0 block w-full h-full">
-        <source srcset={heroBg2.src} media="(min-width: 1024px)" />
+      <!-- Hero Background -->
+      <div class="absolute inset-0 overflow-hidden">
         <img
           src={heroBg.src}
           width={heroBg.width}
           height={heroBg.height}
           alt="SERENA hero background"
-          class="serena-hero-media absolute inset-0 w-full h-full object-cover"
+          class="absolute inset-0 w-full h-full object-cover animate-serena-scale"
           loading="eager"
           decoding="async"
         />
-      </picture>
+      </div>
 
-      <video
-        src={heroVideo}
-        autoplay
-        muted
-        loop
-        playsinline
-        class="hidden lg:block absolute inset-0 w-full h-full object-cover opacity-20"
-      ></video>
+      <!-- SERENA Letters with Glass Rectangle -->
+      <div class="pointer-events-none absolute top-[120px] left-1/2 -translate-x-1/2 z-10 flex items-start justify-center gap-0">
+        <!-- Left Column: S R N -->
+        <div class="flex flex-col items-end gap-[180px] pr-4 pt-8">
+          <span class="text-white text-[22px] font-medium tracking-[0.44px] animate-fade-in" style="animation-delay: 0s">S</span>
+          <span class="text-white text-[22px] font-medium tracking-[0.44px] animate-fade-in" style="animation-delay: 0.2s">R</span>
+          <span class="text-white text-[22px] font-medium tracking-[0.44px] animate-fade-in" style="animation-delay: 0.4s">N</span>
+        </div>
+        
+        <!-- Glass Rectangle in Center -->
+        <div class="relative w-[180px] h-[620px] overflow-hidden">
+          <!-- Gradient borders -->
+          <div class="absolute inset-0 rounded-sm" style="background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.3) 100%); padding: 1px;">
+            <div class="w-full h-full bg-white/[0.08] backdrop-blur-[12px] rounded-sm"></div>
+          </div>
+          <!-- Inner subtle glow -->
+          <div class="absolute inset-[1px] bg-gradient-to-b from-white/10 via-transparent to-white/10 rounded-sm"></div>
+        </div>
+        
+        <!-- Right Column: E E A -->
+        <div class="flex flex-col items-start gap-[180px] pl-4 pt-8">
+          <span class="text-white text-[22px] font-medium tracking-[0.44px] animate-fade-in" style="animation-delay: 0.1s">E</span>
+          <span class="text-white text-[22px] font-medium tracking-[0.44px] animate-fade-in" style="animation-delay: 0.3s">E</span>
+          <span class="text-white text-[22px] font-medium tracking-[0.44px] animate-fade-in" style="animation-delay: 0.5s">A</span>
+        </div>
+      </div>
 
-      <div class="relative z-10 w-full px-4 md:px-16 pb-12 md:pb-20 flex flex-col justify-end items-start gap-8 md:gap-12">
-        <div class="w-full md:w-2/5 flex flex-col gap-4">
-          <h1 class="serena-headline-lg">
-            Your personal oracle app for clarity, answers and guidance.
+      <!-- Hero Content -->
+      <div class="relative z-10 flex-1 flex flex-col justify-end px-5 md:px-20 pb-[150px] gap-[100px]">
+        <div class="w-full max-w-[500px] flex flex-col gap-5">
+          <h1 class="text-[36px] leading-[36px] font-medium tracking-[0.6px] text-white/80 animate-slide-left" style="text-shadow: 0px 4px 4px rgba(0,0,0,0.25);">
+            Your personal oracle app for clarity, answers, and guidance.
           </h1>
-          <p class="serena-headline-md-highlight">
-            This app reads the energy behind your moments, questions, and decisions, turns it into clear and actionable guidance.
-            Through intuitive prompts and personalized insights, it helps you understand what's shifting in your life, why it
-            matters, and how to move forward with confidence.
+          <p class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white animate-slide-left" style="text-shadow: 0px 4px 4px rgba(0,0,0,0.5); animation-delay: 0.2s;">
+            This app reads the energy behind your moments, questions, and decisions, turns it into clear and actionable guidance.<br/>
+            Through intuitive prompts and personalized insights, it helps you understand what's shifting in your life, why it matters, and how to move forward with confidence.
           </p>
         </div>
 
-        <button
-          type="button"
-          class="inline-flex items-center gap-3 py-3 px-6 bg-white/20 rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-black/20 hover:outline hover:outline-white transition"
-        >
-          <span class="serena-button">Begin Experience</span>
-          <img src={nextIcon} alt="Next icon" class="h-4 w-4" loading="lazy" decoding="async" />
-        </button>
+        <div>
+          <button
+            type="button"
+            class="inline-flex items-center gap-2 h-12 px-6 bg-[rgba(212,212,216,0.4)] rounded-full border border-white hover:bg-white/30 transition-all animate-slide-left"
+            style="animation-delay: 0.4s;"
+          >
+            <span class="text-base text-white">Begin Experience</span>
+            <img src={nextIcon} alt="" class="w-5 h-5" loading="lazy" decoding="async" />
+          </button>
+        </div>
       </div>
     </section>
+
+    <!-- Section 2: Main Page with Sticky Scroll -->
+    <section class="relative min-h-[200vh] bg-gradient-to-b from-[#192619] via-[#192619] to-[#09a791]">
+      <!-- Background Image -->
+      <div class="absolute top-0 left-0 right-0 h-[558px] overflow-hidden">
+        <img
+          src={mainBg.src}
+          width={mainBg.width}
+          height={mainBg.height}
+          alt=""
+          class="absolute top-[-22.58%] left-[-9.75%] w-[110%] h-[123%] object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#192619]"></div>
+      </div>
+
+      <!-- Sticky Gradient Ball -->
+      <div class="sticky top-[267px] h-[700px] flex items-end justify-center z-10 pointer-events-none">
+        <div class="w-[467px] h-[400px] flex items-center justify-center">
+          <div class="w-[400px] h-[400px] rounded-full bg-white flex items-center justify-center overflow-hidden">
+            <img
+              src={gradientBall.src}
+              width={gradientBall.width}
+              height={gradientBall.height}
+              alt=""
+              class="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Headline -->
+      <div class="absolute top-[400px] left-0 right-0 px-20 z-20">
+        <div class="flex flex-col items-center gap-[46px] py-5">
+          <h2 class="text-[36px] leading-[36px] font-medium tracking-[0.6px] text-white text-center">
+            In the midst of uncertainty, find your own answer.
+          </h2>
+          <div class="w-[480px] h-[480px] rounded-full bg-gradient-to-r from-[#192619] to-[#154e3e] blur-[10px] rotate-90"></div>
+        </div>
+      </div>
+
+      <!-- Small Text (Sticky) -->
+      <div class="sticky top-[200px] h-[700px] flex items-end justify-center z-20 pointer-events-none">
+        <div class="h-[400px] flex items-center justify-center">
+          <p class="w-[440px] text-xl leading-[26px] font-medium tracking-[0.4px] text-white text-center">
+            In the days of hesitation<br/>
+            I am here to help you seek answer of future<br/>
+            I hope, in the end, you will surpass me<br/>
+            become the master of your own destiny
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: How It Works (Astrology Chatbot UI) -->
+    <section id="feature" class="relative bg-gradient-to-b from-[#09a892] via-[#1a6774] to-[#023344] px-5 md:px-20 py-[50px] md:py-[100px]">
+      <!-- Header -->
+      <div class="flex flex-col items-center gap-[30px] px-4 md:px-[100px] lg:px-[300px] py-[30px] md:py-[50px] mb-10 md:mb-20">
+        <h2 class="text-[32px] md:text-[60px] leading-[40px] md:leading-[70px] font-medium tracking-[0.6px] text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent">
+          How It Works
+        </h2>
+        <p class="text-base md:text-xl leading-[24px] md:leading-[26px] font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] text-center max-w-[680px]">
+          A seamless journey from question to cosmic revelation, powered by the fusion of ancient wisdom and artificial intelligence.
+        </p>
+      </div>
+
+      <!-- Timeline Content - Desktop -->
+      <div class="relative hidden lg:flex gap-8">
+        <!-- Left: Steps -->
+        <div class="flex-1 flex flex-col gap-[150px] pr-[100px]">
+          {howItWorksSteps.map((step, index) => (
+            <div class="h-[700px] overflow-hidden">
+              <div class="sticky top-20 flex flex-col gap-3">
+                <p class="text-lg leading-[26px] font-normal tracking-[0.2px] text-white/70">
+                  {step.num}
+                </p>
+                <h3 class="text-[40px] leading-[52px] font-medium tracking-[0.2px] text-white capitalize">
+                  {step.title}
+                </h3>
+                <p class="text-sm leading-[22px] font-normal tracking-[0.4px] text-[rgba(206,250,254,0.8)] max-w-[510px]">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Center: Timeline Line + Moon Icons -->
+        <div class="relative flex flex-col gap-[800px] items-center">
+          <!-- Gradient Line -->
+          <div class="absolute top-0 bottom-0 w-[2px] bg-gradient-to-b from-[rgba(0,184,219,0.5)] via-[rgba(0,184,219,0.2)] to-transparent"></div>
+          
+          <!-- Moon Phases -->
+          {[moonPhase1, moonPhase2, null].map((moon, index) => (
+            <div class="relative z-10 w-[50px] h-[50px] rounded-full bg-[#023344] border border-[#caf1f8] shadow-[0px_0px_20px_0px_#caf1f8] flex items-center justify-center">
+              {moon ? (
+                <img src={moon.src} alt="" class="w-full h-full object-contain" loading="lazy" decoding="async" />
+              ) : (
+                <div class="w-5 h-5 rounded-full bg-amber-500 shadow-[0px_0px_15px_0px_#f59e0b]"></div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <!-- Right: Sticky Visual Card -->
+        <div class="relative w-[560px]">
+          <div class="sticky top-20 h-[800px] bg-white/[0.03] rounded-3xl border border-white/15 shadow-[0px_20px_40px_0px_rgba(0,0,0,0.2),inset_0px_0px_40px_0px_rgba(9,168,146,0.1)] overflow-hidden">
+            <!-- Corner Dots -->
+            <div class="absolute top-4 left-4 w-2 h-2 rounded-full bg-white/20"></div>
+            <div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-white/20"></div>
+            <div class="absolute bottom-4 left-4 w-2 h-2 rounded-full bg-white/20"></div>
+            <div class="absolute bottom-4 right-4 w-2 h-2 rounded-full bg-white/20"></div>
+            
+            <!-- Top Gradient Line -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50"></div>
+
+            <!-- Chat Visual Content -->
+            <div class="flex flex-col gap-[60px] h-full justify-end px-10 py-[100px]">
+              <div class="flex flex-col gap-3">
+                <div class="bg-white/10 rounded-tr-[10px] rounded-bl-[10px] rounded-br-[10px] p-3">
+                  <p class="text-sm leading-[22px] tracking-[0.4px] text-white/80">
+                    What do the stars say about my career path this month?
+                  </p>
+                </div>
+                <div class="flex justify-end">
+                  <div class="bg-[rgba(9,168,146,0.3)] border border-[rgba(9,168,146,0.5)] rounded-tl-[10px] rounded-bl-[10px] rounded-br-[10px] p-3">
+                    <div class="flex items-center gap-2">
+                      <img src={iconLoader} alt="" class="w-3 h-3 animate-spin" loading="lazy" decoding="async" />
+                      <span class="text-sm leading-[22px] tracking-[0.4px] text-[#cefafe]">Aligning with cosmic data...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="w-full h-[38px] bg-white/5 border border-white/10 rounded-full flex items-center justify-between px-5">
+                <span class="text-sm tracking-[0.4px] text-white/30">Ask the cosmos...</span>
+                <div class="w-7 h-[25px] bg-[rgba(0,184,219,0.2)] rounded-full flex items-center justify-center">
+                  <img src={iconSend} alt="" class="w-3 h-3" loading="lazy" decoding="async" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Content - Mobile -->
+      <div class="lg:hidden flex flex-col gap-12">
+        {howItWorksSteps.map((step, index) => (
+          <div class="flex flex-col gap-4 px-4">
+            <div class="flex items-center gap-4">
+              <div class="w-[50px] h-[50px] rounded-full bg-[#023344] border border-[#caf1f8] shadow-[0px_0px_20px_0px_#caf1f8] flex items-center justify-center flex-shrink-0">
+                {index === 2 ? (
+                  <div class="w-5 h-5 rounded-full bg-amber-500 shadow-[0px_0px_15px_0px_#f59e0b]"></div>
+                ) : (
+                  <img src={index === 0 ? moonPhase1.src : moonPhase2.src} alt="" class="w-full h-full object-contain" loading="lazy" decoding="async" />
+                )}
+              </div>
+              <div>
+                <p class="text-lg leading-[26px] font-normal tracking-[0.2px] text-white/70">{step.num}</p>
+                <h3 class="text-2xl leading-[32px] font-medium tracking-[0.2px] text-white capitalize">{step.title}</h3>
+              </div>
+            </div>
+            <p class="text-sm leading-[22px] font-normal tracking-[0.4px] text-[rgba(206,250,254,0.8)]">
+              {step.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section 4: What Will Be Seen (Moon Page) -->
+    <section class="relative bg-gradient-to-b from-[#023344] via-[#1a6774] to-[#09a892] px-5 md:px-20 py-[100px] md:py-[300px] flex flex-col gap-[100px] md:gap-[200px] items-center">
+      <!-- Header -->
+      <div class="flex flex-col items-center gap-[20px] md:gap-[30px] px-4 md:px-[100px] lg:px-[300px]">
+        <h2 class="text-[32px] md:text-[60px] leading-[40px] md:leading-[70px] font-medium tracking-[0.6px] text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent">
+          What will be seen
+        </h2>
+        <p class="text-base md:text-xl leading-[24px] md:leading-[26px] font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] text-center max-w-[680px]">
+          A clear reading of your energy, revealing the patterns, timing, and guidance shaping your next steps.
+        </p>
+      </div>
+
+      <!-- Feature Cards -->
+      <div class="w-full flex flex-col gap-[80px] md:gap-[200px]">
+        {featureCards.map((card, index) => (
+          <div class="w-full flex justify-start">
+            <div class="w-full max-w-[436px] h-auto min-h-[360px] relative rounded-3xl overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+              <!-- Glassy Background -->
+              <div class="absolute inset-0 rounded-3xl overflow-hidden">
+                <div class="absolute inset-0 bg-[rgba(38,76,89,0.2)] backdrop-blur-[40px] rounded-[25px] shadow-[1px_1px_10px_2px_rgba(26,103,116,0.53),inset_1px_1px_2px_0px_rgba(255,255,255,0.5),inset_-5px_-5px_20px_5px_rgba(160,255,213,0.1)]"></div>
+              </div>
+              
+              <div class="relative z-10 h-full flex flex-col justify-between px-5 pt-10 pb-5">
+                <div class="flex flex-col gap-3 text-white">
+                  <div class="flex flex-col gap-2">
+                    <span class="text-xs md:text-sm font-medium tracking-[2px]">{card.subtitle}</span>
+                    <h3 class="text-[28px] md:text-[36px] leading-[32px] md:leading-[36px] font-medium tracking-[0.6px]">{card.title}</h3>
+                  </div>
+                  <p class="text-sm leading-[22px] tracking-[0.4px]">
+                    {card.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section 5: Registration & Pricing -->
+    <section id="price" class="relative bg-gradient-to-b from-[#09a791] to-[#082625] px-5 md:px-20 py-[100px] md:py-[276px] flex flex-col gap-[100px] md:gap-[300px] items-center">
+      <!-- Ask Section -->
+      <div class="w-full flex flex-col items-center gap-5">
+        <div class="w-full flex flex-col items-center justify-center py-5 px-4">
+          <h2 class="text-[24px] md:text-[36px] leading-[32px] md:leading-[36px] font-medium tracking-[0.6px] text-white text-center">
+            You are not here to receive an answer.<br/>
+            You are here to remember that you are the answer.
+          </h2>
+        </div>
+
+        <div class="w-full max-w-[480px] bg-black/10 backdrop-blur-[40px] rounded-[25px] overflow-hidden px-6 md:px-10 py-[40px] md:py-[60px] flex flex-col gap-8 md:gap-10 items-center">
+          <!-- Input Box -->
+          <div class="w-full h-11 bg-gradient-to-r from-[rgba(40,51,53,0.12)] to-[rgba(119,149,155,0.12)] rounded-full border border-[#1e8e5f] shadow-[0px_-4px_17.2px_0px_rgba(160,255,213,0.6),inset_3px_3px_30px_0px_rgba(255,255,255,0.2)] flex items-center justify-between px-[14px]">
+            <span class="text-xs leading-4 tracking-[0.2px] text-white/50">Your mail box</span>
+            <button class="h-8 px-3 bg-black/20 rounded-[14px] shadow-lg text-xs text-white hover:bg-black/30 transition-colors">
+              Try for free
+            </button>
+          </div>
+
+          <!-- Title -->
+          <div class="flex flex-col items-center gap-5 text-white text-center">
+            <h3 class="font-['Baskervville',serif] text-[28px] md:text-[36px] leading-7 tracking-[0px]">Ask Now</h3>
+            <p class="text-sm leading-[22px] tracking-[0.4px]">
+              Each inquiry is a mirror<br/>
+              reflecting who you are and who you are becoming.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing Cards -->
+      <div class="flex flex-col md:flex-row gap-8 items-center justify-center w-full">
+        <!-- Basic Plan -->
+        <div class="w-full max-w-[400px] h-auto md:h-[700px] backdrop-blur-[20px] rounded-[32px] overflow-hidden p-6 md:p-10 flex flex-col gap-8 md:gap-10">
+          <div class="flex flex-col gap-6 md:gap-8">
+            <div class="flex flex-col gap-4 md:gap-6">
+              <img src={pricingBasic} alt="" class="w-10 h-10" loading="lazy" decoding="async" />
+              <div class="flex flex-col gap-1 text-white">
+                <h4 class="font-['Space_Grotesk',sans-serif] text-xl font-medium leading-7">Basic</h4>
+                <p class="font-['Space_Grotesk',sans-serif] text-sm font-normal leading-5">
+                  One free trial.<br/>
+                  Weeks 2–3, get one free trial on weekends
+                </p>
+              </div>
+            </div>
+            <p class="font-['Space_Grotesk',sans-serif] text-4xl md:text-5xl font-medium leading-[56px] text-white">Free</p>
+          </div>
+
+          <button class="w-full h-11 bg-gradient-to-b from-white/[0.08] to-transparent border border-white/10 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition-colors">
+            Get Started
+          </button>
+
+          <div class="w-full max-w-[283px] h-[1px] bg-white/20"></div>
+
+          <div class="flex flex-col gap-4">
+            <p class="font-semibold text-base leading-9 tracking-[0.6px] text-white">What you will get</p>
+            <div class="flex flex-col gap-4">
+              {basicFeatures.map((feature) => (
+                <div class="flex items-center gap-2">
+                  <img src={iconTick} alt="" class="w-4 h-4 flex-shrink-0" loading="lazy" decoding="async" />
+                  <span class="text-sm leading-[22px] tracking-[0.4px] text-white/80">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="w-full max-w-[370px] h-auto md:h-[700px] backdrop-blur-[42px] bg-gradient-to-b from-[rgba(43,255,255,0.12)] via-[rgba(43,255,255,0.04)] to-[rgba(43,255,255,0.07)] border border-[rgba(43,255,255,0.32)] rounded-[32px] overflow-hidden p-6 md:p-10 flex flex-col gap-8 md:gap-10">
+          <div class="flex flex-col gap-6 md:gap-8">
+            <div class="flex flex-col gap-4 md:gap-6">
+              <img src={pricingPremium} alt="" class="w-10 h-10" loading="lazy" decoding="async" />
+              <div class="flex flex-col gap-1">
+                <h4 class="font-['Space_Grotesk',sans-serif] text-xl font-medium leading-7 text-white">Premium</h4>
+                <p class="font-['Space_Grotesk',sans-serif] text-sm font-normal leading-5 text-white/80">
+                  Unlocks a full reading session
+                </p>
+              </div>
+            </div>
+            <div class="flex items-end gap-1">
+              <p class="font-['Space_Grotesk',sans-serif] text-4xl md:text-5xl font-medium leading-[56px] text-white">$10</p>
+              <span class="font-['Space_Grotesk',sans-serif] text-sm font-normal leading-6 text-white/80">/ per month</span>
+            </div>
+          </div>
+
+          <button class="w-full h-11 bg-gradient-to-b from-[#2bffff] to-[#1a9999] rounded-xl text-sm font-bold text-black hover:opacity-90 transition-opacity shadow-[0_0_6px_rgba(43,255,255,0.5)]">
+            Get Started
+          </button>
+
+          <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-[rgba(43,255,255,0.5)] to-transparent"></div>
+
+          <div class="flex flex-col gap-4">
+            <p class="font-semibold text-base leading-9 tracking-[0.6px] text-white">What you will get</p>
+            <div class="flex flex-col gap-4">
+              {premiumFeatures.map((feature) => (
+                <div class="flex items-center gap-2">
+                  <img src={iconTick} alt="" class="w-4 h-4 flex-shrink-0" loading="lazy" decoding="async" />
+                  <span class="text-sm leading-[22px] tracking-[0.4px] text-white/80">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Footer -->
+    <footer class="bg-black px-5 md:px-20 py-8 md:py-10 flex flex-col items-center justify-end">
+      <div class="w-full flex flex-col md:flex-row gap-10 md:gap-[120px] pt-0">
+        <!-- Left Content -->
+        <div class="flex-1 flex flex-col gap-5">
+          <div class="flex flex-col gap-[10px] max-w-[690px]">
+            <div class="flex items-center">
+              <span class="text-xl leading-[26px] font-medium tracking-[0.4px] text-white">SERENA</span>
+            </div>
+            <p class="text-[15px] leading-[18px] font-medium tracking-[0.4px] text-white/50">
+              We turn personal energy insights into clear, practical guidance that helps people make aligned decisions and move forward with confidence.
+            </p>
+          </div>
+          
+          <!-- Social Links -->
+          <nav class="flex items-center gap-6">
+            <a href="#" class="w-6 h-6 hover:opacity-80 transition-opacity">
+              <img src={iconX} alt="X (Twitter)" class="w-full h-full" loading="lazy" decoding="async" />
+            </a>
+            <a href="#" class="w-6 h-6 hover:opacity-80 transition-opacity">
+              <img src={iconInstagram} alt="Instagram" class="w-full h-full" loading="lazy" decoding="async" />
+            </a>
+            <a href="#" class="w-6 h-6 hover:opacity-80 transition-opacity">
+              <img src={iconLinkedin} alt="LinkedIn" class="w-full h-full" loading="lazy" decoding="async" />
+            </a>
+          </nav>
+
+          <p class="text-sm font-medium leading-[1.45] tracking-[-0.07px] text-white/50">
+            copyright 2025 @SERENA
+          </p>
+        </div>
+
+        <!-- Right Navigation -->
+        <div class="flex gap-10">
+          <nav class="flex flex-col gap-2 w-[130px]">
+            <div class="pb-4">
+              <span class="text-xl leading-[22px] font-semibold tracking-[0.6px] text-white">Features</span>
+            </div>
+            <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Core features</a>
+            <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Pro experience</a>
+            <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Integrations</a>
+          </nav>
+
+          <nav class="flex flex-col gap-2 w-[130px]">
+            <div class="pb-4">
+              <span class="text-xl leading-[22px] font-semibold tracking-[0.6px] text-white">Support</span>
+            </div>
+            <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Contact</a>
+            <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Support</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
   </div>
 </Layout>
+
+<style>
+  @keyframes serena-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slide-left {
+    0% {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+    30% {
+      opacity: 0.3;
+    }
+    70% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .animate-serena-scale {
+    animation: serena-scale 1s ease-out forwards;
+  }
+
+  .animate-slide-left {
+    opacity: 0;
+    animation: slide-left 0.8s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fade-in 0.6s ease-out forwards;
+  }
+</style>
