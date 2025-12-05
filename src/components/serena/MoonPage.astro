@@ -1,0 +1,57 @@
+---
+const featureCards = [
+  {
+    subtitle: 'Foresight Beyond the Moment',
+    title: 'Sense the Hidden',
+    description: 'This system helps you notice what others overlook. Whether it\'s a business about to shift, a partner growing distant, or a plan losing energy, it lets you see the quiet premonitions of what\'s to come.',
+  },
+  {
+    subtitle: 'Discover the Door Behind the Wall',
+    title: 'Life Foresight',
+    description: 'This feature illuminates those hidden openings — a career pivot, an unexpected connection, a decision that could turn failure into freedom. It helps you recognize that destiny often hides behind detours.',
+  },
+  {
+    subtitle: 'Move Ahead of Time',
+    title: 'Reveal Opportunities',
+    description: 'This feature allows you to plan with awareness — to choose your timing, your alliances, your moments of silence. In love, in business, in every crossroad, you can act not reactively, but with composure and clarity.',
+  },
+];
+---
+
+<section class="relative bg-gradient-to-b from-[#023344] via-[#1a6774] to-[#09a892] px-5 md:px-20 py-[100px] md:py-[300px] flex flex-col gap-[100px] md:gap-[200px] items-center">
+  <!-- Header -->
+  <div class="flex flex-col items-center gap-[20px] md:gap-[30px] px-4 md:px-[100px] lg:px-[300px]">
+    <h2 class="text-[32px] md:text-[60px] leading-[40px] md:leading-[70px] font-medium tracking-[0.6px] text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent">
+      What will be seen
+    </h2>
+    <p class="text-base md:text-xl leading-[24px] md:leading-[26px] font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] text-center max-w-[680px]">
+      A clear reading of your energy, revealing the patterns, timing, and guidance shaping your next steps.
+    </p>
+  </div>
+
+  <!-- Feature Cards -->
+  <div class="w-full flex flex-col gap-[80px] md:gap-[200px]">
+    {featureCards.map((card, index) => (
+      <div class="w-full flex justify-start">
+        <div class="w-full max-w-[436px] h-auto min-h-[360px] relative rounded-3xl overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+          <!-- Glassy Background -->
+          <div class="absolute inset-0 rounded-3xl overflow-hidden">
+            <div class="absolute inset-0 bg-[rgba(38,76,89,0.2)] backdrop-blur-[40px] rounded-[25px] shadow-[1px_1px_10px_2px_rgba(26,103,116,0.53),inset_1px_1px_2px_0px_rgba(255,255,255,0.5),inset_-5px_-5px_20px_5px_rgba(160,255,213,0.1)]"></div>
+          </div>
+          
+          <div class="relative z-10 h-full flex flex-col justify-between px-5 pt-10 pb-5">
+            <div class="flex flex-col gap-3 text-white">
+              <div class="flex flex-col gap-2">
+                <span class="text-xs md:text-sm font-medium tracking-[2px]">{card.subtitle}</span>
+                <h3 class="text-[28px] md:text-[36px] leading-[32px] md:leading-[36px] font-medium tracking-[0.6px]">{card.title}</h3>
+              </div>
+              <p class="text-sm leading-[22px] tracking-[0.4px]">
+                {card.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

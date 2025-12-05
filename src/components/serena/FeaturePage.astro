@@ -1,0 +1,139 @@
+---
+import moonPhase1 from '~/assets/icons/serena/moon-phase-1.png';
+import moonPhase2 from '~/assets/icons/serena/moon-phase-2.png';
+import iconLoader from '~/assets/icons/serena/icon-loader.svg?url';
+import iconSend from '~/assets/icons/serena/icon-send.svg?url';
+
+const howItWorksSteps = [
+  {
+    num: '01',
+    title: 'The Intent',
+    description: 'Anchoring your intent into the cosmic data stream. Simply ask your question to begin the alignment process. Our interface connects directly to celestial algorithms.',
+  },
+  {
+    num: '02',
+    title: 'Energy Analysis',
+    description: 'Our AI engine weaves ancient algorithms with real-time star charts to calculate your unique spiritual coordinates, processing thousands of celestial data points.',
+  },
+  {
+    num: '03',
+    title: 'The Revelation',
+    description: 'Clarity revealed through a personalized spiritual reading, delivered with crystal clear insight. Your destiny mapped out in high fidelity resolution.',
+  },
+];
+---
+
+<section id="feature" class="relative bg-gradient-to-b from-[#09a892] via-[#1a6774] to-[#023344] px-5 md:px-20 py-[50px] md:py-[100px]">
+  <!-- Header -->
+  <div class="flex flex-col items-center gap-[30px] px-4 md:px-[100px] lg:px-[300px] py-[30px] md:py-[50px] mb-10 md:mb-20">
+    <h2 class="text-[32px] md:text-[60px] leading-[40px] md:leading-[70px] font-medium tracking-[0.6px] text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent">
+      How It Works
+    </h2>
+    <p class="text-base md:text-xl leading-[24px] md:leading-[26px] font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] text-center max-w-[680px]">
+      A seamless journey from question to cosmic revelation, powered by the fusion of ancient wisdom and artificial intelligence.
+    </p>
+  </div>
+
+  <!-- Timeline Content - Desktop -->
+  <div class="relative hidden lg:flex gap-8">
+    <!-- Left: Steps -->
+    <div class="flex-1 flex flex-col gap-[150px] pr-[100px]">
+      {howItWorksSteps.map((step, index) => (
+        <div class="h-[700px] overflow-hidden">
+          <div class="sticky top-20 flex flex-col gap-3">
+            <p class="text-lg leading-[26px] font-normal tracking-[0.2px] text-white/70">
+              {step.num}
+            </p>
+            <h3 class="text-[40px] leading-[52px] font-medium tracking-[0.2px] text-white capitalize">
+              {step.title}
+            </h3>
+            <p class="text-sm leading-[22px] font-normal tracking-[0.4px] text-[rgba(206,250,254,0.8)] max-w-[510px]">
+              {step.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Center: Timeline Line + Moon Icons -->
+    <div class="relative flex flex-col gap-[800px] items-center">
+      <!-- Gradient Line -->
+      <div class="absolute top-0 bottom-0 w-[2px] bg-gradient-to-b from-[rgba(0,184,219,0.5)] via-[rgba(0,184,219,0.2)] to-transparent"></div>
+      
+      <!-- Moon Phases -->
+      {[moonPhase1, moonPhase2, null].map((moon, index) => (
+        <div class="relative z-10 w-[50px] h-[50px] rounded-full bg-[#023344] border border-[#caf1f8] shadow-[0px_0px_20px_0px_#caf1f8] flex items-center justify-center">
+          {moon ? (
+            <img src={moon.src} alt="" class="w-full h-full object-contain" loading="lazy" decoding="async" />
+          ) : (
+            <div class="w-5 h-5 rounded-full bg-amber-500 shadow-[0px_0px_15px_0px_#f59e0b]"></div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Right: Sticky Visual Card -->
+    <div class="relative w-[560px]">
+      <div class="sticky top-20 h-[800px] bg-white/[0.03] rounded-3xl border border-white/15 shadow-[0px_20px_40px_0px_rgba(0,0,0,0.2),inset_0px_0px_40px_0px_rgba(9,168,146,0.1)] overflow-hidden">
+        <!-- Corner Dots -->
+        <div class="absolute top-4 left-4 w-2 h-2 rounded-full bg-white/20"></div>
+        <div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-white/20"></div>
+        <div class="absolute bottom-4 left-4 w-2 h-2 rounded-full bg-white/20"></div>
+        <div class="absolute bottom-4 right-4 w-2 h-2 rounded-full bg-white/20"></div>
+        
+        <!-- Top Gradient Line -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50"></div>
+
+        <!-- Chat Visual Content -->
+        <div class="flex flex-col gap-[60px] h-full justify-end px-10 py-[100px]">
+          <div class="flex flex-col gap-3">
+            <div class="bg-white/10 rounded-tr-[10px] rounded-bl-[10px] rounded-br-[10px] p-3">
+              <p class="text-sm leading-[22px] tracking-[0.4px] text-white/80">
+                What do the stars say about my career path this month?
+              </p>
+            </div>
+            <div class="flex justify-end">
+              <div class="bg-[rgba(9,168,146,0.3)] border border-[rgba(9,168,146,0.5)] rounded-tl-[10px] rounded-bl-[10px] rounded-br-[10px] p-3">
+                <div class="flex items-center gap-2">
+                  <img src={iconLoader} alt="" class="w-3 h-3 animate-spin" loading="lazy" decoding="async" />
+                  <span class="text-sm leading-[22px] tracking-[0.4px] text-[#cefafe]">Aligning with cosmic data...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="w-full h-[38px] bg-white/5 border border-white/10 rounded-full flex items-center justify-between px-5">
+            <span class="text-sm tracking-[0.4px] text-white/30">Ask the cosmos...</span>
+            <div class="w-7 h-[25px] bg-[rgba(0,184,219,0.2)] rounded-full flex items-center justify-center">
+              <img src={iconSend} alt="" class="w-3 h-3" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline Content - Mobile -->
+  <div class="lg:hidden flex flex-col gap-12">
+    {howItWorksSteps.map((step, index) => (
+      <div class="flex flex-col gap-4 px-4">
+        <div class="flex items-center gap-4">
+          <div class="w-[50px] h-[50px] rounded-full bg-[#023344] border border-[#caf1f8] shadow-[0px_0px_20px_0px_#caf1f8] flex items-center justify-center flex-shrink-0">
+            {index === 2 ? (
+              <div class="w-5 h-5 rounded-full bg-amber-500 shadow-[0px_0px_15px_0px_#f59e0b]"></div>
+            ) : (
+              <img src={index === 0 ? moonPhase1.src : moonPhase2.src} alt="" class="w-full h-full object-contain" loading="lazy" decoding="async" />
+            )}
+          </div>
+          <div>
+            <p class="text-lg leading-[26px] font-normal tracking-[0.2px] text-white/70">{step.num}</p>
+            <h3 class="text-2xl leading-[32px] font-medium tracking-[0.2px] text-white capitalize">{step.title}</h3>
+          </div>
+        </div>
+        <p class="text-sm leading-[22px] font-normal tracking-[0.4px] text-[rgba(206,250,254,0.8)]">
+          {step.description}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
