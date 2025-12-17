@@ -1,0 +1,137 @@
+---
+// SerenaLetter 组件 - 包含六个字母和滚动动画效果
+---
+
+<!-- 六个英语字母居中布置 -->
+<div
+  id="serena-letters"
+  class="h-screen pb-[60px] pt-[120px] absolute left-1/2 -translate-x-1/2 top-0 grid grid-cols-2 grid-rows-3 gap-[12rem] z-30 place-items-center"
+>
+  <div class="letter-wrap" data-letter="S">
+    <h1 class="headline-md animate-letter letter-container" style="animation-delay: 0s">
+      <span class="letter-text">S</span>
+    </h1>
+  </div>
+  <div class="letter-wrap" data-letter="E">
+    <h1 class="headline-md animate-letter letter-container" style="animation-delay: 0s">
+      <span class="letter-text">E</span>
+    </h1>
+  </div>
+  <div class="letter-wrap" data-letter="R">
+    <h1 class="headline-md animate-letter letter-container" style="animation-delay: 0.2s">
+      <span class="letter-text">R</span>
+    </h1>
+  </div>
+  <div class="letter-wrap" data-letter="E">
+    <h1 class="headline-md animate-letter letter-container" style="animation-delay: 0.2s">
+      <span class="letter-text">E</span>
+    </h1>
+  </div>
+  <div class="letter-wrap" data-letter="N">
+    <h1 class="headline-md animate-letter letter-container" style="animation-delay: 0.4s">
+      <span class="letter-text">N</span>
+    </h1>
+  </div>
+  <div class="letter-wrap" data-letter="A">
+    <h1 class="headline-md animate-letter letter-container" style="animation-delay: 0.4s">
+      <span class="letter-text">A</span>
+    </h1>
+  </div>
+</div>
+
+<script>
+  if (typeof window !== 'undefined') {
+    const grid = document.getElementById('serena-letters');
+    if (grid) {
+      const wraps = Array.from(grid.querySelectorAll('.letter-wrap')) as HTMLDivElement[];
+      const speed = 1.2; // scroll speed factor
+      const maxOffset = 80; // max translate in px at one viewport height
+      const fadeStart = 0; // 开始淡出的滚动进度
+      const fadeEnd = 0.3; // 完全消失的滚动进度
+
+      const handleScroll = () => {
+        const progress = window.scrollY / window.innerHeight; // 0 at top, ~1 after one viewport
+        const baseOffset = Math.min(progress * maxOffset * speed, maxOffset * speed);
+
+        // 计算透明度 (1 到 0，从完全可见到消失)
+        const opacity = Math.max(0, Math.min(1, 1 - (progress - fadeStart) / (fadeEnd - fadeStart)));
+
+        wraps.forEach((wrap) => {
+          const depth = parseFloat(wrap.dataset.depth || '1');
+          const offsetY = baseOffset * depth;
+          wrap.style.transform = `translate(0px, ${offsetY.toFixed(2)}px)`;
+          wrap.style.opacity = `${opacity}`;
+        });
+      };
+
+      handleScroll();
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
+  }
+</script>
+
+<style>
+  /* 字母进入动画：从四周聚拢并缩放到 1 */
+  @keyframes letterEnter {
+    0% {
+      opacity: 0;
+      transform: translate(var(--from-x, 0), var(--from-y, 0)) scale(1.2);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1);
+    }
+  }
+
+  /* SERENA 字母样式 */
+  .headline-md {
+    font-family: 'Roboto', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    font-size: 1rem; /* 16px */
+    line-height: 2.5rem; /* 48px */
+    font-weight: 600;
+    letter-spacing: 0.8px;
+  }
+
+  /* 字母动画 */
+  .animate-letter {
+    --from-x: 0;
+    --from-y: 0;
+    opacity: 0;
+    animation: letterEnter 0.9s ease-out forwards;
+    transform-origin: center;
+  }
+
+  /* 聚拢方向配置：从四周进入 */
+  #serena-letters .letter-wrap:nth-child(1) .animate-letter {
+    --from-x: -140px;
+    --from-y: -120px;
+  }
+  #serena-letters .letter-wrap:nth-child(2) .animate-letter {
+    --from-x: 120px;
+    --from-y: -140px;
+  }
+  #serena-letters .letter-wrap:nth-child(3) .animate-letter {
+    --from-x: -130px;
+    --from-y: 140px;
+  }
+  #serena-letters .letter-wrap:nth-child(4) .animate-letter {
+    --from-x: 140px;
+    --from-y: -100px;
+  }
+  #serena-letters .letter-wrap:nth-child(5) .animate-letter {
+    --from-x: -160px;
+    --from-y: 150px;
+  }
+  #serena-letters .letter-wrap:nth-child(6) .animate-letter {
+    --from-x: 150px;
+    --from-y: 120px;
+  }
+
+  /* Letter wrapper: parallax carrier */
+  .letter-wrap {
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+  }
+</style>

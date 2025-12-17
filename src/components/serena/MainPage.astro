@@ -1,80 +1,42 @@
 ---
 import mainBg from '~/assets/images/serena/main-bg.jpg';
-import gradientBall from '~/assets/images/serena/gradient-ball.png';
+import Mover from '../widgets/mainpage/mover.astro';
+
 ---
 
-<section class="relative min-h-[200vh] w-full">
+<section class="relative min-h-[200vh] w-full" id="mainPage">
   <!-- Main Background with Gradient -->
-  <div class="absolute inset-0 bg-gradient-to-b from-[#192619] from-[28%] to-[#09a791] to-[90%] overflow-clip">
+  <div class="absolute flex flex-col inset-0 bg-gradient-to-b from-[#000000] from-[60%] to-[#09a791] to-[90%] overflow-clip">
     <!-- Top Background Image -->
-    <div class="relative h-[558px] w-full">
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute inset-0 overflow-hidden">
+    <div class="relative h-[800px] w-full overflow-clip">
+      <div class="absolute inset-0 h-[800px] pointer-events-none">
           <img
             src={mainBg.src}
             width={mainBg.width}
             height={mainBg.height}
             alt=""
-            class="absolute h-[122.58%] left-[-9.75%] top-[-22.58%] w-[109.78%] max-w-none object-cover"
+            class="absolute h-[122.58%] left-[-9.75%] top-[-30%] w-[109.78%] max-w-none object-cover"
             loading="lazy"
             decoding="async"
           />
-        </div>
-        <!-- Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent via-50% to-[#192619]"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sticky Scroll Gradient Ball -->
-  <div class="absolute inset-0 flex flex-col items-center justify-center p-[10px]">
-    <div class="absolute left-1/2 top-[267px] bottom-0 h-[1781px] pointer-events-none">
-      <div class="sticky top-0 h-[700px] w-[1440px] max-w-full flex flex-col items-center justify-end px-[440px] py-0 pointer-events-auto -translate-x-1/2">
-        <div class="flex flex-col items-center justify-center w-[467px] h-[400px]">
-          <div class="w-[400px] h-[400px] rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0">
-            <img
-              src={gradientBall.src}
-              width={gradientBall.width}
-              height={gradientBall.height}
-              alt=""
-              class="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
+          <!-- Gradient mask overlay: transparent -> black -->
+          <div class="absolute inset-0 pointer-events-none">
+            <div class="bg-gradient-to-b from-[#00000008] from-[20%] to-[#000000] to-[60%] w-full h-full"></div>
           </div>
-        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Headline Section -->
-  <div class="absolute inset-0 overflow-clip px-[80px] py-[400px] flex flex-col items-start">
-    <div class="flex flex-col items-center gap-[46px] h-[746px] w-full px-0 py-[20px]">
-      <h2 class="text-[36px] leading-[36px] font-medium tracking-[0.6px] text-white text-center w-full">
-        In the midst of uncertainty, find your own answer.
+      <div class="relative justify-center h-full w-full inset-0 flex flex-col items-top justify-top overflow-clip">
+      <Mover />
+      <div class="relative w-full flex flex-col items-center justify-center bottom-[50vh]">
+      <h2 class="relative body-large-captalize text-center text-white/60 animate-slide-up-blur">
+        In the days of hesitation </h2>
+      <h2 class="relative body-large-captalize text-center text-white/60 animate-slide-up-blur-delay-1">
+        I am here to help you seek answer of future</h2>
+      <h2 class="relative body-large-captalize text-center text-white/90 animate-slide-up-blur-delay-3">
+         I hope, in the end, you will surpass me</h2>
+      <h2 class="relative body-large-captalize text-center text-white/90 animate-slide-up-blur-delay-3">
+         become the master of your own destiny</h2>
       </h2>
-      <!-- Gradient Mask -->
-      <div class="flex flex-col items-center justify-center w-full px-[400px] py-0">
-        <div class="flex items-center justify-center h-[480px] w-full">
-          <div class="w-full rotate-90">
-            <div class="aspect-square w-[480px] h-[480px] mx-auto rounded-full bg-gradient-to-r from-[#192619] to-[#154e3e] blur-[10px]"></div>
-          </div>
-        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Sticky Scroll Small Text -->
-  <div class="absolute top-[9.77%] left-0 right-0 bottom-0 pointer-events-none">
-    <div class="sticky top-0 flex flex-col items-center justify-end pointer-events-auto">
-      <div class="flex flex-col items-center justify-center h-[400px]">
-        <p class="w-[440px] text-[20px] leading-[26px] font-medium tracking-[0.4px] text-white text-center whitespace-pre-wrap">
-          In the days of hesitation<br/>
-          I am here to help you seek answer of future<br/>
-          I hope, in the end, you will surpass me<br/>
-          become the master of your own destiny
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>

@@ -1,0 +1,102 @@
+---
+/**
+ * A lightweight, CSS-based approximation of a shader gradient.
+ * Accepts the props you provided and maps them to CSS variables.
+ * This is not a WebGL shader, but it reproduces color, brightness,
+ * rotation and simple animated movement to approximate the effect.
+ */
+const {
+  animate = 'off',
+  bgColor1 = '#000000',
+  bgColor2 = '#000000',
+  brightness = 1,
+  color1 = '#1c7eff',
+  color2 = '#308dff',
+  color3 = '#000000',
+  rotationZ = 0,
+  uTime = 0.2,
+  frameRate = 30,
+  destination = 'background',
+  class: extraClass = ''
+} = Astro.props;
+const animateOn = animate === 'on';
+---
+
+<div class={`shader-gradient ${extraClass}`} aria-hidden="true">
+  <div class="shader-layer base"></div>
+  <div class="shader-layer accent"></div>
+  <div class="shader-layer noise"></div>
+</div>
+
+<style>
+  .shader-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    --bg1: ${bgColor1};
+    --bg2: ${bgColor2};
+    --c1: ${color1};
+    --c2: ${color2};
+    --c3: ${color3};
+    --brightness: ${brightness};
+    transform: rotate(${rotationZ}deg);
+    mix-blend-mode: screen;
+    will-change: transform, opacity, filter;
+  }
+
+  .shader-layer {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s ease;
+  }
+
+  /* base gradient */
+  .shader-layer.base {
+    background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+    filter: saturate(calc(var(--brightness) * 1));
+    opacity: 1;
+    z-index: 0;
+  }
+
+  /* animated color accents */
+  .shader-layer.accent {
+    background: radial-gradient(40% 60% at 10% 30%, rgba(28,126,255,0.12) 0%, transparent 20%),
+                radial-gradient(30% 50% at 80% 70%, rgba(48,141,255,0.12) 0%, transparent 30%),
+                linear-gradient(180deg, rgba(28,126,255,0.06), rgba(48,141,255,0.06));
+    mix-blend-mode: screen;
+    z-index: 1;
+    transform-origin: center;
+  }
+
+  /* subtle noise layer to mimic film/grain */
+  .shader-layer.noise {
+    background-image: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.02) 0%, transparent 10%),
+                      radial-gradient(circle at 70% 80%, rgba(0,0,0,0.02) 0%, transparent 10%);
+    opacity: 0.6;
+    z-index: 2;
+    mix-blend-mode: overlay;
+    filter: blur(6px) brightness(0.95);
+  }
+
+  /* animation when animate=on */
+  :global(.shader-gradient.animate) .shader-layer.accent {
+    animation: accent-move ${Math.max(4, 60 / frameRate)}s linear infinite;
+  }
+
+  @keyframes accent-move {
+    0% { transform: translate3d(0,0,0) rotate(0deg) scale(1); }
+    50% { transform: translate3d(6%, -4%, 0) rotate(0deg) scale(1.02); }
+    100% { transform: translate3d(0,0,0) rotate(0deg) scale(1); }
+  }
+</style>
+
+<script define:vars={{ animateOn }}>
+  // Add animation class if requested (keeps HTML static if animate is off)
+  (function () {
+    if (typeof window === 'undefined') return;
+    const root = document.currentScript && document.currentScript.previousElementSibling;
+    if (animateOn && root && root.classList) root.classList.add('animate');
+  })();
+</script>

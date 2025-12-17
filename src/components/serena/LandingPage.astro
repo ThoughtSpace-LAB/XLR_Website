@@ -1,50 +1,19 @@
 ---
 import heroBg from '~/assets/images/serena/hero-bg.jpg';
-import logoIcon from '~/assets/icons/serena/LOGO.svg?url';
 import nextIcon from '~/assets/icons/serena/icon-next.svg?url';
+import NaviBar from '~/components/widgets/landingpage/NaviBar.astro';
+import SerenaLetter from '~/components/widgets/landingpage/SerenaLetter.astro';
+import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.astro';
 ---
 
 <!-- 主容器：全屏高度白色背景，弹性布局 -->
 <section class="min-h-screen bg-white flex flex-col items-center relative">
     
-  <!-- 顶部导航栏：固定定位，白色半透明背景，带边框和阴影 -->
-  <div class="w-full px-4 py-7 md:px-8 absolute top-0 z-20 flex justify-center">
-    <div class="w-full max-w-4xl h-14 relative opacity-95 bg-white/10 rounded-full shadow-lg outline outline-1 outline-offset-[-1px] outline-white/25">
-      <!-- 导航内容区：水平排列，左右两侧对齐 -->
-      <div class="w-full h-full flex justify-between items-center px-6 md:px-12">
-        <!-- 左侧：Logo 区域 -->
-        <div class="flex items-center gap-3">
-          <img src={logoIcon} alt="Logo" class="h-6 w-6 object-contain" />
-          <span class="font-roboto font-semibold text-white text-lg">SERENA</span>
-        </div>
-        
-        <!-- 右侧：导航链接区域 -->
-        <div class="hidden md:flex justify-center items-center gap-16">
-          <a href="#feature" class="text-white text-xs font-normal hover:underline">FEATURE</a>
-          <a href="#price" class="text-white text-xs font-normal hover:underline">PRICE</a>
-          <a href="#certification" class="text-white text-xs font-normal hover:underline">CERTIFICATION</a>
-          <button class="w-24 h-9 flex justify-center items-center bg-black/20 rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/20 hover:outline hover:outline-white transition-all">
-            <span class="text-center text-white text-sm font-normal">Log in</span>
-          </button>
-        </div>
+  <!-- 导航栏组件 -->
+  <NaviBar />
 
-        <!-- 移动端菜单按钮 -->
-        <button class="md:hidden w-9 h-9 flex justify-center items-center bg-black/20 rounded-full">
-          <span class="text-white text-sm">☰</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 六个英语字母居中布置 -->
-  <div class="h-screen pb-[60px] pt-[120px] absolute left-1/2 -translate-x-1/2 top-0 grid grid-cols-2 grid-rows-3 gap-[7.5rem] z-30 place-items-center">
-    <h1 class="headline-md animate-letter" style="animation-delay: 0s">S</h1>
-    <h1 class="headline-md animate-letter" style="animation-delay: 0.1s">E</h1>
-    <h1 class="headline-md animate-letter" style="animation-delay: 0.2s">R</h1>
-    <h1 class="headline-md animate-letter" style="animation-delay: 0.3s">E</h1>
-    <h1 class="headline-md animate-letter" style="animation-delay: 0.4s">N</h1>
-    <h1 class="headline-md animate-letter" style="animation-delay: 0.5s">A</h1>
-  </div>
+  <!-- 六个英语字母组件 -->
+  <SerenaLetter />
 
   <!-- HeroSection：青色背景 + 背景图 + 文字内容 -->
   <div class="w-full flex-1 relative bg-black flex flex-col justify-end items-center overflow-hidden"> 
@@ -77,7 +46,7 @@ import nextIcon from '~/assets/icons/serena/icon-next.svg?url';
       </div>
       
       <!-- 行动按钮区域：CTA 按钮组 -->
-      <button class="inline-flex justify-center items-center py-3 px-4 bg-white/20 text-white rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-black/20 hover:outline hover:outline-white transition-all animate-slide-left" style="animation-delay: 0.4s">
+      <button class="inline-flex justify-center items-center py-3 px-4 bg-white/10 backdrop-blur-sm text-white rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/20 hover:outline hover:outline-white transition-all animate-slide-left" style="animation-delay: 0.4s">
         <span class="button-md">Begin Experience</span>
         <span class="pl-2 inline-flex justify-center">
           <img src={nextIcon} alt="Arrow Right" class="w-5 h-5" />
@@ -86,6 +55,11 @@ import nextIcon from '~/assets/icons/serena/icon-next.svg?url';
     </div>
   </div>
 </section>
+
+<!-- 滚动动画脚本 -->
+<ScrollAnimationScript />
+
+
 
 <style>
   /* ====== 动画定义区 ====== */
@@ -126,21 +100,11 @@ import nextIcon from '~/assets/icons/serena/icon-next.svg?url';
   .headline-lg {
     font-family: 'Roboto', sans-serif;
     color: rgba(255, 255, 255, 1);
-    font-size: 1.6rem; /* 32px */
-    line-height: 1.75rem; /* 36px */
-    font-weight: 400;
-    letter-spacing: 0.6px;
+    font-size: 1.8rem; /* 32px */
+    line-height: 2.5rem; /* 48px */
+    font-weight: 500;
+    letter-spacing: 0.8px;
     text-shadow: 0 4px 4px rgba(0, 0, 0, 0.75);
-  }
-
-  /* SERENA 字母样式 */
-  .headline-md {
-    font-family: 'Roboto', sans-serif;
-    color: rgba(255, 255, 255, 1);
-    font-size: 1.2rem; /* 24px */
-    line-height: 1.75rem; /* 36px */
-    font-weight: 400;
-    letter-spacing: 0.6px;
   }
 
   /* 副标题样式：小号、白色、带阴影 */
@@ -158,10 +122,10 @@ import nextIcon from '~/assets/icons/serena/icon-next.svg?url';
   .button-md {
     font-family: 'Roboto', sans-serif;
     color: rgba(255, 255, 255, 1);
-    font-size: 0.8rem; /* 12px */
-    line-height: 0.8rem; /* 12px */
-    font-weight: 300;
-    letter-spacing: 0.6px;
+    font-size: 1rem; /* 16px */
+    line-height: 1rem; /* 16px */
+    font-weight: 400;
+    letter-spacing: 0.8px;
   }
 
   /* ====== 动画类 ====== */
@@ -177,9 +141,7 @@ import nextIcon from '~/assets/icons/serena/icon-next.svg?url';
     animation: slideInFromLeft 0.8s ease-out forwards;
   }
 
-  /* 字母动画 */
-  .animate-letter {
-    opacity: 0;
-    animation: slideInFromLeft 0.8s ease-out forwards;
-  }
 </style>
+
+<!-- 滚动动画脚本 -->
+<ScrollAnimationScript />

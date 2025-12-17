@@ -6,6 +6,8 @@ import FeaturePage from '~/components/serena/FeaturePage.astro';
 import MoonPage from '~/components/serena/MoonPage.astro';
 import PricePage from '~/components/serena/PricePage.astro';
 import FooterPage from '~/components/serena/FooterPage.astro';
+import '~/assets/styles/feature-text.css';
+
 
 const metadata = {
   title: 'SERENA — Your Personal Oracle App',
@@ -15,10 +17,12 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <div class="relative bg-white flex flex-col text-white font-serena overflow-x-hidden">
+  <div class="relative bg-black flex flex-col text-white font-serena">
     
     <!-- Section 1: Landing Page / Hero -->
     <LandingPage />
+
+    <!-- Sticky debug removed -->
 
     <!-- Section 2: Main Page with Sticky Scroll -->
     <MainPage />

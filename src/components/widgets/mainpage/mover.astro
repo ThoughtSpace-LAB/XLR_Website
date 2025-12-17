@@ -1,0 +1,136 @@
+---
+
+---
+<div id="movercontainer" class="sticky top-0 h-[100vh] w-full overflow-hidden bg-transparent justify-items-center">
+ <div id="stickycontainer" class="sticky top-5 h-[10vh] w-[10vw] bg-transparent">
+  <div class="mover-dot-container">
+    <div class="mover-dot" id="moverDot" aria-hidden="true"></div>
+  </div>
+  </div>
+
+</div>
+
+<style>
+  .mover-dot-container {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  /* dot positioned absolutely so transform origin is viewport center */
+  .mover-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--bg, white);
+    box-shadow:
+      0 0 10px 5px var(--glow1, rgba(255,255,255,0.4)),
+      0 0 20px 10px var(--glow2, rgba(154,255,255,0.3)),
+      0 0 40px 20px var(--glow3, rgba(218,248,255,0.2));
+    transform: translate(-50%, -50%) scale(var(--s,1));
+    transform-origin: center center;
+    transition: transform 3s cubic-bezier(.2,.9,.2,1),
+                background-color 3s ease, box-shadow 0.45s ease;
+    will-change: transform, background-color, box-shadow;
+    pointer-events: none;
+  }
+
+  .mover-dot.expanded {
+    transform: translate(-50%, -50%) scale(var(--s,300));
+  }
+
+  /* allow the oversized dot to overflow when expanded */
+  #movercontainer.expanded {
+    overflow: visible;
+  }
+
+</style>
+
+
+
+<script>
+  if (typeof window !== 'undefined') {
+    (function () {
+      const dot = document.getElementById('moverDot');
+      const container = document.getElementById('movercontainer');
+      if (!dot || !container) {
+        console.warn('Mover: missing element', { dot: !!dot, container: !!container });
+        return;
+      }
+
+      let expanded = false;
+
+      // 创建一个 IntersectionObserver 来检测 movercontainer 的中间
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !expanded) {
+            expanded = true;
+            console.log('Mover: expand triggered by IntersectionObserver');
+            dot.classList.add('expanded');
+            dot.style.setProperty('--s', '300');
+            // change color/glow to green
+            dot.style.setProperty('--bg', '#09a791');
+            dot.style.setProperty('--glow1', 'rgba(9,167,145,0.45)');
+            dot.style.setProperty('--glow2', 'rgba(9,167,145,0.30)');
+            dot.style.setProperty('--glow3', 'rgba(9,167,145,0.20)');
+            container.classList.add('expanded');
+          } else if (!entry.isIntersecting && expanded) {
+            // 当 movercontainer 离开视口时恢复
+            expanded = false;
+            console.log('Mover: collapse triggered by IntersectionObserver');
+            dot.classList.remove('expanded');
+            dot.style.setProperty('--s', '1');
+            // restore original color/glow
+            dot.style.setProperty('--bg', 'white');
+            dot.style.setProperty('--glow1', 'rgba(255,255,255,0.4)');
+            dot.style.setProperty('--glow2', 'rgba(154,255,255,0.3)');
+            dot.style.setProperty('--glow3', 'rgba(218,248,255,0.2)');
+            container.classList.remove('expanded');
+          }
+        });
+      }, {
+        threshold: 0.9, // 当容器 50% 进入视口时触发（更靠近中间）
+        rootMargin: '0px' // 无偏移
+      });
+
+      // 观察 movercontainer 本身
+      if (container) {
+        observer.observe(container);
+      }
+
+      // 备用方案：基于滚动进度
+      function onScroll() {
+        if (expanded) return;
+
+        const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+        
+        // 当滚动到接近底部时触发扩展
+        if (scrollProgress >= 0.95) {
+          expanded = true;
+          console.log('Mover: expand triggered by scroll fallback');
+          dot.classList.add('expanded');
+          dot.style.setProperty('--s', '300');
+          container.classList.add('expanded');
+        } else {
+          // 根据滚动进度轻微缩放（仅 scale）
+          const scale = 1 + scrollProgress * 2; // 从 1 到 3
+          dot.style.setProperty('--s', String(scale));
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      window.addEventListener('beforeunload', () => {
+        window.removeEventListener('scroll', onScroll);
+        observer.disconnect();
+      });
+
+    })();
+  }
+</script>

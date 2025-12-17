@@ -165,3 +165,38 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     </div>
   </div>
 </header>
+
+<script>
+  // 平滑滚动到锚点
+  document.addEventListener('DOMContentLoaded', () => {
+    const anchorLinks = document.querySelectorAll('a[href^="/#"]');
+    
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (href) {
+          const targetId = href.substring(2); // 移除 "/#"
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            // 计算header高度偏移
+            const header = document.getElementById('header');
+            const headerHeight = header ? header.offsetHeight : 0;
+            
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20; // 额外20px间距
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+            
+            // 更新URL但不触发页面跳转
+            window.history.pushState(null, '', href);
+          }
+        }
+      });
+    });
+  });
+</script>

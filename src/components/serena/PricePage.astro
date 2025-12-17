@@ -1,124 +1,72 @@
 ---
-import pricingBasic from '~/assets/icons/serena/pricing-basic.svg?url';
-import pricingPremium from '~/assets/icons/serena/pricing-premium.svg?url';
-import iconTick from '~/assets/icons/serena/icon-tick.svg?url';
+import AskNowCard from '~/components/widgets/pricepage/AskNowCard.astro';
+import PricingPageCard from '~/components/widgets/pricepage/PricingPageCard.astro';
+import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.astro';
+import '~/assets/styles/feature-text.css';
+import '~/assets/styles/pricepagestyle.css';
 
-const basicFeatures = [
-  'Entry-level spiritual readings',
-  'Basic daily guidance',
-  'Communication tools',
-  'Reporting and analytics',
-];
-
-const premiumFeatures = [
-  'No daily limits',
-  'Priority response',
-  'Premium insights & advanced predictions',
-];
 ---
 
-<section id="price" class="relative bg-gradient-to-b from-[#09a791] to-[#082625] px-5 md:px-20 py-[100px] md:py-[276px] flex flex-col gap-[100px] md:gap-[300px] items-center">
+<section id="price" class="price-page-container relative bg-gradient-to-b from-[#09a791] to-[#082625] px-5 md:px-20 py-[100px] md:py-[276px] flex flex-col gap-[100px] md:gap-[300px] items-center transition-all duration-1000 ease-out" style="transform-origin: center;">
   <!-- Ask Section -->
-  <div class="w-full flex flex-col items-center gap-5">
+  <div class="w-full flex flex-col items-center gap-10">
     <div class="w-full flex flex-col items-center justify-center py-5 px-4">
-      <h2 class="text-[24px] md:text-[36px] leading-[32px] md:leading-[36px] font-medium tracking-[0.6px] text-white text-center">
-        You are not here to receive an answer.<br/>
-        You are here to remember that you are the answer.
+      <h2 class="body-large-captalize text-center text-white/60 max-w-[80vw] animate-slide-up-blur">
+        You are not here to <span class="body-large-captalize text-white">receive an answer.</span><br/>
+        You are here to remember <span class="body-large-captalize text-white">that you are the answer.</span>
       </h2>
     </div>
-
-    <div class="w-full max-w-[480px] bg-black/10 backdrop-blur-[40px] rounded-[25px] overflow-hidden px-6 md:px-10 py-[40px] md:py-[60px] flex flex-col gap-8 md:gap-10 items-center">
-      <!-- Input Box -->
-      <div class="w-full h-11 bg-gradient-to-r from-[rgba(40,51,53,0.12)] to-[rgba(119,149,155,0.12)] rounded-full border border-[#1e8e5f] shadow-[0px_-4px_17.2px_0px_rgba(160,255,213,0.6),inset_3px_3px_30px_0px_rgba(255,255,255,0.2)] flex items-center justify-between px-[14px]">
-        <span class="text-xs leading-4 tracking-[0.2px] text-white/50">Your mail box</span>
-        <button class="h-8 px-3 bg-black/20 rounded-[14px] shadow-lg text-xs text-white hover:bg-black/30 transition-colors">
-          Try for free
-        </button>
-      </div>
-
-      <!-- Title -->
-      <div class="flex flex-col items-center gap-5 text-white text-center">
-        <h3 class="font-['Baskervville',serif] text-[28px] md:text-[36px] leading-7 tracking-[0px]">Ask Now</h3>
-        <p class="text-sm leading-[22px] tracking-[0.4px]">
-          Each inquiry is a mirror<br/>
-          reflecting who you are and who you are becoming.
-        </p>
-      </div>
-    </div>
+    <AskNowCard />
   </div>
 
-  <!-- Pricing Cards -->
-  <div class="flex flex-col md:flex-row gap-8 items-center justify-center w-full">
-    <!-- Basic Plan -->
-    <div class="w-full max-w-[400px] h-auto md:h-[700px] backdrop-blur-[20px] rounded-[32px] overflow-hidden p-6 md:p-10 flex flex-col gap-8 md:gap-10">
-      <div class="flex flex-col gap-6 md:gap-8">
-        <div class="flex flex-col gap-4 md:gap-6">
-          <img src={pricingBasic} alt="" class="w-10 h-10" loading="lazy" decoding="async" />
-          <div class="flex flex-col gap-1 text-white">
-            <h4 class="font-['Space_Grotesk',sans-serif] text-xl font-medium leading-7">Basic</h4>
-            <p class="font-['Space_Grotesk',sans-serif] text-sm font-normal leading-5">
-              One free trial.<br/>
-              Weeks 2–3, get one free trial on weekends
-            </p>
-          </div>
-        </div>
-        <p class="font-['Space_Grotesk',sans-serif] text-4xl md:text-5xl font-medium leading-[56px] text-white">Free</p>
-      </div>
+  <PricingPageCard />
 
-      <button class="w-full h-11 bg-gradient-to-b from-white/[0.08] to-transparent border border-white/10 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition-colors">
-        Get Started
-      </button>
-
-      <div class="w-full max-w-[283px] h-[1px] bg-white/20"></div>
-
-      <div class="flex flex-col gap-4">
-        <p class="font-semibold text-base leading-9 tracking-[0.6px] text-white">What you will get</p>
-        <div class="flex flex-col gap-4">
-          {basicFeatures.map((feature) => (
-            <div class="flex items-center gap-2">
-              <img src={iconTick} alt="" class="w-4 h-4 flex-shrink-0" loading="lazy" decoding="async" />
-              <span class="text-sm leading-[22px] tracking-[0.4px] text-white/80">{feature}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    <!-- Premium Plan -->
-    <div class="w-full max-w-[370px] h-auto md:h-[700px] backdrop-blur-[42px] bg-gradient-to-b from-[rgba(43,255,255,0.12)] via-[rgba(43,255,255,0.04)] to-[rgba(43,255,255,0.07)] border border-[rgba(43,255,255,0.32)] rounded-[32px] overflow-hidden p-6 md:p-10 flex flex-col gap-8 md:gap-10">
-      <div class="flex flex-col gap-6 md:gap-8">
-        <div class="flex flex-col gap-4 md:gap-6">
-          <img src={pricingPremium} alt="" class="w-10 h-10" loading="lazy" decoding="async" />
-          <div class="flex flex-col gap-1">
-            <h4 class="font-['Space_Grotesk',sans-serif] text-xl font-medium leading-7 text-white">Premium</h4>
-            <p class="font-['Space_Grotesk',sans-serif] text-sm font-normal leading-5 text-white/80">
-              Unlocks a full reading session
-            </p>
-          </div>
-        </div>
-        <div class="flex items-end gap-1">
-          <p class="font-['Space_Grotesk',sans-serif] text-4xl md:text-5xl font-medium leading-[56px] text-white">$10</p>
-          <span class="font-['Space_Grotesk',sans-serif] text-sm font-normal leading-6 text-white/80">/ per month</span>
-        </div>
-      </div>
-
-      <button class="w-full h-11 bg-gradient-to-b from-[#2bffff] to-[#1a9999] rounded-xl text-sm font-bold text-black hover:opacity-90 transition-opacity shadow-[0_0_6px_rgba(43,255,255,0.5)]">
-        Get Started
-      </button>
-
-      <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-[rgba(43,255,255,0.5)] to-transparent"></div>
-
-      <div class="flex flex-col gap-4">
-        <p class="font-semibold text-base leading-9 tracking-[0.6px] text-white">What you will get</p>
-        <div class="flex flex-col gap-4">
-          {premiumFeatures.map((feature) => (
-            <div class="flex items-center gap-2">
-              <img src={iconTick} alt="" class="w-4 h-4 flex-shrink-0" loading="lazy" decoding="async" />
-              <span class="text-sm leading-[22px] tracking-[0.4px] text-white/80">{feature}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
+
+<script>
+  // 当footer页面出现时（pricing section底部进入视线时）缩放到0.9倍
+  document.addEventListener('DOMContentLoaded', () => {
+    const priceSection = document.querySelector('.price-page-container') as HTMLElement;
+    if (!priceSection) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const rect = entry.boundingClientRect;
+          const windowHeight = window.innerHeight;
+          
+          // 检查pricing section的底部是否进入视线
+          // 当底部边缘接近或进入视口时触发缩放
+          if (rect.bottom <= windowHeight) {
+            priceSection.style.transform = 'scale(0.8)';
+          } else if (rect.bottom > windowHeight) {
+            // pricing section还完全在视口内，保持正常大小
+            priceSection.style.transform = 'scale(1)';
+          }
+        });
+      },
+      {
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+        rootMargin: '0px 0px 0px 0px'
+      }
+    );
+
+    observer.observe(priceSection);
+    
+    // 也监听滚动事件以获得更精确的控制
+    window.addEventListener('scroll', () => {
+      const rect = priceSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // 当pricing section底部进入视线底部20%区域时开始缩放
+      if (rect.bottom <= windowHeight) {
+        priceSection.style.transform = 'scale(0.8)';
+      } else {
+        priceSection.style.transform = 'scale(1)';
+      }
+    }, { passive: true });
+  });
+</script>
+
+<!-- 滚动动画脚本 -->
+<ScrollAnimationScript />
