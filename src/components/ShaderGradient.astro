@@ -12,11 +12,8 @@ const {
   brightness = 1,
   color1 = '#1c7eff',
   color2 = '#308dff',
-  color3 = '#000000',
   rotationZ = 0,
-  uTime = 0.2,
   frameRate = 30,
-  destination = 'background',
   class: extraClass = ''
 } = Astro.props;
 const animateOn = animate === 'on';
@@ -38,7 +35,6 @@ const animateOn = animate === 'on';
     --bg2: ${bgColor2};
     --c1: ${color1};
     --c2: ${color2};
-    --c3: ${color3};
     --brightness: ${brightness};
     transform: rotate(${rotationZ}deg);
     mix-blend-mode: screen;
