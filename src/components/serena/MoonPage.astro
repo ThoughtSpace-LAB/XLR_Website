@@ -3,8 +3,6 @@ import '~/assets/styles/feature-text.css';
 import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.astro';
 import MoonPageCard from '~/components/widgets/moonpage/MoonPageCard.astro';
 
-
-
 const featureCards = [
   {
     subtitle: 'Foresight Beyond the Moment',
@@ -59,16 +57,26 @@ const featureCards = [
     </div>
 
     <!-- Moonanimation -->
-    <div class="sticky flex flex-col top-0 right-0 w-[50vw] h-[90vh]">
-      <div class="moon-animation w-full h-full">
-        <svg class="w-full h-full fill-white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="45" />
-        </svg>
-      </div>
+    <div class="sticky flex flex-col top-0 right-0 w-[50vw] h-[90vh] overflow-hidden">
+      <canvas id="spline-canvas" class="w-[110%] h-[110%] relative -bottom-[10%]"></canvas>
     </div>
   </div>
 
 </section>
+
+<!-- Spline 加载脚本 -->
+<script>
+  import { Application } from '@splinetool/runtime';
+
+  // 等待 DOM 加载完成
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('spline-canvas');
+    if (canvas) {
+      const app = new Application(canvas);
+      app.load('https://prod.spline.design/kg35p8HMxtVW7K1x/scene.splinecode');
+    }
+  });
+</script>
 
 <!-- 滚动动画脚本 -->
 <ScrollAnimationScript />
