@@ -1,0 +1,53 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import LandingPage from '~/components/serena/LandingPage.astro';
+import MainPage from '~/components/serena/MainPage.astro';
+import FeaturePage from '~/components/serena/FeaturePage.astro';
+import MoonPage from '~/components/serena/MoonPage.astro';
+import PricePage from '~/components/serena/PricePage.astro';
+import FooterPage from '~/components/serena/FooterPage.astro';
+import '~/assets/styles/feature-text.css';
+
+
+const metadata = {
+  title: 'SERENA — Your Personal Oracle App',
+  description: 'SERENA provides clarity, answers, and guidance through intuitive prompts and personalized insights.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <div class="relative bg-black flex flex-col text-white font-serena cursor-none">
+    <div 
+    id="custom-cursor" 
+    class="pointer-events-none fixed top-0 left-0 w-4 h-4 bg-white rounded-full z-10 transition-transform duration-150 ease-out -translate-x-1/2 -translate-y-1/2"></div>
+    <script>
+      const cursor = document.getElementById('custom-cursor');
+
+      document.addEventListener('mousemove', (e) => {
+    
+    cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+  });
+</script>
+    
+    <!-- Section 1: Landing Page / Hero -->
+    <LandingPage />
+
+    <!-- Sticky debug removed -->
+
+    <!-- Section 2: Main Page with Sticky Scroll -->
+    <MainPage />
+
+    <!-- Section 3: How It Works (Astrology Chatbot UI) -->
+    <FeaturePage />
+
+    <!-- Section 4: What Will Be Seen (Moon Page) -->
+    <MoonPage />
+
+    <!-- Section 5: Registration & Pricing -->
+    <PricePage />
+
+    <!-- Section 6: Footer -->
+    <FooterPage />
+  </div>
+</Layout>
