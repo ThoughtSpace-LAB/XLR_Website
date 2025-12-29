@@ -1,0 +1,54 @@
+---
+// ScrollAnimationScript - 通用滚动动画触发器
+---
+
+<script>
+  if (typeof window !== 'undefined') {
+    const initScrollAnimation = () => {
+      // 创建 Intersection Observer
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // 添加动画类
+              if (entry.target.classList.contains('animate-slide-up-blur')) {
+                entry.target.classList.add('animate');
+              }
+              if (entry.target.classList.contains('animate-slide-up-blur-delay-1')) {
+                entry.target.classList.add('animate');
+              }
+              if (entry.target.classList.contains('animate-slide-up-blur-delay-2')) {
+                entry.target.classList.add('animate');
+              }
+              if (entry.target.classList.contains('animate-slide-up-blur-delay-3')) {
+                entry.target.classList.add('animate');
+              }
+              // 停止观察已经动画的元素
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          rootMargin: '0px 0px -100px 0px', // 元素进入视口前100px开始触发
+          threshold: 0.1 // 10% 可见时触发
+        }
+      );
+
+      // 观察所有需要动画的元素
+      const animateElements = document.querySelectorAll(
+        '.animate-slide-up-blur, .animate-slide-up-blur-delay-1, .animate-slide-up-blur-delay-2, .animate-slide-up-blur-delay-3'
+      );
+      
+      animateElements.forEach((el) => {
+        observer.observe(el);
+      });
+    };
+
+    // 页面加载完成后初始化
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initScrollAnimation);
+    } else {
+      initScrollAnimation();
+    }
+  }
+</script>

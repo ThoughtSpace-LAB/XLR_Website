@@ -1,0 +1,93 @@
+---
+import pricingBasic from '~/assets/icons/serena/pricing-basic.svg?url';
+import pricingPremium from '~/assets/icons/serena/pricing-premium.svg?url';
+import iconTick from '~/assets/icons/serena/icon-tick.svg?url';
+
+const basicFeatures = [
+  'Entry-level spiritual readings',
+  'Basic daily guidance',
+  'Communication tools',
+  'Reporting and analytics',
+];
+
+const premiumFeatures = [
+  'No daily limits',
+  'Priority response',
+  'Premium insights & advanced predictions',
+];
+---
+
+<!-- Pricing Cards -->
+<div class="flex flex-col md:flex-row gap-8 items-center justify-center w-full">
+  <!-- Basic Plan -->
+  <div class="w-full max-w-[400px] h-auto md:h-[700px] backdrop-blur-[20px] rounded-[32px] overflow-hidden p-6 md:p-10 flex flex-col gap-8 md:gap-10">
+    <div class="flex flex-col gap-6 md:gap-8">
+      <div class="flex flex-col gap-4 md:gap-6">
+        <img src={pricingBasic} alt="" class="w-10 h-10" loading="lazy" decoding="async" />
+        <div class="flex flex-col gap-1 text-white">
+          <h4 class="font-['Space_Grotesk',sans-serif] text-xl font-medium leading-7">Basic</h4>
+          <p class="font-['Space_Grotesk',sans-serif] text-sm font-normal leading-5">
+            One free trial.<br/>
+            Weeks 2–3, get one free trial on weekends
+          </p>
+        </div>
+      </div>
+      <p class="font-['Space_Grotesk',sans-serif] text-4xl md:text-5xl font-medium leading-[56px] text-white">Free</p>
+    </div>
+
+    <button class="w-full h-11 bg-gradient-to-b from-white/[0.08] to-transparent border border-white/10 rounded-xl text-sm font-medium text-white hover:bg-white/10 transition-colors">
+      Get Started
+    </button>
+
+    <div class="w-full max-w-[283px] h-[1px] bg-white/20"></div>
+
+    <div class="flex flex-col gap-4">
+      <p class="font-semibold text-base leading-9 tracking-[0.6px] text-white">What you will get</p>
+      <div class="flex flex-col gap-4">
+        {basicFeatures.map((feature) => (
+          <div class="flex items-center gap-2">
+            <img src={iconTick} alt="" class="w-4 h-4 flex-shrink-0" loading="lazy" decoding="async" />
+            <span class="text-sm leading-[22px] tracking-[0.4px] text-white/80">{feature}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Premium Plan -->
+  <div class="w-full max-w-[370px] h-auto md:h-[700px] backdrop-blur-[42px] bg-gradient-to-b from-[rgba(43,255,255,0.12)] via-[rgba(43,255,255,0.04)] to-[rgba(43,255,255,0.07)] border border-[rgba(43,255,255,0.32)] rounded-[32px] overflow-hidden p-6 md:p-10 flex flex-col gap-8 md:gap-10">
+    <div class="flex flex-col gap-6 md:gap-8">
+      <div class="flex flex-col gap-4 md:gap-6">
+        <img src={pricingPremium} alt="" class="w-10 h-10" loading="lazy" decoding="async" />
+        <div class="flex flex-col gap-1">
+          <h4 class="font-['Space_Grotesk',sans-serif] text-xl font-medium leading-7 text-white">Premium</h4>
+          <p class="font-['Space_Grotesk',sans-serif] text-sm font-normal leading-5 text-white/80">
+            Unlocks a full reading session
+          </p>
+        </div>
+      </div>
+      <div class="flex items-end gap-1">
+        <p class="font-['Space_Grotesk',sans-serif] text-4xl md:text-5xl font-medium leading-[56px] text-white">$10</p>
+        <span class="font-['Space_Grotesk',sans-serif] text-sm font-normal leading-6 text-white/80">/ per month</span>
+      </div>
+    </div>
+
+    <button class="w-full h-11 bg-gradient-to-b from-[#2bffff] to-[#1a9999] rounded-xl text-sm font-bold text-black hover:opacity-90 transition-opacity shadow-[0_0_6px_rgba(43,255,255,0.5)]">
+      Get Started
+    </button>
+
+    <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-[rgba(43,255,255,0.5)] to-transparent"></div>
+
+    <div class="flex flex-col gap-4">
+      <p class="font-semibold text-base leading-9 tracking-[0.6px] text-white">What you will get</p>
+      <div class="flex flex-col gap-4">
+        {premiumFeatures.map((feature) => (
+          <div class="flex items-center gap-2">
+            <img src={iconTick} alt="" class="w-4 h-4 flex-shrink-0" loading="lazy" decoding="async" />
+            <span class="text-sm leading-[22px] tracking-[0.4px] text-white/80">{feature}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>

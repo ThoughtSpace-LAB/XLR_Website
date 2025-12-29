@@ -1,0 +1,134 @@
+---
+import iconLoader from '~/assets/icons/serena/icon-loader.svg?url';
+import iconSend from '~/assets/icons/serena/icon-send.svg?url';
+import visualcard2raw from '~/assets/icons/serena/VisualCard2.svg?raw';
+import visualcard3raw from '~/assets/icons/serena/VisualCard3.svg?raw';
+import '~/assets/styles/feature-text.css';
+
+const { visual } = Astro.props || {};
+---
+
+<div class="relative w-[30vw] h-[70vh] bg-white/[0.03] rounded-3xl border border-white/15 shadow-[0px_20px_40px_0px_rgba(0,0,0,0.2),inset_0px_0px_40px_0px_rgba(9,168,146,0.1)] overflow-hidden">
+  <!-- Visual Card 1: Chat -->
+  {visual === 'chat' && (
+    <div class="absolute inset-0 flex flex-col gap-[20px] h-full justify-end px-10 py-20 transition-all duration-700 ease-out visual-item opacity-0" data-visual="chat">
+      <div class="flex flex-col gap-6">
+        <div class="flex justify-start">
+          <div class="bg-white/10 flex justify-start rounded-tr-[10px] rounded-bl-[10px] rounded-br-[10px] p-3 animate-float-2">
+            <p class="text-small">What do the stars say about my career path this month?</p>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <div class="bg-[rgba(9,168,146,0.3)] border border-[rgba(9,168,146,0.5)] rounded-tl-[10px] rounded-bl-[10px] rounded-br-[10px] p-3 animate-float-2">
+            <div class="flex items-center gap-2">
+              <img src={iconLoader} alt="loader" class="w-4 h-4 animate-pulse" loading="lazy" decoding="async" />
+              <span class="text-small text-[#cefafe] animate-pulse">Aligning with cosmic data...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center p-6 pointer-events-none overflow-visible bubble-container">
+        <div class="flex flex-col items-center space-y-3">
+          <div class="bubble text-center body-small max-w-[360px]" data-text="Let SERENA unlock ancient wisdom and map out your destiny blueprint in high-fidelity resolution.">
+            <span class="bubble-text"></span><span class="cursor" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <style>
+        .bubble { will-change: transform, opacity; }
+        .cursor { display:inline-block; width:1px; height:1em; background: currentColor; margin-left:8px; vertical-align:bottom; animation: blink 1s steps(2) infinite; }
+        @keyframes blink { 50% { opacity: 0 } }
+        .moved-up { transform: translateY(-18px); transition: transform .45s cubic-bezier(.22,.9,.3,1); }
+      </style>
+
+      <div class="w-full h-[50px] bg-white/5 border border-white/10 rounded-full flex items-center justify-between px-6 pr-2">
+        <span class="text-sm tracking-[0.4px] text-white/30">  Ask the cosmos...</span>
+        <div class="w-[40px] h-[40px] bg-[rgba(0,184,219,0.2)] rounded-full flex items-center justify-center animate-pulse hover:bg-[rgba(0,184,219,0.4)] transition-colors cursor-pointer">
+          <img src={iconSend} alt="send" class="w-[20px] h-[20px]" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Visual Card 2: Analysis -->
+  {visual === 'analysis' && (
+    <div class="absolute inset-0 flex flex-col gap-[20px] h-full justify-center px-10 py-20 transition-all duration-700 ease-out visual-item opacity-0" data-visual="analysis">
+      <div class="flex flex-col justify-center items-center gap-4">
+        <div class="text-center justify-start">
+          <span class="body-medium text-cyan-200">Anchor the Time <br/></span>
+          <span class="text-small-cyan">Precisely enter your date and time of birth.<br/></span>
+          <div class="h-2"> </div>
+          <span class="body-medium text-cyan-200">Locate the Axis <br/></span>
+          <span class="text-small-cyan">Determine your place and direction of birth.</span>
+        </div>
+        <div class="visual-card-svg w-[160px] h-[160px] flex justify-center animate-pulse">
+            <div class="items-center" set:html={visualcard2raw} aria-hidden="true"></div>
+        </div>
+        <div class="flex flex-col justify-center items-center p-10">
+          <p class="text-center body-small text-cyan-200/50">SERENA will merge the cosmic data stream to accurately calculate your unique destiny trajectory.</p>
+        </div>
+     </div>
+    </div>
+  )}
+
+  <!-- Visual Card 3: Card -->
+  {visual === 'card' && (
+    <div class="absolute inset-0 flex items-center justify-center transition-all duration-700 ease-out visual-item opacity-0" data-visual="card">
+        <div class="visual-card-svg w-[300px] h-[500px] flex justify-center animate-pulse">
+            <div class="items-center" set:html={visualcard3raw} aria-hidden="true"></div>
+        </div>
+    </div>
+  )}
+</div>
+
+<script type="module">
+  // Scoped typing effect: observe the chat visual inside this component only
+  if (typeof window !== 'undefined') {
+    const root = document.currentScript?.previousElementSibling || null;
+    // fallback: use querySelector inside the component area
+    const container = root && root.matches && root.matches('.relative') ? root : document.querySelector('.relative.w-[560px]');
+
+    function sleep(ms){ return new Promise(r=>setTimeout(r, ms)); }
+    async function typeInto(el, text, speed=30){
+      const textEl = el.querySelector('.bubble-text');
+      const cursor = el.querySelector('.cursor');
+      if (!textEl) return;
+      if (cursor) cursor.style.opacity = '1';
+      for (let i=1;i<=text.length;i++){
+        textEl.textContent = text.slice(0,i);
+        await sleep(speed);
+      }
+      await sleep(250);
+      if (cursor) cursor.style.opacity = '0';
+    }
+
+    try {
+      const chat = container ? container.querySelector('.visual-item[data-visual="chat"]') : document.querySelector('.visual-item[data-visual="chat"]');
+      if (chat) {
+        const observer = new IntersectionObserver(async (entries, obs) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            const bubbles = Array.from(chat.querySelectorAll('.bubble'));
+            if (bubbles.length > 0) {
+              const text1 = bubbles[0].getAttribute('data-text') || '';
+              await typeInto(bubbles[0], text1, 28);
+              await sleep(350);
+              if (bubbles[1]) {
+                const text2 = bubbles[1].getAttribute('data-text') || '';
+                await typeInto(bubbles[1], text2, 28);
+                bubbles[1].classList.add('moved-up');
+              }
+            }
+            obs.disconnect();
+          }
+        }, { threshold: 0.25 });
+        observer.observe(chat);
+      }
+    } catch (err) {
+      // swallow — diagnostics only
+      console.error('RightVisual typing error', err);
+    }
+  }
+</script>

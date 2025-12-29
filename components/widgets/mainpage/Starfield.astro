@@ -1,0 +1,97 @@
+---
+---
+<!-- Starfield implemented with DOM stars animated by CSS keyframes (per-dot opacity animation) -->
+      <div class="absolute inset-0 z-20 pointer-events-none" aria-hidden="true">
+  <canvas id="starfield-canvas" class="w-full h-full block" />
+</div>
+
+      <style>
+        .starfield { position: absolute; inset: 0; overflow: hidden; }
+        .starfield .star {
+          position: absolute;
+          border-radius: 50%;
+          background: white;
+          box-shadow: 0 4px 10px rgba(255,255,255,0.08);
+          will-change: opacity, transform;
+          pointer-events: none;
+          opacity: 0.5;
+          transform-origin: center center;
+          /* animation set via inline style for duration/delay */
+        }
+
+        @keyframes twinkle {
+          0% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.05); }
+          100% { opacity: 0.5; transform: scale(1); }
+        }
+
+        /* subtle background gradient to sit above stars when needed (kept light) */
+        .starfield::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(2,6,23,0.02), rgba(2,6,23,0.18));
+          pointer-events: none;
+          z-index: 0;
+        }
+      </style>
+
+      <script type="module">
+      if (typeof window !== 'undefined') {
+        (function () {
+          const container = document.querySelector('.starfield');
+          if (!container) return;
+
+          function createStars() {
+            container.innerHTML = '';
+            const w = container.clientWidth || window.innerWidth;
+            const h = container.clientHeight || window.innerHeight;
+            const area = w * h;
+            const count = Math.min(600, Math.max(80, Math.floor(area / 12000)));
+
+            for (let i = 0; i < count; i++) {
+              const el = document.createElement('div');
+              el.className = 'star';
+              const size = Math.random() * 2.6 + (Math.random() < 0.03 ? 1.8 : 0.6); // px
+              el.style.width = size + 'px';
+              el.style.height = size + 'px';
+              el.style.left = Math.random() * (w - size) + 'px';
+              el.style.top = Math.random() * (h - size) + 'px';
+
+              // animation duration and delay randomized
+              const dur = (Math.random() * 3 + 2).toFixed(2) + 's'; // 2s-5s
+              const delay = (Math.random() * 5).toFixed(2) + 's';
+              el.style.animation = `twinkle ${dur} ease-in-out ${delay} infinite`;
+              el.style.animationPlayState = 'paused';
+
+              // base opacity range handled in keyframes (0.5-1), but make some stars dimmer initially
+              if (Math.random() < 0.15) el.style.opacity = '0.45';
+
+              container.appendChild(el);
+            }
+          }
+
+          createStars();
+
+          // Observe for animate class on mainPage to start animations
+          const mainPage = document.getElementById('mainPage');
+          if (mainPage) {
+            const observer = new MutationObserver(() => {
+              if (mainPage.classList.contains('animate')) {
+                const stars = container.querySelectorAll('.star');
+                stars.forEach(star => {
+                  star.style.animationPlayState = 'running';
+                });
+                observer.disconnect();
+              }
+            });
+            observer.observe(mainPage, { attributes: true, attributeFilter: ['class'] });
+          }
+
+          window.addEventListener('resize', () => {
+            // recreate on resize for correct positions/density
+            createStars();
+          }, { passive: true });
+        })();
+      }
+      </script>

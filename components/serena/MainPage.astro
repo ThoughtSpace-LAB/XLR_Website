@@ -1,0 +1,198 @@
+---
+import mainBg from '~/assets/images/serena/main-bg.jpg';
+import Mover from '../widgets/mainpage/mover.astro';
+import Starfield from '../widgets/mainpage/Starfield.astro';
+import '~/assets/styles/landingpageparagraph.css';
+import '~/assets/styles/mainpage-container.css';
+import '~/assets/styles/feature-text.css';
+---
+
+<section class="relative min-h-[550vh] md:min-h-[600vh] w-full" id="mainPage">
+  <!-- Starfield background (behind gradient) -->
+  <Starfield />
+  <!-- Main Background with Gradient -->
+  <div class="absolute flex flex-col inset-0 z-10 bg-gradient-to-b from-[#000000] from-[60%] to-[#09a791] to-[90%] overflow-clip">
+    <!-- Top Background Image -->
+    <div id="gradient-picture" class="relative h-[400px] w-full overflow-clip">
+      <div class="relative inset-0 h-[400px]">
+          <img
+            src={mainBg.src}
+            width={mainBg.width}
+            height={mainBg.height}
+            alt=""
+            class="absolute h-[122.58%] left-[-9.75%] top-[-30%] w-[109.78%] max-w-none object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+          <!-- Gradient mask overlay: transparent -> black -->
+          <div class="absolute inset-0">
+            <div class="bg-gradient-to-b from-[#00000008] from-[20%] to-[#000000] to-[60%] w-full h-full"></div>
+          </div>
+      </div>
+    </div>
+      <div id="gradient-ball" class="relative justify-top h-full w-full items-top overflow-clip">
+      <Mover />
+      <style>
+        /* Pause all animations initially */
+        #mainPage [class*="animate-"] {
+          animation-play-state: paused;
+        }
+        /* Start animations when scrolled into view */
+        .animate [class*="animate-"] {
+          animation-play-state: running;
+        }
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.1 });
+
+          const mainPage = document.getElementById('mainPage');
+          if (mainPage) observer.observe(mainPage);
+        });
+      </script>
+
+      <div id="loader" class="relative w-full flex flex-col items-center justify-center ">
+        <div class="relative text-center flex flex-col bg-blend-color-dodge">
+              <div class="headline-small">Serena helps you to find the answer to</div>     
+              <div class="loader">
+                <p>Your</p>
+                <div class="words">
+                <span class="word"> </span>
+                <span class="word">Wealth</span>
+                <span class="word">Friends</span>
+                <span class="word">Career</span>
+                </div>
+              </div>
+              <div class="mt-4 w-full text-center text-lg tracking-widest font-semibold mix-blend-difference text-white">
+                 And the most important one —— Yourself
+              </div>
+      </div>
+      </div>
+
+      <div id="cards" class="relative w-full h-full flex flex-col md:flex-row justify-top gap-16 pt-[80vh] px-[10vw] overflow-clip ">
+        <div class="container noselect ">
+          <div class="canvas">
+            <div class="tracker tr-1"></div>
+            <div class="tracker tr-2"></div>
+            <div class="tracker tr-3"></div>
+            <div class="tracker tr-4"></div>
+            <div class="tracker tr-5"></div>
+            <div class="tracker tr-6"></div>
+            <div class="tracker tr-7"></div>
+            <div class="tracker tr-8"></div>
+            <div class="tracker tr-9"></div>
+            <div id="card">
+              <div class="card-content">
+                <div class="card-glare"></div>
+                <div class="cyber-lines">
+                   <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="flex flex-col justify-center items-center w-full h-full gap-4 px-4">
+                
+                  <div class="subtitle relative">
+                    <span>MODEL I. </span>
+                    <span class="highlight">THE INSIGHT</span>
+                  </div>
+
+                   <div id="prompt">
+                    <div class="relative flex headline-small text-white/40 py-2 ">SCOPE</div>
+                    <p class="relative flex body-small-highlight">Immediate clarity on daily life and current situations. Insights for the upcoming week, up to one month.<br />
+                    Best for everyday errands, short trips, and daily decisions.</p><br />
+                  </div>
+
+                </div>
+
+                <div class="absolute top-0 flex flex-row justify-center gap-[10%] w-[100%] h-[100%]">
+                <div class="relative flex flex-col justify-center h-auto ">
+                  <p class="title-num">70% </p>
+                  <p class="title">Precision</p></div>
+                <div class="relative flex flex-col justify-center h-auto ">
+                  <p class="title-num">60% </p>
+                  <p class="title">Resonance</p></div>
+                </div>
+                <div class="glowing-elements">
+                  <div class="glow-1"></div>
+                  <div class="glow-2"></div>
+                  <div class="glow-3"></div>
+                </div>
+                <div class="card-particles">
+                  <span></span><span></span><span></span> <span></span><span></span><span></span>
+                </div>
+                <div class="corner-elements">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="scan-line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container noselect">
+          <div class="canvas">
+            <div class="tracker tr-1"></div>
+            <div class="tracker tr-2"></div>
+            <div class="tracker tr-3"></div>
+            <div class="tracker tr-4"></div>
+            <div class="tracker tr-5"></div>
+            <div class="tracker tr-6"></div>
+            <div class="tracker tr-7"></div>
+            <div class="tracker tr-8"></div>
+            <div class="tracker tr-9"></div>
+            <div id="card">
+              <div class="card-content">
+                <div class="card-glare"></div>
+                <div class="cyber-lines">
+                   <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="flex flex-col justify-center items-center w-full h-full gap-4 px-4">
+                
+                  <div class="subtitle relative">
+                    <span>MODEL II. </span>
+                    <span class="highlight">THE ORACLE</span>
+                  </div>
+
+                   <div id="prompt">
+                    <div class="relative flex headline-small text-white/40 py-2 ">SCOPE</div>
+                    <p class="relative flex body-small-highlight">Deep architectural analysis of your life and major ventures.A visionary look into the next 12 months.<br />
+                    Requires a state of devotion and a quiet mind. Inquire only when the matter is of true weight.</p><br />
+                  </div>
+
+                </div>
+
+                <div class="absolute top-0 flex flex-row justify-center gap-[10%] w-[100%] h-[100%]">
+                <div class="relative flex flex-col justify-center h-auto ">
+                  <p class="title-num">99% </p>
+                  <p class="title">Precision</p></div>
+                <div class="relative flex flex-col justify-center h-auto ">
+                  <p class="title-num">80% </p>
+                  <p class="title">Resonance</p></div>
+                </div>
+                <div class="glowing-elements">
+                  <div class="glow-1"></div>
+                  <div class="glow-2"></div>
+                  <div class="glow-3"></div>
+                </div>
+                <div class="card-particles">
+                  <span></span><span></span><span></span> <span></span><span></span><span></span>
+                </div>
+                <div class="corner-elements">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="scan-line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+    </div>
+  </section>
