@@ -1,9 +1,334 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Feature text styles (moved out of FeaturePage.astro)
    Only contains typography rules used by the Feature section */
 
-/* ====== 文字动画定义区 ====== */
+/* Responsive alias helpers
+  - `--responmd` custom-media: usable if your build supports postcss-custom-media/postcss-preset-env
+  - `.responmd` utility class: a simple DOM class you can use to scope mobile-only rules
+  - Also provide a plain `@media (max-width: 768px)` fallback for direct use.
+*/
 
-/* 文字向上从模糊到清晰进入动画 */
+@custom-media --responmd (max-width: 768px);
+
+:root {
+  --responmd-break: 768px; /* fallback variable */
+}
+
+/* Utility class: Use `.responmd` on an element to indicate mobile-scoped content.
+  Example: .responmd .foo { ... } will apply inside mobile media queries.
+*/
+.responmd { }
+
+/* Plain fallback media query (safe to use in all browsers) */
+@media (max-width: 768px) {
+  /* add mobile-scoped helpers here if desired */
+}
+
+/* ====== 通用向上滑入动画 ====== */
+@keyframes slideUpFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  60% {
+    opacity: 0.6;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  opacity: 0;
+  animation: slideUpFromBottom 0.8s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+.animate-slide-up.delay-1 { animation-delay: 0.15s; }
+.animate-slide-up.delay-2 { animation-delay: 0.3s; }
+.animate-slide-up.delay-3 { animation-delay: 0.45s; }
+
+
+
+   
+   
+/* ====== 文字样式区 ====== */
+
+
+.body-medium {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem; /* 16px */
+  line-height: 1.6rem; /* 24px */
+  font-weight: 500;
+  letter-spacing: 0.6px;
+}
+
+.body-md-highlight {
+    font-family: 'Arial', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    font-size: 0.9rem; /* 14.4px */
+    line-height: 1.2rem; /* 16px */
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+  }
+
+  @media (max-width: 768px) {
+  .body-md-highlight {
+    font-size: 0.8rem; /* 13px */
+    line-height: 1.125rem; /* 16px */
+    font-weight: 400;
+    letter-spacing: 0.6px;
+  }
+}
+
+
+.body-large-captalize {
+  font-family: 'Roboto', sans-serif;
+  text-transform: capitalize;
+  font-size: 2rem; /* 32px */
+  line-height: 2.8rem; /* 45px */
+  font-weight: 500;
+  letter-spacing: 0.6px;
+}
+
+@media (max-width: 768px) {
+  .body-large-captalize {
+    font-size: 1.25rem; /* 24px */
+    line-height: 2rem; /* 32px */
+    font-weight: 400;
+  }
+}
+
+
+.text-small {
+  font-family: 'Roboto', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem; /* 14.4px */
+  line-height: 1rem; /* 16px */
+  font-weight: 400;
+  letter-spacing: 0.6px;
+}
+
+.button-small {
+  font-family: 'Roboto', sans-serif;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.875rem; /* 14px */
+  line-height: 1rem; /* 16px */
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 768px) {
+  .button-small {
+    font-size: 0.8rem; /* 12.8px */
+    line-height: 1rem; /* 16px */
+    font-weight: 400;
+  }
+}
+
+.headline-display {
+  font-family: 'Roboto', sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 2.5rem; /* 40px */
+  line-height: 3.25rem; /* 52px */
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+@media (max-width: 768px) {
+  .headline-display {
+    font-size: 2rem; /* 32px */
+    line-height: 2.25rem; /* 36px */
+    font-weight: 500;
+  }
+}
+
+
+
+.headline-large {
+  font-family: 'Roboto', sans-serif;
+  font-size: 3rem; /* 56px */
+  line-height: 4rem; /* 64px */
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+
+@media (min-width: 768px) {
+  .headline-large {
+    font-size: 3.75rem; /* 60px */
+    line-height: 4.375rem; /* 70px */
+  }
+}
+
+
+.headline-md-highlight {
+    font-family: 'Arial', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    font-size: 2.8rem; /* 32px */
+    line-height: 2.8 rem; /* 48px */
+    font-weight: 550;
+    letter-spacing: 0.8px;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  }
+@media (max-width: 768px) {
+  .headline-md-highlight {
+    font-size: 1.8rem; /* 28.8px */
+    line-height: 2rem; /* 32px */
+    font-weight: 600;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+.headline-medium {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.9375rem; /* 30px */
+  line-height: 2.25rem; /* 36px */
+  font-weight: 500;
+  letter-spacing: 0.6px;
+}
+
+@media (max-width: 768px) {
+  .headline-medium {
+    font-size: 1.1 rem; /* 20px */
+    line-height: 2 rem; /* 24px */
+    font-weight: 500;
+  }
+}
+
+.headline-small {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 20px */
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
+/* Larger headline on medium+ screens (matches previous md:text-[60px]) */
+@media (min-width: 768px) {
+  .headline-small {
+    font-size: 1.2 rem; /* 20px */
+    line-height: 1.5rem; /* 24px */
+    font-weight: 500;
+  }
+}
+
+.headline-special {
+  font-family: 'Baskervville', serif;
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.5rem; /* 40px */
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+@media (max-width: 768px) {
+  .headline-special {
+    font-size: 1.6rem; /* 24px */
+    line-height: 1.8rem; /* 28px */
+    font-weight: 400;
+  }
+}
+
+
+.text-medium {
+  font-family: 'Roboto', sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem; /* 16px */
+  line-height: 1.2rem; /* 16px */
+  font-weight: 400;
+  letter-spacing: 1.5px;
+}
+
+@media (max-width: 768px) {
+  .text-medium {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.4rem; /* 28px */
+    letter-spacing: 0.8 px;
+    font-weight: 400;
+  }
+}
+
+
+.body-small {
+  font-family: 'Roboto', sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.2rem; /* 16px */
+  font-weight: 300;
+  letter-spacing: 0.6px;
+}
+
+.body-small-highlight {
+  font-family: 'Roboto', sans-serif;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.9rem; /* 14.4px */
+  line-height: 1.6rem; /* 24px */
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
+
+.text-small-cyan {
+  font-family: 'Roboto', sans-serif;
+  color: rgba(161, 252, 255, 0.5);
+  font-size: 0.8rem; /* 13px */
+  line-height: 1rem; /* 16px */
+  font-weight: 400;
+  letter-spacing: 0.6px;
+}
+
+.body-special {
+  font-family: 'Baskervville', serif;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.6rem; /* 24px */
+  font-weight: 300;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 768px) {
+  .body-special {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.6rem; /* 24px */
+  }
+}
+
+.button-md {
+    font-family: 'Roboto', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    font-size: 1rem; /* 16px */
+    line-height: 1rem; /* 16px */
+    font-weight: 400;
+    letter-spacing: 0.8px;
+  }
+
+  @media (max-width: 768px) {
+  .button-md {
+    font-size: 0.85rem; /* 14px */
+    line-height: 0.85rem; /* 16px */
+  }
+}
+
+
+  
+
+  /* ====== 动画类 ====== */
+
+  /* 背景图从小到大浮现动画：从透明 + 缩小 → 不透明 + 原大小 */
+  @keyframes scaleUp {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* 文字向上从模糊到清晰进入动画 */
 @keyframes slideUpBlurToSharp {
   0% {
     opacity: 0;
@@ -71,175 +396,150 @@
   animation-delay: 0.6s;
 }
 
-/* ====== 文字样式区 ====== */
+  
+  /* 背景图动画：从小到大缩放进入 */
+  .animate-scale-up {
+    animation: scaleUp 1s ease-out forwards;
+  }
 
-.body-medium {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1rem; /* 16px */
-  line-height: 1.6rem; /* 24px */
-  font-weight: 500;
-  letter-spacing: 0.6px;
-}
+  /* 从左滑入动画 */
+  .animate-slide-left {
+    opacity: 0;
+    animation: slideInFromLeft 0.8s ease-out forwards;
+  }
 
+  /* Headline variant: includes the per-element translateY so translateY isn't lost by the animation */
+  @keyframes slideInFromLeftHead {
+    0% {
+      opacity: 0;
+      transform: translateX(-200px) translateY(var(--fg-ty-head, 0px));
+    }
+    30% {
+      opacity: 0.3;
+      transform: translateX(-140px) translateY(var(--fg-ty-head, 0px));
+    }
+    70% {
+      opacity: 0.7;
+      transform: translateX(-40px) translateY(var(--fg-ty-head, 0px));
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0) translateY(var(--fg-ty-head, 0px));
+    }
+  }
 
-.body-large-captalize {
-  font-family: 'Roboto', sans-serif;
-  text-transform: capitalize;
-  font-size: 2rem; /* 32px */
-  line-height: 2.8rem; /* 45px */
-  font-weight: 500;
-  letter-spacing: 0.6px;
-}
+  .animate-slide-left-head {
+    opacity: 0;
+    animation: slideInFromLeftHead 0.8s ease-out forwards;
+  }
 
-@media (max-width: 768px) {
-  .body-large-captalize {
-    font-size: 1.5rem; /* 24px */
-    line-height: 2rem; /* 32px */
-    font-weight: 500;
+  /* Content variant: includes its own translateY variable */
+  @keyframes slideInFromLeftContent {
+    0% {
+      opacity: 0;
+      transform: translateX(-200px) translateY(var(--fg-ty-content, 0px));
+    }
+    30% {
+      opacity: 0.3;
+      transform: translateX(-140px) translateY(var(--fg-ty-content, 0px));
+    }
+    70% {
+      opacity: 0.7;
+      transform: translateX(-40px) translateY(var(--fg-ty-content, 0px));
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0) translateY(var(--fg-ty-content, 0px));
+    }
+  }
+
+  .animate-slide-left-content {
+    opacity: 0;
+    animation: slideInFromLeftContent 0.8s ease-out forwards;
+  }
+
+  /* 前景文字：滚动速度视差（translateY driven by JS）
+     The JS will set `--fg-ty` in px so we apply it here. */
+  .foreground-parallax {
+    will-change: transform;
+  }
+
+  /* Per-element parallax transforms (controlled by JS via --fg-ty-head / --fg-ty-content) */
+  #foregroundText-headline {
+    transform: translateY(var(--fg-ty-head, 0px));
+    will-change: transform;
+  }
+
+  #foregroundText-content {
+    transform: translateY(var(--fg-ty-content, 0px));
+    will-change: transform;
+  }
+
+  
+
+  @layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
+  
 
-.text-small {
-  font-family: 'Roboto', sans-serif;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.9rem; /* 14.4px */
-  line-height: 1rem; /* 16px */
-  font-weight: 400;
-  letter-spacing: 0.6px;
-}
-
-.button-small {
-  font-family: 'Roboto', sans-serif;
-  color: rgba(255, 255, 255, 1);
-  font-size: 0.875rem; /* 14px */
-  line-height: 1rem; /* 16px */
-  font-weight: 400;
-  letter-spacing: 0.2px;
-}
-
-.headline-large {
-  font-family: 'Roboto', sans-serif;
-  font-size: 2rem; /* 32px */
-  line-height: 2.125rem; /* 40px */
-  font-weight: 500;
-  letter-spacing: 0.6px;
-}
-
-/* Larger headline on medium+ screens (matches previous md:text-[60px]) */
-@media (min-width: 768px) {
-  .headline-large {
-    font-size: 3.75rem; /* 60px */
-    line-height: 4.375rem; /* 70px */
+  @layer base {
+  * {
+    @apply border-border;
   }
-}
-
-.headline-small {
-  font-family: 'Roboto', sans-serif;
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.25rem; /* 20px */
-  font-weight: 400;
-  letter-spacing: 0.6px;
-}
-
-/* Larger headline on medium+ screens (matches previous md:text-[60px]) */
-@media (min-width: 768px) {
-  .headline-small {
-    font-size: 1rem; /* 20px */
-    line-height: 1.5rem; /* 24px */
-    font-weight: 500;
-  }
-}
-
-.headline-medium {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.9375rem; /* 30px */
-  line-height: 2.25rem; /* 36px */
-  font-weight: 500;
-  letter-spacing: 0.6px;
-}
-
-@media (max-width: 768px) {
-  .headline-medium {
-    font-size: 1rem; /* 20px */
-    line-height: 1.5rem; /* 24px */
-    font-weight: 500;
-  }
-}
-
-.text-medium {
-  font-family: 'Roboto', sans-serif;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.8rem; /* 13px */
-  line-height: 1rem; /* 16px */
-  font-weight: 600;
-  letter-spacing: 1.5px;
-}
-
-.headline-display {
-  font-family: 'Roboto', sans-serif;
-  color: rgb(255, 255, 255);
-  font-size: 2.5rem; /* 40px */
-  line-height: 3.25rem; /* 52px */
-  font-weight: 500;
-  letter-spacing: 0.2px;
-}
-
-.body-small {
-  font-family: 'Roboto', sans-serif;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.6rem; /* 24px */
-  font-weight: 400;
-  letter-spacing: 0.6px;
-}
-
-.body-small-highlight {
-  font-family: 'Roboto', sans-serif;
-  color: rgba(255, 255, 255, 1);
-  font-size: 0.9rem; /* 14.4px */
-  line-height: 1.6rem; /* 24px */
-  font-weight: 400;
-  letter-spacing: 0.8px;
-}
-
-.text-small-cyan {
-  font-family: 'Roboto', sans-serif;
-  color: rgba(161, 252, 255, 0.5);
-  font-size: 0.8rem; /* 13px */
-  line-height: 1rem; /* 16px */
-  font-weight: 400;
-  letter-spacing: 0.6px;
-}
-
-
-.headline-special {
-  font-family: 'Baskervville', serif;
-  font-size: 2.25rem; /* 36px */
-  line-height: 2.5rem; /* 40px */
-  font-weight: 400;
-  letter-spacing: 0px;
-}
-
-@media (max-width: 768px) {
-  .headline-special {
-    font-size: 1.6rem; /* 24px */
-    line-height: 1.8rem; /* 28px */
-    font-weight: 400;
-  }
-}
-
-.body-special {
-  font-family: 'Baskervville', serif;
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.6rem; /* 24px */
-  font-weight: 300;
-  letter-spacing: 0.2px;
-}
-
-@media (max-width: 768px) {
-  .body-special {
-    font-size: 0.875rem; /* 14px */
-    line-height: 1.6rem; /* 24px */
+  body {
+    @apply bg-background text-foreground;
   }
 }

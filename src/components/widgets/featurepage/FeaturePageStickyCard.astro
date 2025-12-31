@@ -4,6 +4,9 @@ import iconSend from '~/assets/icons/serena/icon-send.svg?url';
 import visualcard2raw from '~/assets/icons/serena/VisualCard2.svg?raw';
 import visualcard3raw from '~/assets/icons/serena/VisualCard3.svg?raw';
 import '~/assets/styles/feature-text.css';
+import FeaturePageCard1 from './FeaturePageCard1.astro';
+import FeaturePageCard2 from './FeaturePageCard2.astro';
+import FeaturePageCard3 from './FeaturePageCard3.astro';
 
 ---
 
@@ -140,63 +143,7 @@ import '~/assets/styles/feature-text.css';
         }
       </script>
 
-      <!-- 移动端卡片滑动脚本 -->
-      <script type="module">
-        if (typeof window !== 'undefined') {
-          const mobileSlider = document.querySelector('.mobile-card-slider');
-          const mobileIndicators = document.querySelectorAll('.mobile-card-indicator');
-          
-          if (mobileSlider && mobileIndicators.length > 0) {
-            // 更新指示器状态
-            function updateMobileIndicators() {
-              const scrollLeft = mobileSlider.scrollLeft;
-              const containerWidth = mobileSlider.clientWidth;
-              const currentSlide = Math.round(scrollLeft / containerWidth);
-              
-              mobileIndicators.forEach((indicator, index) => {
-                if (index === currentSlide) {
-                  indicator.classList.add('active');
-                  indicator.style.backgroundColor = '#caf1f8';
-                } else {
-                  indicator.classList.remove('active');
-                  indicator.style.backgroundColor = 'rgba(202, 241, 248, 0.3)';
-                }
-              });
-            }
-
-            // 监听滑动事件
-            mobileSlider.addEventListener('scroll', updateMobileIndicators, { passive: true });
-            
-            // 初始化指示器状态
-            updateMobileIndicators();
-
-            // 点击指示器跳转到对应slide
-            mobileIndicators.forEach((indicator, index) => {
-              indicator.addEventListener('click', () => {
-                const containerWidth = mobileSlider.clientWidth;
-                mobileSlider.scrollTo({
-                  left: index * containerWidth,
-                  behavior: 'smooth'
-                });
-              });
-              
-              // 添加指示器样式
-              indicator.style.cursor = 'pointer';
-              indicator.style.transition = 'all 0.3s ease';
-              
-              indicator.addEventListener('mouseenter', () => {
-                indicator.style.transform = 'scale(1.2)';
-              });
-              
-              indicator.addEventListener('mouseleave', () => {
-                indicator.style.transform = 'scale(1)';
-              });
-            });
-          }
-        }
-      </script>
-
-      <div class="w-full h-[50px] bg-white/5 border border-white/10 rounded-full flex items-center justify-between px-6 pr-2">
+      <div class="w-full h-[50px] bg-white/5 border border-white/10 rounded-full flex items-center justify-between px-6 pr-2 h-">
         <span class="text-sm tracking-[0.4px] text-white/30">  Ask the cosmos...</span>
         <div class="w-[40px] h-[40px] bg-[rgba(0,184,219,0.2)] rounded-full flex items-center justify-center animate-pulse hover:bg-[rgba(0,184,219,0.4)] transition-colors cursor-pointer">
           <img src={iconSend} alt="send" class="w-[20px] h-[20px]" loading="lazy" decoding="async" />
@@ -233,86 +180,5 @@ import '~/assets/styles/feature-text.css';
 </div>
 </div>
 
-<!-- Mobile Version - 单张卡片内容切换 -->
-<div class="lg:hidden sticky w-[80vw] h-[60vh] mx-auto bg-white/[0.03] rounded-3xl border border-white/15 shadow-[0px_20px_40px_0px_rgba(0,0,0,0.2),inset_0px_0px_40px_0px_rgba(9,168,146,0.1)] overflow-hidden">
-  <!-- Corner Dots -->
-  <div class="absolute top-4 left-4 w-2 h-2 rounded-full bg-white/20"></div>
-  <div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-white/20"></div>
-  <div class="absolute bottom-4 left-4 w-2 h-2 rounded-full bg-white/20"></div>
-  <div class="absolute bottom-4 right-4 w-2 h-2 rounded-full bg-white/20"></div>
 
-  <!-- Top Gradient Line -->
-  <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50"></div>
-  
-  <!-- 移动端内容切换容器 -->
-  <div class="mobile-content-slider overflow-x-auto scrollbar-hide h-full">
-    <div class="flex snap-x snap-mandatory h-full" style="width: 300%;">
-      
-      <!-- Mobile Content 1 - Chat -->
-      <div class="w-full flex-shrink-0 snap-start absolute inset-0 flex flex-col gap-4 h-full justify-end px-6 py-6 mobile-visual-item opacity-100" data-mobile-visual="chat">
-        <div class="flex flex-col gap-4">
-          <div class="flex justify-start">
-            <div class="bg-white/10 flex justify-start rounded-tr-[10px] rounded-bl-[10px] rounded-br-[10px] p-2 animate-float-2">
-              <p class="text-xs">What do the stars say about my career?</p>
-            </div>
-          </div>
-          <div class="flex justify-end">
-            <div class="bg-[rgba(9,168,146,0.3)] border border-[rgba(9,168,146,0.5)] rounded-tl-[10px] rounded-bl-[10px] rounded-br-[10px] p-2 animate-float-2">
-              <div class="flex items-center gap-2">
-                <img src={iconLoader} alt="loader" class="w-3 h-3 animate-pulse" loading="lazy" decoding="async" />
-                <span class="text-xs text-[#cefafe] animate-pulse">Analyzing...</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Typing bubbles for mobile -->
-        <div class="flex justify-center p-4 pointer-events-none overflow-visible mobile-bubble-container">
-          <div class="flex flex-col items-center space-y-2">
-            <div class="mobile-bubble text-center text-xs max-w-[280px]" data-text="Let SERENA unlock ancient wisdom and map your destiny.">
-              <span class="mobile-bubble-text"></span><span class="mobile-cursor" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
-        
-        <div class="w-full h-[40px] bg-white/5 border border-white/10 rounded-full flex items-center justify-between px-4 pr-2">
-          <span class="text-xs tracking-[0.4px] text-white/30">Ask the cosmos...</span>
-          <div class="w-[30px] h-[30px] bg-[rgba(0,184,219,0.2)] rounded-full flex items-center justify-center animate-pulse">
-            <img src={iconSend} alt="send" class="w-[15px] h-[15px]" loading="lazy" decoding="async" />
-          </div>
-        </div>
-      </div>
 
-      <!-- Mobile Content 2 - Analysis -->
-      <div class="w-full flex-shrink-0 snap-start absolute inset-0 flex flex-col gap-4 h-full justify-center px-6 py-6 transition-all duration-700 ease-out mobile-visual-item opacity-0" data-mobile-visual="analysis">
-        <div class="flex flex-col justify-center items-center gap-4">
-          <div class="text-center">
-            <span class="text-sm font-medium text-cyan-200">Anchor the Time</span>
-            <p class="text-xs text-cyan-200/70 mt-1">Precisely enter your date and time of birth.</p>
-            <span class="text-sm font-medium text-cyan-200 block mt-3">Locate the Axis</span>
-            <p class="text-xs text-cyan-200/70 mt-1">Determine your place and direction of birth.</p>
-          </div>
-          <div class="visual-card-svg w-[100px] h-[100px] flex justify-center animate-pulse">
-              <div class="items-center" set:html={visualcard2raw} aria-hidden="true"></div>
-          </div>
-          <p class="text-center text-xs text-cyan-200/50 px-2">SERENA will merge cosmic data to calculate your destiny.</p>
-       </div>
-      </div>
-
-      <!-- Mobile Content 3 - Visual Card -->
-      <div class="w-full flex-shrink-0 snap-start absolute inset-0 flex items-center justify-center transition-all duration-700 ease-out mobile-visual-item opacity-0" data-mobile-visual="card">
-          <div class="visual-card-svg w-[200px] h-[300px] flex justify-center animate-pulse">
-              <div class="items-center" set:html={visualcard3raw} aria-hidden="true"></div>
-          </div>
-      </div>
-      
-    </div>
-  </div>
-
-  <!-- 移动端滑动指示器 -->
-  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-    <div class="w-2 h-2 rounded-full bg-[#caf1f8] mobile-card-indicator active"></div>
-    <div class="w-2 h-2 rounded-full bg-[#caf1f8]/30 mobile-card-indicator"></div>
-    <div class="w-2 h-2 rounded-full bg-[#caf1f8]/30 mobile-card-indicator"></div>
-  </div>
-</div>

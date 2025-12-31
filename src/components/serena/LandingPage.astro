@@ -4,6 +4,8 @@ import nextIcon from '~/assets/icons/serena/icon-next.svg?url';
 import NaviBar from '~/components/widgets/landingpage/NaviBar.astro';
 import SerenaLetter from '~/components/widgets/landingpage/SerenaLetter.astro';
 import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.astro';
+import '~/assets/styles/landingpageparagraph.css';
+import '~/assets/styles/feature-text.css';
 ---
 
 <!-- 主容器：全屏高度白色背景，弹性布局 -->
@@ -31,33 +33,95 @@ import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.ast
     </div>
 
     <!-- 主内容区：包含标题和按钮，z-index 叠层以覆盖背景 -->
-    <div class="w-full p-4 md:p-16 flex flex-col justify-end items-start gap-12 md:gap-12 relative z-10">
+    <div class="w-full py-16 md:py-32 px-8 md:px-16 flex flex-col justify-end items-start gap-6 md:gap-10 relative z-10">
       <!-- 文字内容：主标题 + 副标题 -->
-      <div class="w-full md:w-2/5 flex flex-col justify-end items-start gap-3 md:gap-5">
-        <!-- 主标题：使用 headline-lg 样式，从左浮现 -->
-        <h1 class="headline-lg animate-slide-left">
-          Your personal oracle app for clarity, answers and guidance.
-        </h1>
-        
-        <!-- 副标题：使用 headline-md-highlight 样式，从左浮现（延迟） -->
-        <p class="headline-md-highlight animate-slide-left" style="animation-delay: 0.2s">
-          This app reads the energy behind your moments, questions, and decisions, turns it into clear and actionable guidance. Through intuitive prompts and personalized insights, it helps you understand what's shifting in your life, why it matters, and how to move forward with confidence.
-        </p>
-      </div>
+      <div id="foregroundText" class="w-full md:w-2/5 flex flex-col justify-end items-start gap-3 md:gap-5 foreground-parallax">
+        <!-- 主标题：使用 headline-md-highlight 样式，从左浮现 -->
+        <div id="foregroundText-headline" class="headline-md-highlight animate-slide-left-head">
+          Your Guide Through Universe
+        </div>
       
-      <!-- 行动按钮区域：CTA 按钮组 -->
-      <button class="inline-flex justify-center items-center py-3 px-4 bg-white/10 backdrop-blur-sm text-white rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/20 hover:outline hover:outline-white transition-all animate-slide-left" style="animation-delay: 0.4s">
+        <!-- 副标题：使用 headline-md-highlight 样式，从左浮现（延迟） -->
+        <div id="foregroundText-content" class="body-md-highlight animate-slide-left-content" style="animation-delay: 0.2s">
+          Through Serena, find the echoes of your existence: your path, your fortune, and the whispers of your heart. <br >
+          Yet, the truest journey returns to You. Destiny is not your master; you are the architect of your own fate.</div>
+        </div>
+
+        <!-- 行动按钮区域：CTA 按钮组 -->
+      <button class="inline-flex justify-center items-center py-2 px-3 md:py-3 md:px-4 bg-white/10 backdrop-blur-sm text-white rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/20 hover:outline hover:outline-white transition-all animate-slide-left" style="animation-delay: 0.4s">
         <span class="button-md">Begin Experience</span>
         <span class="pl-2 inline-flex justify-center">
           <img src={nextIcon} alt="Arrow Right" class="w-5 h-5" />
         </span>
       </button>
+
+      </div>
+      
+      
     </div>
   </div>
 </section>
 
 <!-- 滚动动画脚本 -->
 <ScrollAnimationScript />
+
+<script>
+  if (typeof window !== 'undefined') {
+    (function () {
+      const root = document.getElementById('foregroundText') as HTMLElement | null;
+      if (!root) return;
+      const rootEl = root as HTMLElement;
+
+      // start scroll position to compute delta
+      let startScroll = window.scrollY || 0;
+      // store RAF id
+      let raf: number | null = null;
+
+      function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+      function update() {
+        raf = null;
+        const rect = rootEl.getBoundingClientRect();
+
+        // progress: 0 when element top is at top of viewport, 1 when it moved one viewport height
+        const progress = clamp(1 - (rect.top / window.innerHeight), 0, 1);
+
+        // speed maps from 1.2 -> 1.4 across progress
+        const speed = 1.2 + 0.2 * progress;
+
+        const delta = (window.scrollY || 0) - startScroll;
+
+        // apply extra movement so element appears to scroll faster than the page
+        const transY = -delta * (speed - 1);
+
+          const headline = rootEl.querySelector('#foregroundText-headline') as HTMLElement | null;
+          const content = rootEl.querySelector('#foregroundText-content') as HTMLElement | null;
+
+          // Multipliers: headline moves slightly faster than content
+          const headlineMul = 1.3;
+          const contentMul = 0.75;
+
+          if (headline) headline.style.setProperty('--fg-ty-head', transY * headlineMul + 'px');
+          if (content) content.style.setProperty('--fg-ty-content', transY * contentMul + 'px');
+      }
+
+      function schedule() {
+        if (raf) return;
+        raf = requestAnimationFrame(update);
+      }
+
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', schedule);
+
+      // reset startScroll when page loses/gains focus or at first run to account for dynamic layout
+      window.addEventListener('load', () => { startScroll = window.scrollY || 0; schedule(); });
+      window.addEventListener('orientationchange', () => { startScroll = window.scrollY || 0; schedule(); });
+
+      // initialize
+      schedule();
+    })();
+  }
+</script>
 
 
 
@@ -80,65 +144,6 @@ import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.ast
       opacity: 1;
       transform: translateX(0);
     }
-  }
-
-  /* 背景图从小到大浮现动画：从透明 + 缩小 → 不透明 + 原大小 */
-  @keyframes scaleUp {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  /* ====== 文字样式区 ====== */
-  
-  /* 主标题样式：大号、白色、带阴影、从左浮现 */
-  .headline-lg {
-    font-family: 'Roboto', sans-serif;
-    color: rgba(255, 255, 255, 1);
-    font-size: 1.8rem; /* 32px */
-    line-height: 2.5rem; /* 48px */
-    font-weight: 500;
-    letter-spacing: 0.8px;
-    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.75);
-  }
-
-  /* 副标题样式：小号、白色、带阴影 */
-  .headline-md-highlight {
-    font-family: 'Roboto', sans-serif;
-    color: rgba(255, 255, 255, 1);
-    font-size: 0.75rem; /* 14px */
-    line-height: 1rem; /* 16px */
-    font-weight: 250;
-    letter-spacing: 0.4px;
-    text-shadow: 0 4px 4px rgba(0, 0, 0, 1);
-  }
-
-  /* 按钮文字样式 */
-  .button-md {
-    font-family: 'Roboto', sans-serif;
-    color: rgba(255, 255, 255, 1);
-    font-size: 1rem; /* 16px */
-    line-height: 1rem; /* 16px */
-    font-weight: 400;
-    letter-spacing: 0.8px;
-  }
-
-  /* ====== 动画类 ====== */
-  
-  /* 背景图动画：从小到大缩放进入 */
-  .animate-scale-up {
-    animation: scaleUp 1s ease-out forwards;
-  }
-
-  /* 从左滑入动画 */
-  .animate-slide-left {
-    opacity: 0;
-    animation: slideInFromLeft 0.8s ease-out forwards;
   }
 
 </style>

@@ -5,6 +5,9 @@ import moonicon1 from '~/assets/icons/serena/Moonicon1.svg?raw';
 import moonicon2 from '~/assets/icons/serena/Moonicon2.svg?raw';
 import moonicon3 from '~/assets/icons/serena/Moonicon3.svg?raw';
 import '~/assets/styles/feature-text.css';
+import FeaturePageCard1 from '~/components/widgets/featurepage/FeaturePageCard1.astro';
+import FeaturePageCard2 from '~/components/widgets/featurepage/FeaturePageCard2.astro';
+import FeaturePageCard3 from '~/components/widgets/featurepage/FeaturePageCard3.astro';
 
 
 const howItWorksSteps = [
@@ -30,13 +33,13 @@ const howItWorksSteps = [
 ---
    
 
-<section id="feature" class="relative bg-gradient-to-b from-[#09a892] via-[#1a6774] to-[#023344] px-5 md:px-20 py-[50px] md:py-[100px] min-h-[400vh]">
+<section id="feature" class="relative bg-gradient-to-b from-[#09a892] via-[#1a6774] to-[#023344] px-0 md:px-20 py-[50px] md:py-[100px] min-h-[150vh]">
   <!-- Header -->
-  <div class="flex flex-col items-center gap-[30px] md:px-[50px] lg:px-[300px] md:py-[30px] lg:py-[100px]">
+  <div class="flex flex-col items-center gap-[2rem] md:px-[10vw] px-[5vw] md:py-[30px] lg:py-[100px] h-fit-content">
     <p class="headline-large text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent animate-slide-up-blur">
       How It Works
     </p>
-    <p class="headline-small text-center leading-[24px] md:leading-[26px] font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] max-w-[680px] animate-slide-up-blur-delay-1">
+    <p class="headline-small text-center h-fit-content leading-[24px] md:leading-[26px] font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] max-w-[80vw] animate-slide-up-blur-delay-1">
       A seamless journey from question to cosmic revelation, powered by the fusion of ancient wisdom and artificial intelligence.
     </p>
   </div>
@@ -52,6 +55,7 @@ const howItWorksSteps = [
                   <p class="title-lg animate-slide-up-blur">{step.num} </p>
                   <h3 class="headline-display animate-slide-up-blur-delay-1">{step.title} </h3>
                   <p class="body-small animate-slide-up-blur-delay-2">{step.description} </p>
+                  
               </div>
           </div>
       ))}
@@ -84,65 +88,68 @@ const howItWorksSteps = [
   </div>
 
   <!-- Timeline Content - Mobile (横向滑动) -->
-  <div class="lg:hidden">
+  <div class="lg:hidden relative">
+    <!-- 固定背景卡片 -->
+    <div id="cardbg" class="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden pointer-events-none z-0">
+      <div class="absolute w-[85vw] h-[75vh] top-[45vh] bg-white/[0.03] rounded-3xl border border-white/15 shadow-[0px_20px_40px_0px_rgba(0,0,0,0.2),inset_0px_0px_40px_0px_rgba(9,168,146,0.1)]"> 
+        <!-- Corner Dots -->
+        <div class="absolute top-4 left-4 w-2 h-2 rounded-full bg-white/20"></div>
+        <div class="absolute top-4 right-4 w-2 h-2 rounded-full bg-white/20"></div>
+        <div class="absolute bottom-4 left-4 w-2 h-2 rounded-full bg-white/20"></div>
+        <div class="absolute bottom-4 right-4 w-2 h-2 rounded-full bg-white/20"></div>
+        <!-- Top Gradient Line -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50"></div>
+      </div>
+    </div>
+
     <!-- 滑动容器 -->
-    <div class="overflow-x-auto scrollbar-hide">
-      <div class="flex snap-x snap-mandatory gap-8 pb-4" style="width: 300vw;">
+    <div class="overflow-x-auto scrollbar-hide relative z-10">
+      <div class="flex snap-x snap-mandatory pb-4" style="width: 300vw;">
         {howItWorksSteps.map((step, index) => (
-          <div class="w-screen flex-shrink-0 snap-start px-4">
-            <!-- Step组合 -->
-            <div class="py-8">
+            <div class="pt-[6rem] px-[5vw] z-0 w-[100vw] h-[150vh]">
               <!-- 文字区域 -->
-              <div class="flex flex-col gap-4 mb-8">
+              <div class="flex flex-col">
                 <div class="flex items-center gap-4">
                   <div class="w-[50px] h-[50px] rounded-full bg-[#023344] border border-[#caf1f8] shadow-[0px_0px_20px_0px_#caf1f8] flex items-center justify-center flex-shrink-0">
-                    {index === 2 ? (
-                      <div class="w-5 h-5 rounded-full bg-amber-500 shadow-[0px_0px_15px_0px_#f59e0b]"></div>
-                    ) : (
-                      <img src={index === 0 ? moonicon1 : moonicon3} alt="" class="w-full h-full object-contain" loading="lazy" decoding="async" />
-                    )}
-                  </div>
-                  <div>
-                    <p class="text-lg leading-[26px] font-normal tracking-[0.2px] text-white/70">{step.num}</p>
-                    <h3 class="text-2xl leading-[32px] font-medium tracking-[0.2px] text-white capitalize">{step.title}</h3>
-                  </div>
-                </div>
-                <p class="text-sm leading-[22px] font-normal tracking-[0.4px] text-[rgba(206,250,254,0.8)]">
-                  {step.description}
-                </p>
-              </div>
-
-              <!-- 月球图标 -->
-              <div class="flex justify-center mb-8">
-                <div class="w-[40px] h-[40px] bg-[#023344] border border-[#caf1f8] shadow-[0px_0px_20px_0px_#caf1f8] rounded-full flex items-center justify-center">
+                  <div class="flex justify-center">
                   {index === 0 && <div class="w-[22px] h-[22px]" set:html={moonicon1}></div>}
                   {index === 1 && <div class="w-[20px] h-[20px]" set:html={moonicon2}></div>}
                   {index === 2 && <div class="w-[20px] h-[20px]" set:html={moonicon3}></div>}
+                  </div>
+                  </div>
+
+                  <div>
+                    <p class="headline-small leading-[26px] text-white/70 animate-slide-up-blur-delay-1">{step.num}</p>
+                    <h3 class="headline-md-highlight text-white capitalize animate-slide-up-blur-delay-1">{step.title}</h3>
+                  </div>
                 </div>
+                <p class="py-6 text-medium leading-[22px] font-normal tracking-[0.4px] text-[rgba(206,250,254,0.8)] animate-slide-up-blur-delay-3">
+                  {step.description}
+                </p>
+
+                <!-- Small preview of the visual card for this step (componentized) -->
+                {step.visualId === 'chat' && (
+                  <FeaturePageCard1 />
+                )}
+
+                {step.visualId === 'analysis' && (
+                  <FeaturePageCard2 />
+                )}
+
+                {step.visualId === 'card' && (
+                  <FeaturePageCard3 />
+                )}
+
               </div>
 
-              <!-- 卡片区域 -->
-              <div>
-                <FeaturePageStickyCard />
-              </div>
-
-              <!-- 横画分隔线 -->
-              <div class="flex justify-center mt-8">
-                <div class="w-16 h-px bg-gradient-to-r from-transparent via-[#caf1f8] to-transparent"></div>
-              </div>
             </div>
-          </div>
         ))}
       </div>
     </div>
 
-    <!-- 滑动指示器 -->
-    <div class="flex justify-center gap-2 mt-4">
-      {howItWorksSteps.map((_, index) => (
-        <div class="w-2 h-2 rounded-full bg-[#caf1f8]/30 transition-all duration-300 slide-indicator" data-index={index}></div>
-      ))}
-    </div>
+
   </div>
+
 
 
 <script>

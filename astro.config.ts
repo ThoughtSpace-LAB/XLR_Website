@@ -5,6 +5,7 @@ import { defineConfig } from 'astro/config';
 
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
@@ -20,6 +21,8 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
+    // React integration enables client-side React components (\.tsx) to render
+    react(),
     sitemap(),
     mdx(),
     icon({

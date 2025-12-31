@@ -1,136 +1,161 @@
 ---
 
 ---
-<div id="movercontainer" class="sticky top-0 h-[100vh] w-full overflow-hidden bg-transparent justify-items-center">
- <div id="stickycontainer" class="sticky top-5 h-[10vh] w-[10vw] bg-transparent">
-  <div class="mover-dot-container">
-    <div class="mover-dot" id="moverDot" aria-hidden="true"></div>
-  </div>
-  </div>
+    <!-- Simple mover: only an overlay and a single dot. The dot breathes (scale 0.9–1.1) and continuously rotates. -->
+    <div id="movercontainer" class="sticky top-0 w-full items-top justify-top">
+      <div class="overlay" aria-hidden="true"></div>
+      <div class="dot" aria-hidden="true">
+      <div class="dot-inner" aria-hidden="true"></div>
+    </div>
+    <div class="borderline" aria-hidden="true">
+      </div>
+    </div>
+    <div id="scroll-location" > </div>
+    </div>
 
-</div>
-
-<style>
-  .mover-dot-container {
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-    pointer-events: none;
-  }
-
-  /* dot positioned absolutely so transform origin is viewport center */
-  .mover-dot {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--bg, white);
-    box-shadow:
-      0 0 10px 5px var(--glow1, rgba(255,255,255,0.4)),
-      0 0 20px 10px var(--glow2, rgba(154,255,255,0.3)),
-      0 0 40px 20px var(--glow3, rgba(218,248,255,0.2));
-    transform: translate(-50%, -50%) scale(var(--s,1));
-    transform-origin: center center;
-    transition: transform 3s cubic-bezier(.2,.9,.2,1),
-                background-color 3s ease, box-shadow 0.45s ease;
-    will-change: transform, background-color, box-shadow;
-    pointer-events: none;
-  }
-
-  .mover-dot.expanded {
-    transform: translate(-50%, -50%) scale(var(--s,300));
-  }
-
-  /* allow the oversized dot to overflow when expanded */
-  #movercontainer.expanded {
-    overflow: visible;
-  }
-
-</style>
-
-
-
-<script>
-  if (typeof window !== 'undefined') {
-    (function () {
-      const dot = document.getElementById('moverDot');
-      const container = document.getElementById('movercontainer');
-      if (!dot || !container) {
-        console.warn('Mover: missing element', { dot: !!dot, container: !!container });
-        return;
+    <style>
+      :root { 
+        --mover-size: 15vw; 
       }
-
-      let expanded = false;
-
-      // 创建一个 IntersectionObserver 来检测 movercontainer 的中间
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !expanded) {
-            expanded = true;
-            console.log('Mover: expand triggered by IntersectionObserver');
-            dot.classList.add('expanded');
-            dot.style.setProperty('--s', '300');
-            // change color/glow to green
-            dot.style.setProperty('--bg', '#09a791');
-            dot.style.setProperty('--glow1', 'rgba(9,167,145,0.45)');
-            dot.style.setProperty('--glow2', 'rgba(9,167,145,0.30)');
-            dot.style.setProperty('--glow3', 'rgba(9,167,145,0.20)');
-            container.classList.add('expanded');
-          } else if (!entry.isIntersecting && expanded) {
-            // 当 movercontainer 离开视口时恢复
-            expanded = false;
-            console.log('Mover: collapse triggered by IntersectionObserver');
-            dot.classList.remove('expanded');
-            dot.style.setProperty('--s', '1');
-            // restore original color/glow
-            dot.style.setProperty('--bg', 'white');
-            dot.style.setProperty('--glow1', 'rgba(255,255,255,0.4)');
-            dot.style.setProperty('--glow2', 'rgba(154,255,255,0.3)');
-            dot.style.setProperty('--glow3', 'rgba(218,248,255,0.2)');
-            container.classList.remove('expanded');
-          }
-        });
-      }, {
-        threshold: 0.9, // 当容器 50% 进入视口时触发（更靠近中间）
-        rootMargin: '0px' // 无偏移
-      });
-
-      // 观察 movercontainer 本身
-      if (container) {
-        observer.observe(container);
-      }
-
-      // 备用方案：基于滚动进度
-      function onScroll() {
-        if (expanded) return;
-
-        const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-        
-        // 当滚动到接近底部时触发扩展
-        if (scrollProgress >= 0.95) {
-          expanded = true;
-          console.log('Mover: expand triggered by scroll fallback');
-          dot.classList.add('expanded');
-          dot.style.setProperty('--s', '300');
-          container.classList.add('expanded');
-        } else {
-          // 根据滚动进度轻微缩放（仅 scale）
-          const scale = 1 + scrollProgress * 2; // 从 1 到 3
-          dot.style.setProperty('--s', String(scale));
+      @media (max-width: 768px) {
+        :root {
+          --mover-size: 30vw;
         }
       }
+      #scroll-location {
+        position: absolute;
+        top: 0;
+        height: fill-available;
+        width: 100%;
+        background-color: transparent;
+        /* Removed scroll-timeline properties as they require a scrollable container */
+      }
 
-      window.addEventListener('scroll', onScroll, { passive: true });
+      #movercontainer {
+        position: sticky;
+        align-items: center;
+        top: 0;
+        height: 100vh;
+        width: 100%;;
+        /* fade in with blur on page load */
+        opacity: 0;
+        filter: blur(20px);
+        animation: fadeInBlur 4s ease-out 0.5s forwards;
+        view-timeline: --animationscroll block;
+        animation-timeline: --animationscroll;
+        animation-range: 10% 30%;
+      }
 
-      window.addEventListener('beforeunload', () => {
-        window.removeEventListener('scroll', onScroll);
-        observer.disconnect();
-      });
+      /* overlay: slightly larger circular mask behind the dot */
+      .overlay {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(var(--mover-size) * 1.2);
+        height: calc(var(--mover-size) * 1.2);
+        border-radius: 50%;
+        background: radial-gradient(circle at center, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 20%, rgba(252, 252, 252, 1) 70%);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 5;
+        animation: scaleoutDot ease-in-out 4s forwards;
+        view-timeline: --animationscroll block;
+        animation-timeline: --animationscroll;
+        animation-range: 20% 60%;
+      }
 
-    })();
-  }
-</script>
+      .borderline {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(var(--mover-size) * 1.1);
+        height: calc(var(--mover-size) * 1.1);
+        background: radial-gradient(circle at center, rgb(255, 255, 255, 0) 0%, rgba(18, 60, 79, 0.2) 40%, rgba(255, 255, 255, 1) 80%);
+        border-radius: 50%;
+        animation: scaleinline ease-in-out 4s forwards;
+        view-timeline: --animationscroll block;
+        animation-timeline: --animationscroll;
+        animation-range: 10% 100%;
+      }
+
+
+      /* dot: parent holds breathing (scale), inner rotates */
+      .dot {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: var(--mover-size);
+        height: var(--mover-size);
+        min-width: 30px;
+        min-height: 30px;
+        filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transform-origin: center center;
+        animation: fadeOutBlur linear;
+        view-timeline: --animationscroll block;
+        animation-timeline: --animationscroll;
+        animation-range: 40% 100%;
+      }
+
+      .dot-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #00ff7b, #00eaff, #008cff);
+        filter: blur(10px);
+        box-shadow: azure 0px 0px 20px, rgb(255, 255, 255) -5px -5px 2px;
+        transform-origin: center center;
+        /* combined breathe (scale) and spin (rotate) animation */
+        animation:  breatheAndSpin 4s ease-in-out 2s infinite;
+      }
+
+      /* start animations when page is scrolled into view */
+      .animate .dot-inner {
+        animation-play-state: running;
+        color-blend-mode: screen;
+      }
+
+      @keyframes breatheAndSpin {
+        0% { transform: scale(0.95) rotate(0deg); }
+        25% { transform: scale(1.1) rotate(90deg); }
+        50% { transform: scale(0.95) rotate(180deg); }
+        75% { transform: scale(1.1) rotate(270deg); }
+        100% { transform: scale(0.95) rotate(360deg); }
+      }
+
+      @keyframes fadeInBlur {
+        0% { opacity: 0; filter: blur(20px); }
+        100% { opacity: 1; filter: blur(0px); }
+      }
+
+      @keyframes scaleoutDot {
+        0% { transform: translate(-50%, -50%) scale(1);filter: blur(0px); }
+        60% { transform: translate(-50%, -50%) scale(0.4);filter: blur(0px); }
+        100% { transform: translate(-50%, -50%) scale(0);filter: blur(10px); }
+      }
+
+      @keyframes scaleinline {
+        0% { transform: translate(-50%, -50%) scale(0); opacity: 0;filter: blur(10px); }
+        50% { transform: translate(-50%, -50%) scale(2); opacity: 0.6; filter: blur(0px);}
+        100% { transform: translate(-50%, -50%) scale(1); opacity: 1; filter: blur(0px); }
+      }
+      
+      @keyframes fadeOutBlur {
+        0% { opacity: 1; filter: blur(0px); }
+        60% { opacity: 0; filter: blur(10px); }
+        100% { opacity: 1; filter: blur(0px); }
+      }
+
+      @keyframes colorchange {
+        0% { background: radial-gradient(circle at center, rgb(255, 255, 255,0.2) 0%, rgb(255, 255, 255, 0.3) 20%, rgba(252, 252, 252, 0.5) 70%); }
+        100% { background: radial-gradient(circle at center,  rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.256) 20%, rgba(252, 252, 252, 1) 70%); }
+      }
+
+    
+
+    </style>
