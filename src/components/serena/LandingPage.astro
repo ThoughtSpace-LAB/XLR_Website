@@ -10,7 +10,6 @@ import '~/assets/styles/feature-text.css';
 
 <!-- 主容器：全屏高度白色背景，弹性布局 -->
 <section class="min-h-screen bg-white flex flex-col items-center relative">
-    
   <!-- 导航栏组件 -->
   <NaviBar />
 
@@ -18,14 +17,14 @@ import '~/assets/styles/feature-text.css';
   <SerenaLetter />
 
   <!-- HeroSection：青色背景 + 背景图 + 文字内容 -->
-  <div class="w-full flex-1 relative bg-black flex flex-col justify-end items-center overflow-hidden"> 
+  <div class="w-full flex-1 relative bg-black flex flex-col justify-end items-center overflow-hidden">
     <!-- 背景图层：全屏覆盖，使用 object-cover 缩放到铺满，应用 scaleUp 动画 -->
     <div class="w-full h-full absolute inset-0">
-      <img 
+      <img
         src={heroBg.src}
         width={heroBg.width}
         height={heroBg.height}
-        class="w-full h-full object-cover animate-scale-up" 
+        class="w-full h-full object-cover animate-scale-up"
         alt="背景图"
         loading="eager"
         decoding="async"
@@ -33,31 +32,41 @@ import '~/assets/styles/feature-text.css';
     </div>
 
     <!-- 主内容区：包含标题和按钮，z-index 叠层以覆盖背景 -->
-    <div class="w-full py-16 md:py-32 px-8 md:px-16 flex flex-col justify-end items-start gap-6 md:gap-10 relative z-10">
+    <div
+      class="w-full py-16 md:py-32 px-8 md:px-16 flex flex-col justify-end items-start gap-6 md:gap-10 relative z-10"
+    >
       <!-- 文字内容：主标题 + 副标题 -->
-      <div id="foregroundText" class="w-full md:w-2/5 flex flex-col justify-end items-start gap-3 md:gap-5 foreground-parallax">
+      <div
+        id="foregroundText"
+        class="w-full md:w-2/5 flex flex-col justify-end items-start gap-3 md:gap-5 foreground-parallax"
+      >
         <!-- 主标题：使用 headline-md-highlight 样式，从左浮现 -->
         <div id="foregroundText-headline" class="headline-md-highlight animate-slide-left-head">
           Your Guide Through Universe
         </div>
-      
-        <!-- 副标题：使用 headline-md-highlight 样式，从左浮现（延迟） -->
-        <div id="foregroundText-content" class="body-md-highlight animate-slide-left-content" style="animation-delay: 0.2s">
-          Through Serena, find the echoes of your existence: your path, your fortune, and the whispers of your heart. <br >
-          Yet, the truest journey returns to You. Destiny is not your master; you are the architect of your own fate.</div>
-        </div>
 
-        <!-- 行动按钮区域：CTA 按钮组 -->
-      <button class="inline-flex justify-center items-center py-2 px-3 md:py-3 md:px-4 bg-white/10 backdrop-blur-sm text-white rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/20 hover:outline hover:outline-white transition-all animate-slide-left" style="animation-delay: 0.4s">
+        <!-- 副标题：使用 headline-md-highlight 样式，从左浮现（延迟） -->
+        <div
+          id="foregroundText-content"
+          class="body-md-highlight animate-slide-left-content"
+          style="animation-delay: 0.2s"
+        >
+          Through Serena, find the echoes of your existence: your path, your fortune, and the whispers of your heart. <br
+          />
+          Yet, the truest journey returns to You. Destiny is not your master; you are the architect of your own fate.
+        </div>
+      </div>
+
+      <!-- 行动按钮区域：CTA 按钮组 -->
+      <button
+        class="inline-flex justify-center items-center py-2 px-3 md:py-3 md:px-4 bg-white/10 backdrop-blur-sm text-white rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/20 hover:outline hover:outline-white transition-all animate-slide-left"
+        style="animation-delay: 0.4s"
+      >
         <span class="button-md">Begin Experience</span>
         <span class="pl-2 inline-flex justify-center">
           <img src={nextIcon} alt="Arrow Right" class="w-5 h-5" />
         </span>
       </button>
-
-      </div>
-      
-      
     </div>
   </div>
 </section>
@@ -77,14 +86,16 @@ import '~/assets/styles/feature-text.css';
       // store RAF id
       let raf: number | null = null;
 
-      function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+      function clamp(v: number, a: number, b: number) {
+        return Math.max(a, Math.min(b, v));
+      }
 
       function update() {
         raf = null;
         const rect = rootEl.getBoundingClientRect();
 
         // progress: 0 when element top is at top of viewport, 1 when it moved one viewport height
-        const progress = clamp(1 - (rect.top / window.innerHeight), 0, 1);
+        const progress = clamp(1 - rect.top / window.innerHeight, 0, 1);
 
         // speed maps from 1.2 -> 1.4 across progress
         const speed = 1.2 + 0.2 * progress;
@@ -94,15 +105,15 @@ import '~/assets/styles/feature-text.css';
         // apply extra movement so element appears to scroll faster than the page
         const transY = -delta * (speed - 1);
 
-          const headline = rootEl.querySelector('#foregroundText-headline') as HTMLElement | null;
-          const content = rootEl.querySelector('#foregroundText-content') as HTMLElement | null;
+        const headline = rootEl.querySelector('#foregroundText-headline') as HTMLElement | null;
+        const content = rootEl.querySelector('#foregroundText-content') as HTMLElement | null;
 
-          // Multipliers: headline moves slightly faster than content
-          const headlineMul = 1.3;
-          const contentMul = 0.75;
+        // Multipliers: headline moves slightly faster than content
+        const headlineMul = 1.3;
+        const contentMul = 0.75;
 
-          if (headline) headline.style.setProperty('--fg-ty-head', transY * headlineMul + 'px');
-          if (content) content.style.setProperty('--fg-ty-content', transY * contentMul + 'px');
+        if (headline) headline.style.setProperty('--fg-ty-head', transY * headlineMul + 'px');
+        if (content) content.style.setProperty('--fg-ty-content', transY * contentMul + 'px');
       }
 
       function schedule() {
@@ -114,8 +125,14 @@ import '~/assets/styles/feature-text.css';
       window.addEventListener('resize', schedule);
 
       // reset startScroll when page loses/gains focus or at first run to account for dynamic layout
-      window.addEventListener('load', () => { startScroll = window.scrollY || 0; schedule(); });
-      window.addEventListener('orientationchange', () => { startScroll = window.scrollY || 0; schedule(); });
+      window.addEventListener('load', () => {
+        startScroll = window.scrollY || 0;
+        schedule();
+      });
+      window.addEventListener('orientationchange', () => {
+        startScroll = window.scrollY || 0;
+        schedule();
+      });
 
       // initialize
       schedule();
@@ -123,11 +140,9 @@ import '~/assets/styles/feature-text.css';
   }
 </script>
 
-
-
 <style>
   /* ====== 动画定义区 ====== */
-  
+
   /* 文字从左边浮现动画：更平缓的淡入效果，分阶段显示 */
   @keyframes slideInFromLeft {
     0% {
@@ -135,7 +150,7 @@ import '~/assets/styles/feature-text.css';
       transform: translateX(-200px);
     }
     30% {
-      opacity: 0.3; 
+      opacity: 0.3;
     }
     70% {
       opacity: 0.7;
@@ -145,8 +160,4 @@ import '~/assets/styles/feature-text.css';
       transform: translateX(0);
     }
   }
-
 </style>
-
-<!-- 滚动动画脚本 -->
-<ScrollAnimationScript />

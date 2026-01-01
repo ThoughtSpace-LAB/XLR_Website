@@ -1,9 +1,7 @@
-
-
 .loader {
   color: rgb(188, 188, 188);
   mix-blend-mode: difference;
-  font-family: "roboto", sans-serif;
+  font-family: 'roboto', sans-serif;
   font-weight: 800;
   font-size: 5rem;
   -webkit-box-sizing: content-box;
@@ -17,7 +15,7 @@
 
 .words {
   color: rgba(255, 255, 255, 0.529);
-  font-family: "roboto", sans-serif;
+  font-family: 'roboto', sans-serif;
   mix-blend-mode: difference;
   font-weight: 800;
   font-size: 5rem;
@@ -25,7 +23,7 @@
   position: relative;
 }
 .words::after {
-  content: "";
+  content: '';
   position: relative;
   inset: 0;
   z-index: 20;

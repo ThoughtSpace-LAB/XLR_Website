@@ -1,35 +1,41 @@
 ---
 import AskNowCard from '~/components/widgets/pricepage/AskNowCard.astro';
-import PricingPageCard from '~/components/widgets/pricepage/PricingPageCard.astro';
 import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.astro';
 import '~/assets/styles/feature-text.css';
 import '~/assets/styles/pricepagestyle.css';
-
 ---
 
-<section id="price" class="price-page-container relative bg-gradient-to-b from-[#043f38] to-[#082625] px-5 md:px-20 py-[100px] md:py-[276px] flex flex-col gap-[100px] md:gap-[300px] items-center transition-all duration-1000 ease-out" style="transform-origin: center;">
+<section
+  id="price"
+  class="price-page-container relative bg-gradient-to-b from-[#043f38] to-[#082625] px-5 md:px-20 py-[100px] md:py-[276px] flex flex-col gap-[100px] md:gap-[300px] items-center transition-all duration-1000 ease-out"
+  style="transform-origin: center;"
+>
   <!-- Ask Section -->
   <div class="w-full flex flex-col items-center gap-10">
     <div class="w-full flex flex-col items-center justify-center py-5 px-4">
       <h2 class="body-large-captalize text-center text-white/60 max-w-[80vw] animate-slide-up-blur">
-        You are not here to <span class="body-large-captalize text-white">receive an answer.</span><br/>
+        You are not here to <span class="body-large-captalize text-white">receive an answer.</span><br />
         You are here to remember <span class="body-large-captalize text-white">that you are the answer.</span>
       </h2>
     </div>
     <AskNowCard />
 
     <div class="flex flex-col items-center justify-center gap-[4rem] h-[150vh] md:px-[10vw] px-[5vw] pt-[30vh]">
-      <p class="headline-medium text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent animate-slide-up-blur">
+      <p
+        class="headline-medium text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent animate-slide-up-blur"
+      >
         Join Our Extraordinary Abilities Championship
       </p>
-    <p class="headline-small h-auto font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] max-w-[90vw] text-justify animate-slide-up-blur-delay-1">
-      If you are an individual with any extraordinary abilities, please sign up for our championship. We will cover all your expenses during the trip, including round-trip airfare, accommodation, and other travel costs, at the appropriate time. Additionally, we will provide you with an interpreter. Join our annual competition (potential venues include Fujian, China; Bali, Indonesia; Hawaii, USA, etc.).
-    </p>
+      <p
+        class="headline-small h-auto font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] max-w-[90vw] text-justify animate-slide-up-blur-delay-1"
+      >
+        If you are an individual with any extraordinary abilities, please sign up for our championship. We will cover
+        all your expenses during the trip, including round-trip airfare, accommodation, and other travel costs, at the
+        appropriate time. Additionally, we will provide you with an interpreter. Join our annual competition (potential
+        venues include Fujian, China; Bali, Indonesia; Hawaii, USA, etc.).
+      </p>
+    </div>
   </div>
-
-  </div>
-
-
 </section>
 
 <script>
@@ -43,7 +49,7 @@ import '~/assets/styles/pricepagestyle.css';
         entries.forEach((entry) => {
           const rect = entry.boundingClientRect;
           const windowHeight = window.innerHeight;
-          
+
           // 检查pricing section的底部是否进入视线
           // 当底部边缘接近或进入视口时触发缩放
           if (rect.bottom <= windowHeight) {
@@ -56,24 +62,28 @@ import '~/assets/styles/pricepagestyle.css';
       },
       {
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-        rootMargin: '0px 0px 0px 0px'
+        rootMargin: '0px 0px 0px 0px',
       }
     );
 
     observer.observe(priceSection);
-    
+
     // 也监听滚动事件以获得更精确的控制
-    window.addEventListener('scroll', () => {
-      const rect = priceSection.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      // 当pricing section底部进入视线底部20%区域时开始缩放
-      if (rect.bottom <= windowHeight) {
-        priceSection.style.transform = 'scale(0.8)';
-      } else {
-        priceSection.style.transform = 'scale(1)';
-      }
-    }, { passive: true });
+    window.addEventListener(
+      'scroll',
+      () => {
+        const rect = priceSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // 当pricing section底部进入视线底部20%区域时开始缩放
+        if (rect.bottom <= windowHeight) {
+          priceSection.style.transform = 'scale(0.8)';
+        } else {
+          priceSection.style.transform = 'scale(1)';
+        }
+      },
+      { passive: true }
+    );
   });
 </script>
 

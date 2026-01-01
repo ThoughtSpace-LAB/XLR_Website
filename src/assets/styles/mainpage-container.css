@@ -12,7 +12,6 @@
   }
 }
 
-
 .container:active {
   position: relative;
   width: 35vw;
@@ -24,11 +23,9 @@
     width: 70vw;
     height: 70vh;
     background: linear-gradient(85deg, #0000003f, #00ffe541);
-  backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 }
-
-
 
 #card {
   position: absolute;
@@ -75,7 +72,7 @@
   font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 3px;
-  text-align: start ;
+  text-align: start;
   width: 100%;
   background: linear-gradient(45deg, #ffffff, #67ffed);
   -webkit-background-clip: text;
@@ -92,15 +89,13 @@
   font-weight: 800;
   padding-top: 4rem;
   letter-spacing: 4px;
-  text-align: start ;
+  text-align: start;
   width: 100%;
   background: linear-gradient(45deg, #ffffff, #67ffed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 15px rgba(0, 255, 170, 0.3));
 }
-
-
 
 .subtitle {
   position: relative;
@@ -119,7 +114,6 @@
     font-weight: 400;
   }
 }
-
 
 .highlight {
   color: #00ffaa;
@@ -143,11 +137,7 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at center,
-    rgba(0, 255, 170, 0.3) 0%,
-    rgba(0, 255, 170, 0) 70%
-  );
+  background: radial-gradient(circle at center, rgba(0, 255, 170, 0.3) 0%, rgba(0, 255, 170, 0) 70%);
   filter: blur(15px);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -175,7 +165,7 @@
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.3s ease;
-   animation: particleFloat 2s infinite
+  animation: particleFloat 2s infinite;
 }
 
 /* Hover effects */
@@ -192,7 +182,6 @@
 .tracker:hover ~ #card .glowing-elements div {
   opacity: 1;
 }
-
 
 @keyframes particleFloat {
   0% {
@@ -247,13 +236,8 @@
 }
 
 #card::before {
-  content: "";
-  background: radial-gradient(
-    circle at center,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(3, 3, 3, 0.4) 80%,
-    transparent 100%
-  );
+  content: '';
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.1) 0%, rgba(3, 3, 3, 0.4) 80%, transparent 100%);
   filter: blur(20px);
   opacity: 0;
   width: 150%;
@@ -291,7 +275,7 @@
 
 .container:hover #card::before {
   transition: 200ms;
-  content: "";
+  content: '';
   opacity: 80%;
 }
 
@@ -305,11 +289,11 @@
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "tr-1 tr-2 tr-3 tr-4 tr-5"
-    "tr-6 tr-7 tr-8 tr-9 tr-10"
-    "tr-11 tr-12 tr-13 tr-14 tr-15"
-    "tr-16 tr-17 tr-18 tr-19 tr-20"
-    "tr-21 tr-22 tr-23 tr-24 tr-25";
+    'tr-1 tr-2 tr-3 tr-4 tr-5'
+    'tr-6 tr-7 tr-8 tr-9 tr-10'
+    'tr-11 tr-12 tr-13 tr-14 tr-15'
+    'tr-16 tr-17 tr-18 tr-19 tr-20'
+    'tr-21 tr-22 tr-23 tr-24 tr-25';
 }
 
 .tr-1 {
@@ -569,12 +553,7 @@
 
 .cyber-lines span {
   position: absolute;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(92, 103, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(92, 103, 255, 0.2), transparent);
 }
 
 .cyber-lines span:nth-child(1) {
@@ -655,12 +634,7 @@
 .scan-line {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(92, 103, 255, 0.1),
-    transparent
-  );
+  background: linear-gradient(to bottom, transparent, rgba(92, 103, 255, 0.1), transparent);
   transform: translateY(-100%);
   animation: scanMove 2s linear infinite;
 }

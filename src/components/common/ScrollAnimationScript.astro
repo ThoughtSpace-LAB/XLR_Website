@@ -30,7 +30,7 @@
         },
         {
           rootMargin: '0px 0px -100px 0px', // 元素进入视口前100px开始触发
-          threshold: 0.1 // 10% 可见时触发
+          threshold: 0.1, // 10% 可见时触发
         }
       );
 
@@ -38,7 +38,7 @@
       const animateElements = document.querySelectorAll(
         '.animate-slide-up-blur, .animate-slide-up-blur-delay-1, .animate-slide-up-blur-delay-2, .animate-slide-up-blur-delay-3'
       );
-      
+
       animateElements.forEach((el) => {
         observer.observe(el);
       });

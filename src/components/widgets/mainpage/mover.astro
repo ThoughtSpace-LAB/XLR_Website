@@ -1,161 +1,228 @@
 ---
 
 ---
-    <!-- Simple mover: only an overlay and a single dot. The dot breathes (scale 0.9–1.1) and continuously rotates. -->
-    <div id="movercontainer" class="sticky top-0 w-full items-top justify-top">
-      <div class="overlay" aria-hidden="true"></div>
-      <div class="dot" aria-hidden="true">
-      <div class="dot-inner" aria-hidden="true"></div>
-    </div>
-    <div class="borderline" aria-hidden="true">
-      </div>
-    </div>
-    <div id="scroll-location" > </div>
-    </div>
 
-    <style>
-      :root { 
-        --mover-size: 15vw; 
-      }
-      @media (max-width: 768px) {
-        :root {
-          --mover-size: 30vw;
-        }
-      }
-      #scroll-location {
-        position: absolute;
-        top: 0;
-        height: fill-available;
-        width: 100%;
-        background-color: transparent;
-        /* Removed scroll-timeline properties as they require a scrollable container */
-      }
+<!-- Simple mover: only an overlay and a single dot. The dot breathes (scale 0.9–1.1) and continuously rotates. -->
+<div id="movercontainer" class="sticky top-0 w-full items-top justify-top">
+  <div class="overlay" aria-hidden="true"></div>
+  <div class="dot" aria-hidden="true">
+    <div class="dot-inner" aria-hidden="true"></div>
+  </div>
+  <div class="borderline" aria-hidden="true"></div>
+  <div id="scroll-location"></div>
+</div>
 
-      #movercontainer {
-        position: sticky;
-        align-items: center;
-        top: 0;
-        height: 100vh;
-        width: 100%;;
-        /* fade in with blur on page load */
-        opacity: 0;
-        filter: blur(20px);
-        animation: fadeInBlur 4s ease-out 0.5s forwards;
-        view-timeline: --animationscroll block;
-        animation-timeline: --animationscroll;
-        animation-range: 10% 30%;
-      }
+<style>
+  :root {
+    --mover-size: 15vw;
+  }
+  @media (max-width: 768px) {
+    :root {
+      --mover-size: 30vw;
+    }
+  }
+  #scroll-location {
+    position: absolute;
+    top: 0;
+    height: fill-available;
+    width: 100%;
+    background-color: transparent;
+    /* Removed scroll-timeline properties as they require a scrollable container */
+  }
 
-      /* overlay: slightly larger circular mask behind the dot */
-      .overlay {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: calc(var(--mover-size) * 1.2);
-        height: calc(var(--mover-size) * 1.2);
-        border-radius: 50%;
-        background: radial-gradient(circle at center, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 20%, rgba(252, 252, 252, 1) 70%);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        z-index: 5;
-        animation: scaleoutDot ease-in-out 4s forwards;
-        view-timeline: --animationscroll block;
-        animation-timeline: --animationscroll;
-        animation-range: 20% 60%;
-      }
+  #movercontainer {
+    position: sticky;
+    align-items: center;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    /* fade in with blur on page load */
+    opacity: 0;
+    filter: blur(20px);
+    animation: fadeInBlur 4s ease-out 0.5s forwards;
+    view-timeline: --animationscroll block;
+    animation-timeline: --animationscroll;
+    animation-range: 10% 30%;
+  }
 
-      .borderline {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: calc(var(--mover-size) * 1.1);
-        height: calc(var(--mover-size) * 1.1);
-        background: radial-gradient(circle at center, rgb(255, 255, 255, 0) 0%, rgba(18, 60, 79, 0.2) 40%, rgba(255, 255, 255, 1) 80%);
-        border-radius: 50%;
-        animation: scaleinline ease-in-out 4s forwards;
-        view-timeline: --animationscroll block;
-        animation-timeline: --animationscroll;
-        animation-range: 10% 100%;
-      }
+  /* overlay: slightly larger circular mask behind the dot */
+  .overlay {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(var(--mover-size) * 1.2);
+    height: calc(var(--mover-size) * 1.2);
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at center,
+      rgb(255, 255, 255) 0%,
+      rgb(255, 255, 255) 20%,
+      rgba(252, 252, 252, 1) 70%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 5;
+    animation: scaleoutDot ease-in-out 4s forwards;
+    view-timeline: --animationscroll block;
+    animation-timeline: --animationscroll;
+    animation-range: 20% 60%;
+  }
 
+  .borderline {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(var(--mover-size) * 1.1);
+    height: calc(var(--mover-size) * 1.1);
+    background: radial-gradient(
+      circle at center,
+      rgb(255, 255, 255, 0) 0%,
+      rgba(18, 60, 79, 0.2) 40%,
+      rgba(255, 255, 255, 1) 80%
+    );
+    border-radius: 50%;
+    animation: scaleinline ease-in-out 4s forwards;
+    view-timeline: --animationscroll block;
+    animation-timeline: --animationscroll;
+    animation-range: 10% 100%;
+  }
 
-      /* dot: parent holds breathing (scale), inner rotates */
-      .dot {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: var(--mover-size);
-        height: var(--mover-size);
-        min-width: 30px;
-        min-height: 30px;
-        filter: blur(8px);
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
-        transform-origin: center center;
-        animation: fadeOutBlur linear;
-        view-timeline: --animationscroll block;
-        animation-timeline: --animationscroll;
-        animation-range: 40% 100%;
-      }
+  /* dot: parent holds breathing (scale), inner rotates */
+  .dot {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--mover-size);
+    height: var(--mover-size);
+    min-width: 30px;
+    min-height: 30px;
+    filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transform-origin: center center;
+    animation: fadeOutBlur linear;
+    view-timeline: --animationscroll block;
+    animation-timeline: --animationscroll;
+    animation-range: 40% 100%;
+  }
 
-      .dot-inner {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #00ff7b, #00eaff, #008cff);
-        filter: blur(10px);
-        box-shadow: azure 0px 0px 20px, rgb(255, 255, 255) -5px -5px 2px;
-        transform-origin: center center;
-        /* combined breathe (scale) and spin (rotate) animation */
-        animation:  breatheAndSpin 4s ease-in-out 2s infinite;
-      }
+  .dot-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00ff7b, #00eaff, #008cff);
+    filter: blur(10px);
+    box-shadow:
+      azure 0px 0px 20px,
+      rgb(255, 255, 255) -5px -5px 2px;
+    transform-origin: center center;
+    /* combined breathe (scale) and spin (rotate) animation */
+    animation: breatheAndSpin 4s ease-in-out 2s infinite;
+  }
 
-      /* start animations when page is scrolled into view */
-      .animate .dot-inner {
-        animation-play-state: running;
-        color-blend-mode: screen;
-      }
+  /* start animations when page is scrolled into view */
+  .animate .dot-inner {
+    animation-play-state: running;
+    color-blend-mode: screen;
+  }
 
-      @keyframes breatheAndSpin {
-        0% { transform: scale(0.95) rotate(0deg); }
-        25% { transform: scale(1.1) rotate(90deg); }
-        50% { transform: scale(0.95) rotate(180deg); }
-        75% { transform: scale(1.1) rotate(270deg); }
-        100% { transform: scale(0.95) rotate(360deg); }
-      }
+  @keyframes breatheAndSpin {
+    0% {
+      transform: scale(0.95) rotate(0deg);
+    }
+    25% {
+      transform: scale(1.1) rotate(90deg);
+    }
+    50% {
+      transform: scale(0.95) rotate(180deg);
+    }
+    75% {
+      transform: scale(1.1) rotate(270deg);
+    }
+    100% {
+      transform: scale(0.95) rotate(360deg);
+    }
+  }
 
-      @keyframes fadeInBlur {
-        0% { opacity: 0; filter: blur(20px); }
-        100% { opacity: 1; filter: blur(0px); }
-      }
+  @keyframes fadeInBlur {
+    0% {
+      opacity: 0;
+      filter: blur(20px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
 
-      @keyframes scaleoutDot {
-        0% { transform: translate(-50%, -50%) scale(1);filter: blur(0px); }
-        60% { transform: translate(-50%, -50%) scale(0.4);filter: blur(0px); }
-        100% { transform: translate(-50%, -50%) scale(0);filter: blur(10px); }
-      }
+  @keyframes scaleoutDot {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      filter: blur(0px);
+    }
+    60% {
+      transform: translate(-50%, -50%) scale(0.4);
+      filter: blur(0px);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(0);
+      filter: blur(10px);
+    }
+  }
 
-      @keyframes scaleinline {
-        0% { transform: translate(-50%, -50%) scale(0); opacity: 0;filter: blur(10px); }
-        50% { transform: translate(-50%, -50%) scale(2); opacity: 0.6; filter: blur(0px);}
-        100% { transform: translate(-50%, -50%) scale(1); opacity: 1; filter: blur(0px); }
-      }
-      
-      @keyframes fadeOutBlur {
-        0% { opacity: 1; filter: blur(0px); }
-        60% { opacity: 0; filter: blur(10px); }
-        100% { opacity: 1; filter: blur(0px); }
-      }
+  @keyframes scaleinline {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      filter: blur(10px);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 0.6;
+      filter: blur(0px);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
 
-      @keyframes colorchange {
-        0% { background: radial-gradient(circle at center, rgb(255, 255, 255,0.2) 0%, rgb(255, 255, 255, 0.3) 20%, rgba(252, 252, 252, 0.5) 70%); }
-        100% { background: radial-gradient(circle at center,  rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.256) 20%, rgba(252, 252, 252, 1) 70%); }
-      }
+  @keyframes fadeOutBlur {
+    0% {
+      opacity: 1;
+      filter: blur(0px);
+    }
+    60% {
+      opacity: 0;
+      filter: blur(10px);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
 
-    
-
-    </style>
+  @keyframes colorchange {
+    0% {
+      background: radial-gradient(
+        circle at center,
+        rgb(255, 255, 255, 0.2) 0%,
+        rgb(255, 255, 255, 0.3) 20%,
+        rgba(252, 252, 252, 0.5) 70%
+      );
+    }
+    100% {
+      background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.256) 20%,
+        rgba(252, 252, 252, 1) 70%
+      );
+    }
+  }
+</style>

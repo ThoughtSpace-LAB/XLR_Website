@@ -11,7 +11,7 @@ metadata:
   title:
     default: SERENA
     template: '%s — SERENA'
-  description: "SERENA provides clarity, answers, and guidance through intuitive prompts and personalized insights."
+  description: 'SERENA provides clarity, answers, and guidance through intuitive prompts and personalized insights.'
   robots:
     index: true
     follow: true

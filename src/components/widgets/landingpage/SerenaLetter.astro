@@ -4,39 +4,41 @@
 
 <!-- 六个英语字母居中布置 -->
 <div class="absolute z-30 h-full w-[15%] place-content-start cursor-none pt-[20vh] pb-[40vh] md:py-[15vh]">
-<div id="serena-letters" 
-class="cursor-none w-full max-w-4xl mx-auto h-full grid grid-cols-2 grid-rows-3 z-30 place-items-start">
-  <div class="letter-wrap " data-letter="S">
-    <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0s">
-      <span class="letter-text">S</span>
-    </h1>
+  <div
+    id="serena-letters"
+    class="cursor-none w-full max-w-4xl mx-auto h-full grid grid-cols-2 grid-rows-3 z-30 place-items-start"
+  >
+    <div class="letter-wrap" data-letter="S">
+      <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0s">
+        <span class="letter-text">S</span>
+      </h1>
+    </div>
+    <div class="letter-wrap" data-letter="E">
+      <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0s">
+        <span class="letter-text">E</span>
+      </h1>
+    </div>
+    <div class="letter-wrap" data-letter="R">
+      <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0.2s">
+        <span class="letter-text">R</span>
+      </h1>
+    </div>
+    <div class="letter-wrap" data-letter="E">
+      <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0.2s">
+        <span class="letter-text">E</span>
+      </h1>
+    </div>
+    <div class="letter-wrap" data-letter="N">
+      <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0.4s">
+        <span class="letter-text">N</span>
+      </h1>
+    </div>
+    <div class="letter-wrap" data-letter="A">
+      <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0.4s">
+        <span class="letter-text">A</span>
+      </h1>
+    </div>
   </div>
-  <div class="letter-wrap" data-letter="E">
-    <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0s">
-      <span class="letter-text">E</span>
-    </h1>
-  </div>
-  <div class="letter-wrap" data-letter="R">
-    <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0.2s">
-      <span class="letter-text">R</span>
-    </h1>
-  </div>
-  <div class="letter-wrap" data-letter="E">
-    <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0.2s">
-      <span class="letter-text">E</span>
-    </h1>
-  </div>
-  <div class="letter-wrap" data-letter="N">
-    <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0.4s">
-      <span class="letter-text">N</span>
-    </h1>
-  </div>
-  <div class="letter-wrap" data-letter="A">
-    <h1 class="headline-md scramble-target animate-letter letter-container" style="animation-delay: 0.4s">
-      <span class="letter-text">A</span>
-    </h1>
-  </div>
-</div>
 </div>
 
 <script>
@@ -70,54 +72,49 @@ class="cursor-none w-full max-w-4xl mx-auto h-full grid grid-cols-2 grid-rows-3 
   }
 </script>
 
-
-
 <script>
-    // 1. 定义字符池
-    const CHAR_POOL = ['S', 'E', 'R', 'N', 'A'];
-    const SCRAMBLE_SPEED = 300;
+  // 1. 定义字符池
+  const CHAR_POOL = ['S', 'E', 'R', 'N', 'A'];
+  const SCRAMBLE_SPEED = 300;
 
-    // 2. 获取所有需要交互的字母元素
-    const targets = document.querySelectorAll('.scramble-target');
+  // 2. 获取所有需要交互的字母元素
+  const targets = document.querySelectorAll('.scramble-target');
 
-    // 3. 遍历每个元素并添加事件监听
-    targets.forEach((element) => {
-      const span = element as HTMLElement & { _intervalId?: ReturnType<typeof setInterval> };
+  // 3. 遍历每个元素并添加事件监听
+  targets.forEach((element) => {
+    const span = element as HTMLElement & { _intervalId?: ReturnType<typeof setInterval> };
     // 1. 保存原始状态
-      // 我们把原始字符保存在 dataset 中，方便恢复
-      span.dataset.original = span.innerText;
+    // 我们把原始字符保存在 dataset 中，方便恢复
+    span.dataset.original = span.innerText;
 
-      // 2. 使用 pointer 事件：进入开始扰动，离开立即恢复为原字符
-      span.addEventListener('pointerenter', () => {
-        // 如果已有定时器，先清除，避免重复
-        if (span._intervalId) {
-          clearInterval(span._intervalId);
-          span._intervalId = undefined;
-        }
+    // 2. 使用 pointer 事件：进入开始扰动，离开立即恢复为原字符
+    span.addEventListener('pointerenter', () => {
+      // 如果已有定时器，先清除，避免重复
+      if (span._intervalId) {
+        clearInterval(span._intervalId);
+        span._intervalId = undefined;
+      }
 
-        // 启动定时器进行字符扰动
-        span._intervalId = setInterval(() => {
-          const randomIndex = Math.floor(Math.random() * CHAR_POOL.length);
-          span.innerText = CHAR_POOL[randomIndex];
-        }, SCRAMBLE_SPEED);
-      });
-
-      // pointerleave 保证在 pointer 离开元素（包括由子元素引起的）时触发
-      span.addEventListener('pointerleave', () => {
-        // 清除定时器（如果存在）
-        if (span._intervalId) {
-          clearInterval(span._intervalId);
-          span._intervalId = undefined;
-        }
-
-        // 立即恢复为原始字符，确保离开瞬间回到原位
-        span.innerText = span.dataset.original ?? '';
-      });
+      // 启动定时器进行字符扰动
+      span._intervalId = setInterval(() => {
+        const randomIndex = Math.floor(Math.random() * CHAR_POOL.length);
+        span.innerText = CHAR_POOL[randomIndex];
+      }, SCRAMBLE_SPEED);
     });
 
-  </script>
+    // pointerleave 保证在 pointer 离开元素（包括由子元素引起的）时触发
+    span.addEventListener('pointerleave', () => {
+      // 清除定时器（如果存在）
+      if (span._intervalId) {
+        clearInterval(span._intervalId);
+        span._intervalId = undefined;
+      }
 
-
+      // 立即恢复为原始字符，确保离开瞬间回到原位
+      span.innerText = span.dataset.original ?? '';
+    });
+  });
+</script>
 
 <style>
   /* 字母进入动画：从四周聚拢并缩放到 1 */
@@ -191,7 +188,13 @@ class="cursor-none w-full max-w-4xl mx-auto h-full grid grid-cols-2 grid-rows-3 
 
   /* make sure grid cells keep reasonable size on small screens */
   @media (max-width: 768px) {
-    #serena-letters { gap: 3.5rem; }
-    .headline-md { font-size: 0.75rem; line-height: 0.8rem; font-weight: 800; }
+    #serena-letters {
+      gap: 3.5rem;
+    }
+    .headline-md {
+      font-size: 0.75rem;
+      line-height: 0.8rem;
+      font-weight: 800;
+    }
   }
 </style>

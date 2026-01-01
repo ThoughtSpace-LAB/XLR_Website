@@ -8,7 +8,6 @@ import PricePage from '~/components/serena/PricePage.astro';
 import FooterPage from '~/components/serena/FooterPage.astro';
 import '~/assets/styles/feature-text.css';
 
-
 const metadata = {
   title: 'SERENA — Your Personal Oracle App',
   description: 'SERENA provides clarity, answers, and guidance through intuitive prompts and personalized insights.',
@@ -18,18 +17,19 @@ const metadata = {
 
 <Layout metadata={metadata}>
   <div class="relative bg-black flex flex-col text-white font-serena cursor-none">
-    <div 
-    id="custom-cursor" 
-    class="pointer-events-none fixed top-0 left-0 w-4 h-4 bg-white rounded-full z-10 transition-transform duration-150 ease-out -translate-x-1/2 -translate-y-1/2"></div>
+    <div
+      id="custom-cursor"
+      class="pointer-events-none fixed top-0 left-0 w-4 h-4 bg-white rounded-full z-10 transition-transform duration-150 ease-out -translate-x-1/2 -translate-y-1/2"
+    >
+    </div>
     <script>
       const cursor = document.getElementById('custom-cursor');
 
       document.addEventListener('mousemove', (e) => {
-    
-    cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
-  });
-</script>
-    
+        cursor!.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+      });
+    </script>
+
     <!-- Section 1: Landing Page / Hero -->
     <LandingPage />
 
