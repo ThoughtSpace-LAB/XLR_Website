@@ -23,7 +23,7 @@ const metadata = {
     class="pointer-events-none fixed top-0 left-0 w-4 h-4 bg-white rounded-full z-10 transition-transform duration-150 ease-out -translate-x-1/2 -translate-y-1/2"></div>
     <script>
       const cursor = document.getElementById('custom-cursor') as HTMLDivElement | null;
-      if (!cursor) return;
+
       document.addEventListener('mousemove', (e) => {
         cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
       });
