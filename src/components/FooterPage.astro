@@ -1,0 +1,58 @@
+---
+import iconX from '../assets/icons/icon-x.svg';
+import iconInstagram from '../assets/icons/icon-instagram.svg';
+import iconLinkedin from '../assets/icons/icon-linkedin.svg';
+---
+
+<footer class="bg-black px-5 md:px-20 py-10 md:py-30 flex flex-col items-center justify-end">
+  <div class="w-full flex flex-col md:flex-row gap-10 md:gap-[120px] pt-0">
+    <!-- Left Content -->
+    <div class="flex-1 flex flex-col gap-5">
+      <div class="flex flex-col gap-[10px] max-w-[690px]">
+        <div class="flex items-center">
+          <span class="text-xl leading-[26px] font-medium tracking-[0.4px] text-white">SERENA</span>
+        </div>
+        <p class="text-[15px] leading-[18px] font-medium tracking-[0.4px] text-white/50">
+          We turn personal energy insights into clear, practical guidance that helps people make aligned decisions and move forward with confidence.
+        </p>
+      </div>
+      
+      <!-- Social Links -->
+      <nav class="flex items-center gap-6">
+        <a href="#" class="w-6 h-6 hover:opacity-80 transition-opacity">
+          <img src={iconX} alt="X (Twitter)" class="w-full h-full" loading="lazy" decoding="async" />
+        </a>
+        <a href="#" class="w-6 h-6 hover:opacity-80 transition-opacity">
+          <img src={iconInstagram} alt="Instagram" class="w-full h-full" loading="lazy" decoding="async" />
+        </a>
+        <a href="#" class="w-6 h-6 hover:opacity-80 transition-opacity">
+          <img src={iconLinkedin} alt="LinkedIn" class="w-full h-full" loading="lazy" decoding="async" />
+        </a>
+      </nav>
+
+      <p class="text-sm font-medium leading-[1.45] tracking-[-0.07px] text-white/50">
+        copyright 2025 @SERENA
+      </p>
+    </div>
+
+    <!-- Right Navigation -->
+    <div class="flex gap-10">
+      <nav class="flex flex-col gap-2 w-[130px]">
+        <div class="pb-4">
+          <span class="text-xl leading-[22px] font-semibold tracking-[0.6px] text-white">Features</span>
+        </div>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Core features</a>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Pro experience</a>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Integrations</a>
+      </nav>
+
+      <nav class="flex flex-col gap-2 w-[130px]">
+        <div class="pb-4">
+          <span class="text-xl leading-[22px] font-semibold tracking-[0.6px] text-white">Support</span>
+        </div>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Contact</a>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Support</a>
+      </nav>
+    </div>
+  </div>
+</footer>
