@@ -80,8 +80,8 @@ const featureCards = [
   document.addEventListener('DOMContentLoaded', () => {
     // If there are multiple canvas elements with the same id (responsive
     // variants), pick the one that's currently visible in the layout.
-    const canvases = Array.from(document.querySelectorAll('#spline-canvas'));
-    let canvas = null;
+    const canvases = Array.from(document.querySelectorAll<HTMLCanvasElement>('#spline-canvas'));
+    let canvas: HTMLCanvasElement | null = null;
     for (const c of canvases) {
       const style = window.getComputedStyle(c);
       if (style.display !== 'none' && c.clientWidth > 0 && c.clientHeight > 0) {

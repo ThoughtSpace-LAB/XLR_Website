@@ -1,12 +1,9 @@
 ---
-import iconLoader from '~/assets/icons/serena/icon-loader.svg?url';
-import iconSend from '~/assets/icons/serena/icon-send.svg?url';
-import visualcard2raw from '~/assets/icons/serena/VisualCard2.svg?raw';
-import visualcard3raw from '~/assets/icons/serena/VisualCard3.svg?raw';
+import iconLoader from '~/assets/icons/icon-loader.svg?url';
+import iconSend from '~/assets/icons/icon-send.svg?url';
+import visualcard2raw from '~/assets/icons/VisualCard2.svg';
+import visualcard3raw from '~/assets/icons/VisualCard3.svg';
 import '~/assets/styles/feature-text.css';
-import FeaturePageCard1 from './FeaturePageCard1.astro';
-import FeaturePageCard2 from './FeaturePageCard2.astro';
-import FeaturePageCard3 from './FeaturePageCard3.astro';
 
 ---
 
@@ -95,7 +92,7 @@ import FeaturePageCard3 from './FeaturePageCard3.astro';
         }
       </style>
 
-      <script type="module">
+      <script type="module" is:inline>
         if (typeof window !== 'undefined') {
           // Find the chat visual reliably by data attribute (IDs changed in refactor)
           const chat = document.querySelector('.visual-item[data-visual="chat"]');

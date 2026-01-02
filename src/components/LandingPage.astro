@@ -1,6 +1,6 @@
 ---
 import heroBg from '../assets/images/hero-bg.jpg';
-import nextIcon from '../assets/icons/icon-next.svg';
+import nextIcon from '../assets/icons/icon-next.svg?url';
 import NaviBar from './widgets/landingpage/NaviBar.astro';
 import SerenaLetter from './widgets/landingpage/SerenaLetter.astro';
 import ScrollAnimationScript from './common/ScrollAnimationScript.astro';
@@ -77,7 +77,7 @@ import '../styles/feature-text.css';
       // store RAF id
       let raf: number | null = null;
 
-      function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+      function clamp(v: number, a: number, b: number) { return Math.max(a, Math.min(b, v)); }
 
       function update() {
         raf = null;
