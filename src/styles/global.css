@@ -3,290 +3,111 @@
 @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&display=swap');
 @import './feature-text.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: var(--aw-color-primary);
+  --color-secondary: var(--aw-color-secondary);
+  --color-accent: var(--aw-color-accent);
+  --color-default: var(--aw-color-text-default);
+  --color-muted: var(--aw-color-text-muted);
+  --color-page: var(--aw-color-bg-page);
+
+  --font-sans: var(--aw-font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--aw-font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-heading: var(--aw-font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-serena: 'Roboto', ui-sans-serif, system-ui, sans-serif;
+}
 
 @layer utilities {
-    /* base from .btn */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    border: 1px solid var(--aw-color-primary, currentColor);
-    background-color: var(--aw-color-primary, #000);
-    font-weight: 600;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: #fff;
-    transition: all 200ms ease-in;
-    padding: 0.875rem 1.5rem;
-    cursor: pointer;
-  }
-  @media (min-width: 768px) {
-    .btn-primary { padding-left: 2rem; padding-right: 2rem; }
+  .bg-page {
     background-color: var(--aw-color-bg-page);
   }
   .bg-dark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    border: 1px solid rgb(156 163 175);
-    background-color: transparent;
-    font-weight: 500;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: var(--aw-color-text-page);
-    transition: all 200ms ease-in;
-    padding: 0.875rem 1.5rem;
-    cursor: pointer;
-  }
-  @media (min-width: 768px) {
-    .btn-secondary { padding-left: 2rem; padding-right: 2rem; }
+    background-color: var(--aw-color-bg-page-dark);
   }
   .bg-light {
     background-color: var(--aw-color-bg-page);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background-color: transparent;
-    box-shadow: none;
-    color: var(--aw-color-text-muted);
-    font-weight: 500;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    padding: 0.875rem 1.5rem;
-    cursor: pointer;
   }
-  .btn-tertiary:hover { color: rgb(17 24 39); }
-  @media (min-width: 768px) {
-    .btn-tertiary { padding-left: 2rem; padding-right: 2rem; }
   .text-page {
     color: var(--aw-color-text-page);
   }
-    font-family: var(--aw-font-serena, 'Roboto', sans-serif);
-    color: #fff;
-    font-size: 1.6rem;
-    line-height: 1.75rem;
-    font-weight: 400;
-    letter-spacing: 0.0375rem;
+  .text-muted {
     color: var(--aw-color-text-muted);
   }
   
   /* Serena Gradient Text */
-.serena-gradient-text {
-    font-family: var(--aw-font-serena, 'Roboto', sans-serif);
-    color: #fff;
-    font-size: 1.2rem;
-    line-height: 1.75rem;
-    font-weight: 400;
-    letter-spacing: 0.0375rem;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-    font-family: var(--aw-font-serena, 'Roboto', sans-serif);
-    color: #fff;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 300;
-    letter-spacing: 0.025rem;
+  .serena-gradient-text {
+    @apply bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent;
+  }
+
+  /* 通用滚动动画触发器 */
   .scroll-animate {
     opacity: 0;
     transform: translateY(30px);
     filter: blur(8px);
     transition: all 0.6s ease-out;
   }
-    font-family: var(--aw-font-serena, 'Roboto', sans-serif);
-    color: #fff;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 300;
-    letter-spacing: 0.0375rem;
+
   .scroll-animate.in-view {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0px);
-  background-color: var(--aw-color-bg-page);
-  box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
-}
-@media (min-width: 768px) {
-  #header.scroll > div:first-child {
-    background-color: rgba(255,255,255,0.9);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
   }
   
   /* Glassmorphism Effects */
   .glass-card {
-  background-color: var(--aw-color-bg-page);
-  border-bottom: 1px solid rgb(107 114 128 / 0.2);
-}
-@media (min-width: 768px) {
-  .dark #header.scroll > div:first-child,
-  #header.scroll.dark > div:first-child {
-    background-color: rgba(3,6,33,0.9);
-  }
-    backdrop-filter: blur(20px);
-
+    @apply bg-white/[0.03] backdrop-blur-[20px] border border-white/15 rounded-3xl;
   }
   
   .glass-card-premium {
-    backdrop-filter: blur(42px);
-    -webkit-backdrop-filter: blur(42px);
-    background: linear-gradient(
-      180deg,
-      rgba(43, 255, 255, 0.12) 0%,
-      rgba(43, 255, 255, 0.04) 50%,
-      rgba(43, 255, 255, 0.07) 100%
-    );
-    border: 1px solid rgba(43, 255, 255, 0.32);
-    border-radius: 32px;
+    @apply backdrop-blur-[42px] bg-gradient-to-b from-[rgba(43,255,255,0.12)] via-[rgba(43,255,255,0.04)] to-[rgba(43,255,255,0.07)] border border-[rgba(43,255,255,0.32)] rounded-[32px];
   }
 }
 
 @layer components {
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    border: 1px solid rgb(156 163 175); /* border-gray-400 */
-    background-color: transparent;
-    font-weight: 500;
-    text-align: center;
-    font-size: 1rem; /* base */
-    line-height: 1.5rem;
-    color: var(--aw-color-text-page);
-    transition: all 200ms ease-in;
-    padding: 0.875rem 1.5rem; /* py-3.5 px-6 */
-    cursor: pointer;
-  }
-  @media (min-width: 768px) {
-    .btn {
-      padding-left: 2rem; /* px-8 */
-      padding-right: 2rem;
-    }
-  }
-  .btn:hover {
-    background-color: rgb(243 244 246); /* hover:bg-gray-100 */
-    border-color: rgb(75 85 99); /* hover:border-gray-600 */
-  }
-  .btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgb(59 130 246), 0 0 0 4px rgb(226 232 240); /* focus ring */
+  .btn, .btn-primary, .btn-secondary, .btn-tertiary {
+    @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
+    color: var(--aw-color-text-default);
   }
 
   .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    border: 1px solid var(--aw-color-primary, currentColor);
-    background-color: var(--aw-color-primary, #000);
-    font-weight: 600;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: #fff;
-    transition: all 200ms ease-in;
-    padding: 0.875rem 1.5rem;
-    cursor: pointer;
-  }
-  @media (min-width: 768px) {
-    .btn-primary { padding-left: 2rem; padding-right: 2rem; }
-  }
-  .btn-primary:hover {
-    background-color: var(--aw-color-secondary, #0ea5e9);
-    border-color: var(--aw-color-secondary, #0ea5e9);
-    color: #fff;
+    @apply font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary hover:text-white dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary;
   }
 
   .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    border: 1px solid rgb(156 163 175);
-    background-color: transparent;
-    font-weight: 500;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: var(--aw-color-text-page);
-    transition: all 200ms ease-in;
-    padding: 0.875rem 1.5rem;
-    cursor: pointer;
-  }
-  @media (min-width: 768px) {
-    .btn-secondary { padding-left: 2rem; padding-right: 2rem; }
+    /* Inherits base styles */
   }
 
   .btn-tertiary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    background-color: transparent;
-    box-shadow: none;
+    @apply border-none shadow-none hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
     color: var(--aw-color-text-muted);
-    font-weight: 500;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    padding: 0.875rem 1.5rem;
-    cursor: pointer;
-  }
-  .btn-tertiary:hover { color: rgb(17 24 39); }
-  @media (min-width: 768px) {
-    .btn-tertiary { padding-left: 2rem; padding-right: 2rem; }
   }
 
   .serena-headline-lg {
-    font-family: var(--aw-font-serena, 'Roboto', sans-serif);
-    color: #fff;
-    font-size: 1.6rem;
-    line-height: 1.75rem;
-    font-weight: 400;
-    letter-spacing: 0.0375rem;
+    @apply text-white text-[1.6rem] leading-[1.75rem] font-normal tracking-[0.0375rem];
+    font-family: var(--font-serena);
     text-shadow: 0 4px 4px rgba(0, 0, 0, 0.75);
     animation: serena-slide-in 0.8s ease-out forwards;
   }
 
   .serena-headline-md {
-    font-family: var(--aw-font-serena, 'Roboto', sans-serif);
-    color: #fff;
-    font-size: 1.2rem;
-    line-height: 1.75rem;
-    font-weight: 400;
-    letter-spacing: 0.0375rem;
+    @apply text-white text-[1.2rem] leading-[1.75rem] font-normal tracking-[0.0375rem];
+    font-family: var(--font-serena);
     animation: serena-slide-in 0.8s ease-out forwards;
   }
 
   .serena-headline-md-highlight {
-    font-family: var(--aw-font-serena, 'Roboto', sans-serif);
-    color: #fff;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 300;
-    letter-spacing: 0.025rem;
+    @apply text-white text-[0.75rem] leading-[1rem] font-light tracking-[0.025rem];
+    font-family: var(--font-serena);
     text-shadow: 0 4px 4px rgba(0, 0, 0, 1);
     animation: serena-slide-in 0.8s ease-out forwards;
     animation-delay: 0.2s;
   }
 
   .serena-button {
-    font-family: var(--aw-font-serena, 'Roboto', sans-serif);
-    color: #fff;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 300;
-    letter-spacing: 0.0375rem;
+    @apply text-white text-sm font-light tracking-[0.0375rem];
+    font-family: var(--font-serena);
   }
 
   .serena-hero-media {
@@ -295,27 +116,13 @@
 }
 
 #header.scroll > div:first-child {
-  background-color: var(--aw-color-bg-page);
+  @apply bg-page md:bg-white/90 md:backdrop-blur-md;
   box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
-}
-@media (min-width: 768px) {
-  #header.scroll > div:first-child {
-    background-color: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
 }
 .dark #header.scroll > div:first-child,
 #header.scroll.dark > div:first-child {
-  background-color: var(--aw-color-bg-page);
-  border-bottom: 1px solid rgb(107 114 128 / 0.2);
+  @apply bg-page md:bg-[#030621e6] border-b border-gray-500/20;
   box-shadow: none;
-}
-@media (min-width: 768px) {
-  .dark #header.scroll > div:first-child,
-  #header.scroll.dark > div:first-child {
-    background-color: rgba(3, 6, 33, 0.9);
-  }
 }
 /* #header.scroll > div:last-child {
   @apply py-3;
@@ -345,14 +152,14 @@
 }
 
 [data-aw-toggle-menu] path {
-  transition: all 150ms ease;
+  @apply transition;
 }
 [data-aw-toggle-menu].expanded g > path:first-child {
-  transform: rotate(-45deg) translateY(15px) translateX(-3px);
+  @apply -rotate-45 translate-y-[15px] translate-x-[-3px];
 }
 
 [data-aw-toggle-menu].expanded g > path:last-child {
-  transform: rotate(45deg) translateY(-8px) translateX(14px);
+  @apply rotate-45 translate-y-[-8px] translate-x-[14px];
 }
 
 /* To deprecated */
@@ -434,13 +241,11 @@
 /* Responsive adjustments for Serena */
 @media (max-width: 768px) {
   .serena-headline-lg {
-    font-size: 1.5rem;
-    line-height: 1.6rem;
+    @apply text-[1.5rem] leading-[1.6rem];
   }
   
   .serena-headline-md {
-    font-size: 1rem;
-    line-height: 1.4rem;
+    @apply text-[1rem] leading-[1.4rem];
   }
 }
 

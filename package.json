@@ -13,7 +13,9 @@
     "@splinetool/runtime": "^1.12.28",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.6",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "vite": "^6.4.1"
   }
 }
