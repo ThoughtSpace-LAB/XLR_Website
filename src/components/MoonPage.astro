@@ -1,0 +1,103 @@
+---
+import '../styles/feature-text.css';
+import ScrollAnimationScript from './common/ScrollAnimationScript.astro';
+import MoonPageCard from './widgets/moonpage/MoonPageCard.astro';
+
+const featureCards = [
+  {
+    subtitle: 'Foresight Beyond the Moment',
+    title: 'Sense the Hidden',
+    description: 'This system helps you notice what others overlook. Whether it\'s a business about to shift, a partner growing distant, or a plan losing energy, it lets you see the quiet premonitions of what\'s to come.',
+  },
+  {
+    subtitle: 'Discover the Door Behind the Wall',
+    title: 'Life Foresight',
+    description: 'This feature illuminates those hidden openings — a career pivot, an unexpected connection, a decision that could turn failure into freedom. It helps you recognize that destiny often hides behind detours.',
+  },
+  {
+    subtitle: 'Move Ahead of Time',
+    title: 'Reveal Opportunities',
+    description: 'This feature allows you to plan with awareness — to choose your timing, your alliances, your moments of silence. In love, in business, in every crossroad, you can act not reactively, but with composure and clarity.',
+  },
+];
+---
+
+<section class="relative bg-gradient-to-b from-[#023344] via-[#1b6a83] to-[#043f38] px-5 md:px-20 py-[50px] md:py-[100px] flex flex-col items-center">
+  <!-- Header -->
+  <div class="flex flex-col items-center gap-[2rem] md:px-[10vw] px-[5vw] md:py-[30px] py-[100px]">
+    <p class="headline-large text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent animate-slide-up-blur">
+      What will be seen
+    </p>
+    <p class="headline-small text-center leading-[24px] md:leading-[26px] font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] max-w-[80vw] animate-slide-up-blur-delay-1">
+      A clear reading of your energy, revealing the patterns, timing, and guidance shaping your next steps.
+    </p>
+  </div>
+
+
+  <!-- Feature Cards -->
+  <div class="w-full h-[450vh] flex flex-row gap-8">
+    <div class="w-full md:w-1/2 flex flex-col h-[400vh] gap-[20vh]">
+    {featureCards.map((card) => (
+      <div class="w-full h-full relative flex justify-start">
+        <div class="sticky z-10 top-3 w-[70vw] max-w-[436px] h-[60vh] rounded-3xl overflow-hidden group hover:scale-[1.02]  transition-transform duration-300 animate-slide-up-blur">
+          <!-- Glassy Background -->
+          <MoonPageCard />
+          <div class="relative h-full flex flex-col justify-between px-5 pt-10 pb-5">
+            <div class="flex flex-col gap-3 text-white">
+              <div class="flex flex-col gap-2">
+                <span class="text-medium uppercase animate-slide-up-blur">{card.subtitle}</span>
+                <h3 class="headline-medium animate-slide-up-blur-delay-1">{card.title}</h3>
+              </div>
+              <p class="body-small-highlight animate-slide-up-blur-delay-2">{card.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+    </div>
+
+    <!-- Moonanimation -->
+    <!-- Hidden on small viewports (<768px). Visible at md and up. Fixed stray bracket in canvas class. -->
+    <div class="hidden md:sticky md:flex md:flex-col md:top-0 md:right-0 md:w-[50vw] md:h-[90vh] md:overflow-hidden">
+      <canvas id="spline-canvas" class="w-full h-full relative -bottom-[10%] scale-[1]"></canvas>
+    </div>
+
+    <div class="lg:hidden w-full h-[450vh] absolute top-0 right-0 z-5">
+      <div class="sticky top-[2vh] right-0 w-[100vw] h-[90vh] overflow-hidden">
+        <canvas id="spline-canvas" class="w-full h-full relative -bottom-[10%] -right-[10%] scale-[1]"></canvas>
+      </div>
+    </div>
+  
+  </div>
+
+</section>
+
+<!-- Spline 加载脚本 -->
+<script>
+  import { Application } from '@splinetool/runtime';
+
+  // 等待 DOM 加载完成
+  document.addEventListener('DOMContentLoaded', () => {
+    // If there are multiple canvas elements with the same id (responsive
+    // variants), pick the one that's currently visible in the layout.
+    const canvases = Array.from(document.querySelectorAll<HTMLCanvasElement>('#spline-canvas'));
+    let canvas: HTMLCanvasElement | null = null;
+    for (const c of canvases) {
+      const style = window.getComputedStyle(c);
+      if (style.display !== 'none' && c.clientWidth > 0 && c.clientHeight > 0) {
+        canvas = c;
+        break;
+      }
+    }
+    // fallback to the first canvas if none appear visible
+    if (!canvas && canvases.length) canvas = canvases[0];
+
+    if (canvas) {
+      const app = new Application(canvas);
+      app.load('https://prod.spline.design/kg35p8HMxtVW7K1x/scene.splinecode');
+    }
+  });
+</script>
+
+<!-- 滚动动画脚本 -->
+<ScrollAnimationScript />
