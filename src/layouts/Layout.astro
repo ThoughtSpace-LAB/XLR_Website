@@ -8,7 +8,15 @@ import CustomStyles from '~/components/CustomStyles.astro';
 
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
+export interface Props {
+  metadata?: {
+    title?: string;
+    description?: string;
+    ignoreTitleTemplate?: boolean;
+  };
+}
 
+const { metadata = {} } = Astro.props;
 const language = 'en';
 const textDirection = 'ltr';
 ---
@@ -18,13 +26,11 @@ const textDirection = 'ltr';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <!-- <CommonMeta /> -->
-    <!-- <Favicons /> -->
+    <link rel="icon" type="image/svg+xml" href="/LOGO.svg" />
+    <title>{metadata.title}</title>
+    <meta name="description" content={metadata.description} />
+
     <CustomStyles />
-    <!-- <ApplyColorMode /> -->
-    <!-- <Metadata {...metadata} /> -->
-    <!-- <SiteVerification /> -->
-    <!-- <Analytics /> -->
 
     <!-- Comment the line below to disable View Transitions -->
     <!-- <ClientRouter fallback="swap" /> -->
