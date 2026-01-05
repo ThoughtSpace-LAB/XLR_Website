@@ -1,0 +1,53 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import SerenaActivity from '~/components/serena/activity.astro';
+import '~/assets/styles/feature-text.css';
+
+const metadata = {
+  title: 'Activity — SERENA',
+  description: 'Write down your question',
+};
+---
+
+<Layout metadata={metadata}>
+<div class="relative bg-white flex flex-col text-white font-serena cursor-none">
+  <div 
+    id="custom-cursor" 
+    class="pointer-events-none fixed top-0 left-0 w-3 h-3 bg-white rounded-full z-50 mix-blend-lighten"
+    style="will-change: transform;"
+  ></div>
+
+  <script>
+  const cursor = document.getElementById('custom-cursor');
+  let mouseX = -100; // 初始位置设在屏幕外
+  let mouseY = -100;
+
+  // 1. 初始状态：先隐藏，避免在页面中心闪现
+  cursor.style.opacity = "0";
+
+  document.addEventListener('mousemove', (e) => {
+    // 第一次移动时再显示
+    if (cursor.style.opacity === "0") cursor.style.opacity = "1";
+    
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animate() {
+    // 使用简单的同步，减少因平滑导致的滞后感
+    cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+    requestAnimationFrame(animate);
+  }
+  
+  // 2. 页面显示/返回时强制刷新状态
+  window.addEventListener('pageshow', () => {
+    // 确保从缓存返回时依然隐藏原生鼠标
+    document.documentElement.style.cursor = 'none';
+  });
+
+  animate();
+</script>
+<SerenaActivity />
+  </div>
+  
+</Layout>
