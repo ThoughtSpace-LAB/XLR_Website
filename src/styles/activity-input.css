@@ -1,0 +1,121 @@
+.nebula-input {
+  position: relative;
+  width: 25vw;
+  margin: 10px auto;
+}
+
+.nebula-input .input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #393a2a;
+  background: #00000f;
+  color: white;
+  font-size: 16px;
+  outline: none;
+  border-radius: 8px;
+  transition: all 0.4s ease-out;
+}
+
+.nebula-input .user-label {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  pointer-events: none;
+  color: #888a6a;
+  transition: all 0.4s ease-out;
+  background: #00000f;
+  padding: 0 5px;
+}
+
+.nebula-input .input:focus {
+  border-color: #fff2b9c0;
+  box-shadow:
+    0 5px 8px rgba(238, 255, 106, 0.3),
+    0 10px 20px rgba(255, 238, 106, 0.439),
+    0 15px 40px rgba(255, 235, 106, 0.15),
+    0 20px 60px rgba(240, 255, 106, 0.1);
+}
+
+.nebula-input .input:focus ~ .user-label,
+.nebula-input .input:valid ~ .user-label {
+  transform: translateY(-25px);
+  font-size: 12px;
+  color: #fff0b3;
+  left: 10px;
+}
+
+.nebula-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  top: 50%;
+  left: 10px;
+  filter: blur(0.8px);
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}
+
+.nebula-input .input:focus ~ .nebula-particle {
+  animation: nebula-float 2s forwards ease-out;
+}
+
+@keyframes nebula-float {
+  0% {
+    transform: translate(0, -50%) scale(0.8);
+    opacity: 0;
+    background: #fffbaa;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(calc(var(--x) * 140px), calc(var(--y) * 35px))
+      scale(1.1);
+    opacity: 0;
+    background: #fffbaa;
+  }
+}
+
+/* Gender toggle (radio-backed buttons styled like nebula inputs) */
+.gender-options {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.gender-options input[type="radio"] {
+  display: none;
+}
+
+.gender-option {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #00000f;
+  color: #fff;
+  border: 2px solid #393a2a;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gender-option:hover {
+  transform: translateY(-3px);
+}
+
+.gender-options input[type="radio"]:checked + label.gender-option {
+  background: #fff2b9c0;
+  color: #111;
+  border-color: #fff2b9c0;
+  box-shadow: 0 6px 18px rgba(255,230,120,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.nebula-input .user-label + .gender-options {
+  margin-top: 6px;
+}
