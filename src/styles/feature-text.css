@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Removed @tailwind directives as they are now handled by @import "tailwindcss" in global css */
+@config "../../tailwind.config.js";
 
 /* Feature text styles (moved out of FeaturePage.astro)
    Only contains typography rules used by the Feature section */

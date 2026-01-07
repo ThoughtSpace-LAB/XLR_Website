@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import { defineConfig } from "astro/config";
 
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import compress from "astro-compress";
 
 import astrowind from "./vendor/integration";
@@ -15,9 +15,6 @@ export default defineConfig({
   output: "static",
 
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
     sitemap(),
 
     compress({
@@ -43,6 +40,7 @@ export default defineConfig({
   },
 
   vite: {
+    plugins: [tailwindcss()],
     resolve: {
       alias: {
         "~": path.resolve(__dirname, "./src"),

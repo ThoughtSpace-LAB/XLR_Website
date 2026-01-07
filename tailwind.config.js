@@ -63,7 +63,7 @@ export default {
           "var(--aw-font-heading, ui-sans-serif)",
           ...defaultTheme.fontFamily.sans,
         ],
-        serena: ['Roboto"', ...defaultTheme.fontFamily.sans],
+        serena: ["Roboto", ...defaultTheme.fontFamily.sans],
       },
       animation: {
         fade: "fadeInUp 1s both",
