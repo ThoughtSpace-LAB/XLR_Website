@@ -1,9 +1,8 @@
 ---
-// astrowind config removed; set a simple default theme
-const defaultTheme = 'light';
+import { UI } from 'astrowind:config';
 ---
 
-<script is:inline define:vars={{ defaultTheme }}>
+<script is:inline define:vars={{ defaultTheme: UI.theme }}>
   if (window.basic_script) {
     return;
   }

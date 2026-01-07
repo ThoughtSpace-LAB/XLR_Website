@@ -3,21 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&display=swap');
 @import './feature-text.css';
 
-@import "tailwindcss";
-
-@theme {
-  --color-primary: var(--aw-color-primary);
-  --color-secondary: var(--aw-color-secondary);
-  --color-accent: var(--aw-color-accent);
-  --color-default: var(--aw-color-text-default);
-  --color-muted: var(--aw-color-text-muted);
-  --color-page: var(--aw-color-bg-page);
-
-  --font-sans: var(--aw-font-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--aw-font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-heading: var(--aw-font-heading), ui-sans-serif, system-ui, sans-serif;
-  --font-serena: 'Roboto', ui-sans-serif, system-ui, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer utilities {
   .bg-page {
@@ -66,48 +54,42 @@
 }
 
 @layer components {
-  .btn, .btn-primary, .btn-secondary, .btn-tertiary {
-    @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
-    color: var(--aw-color-text-default);
+  .btn {
+    @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base text-page leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-blue-200 focus:ring-2 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
   }
 
   .btn-primary {
-    @apply font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary hover:text-white dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary;
+    @apply btn font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary hover:text-white dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary;
   }
 
   .btn-secondary {
-    /* Inherits base styles */
+    @apply btn;
   }
 
   .btn-tertiary {
-    @apply border-none shadow-none hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
-    color: var(--aw-color-text-muted);
+    @apply btn border-none shadow-none text-muted hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
   }
 
   .serena-headline-lg {
-    @apply text-white text-[1.6rem] leading-[1.75rem] font-normal tracking-[0.0375rem];
-    font-family: var(--font-serena);
+    @apply font-serena text-white text-[1.6rem] leading-[1.75rem] font-normal tracking-[0.0375rem];
     text-shadow: 0 4px 4px rgba(0, 0, 0, 0.75);
     animation: serena-slide-in 0.8s ease-out forwards;
   }
 
   .serena-headline-md {
-    @apply text-white text-[1.2rem] leading-[1.75rem] font-normal tracking-[0.0375rem];
-    font-family: var(--font-serena);
+    @apply font-serena text-white text-[1.2rem] leading-[1.75rem] font-normal tracking-[0.0375rem];
     animation: serena-slide-in 0.8s ease-out forwards;
   }
 
   .serena-headline-md-highlight {
-    @apply text-white text-[0.75rem] leading-[1rem] font-light tracking-[0.025rem];
-    font-family: var(--font-serena);
+    @apply font-serena text-white text-[0.75rem] leading-[1rem] font-light tracking-[0.025rem];
     text-shadow: 0 4px 4px rgba(0, 0, 0, 1);
     animation: serena-slide-in 0.8s ease-out forwards;
     animation-delay: 0.2s;
   }
 
   .serena-button {
-    @apply text-white text-sm font-light tracking-[0.0375rem];
-    font-family: var(--font-serena);
+    @apply font-serena text-white text-sm font-light tracking-[0.0375rem];
   }
 
   .serena-hero-media {

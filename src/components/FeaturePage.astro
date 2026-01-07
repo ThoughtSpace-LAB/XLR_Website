@@ -1,14 +1,14 @@
 ---
+import FeaturePageStickyCard from '~/components/widgets/featurepage/FeaturePageStickyCard.astro';
+import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.astro';
+import moonicon1 from '~/assets/icons/Moonicon1.svg?raw';
+import moonicon2 from '~/assets/icons/Moonicon2.svg?raw';
+import moonicon3 from '~/assets/icons/Moonicon3.svg?raw';
+import '~/styles/feature-text.css';
+import FeaturePageCard1 from '~/components/widgets/featurepage/FeaturePageCard1.astro';
+import FeaturePageCard2 from '~/components/widgets/featurepage/FeaturePageCard2.astro';
+import FeaturePageCard3 from '~/components/widgets/featurepage/FeaturePageCard3.astro';
 
-import moonicon1 from '../assets/icons/Moonicon1.svg?raw';
-import moonicon2 from '../assets/icons/Moonicon2.svg?raw';
-import moonicon3 from '../assets/icons/Moonicon3.svg?raw';
-import '../styles/feature-text.css';
-import FeaturePageCard1 from './widgets/featurepage/FeaturePageCard1.astro';
-import FeaturePageCard2 from './widgets/featurepage/FeaturePageCard2.astro';
-import FeaturePageCard3 from './widgets/featurepage/FeaturePageCard3.astro';
-import FeaturePageStickyCard from './widgets/featurepage/FeaturePageStickyCard.astro';
-import ScrollAnimationScript from './common/ScrollAnimationScript.astro';
 
 const howItWorksSteps = [
   {
@@ -297,7 +297,7 @@ const howItWorksSteps = [
   .moon-2 { top: calc(100vh + 80px); }
   .moon-3 { top: calc(200vh + 80px); }
 
-  /* Typography styles moved to `src/assets/styles/feature-text.css` */
+  /* Typography styles moved to `src/styles/feature-text.css` */
 </style>
 
 <!-- 滚动动画脚本 -->
