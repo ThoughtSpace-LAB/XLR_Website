@@ -19,7 +19,7 @@
 ## 🛠 Tech Stack
 
 - **Framework**: [Astro 5.x](https://astro.build/)
-- **Styling**: [Tailwind CSS v3](https://tailwindcss.com/) + `tailwindcss-animate`
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) + `@tailwindcss/vite`
 - **Language**: TypeScript / JavaScript (ESM)
 - **3D/Graphics**: `@splinetool/runtime`
 - **Linting & Formatting**: ESLint, Prettier
@@ -44,7 +44,7 @@
 │   ├── pages/              # Astro routes (index.astro is the main entry)
 │   ├── styles/             # Global and component-specific CSS
 │   └── utils/              # Helper functions
-├── astro.config.mjs        # Astro configuration
+├── astro.config.ts         # Astro configuration
 ├── tailwind.config.js      # Tailwind configuration
 └── package.json            # Dependencies and scripts
 ```
@@ -69,7 +69,8 @@ All commands are run from the root of the project, from a terminal:
 - [ ] **Testing**: Add unit or E2E tests for critical interactions (sticky scrolling, registration flow).
 - [ ] **SEO**: Verify meta tags and OpenGraph data for social sharing.
 - [ ] **Accessibility**: Ensure custom cursor and 3D elements do not hinder accessibility references.
-
+- [ ] **CSS**: Organize CSS files and add global.css.
+- [ ] **Functional Modules**: Optimize based on the current state of the Serena project, modify SEO, and analyze functionality.
 ## 📄 License
 
 This project is private and proprietary.
