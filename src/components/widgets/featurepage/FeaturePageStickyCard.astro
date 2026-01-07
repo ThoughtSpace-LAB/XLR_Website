@@ -4,10 +4,6 @@ import iconSend from '~/assets/icons/icon-send.svg?url';
 import visualcard2raw from '~/assets/icons/VisualCard2.svg?raw';
 import visualcard3raw from '~/assets/icons/VisualCard3.svg?raw';
 import '~/styles/feature-text.css';
-import FeaturePageCard1 from './FeaturePageCard1.astro';
-import FeaturePageCard2 from './FeaturePageCard2.astro';
-import FeaturePageCard3 from './FeaturePageCard3.astro';
-
 ---
 
 <div class="sticky top-[calc(50vh-400px)] w-[560px] h-[800px] bg-white/[0.03] rounded-3xl border border-white/15 shadow-[0px_20px_40px_0px_rgba(0,0,0,0.2),inset_0px_0px_40px_0px_rgba(9,168,146,0.1)] overflow-hidden lg:block hidden">
@@ -95,7 +91,7 @@ import FeaturePageCard3 from './FeaturePageCard3.astro';
         }
       </style>
 
-      <script type="module">
+      <script type="module" is:inline>
         if (typeof window !== 'undefined') {
           // Find the chat visual reliably by data attribute (IDs changed in refactor)
           const chat = document.querySelector('.visual-item[data-visual="chat"]');

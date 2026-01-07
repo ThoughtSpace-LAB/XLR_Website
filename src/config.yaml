@@ -1,7 +1,7 @@
 site:
   name: SERENA
-  site: 'https://www.serenafelix.cc'
-  base: '/'
+  site: "https://www.serenafelix.cc"
+  base: "/"
   trailingSlash: false
 
   googleSiteVerificationId: null
@@ -10,7 +10,7 @@ site:
 metadata:
   title:
     default: SERENA
-    template: '%s — SERENA'
+    template: "%s — SERENA"
   description: "SERENA provides clarity, answers, and guidance through intuitive prompts and personalized insights."
   robots:
     index: true
@@ -18,13 +18,13 @@ metadata:
   openGraph:
     site_name: SERENA
     images:
-      - url: '~/assets/images/serena/default.png'
+      - url: "~/assets/images/serena/default.png"
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@serena'
-    site: '@serena'
+    handle: "@serena"
+    site: "@serena"
     cardType: summary_large_image
 
 i18n:
@@ -41,4 +41,4 @@ analytics:
       id: null # or "G-XXXXXXXXXX"
 
 ui:
-  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: "system" # Values: "system" | "light" | "dark" | "light:only" | "dark:only"

@@ -81,7 +81,7 @@ const featureCards = [
     // If there are multiple canvas elements with the same id (responsive
     // variants), pick the one that's currently visible in the layout.
     const canvases = Array.from(document.querySelectorAll('#spline-canvas'));
-    let canvas = null;
+    let canvas: Element | null = null;
     for (const c of canvases) {
       const style = window.getComputedStyle(c);
       if (style.display !== 'none' && c.clientWidth > 0 && c.clientHeight > 0) {
@@ -93,7 +93,7 @@ const featureCards = [
     if (!canvas && canvases.length) canvas = canvases[0];
 
     if (canvas) {
-      const app = new Application(canvas);
+      const app = new Application(canvas as HTMLCanvasElement);
       app.load('https://prod.spline.design/kg35p8HMxtVW7K1x/scene.splinecode');
     }
   });

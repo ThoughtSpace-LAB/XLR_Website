@@ -12,7 +12,6 @@
   }
 }
 
-
 .container:active {
   position: relative;
   width: 35vw;
@@ -24,11 +23,9 @@
     width: 70vw;
     height: 70vh;
     background: linear-gradient(85deg, #0000003f, #00ffe541);
-  backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 }
-
-
 
 #card {
   position: absolute;
@@ -75,7 +72,7 @@
   font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 3px;
-  text-align: start ;
+  text-align: start;
   width: 100%;
   background: linear-gradient(45deg, #ffffff, #67ffed);
   -webkit-background-clip: text;
@@ -92,15 +89,13 @@
   font-weight: 800;
   padding-top: 4rem;
   letter-spacing: 4px;
-  text-align: start ;
+  text-align: start;
   width: 100%;
   background: linear-gradient(45deg, #ffffff, #67ffed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 15px rgba(0, 255, 170, 0.3));
 }
-
-
 
 .subtitle {
   position: relative;
@@ -119,7 +114,6 @@
     font-weight: 400;
   }
 }
-
 
 .highlight {
   color: #00ffaa;
@@ -175,7 +169,7 @@
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.3s ease;
-   animation: particleFloat 2s infinite
+  animation: particleFloat 2s infinite;
 }
 
 /* Hover effects */
@@ -192,7 +186,6 @@
 .tracker:hover ~ #card .glowing-elements div {
   opacity: 1;
 }
-
 
 @keyframes particleFloat {
   0% {

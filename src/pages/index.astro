@@ -25,10 +25,11 @@ const metadata = {
       const cursor = document.getElementById('custom-cursor');
 
       document.addEventListener('mousemove', (e) => {
-    
-    cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
-  });
-</script>
+        if (cursor) {
+          cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+        }
+      });
+    </script>
     
     <!-- Section 1: Landing Page / Hero -->
     <LandingPage />
