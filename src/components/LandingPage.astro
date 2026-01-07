@@ -1,11 +1,11 @@
 ---
-import heroBg from '../assets/images/hero-bg.jpg';
-import nextIcon from '../assets/icons/icon-next.svg?url';
-import NaviBar from './widgets/landingpage/NaviBar.astro';
-import SerenaLetter from './widgets/landingpage/SerenaLetter.astro';
-import ScrollAnimationScript from './common/ScrollAnimationScript.astro';
-import '../styles/landingpageparagraph.css';
-import '../styles/feature-text.css';
+import heroBg from '~/assets/images/hero-bg.jpg';
+import nextIcon from '~/assets/icons/icon-next.svg?url';
+import NaviBar from '~/components/widgets/landingpage/NaviBar.astro';
+import SerenaLetter from '~/components/widgets/landingpage/SerenaLetter.astro';
+import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.astro';
+import '~/styles/landingpageparagraph.css';
+import '~/styles/feature-text.css';
 ---
 
 <!-- 主容器：全屏高度白色背景，弹性布局 -->
@@ -57,24 +57,11 @@ import '../styles/feature-text.css';
 
       </div>
       
-      
     </div>
-  </div>
 </section>
 
 <!-- 滚动动画脚本 -->
 <ScrollAnimationScript />
-
-<style is:global>
-  /* Ensure landing takes full viewport and no default body gaps */
-  html, body {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-    background: #000;
-    overflow-x: hidden;
-  }
-</style>
 
 <script>
   if (typeof window !== 'undefined') {

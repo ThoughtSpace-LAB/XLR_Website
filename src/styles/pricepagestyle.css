@@ -1,14 +1,13 @@
-
 /* Additional styles for ASK ME cards */
 .animation {
   --perspective: 800px;
-  width: 100%; max-width: 480px;
+  width: 100%;
+  max-width: 480px;
   height: 400px;
   transform-style: preserve-3d;
   opacity: 0.75;
   transition: all 0.5s ease;
   perspective: 3000px;
-
 
   &:hover {
     opacity: 1;
@@ -150,7 +149,7 @@
   overflow: hidden;
   padding: 40px 60px;
   box-sizing: border-box;
-  place-items: center;  
+  place-items: center;
 }
 
 .header-card {

@@ -1,7 +1,7 @@
 ---
-import '../styles/feature-text.css';
-import ScrollAnimationScript from './common/ScrollAnimationScript.astro';
-import MoonPageCard from './widgets/moonpage/MoonPageCard.astro';
+import '~/styles/feature-text.css';
+import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.astro';
+import MoonPageCard from '~/components/widgets/moonpage/MoonPageCard.astro';
 
 const featureCards = [
   {
@@ -80,8 +80,8 @@ const featureCards = [
   document.addEventListener('DOMContentLoaded', () => {
     // If there are multiple canvas elements with the same id (responsive
     // variants), pick the one that's currently visible in the layout.
-    const canvases = Array.from(document.querySelectorAll<HTMLCanvasElement>('#spline-canvas'));
-    let canvas: HTMLCanvasElement | null = null;
+    const canvases = Array.from(document.querySelectorAll('#spline-canvas'));
+    let canvas: Element | null = null;
     for (const c of canvases) {
       const style = window.getComputedStyle(c);
       if (style.display !== 'none' && c.clientWidth > 0 && c.clientHeight > 0) {
@@ -93,7 +93,7 @@ const featureCards = [
     if (!canvas && canvases.length) canvas = canvases[0];
 
     if (canvas) {
-      const app = new Application(canvas);
+      const app = new Application(canvas as HTMLCanvasElement);
       app.load('https://prod.spline.design/kg35p8HMxtVW7K1x/scene.splinecode');
     }
   });
