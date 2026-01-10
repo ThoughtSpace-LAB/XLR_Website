@@ -1,0 +1,125 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+/* Import Abhaya Libre from Google Fonts for activity headline */
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;700&display=swap');
+
+body {
+  background-image: radial-gradient(#021027, #000000);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.circle-container {
+  /* Use CSS custom properties instead of Sass variables */
+  --particle-width: 10px;
+  --particle-color: hsl(62, 100%, 84%);
+
+  position: absolute;
+  inset: 0;
+  transform: translateY(-10vh);
+}
+
+/* Base particle style. For per-particle variation set CSS custom properties
+   on each `.circle` element (inline or via JS):
+   --move-x: 20vw; --move-duration: 8s; --move-delay: 1.2s; --size: 8px; */
+.circle-container .circle {
+  position: absolute; /* independent layering */
+  left: 0;
+  top: 0;
+  width: var(--size, var(--particle-width));
+  height: var(--size, var(--particle-width));
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  background-image: radial-gradient(
+    var(--particle-color),
+    var(--particle-color) 10%,
+    rgba(0,0,0,0) 56%
+  );
+
+  /* place at initial transform so particles don't stack at left */
+  transform: translate3d(var(--move-x, 0vw), var(--move-y-start, 100vh), 0) scale(var(--scale-start, 0.6));
+
+  /* animate translation (move), and a gentle pulsing opacity */
+  animation: move-frames var(--move-duration, 8s) linear var(--move-delay, 0s) infinite,
+             fade-frames var(--fade-duration, 6s) ease-in-out calc(var(--move-delay, 0s) / 2) infinite;
+  will-change: transform, opacity;
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+}
+
+.circle-container.initialized .circle {
+  opacity: 1;
+}
+
+@keyframes fade-frames {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+@keyframes move-frames {
+  from {
+    transform: translate3d(var(--move-x, 0vw), var(--move-y-start, 100vh), 0) scale(var(--scale-start, 0.6));
+  }
+  50% {
+    transform: translate3d(var(--move-x, 0vw), calc(var(--move-y-start, 100vh) - 50vh), 0) scale(var(--scale-mid, 1.6));
+  }
+  to {
+    transform: translate3d(var(--move-x, 0vw), var(--move-y-end, -10vh), 0) scale(var(--scale-end, 0.6));
+  }
+}
+
+/* Example usage (in markup or JS):
+   <div class="circle-container">
+     <div class="circle" style="--size:6px; --move-x:5vw; --move-duration:9s; --move-delay:0.5s"></div>
+     <div class="circle" style="--size:10px; --move-x:40vw; --move-duration:7.2s; --move-delay:2.1s"></div>
+     ...
+   </div>
+
+  For large numbers of particles generate these elements via JS and assign
+  random values to the per-element custom properties instead of relying on
+  Sass loops. This keeps the stylesheet valid plain CSS.
+*/
+
+.activity-headline {
+  font-family: 'Abhaya Libre', serif;
+  font-size: 2.5rem; /* 40px approx */
+  color: #fdffc1;
+  text-shadow: #fdffc1 0px 0px 12px;
+  line-height: 2.25rem; /* 36px */
+  font-weight: 500;
+  letter-spacing: 0.6px;
+}
+
+@media (max-width: 768px) {
+  .activity-headline {
+    font-size: 1.1rem; /* 18px */
+    line-height: 1.6rem; /* 25.6px */
+    font-weight: 500;
+  }
+}
+
+.activity-paragraph {
+  font-family: 'Abhaya Libre', serif;
+  font-size: 1.25rem; /* 20px approx */
+  color: #cac798;
+  text-shadow: #363636 0px 0px 6px;
+  line-height: 1.6rem; /* 25.6px */
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 768px) {
+  .activity-paragraph {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.4rem; /* 22.4px */
+    font-weight: 600;
+  }
+}

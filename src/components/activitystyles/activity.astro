@@ -1,0 +1,232 @@
+---
+import '~/styles/activity/activity-background.css';
+import '~/styles/feature-text.css';
+import '~/styles/activity/activity-input.css';
+import heroBg from '~/assets/images/activityimages/activity-mainbg.png';
+---
+
+<div class="relative">
+  <a href="/" aria-label="Back to home" class="fixed top-6 right-6 z-50 inline-flex items-center gap-2 py-2 px-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-all">
+    ← Back
+  </a>
+
+  <section id="activity-page" class="min-h-screen w-full flex items-center justify-center bg-black">
+  <div class="w-full h-full absolute inset-0 z-0 opacity-70">
+    <img 
+      src={heroBg.src}
+      width={heroBg.width}
+      height={heroBg.height}
+      class="w-full h-full object-cover" 
+      alt="背景图"
+    />
+  </div>
+
+  <div class="relative z-10 flex flex-col items-center justify-center gap-10 h-full">
+
+  <div class="w-full max-w-4xl overflow-hidden" id="slider-window">
+    <div class="flex transition-transform duration-700 ease-in-out" id="slider-track">
+      
+      <!-- Step 1 Container -->
+      <div class="w-full flex-shrink-0 flex flex-col items-center justify-center" id="step-1">
+        <div class="flex flex-col w-full px-32 md:px-56" id="pagewrapper">
+          <h1 class="activity-headline text-center mb-4">Begin Your Wishing Journey</h1>
+          <h1 class="activity-paragraph text-center mb-10">
+            Your information is only used to deliver your guidance.<br />
+            We respect your privacy and your space.
+          </h1>
+          <div id="email-input" class="nebula-input z-20 w-full">
+          <input required="" type="text" name="text" autocomplete="off" class="input w-full" required />
+          <label class="user-label">Email Address</label>
+          <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+          <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+          <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+          <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+          <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+          <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+          </div>
+          
+          <!-- Gender single-choice (radio-backed) -->
+          <div id="gender-input" class="nebula-input z-20">
+            <div class="gender-options" role="radiogroup" aria-labelledby="gender-label">
+              <input type="radio" id="gender-female" name="gender" value="female" required />
+              <label class="gender-option" for="gender-female">Female</label>
+
+              <input type="radio" id="gender-male" name="gender" value="male" />
+              <label class="gender-option" for="gender-male">Male</label>
+            </div>
+            <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+            <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+          </div>
+
+          <!-- Continue button -->
+          <div class="w-full flex justify-start mt-6">
+            <a href="#" class="button inline-flex items-center py-2 px-4 bg-white/10 text-white rounded-full hover:bg-white/20 transition-shadow z-50 cursor-pointer" id="continueBtn">
+              Continue
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 Container -->
+      <div class="w-full flex-shrink-0 flex flex-col items-center justify-center px-4" id="step-2">
+         <!-- Card Background Wrapper -->
+         <div class="relative w-full max-w-lg p-10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black/20 backdrop-blur-md">
+            
+            <!-- Animated decorative gradients/blobs (simulated) -->
+            <div class="absolute -top-[20%] -left-[20%] w-[70%] h-[70%] bg-blue-900/20 rounded-full blur-[80px] pointer-events-none animate-pulse-slow"></div>
+            <div class="absolute -bottom-[20%] -right-[20%] w-[70%] h-[70%] bg-amber-200/5 rounded-full blur-[80px] pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col items-center gap-6">
+              <h1 class="activity-headline text-3xl md:text-4xl text-center">Activity — Step 2</h1>
+              <div class="flex flex-col" id="pagewrapper">
+                <div class="flex flex-row gap-10" id="numbers-inputs">
+          <div id="number-input" class="nebula-input z-20 w-auto">
+          <input required="" type="text" name="text" autocomplete="off" class="input" required />
+          <label class="user-label">Number</label>
+          <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+          <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+          <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+          <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+          <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+          <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+          </div>
+
+          <div id="number-input" class="nebula-input z-20 w-auto">
+          <input required="" type="text" name="text" autocomplete="off" class="input" required />
+          <label class="user-label">Number</label>
+          <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+          <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+          <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+          <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+          <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+          <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+          </div>
+          </div>
+
+          <!-- Custom Question (Line Style) -->
+          <div id="custom-question-input" class="nebula-input line-style z-20 w-full">
+            <textarea required name="custom-question" rows="1" class="input w-full resize-none overflow-hidden" placeholder=" "></textarea>
+            <label class="user-label">Ask your question...</label>
+            <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+            <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+            <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+            <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+            <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+            <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+          </div>
+        
+          <!-- Continue button -->
+          <div class="w-full flex justify-start mt-6">
+            <a href="#" class="button inline-flex items-center py-2 px-4 bg-white/10 text-white rounded-full hover:bg-white/20 transition-shadow z-50 cursor-pointer" id="continueBtn">
+              Continue
+            </a>
+          </div>
+
+            </div>
+         </div>
+      </div>
+
+    </div>
+
+    
+  </div>
+
+  </div>
+  </section>
+
+  <!-- / STAR ANIMATION -->
+
+
+  <div class="animation-wrapper pointer-events-none" aria-hidden="true">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+  </div>
+
+  <div class="page-wrapper pointer-events-none hidden"> 
+    <h4>CSS Particles</h4>
+  </div>
+
+  <div class="absolute inset-0 pointer-events-none z-0">
+    <div class="container">
+      <div id="particles" class="circle-container" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    if (typeof window !== 'undefined') {
+      window.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('particles');
+        if (!container) {
+          console.debug('[particles] container not found');
+          return;
+        }
+        console.debug('[particles] initializing');
+        const NUM = 60; // lowered count to reduce initial load
+        for (let i = 0; i < NUM; i++) {
+          const d = document.createElement('div');
+          d.className = 'circle';
+
+          const size = (Math.random() * 12 + 4).toFixed(2); // px as float
+          const moveX = (Math.random() * 100).toFixed(2); // vw as float
+          const moveYStart = (Math.random() * 30 + 70).toFixed(2); // vh start
+          const moveYEnd = - (parseFloat(moveYStart) + Math.random() * 30).toFixed(2);
+          const duration = (14 + Math.random() * 12).toFixed(2) + 's';
+          const delay = (Math.random() * 11).toFixed(2) + 's';
+          const scaleStart = (0.4 + Math.random() * 0.4).toFixed(2);
+          const scaleMid = (1.0 + Math.random() * 0.8).toFixed(2);
+
+          d.style.setProperty('--size', size + 'px');
+          d.style.setProperty('--move-x', moveX + 'vw');
+          d.style.setProperty('--move-y-start', moveYStart + 'vh');
+          d.style.setProperty('--move-y-end', moveYEnd + 'vh');
+          d.style.setProperty('--move-duration', duration);
+          d.style.setProperty('--move-delay', delay);
+          d.style.setProperty('--scale-start', scaleStart);
+          d.style.setProperty('--scale-mid', scaleMid);
+
+          // small jitter so not all start at same time
+          d.style.setProperty('--fade-duration', (6 + Math.random() * 4).toFixed(2) + 's');
+
+          container.appendChild(d);
+        }
+        console.debug('[particles] appended', NUM);
+        // Reveal particles with a single class to avoid flash/stacking
+        setTimeout(() => container.classList.add('initialized'), 50);
+      });
+    }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const continueBtn = document.getElementById('continueBtn');
+      const backBtn = document.getElementById('backBtn');
+      const sliderTrack = document.getElementById('slider-track');
+
+      if (continueBtn && sliderTrack) {
+        continueBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          sliderTrack.style.transform = 'translateX(-100%)';
+        });
+      }
+
+      if (backBtn && sliderTrack) {
+        backBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          sliderTrack.style.transform = 'translateX(0)';
+        });
+      }
+
+      // Auto-resize textarea
+      const textareas = document.querySelectorAll('textarea.input');
+      textareas.forEach(textarea => {
+        textarea.addEventListener('input', function() {
+          this.style.height = 'auto';
+          this.style.height = (this.scrollHeight) + 'px';
+        });
+      });
+    });
+  </script>
+
+</div>
