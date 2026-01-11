@@ -98,10 +98,40 @@ body {
   letter-spacing: 0.6px;
 }
 
+/* Continue Button Style */
+.continue-button-bg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../../assets/images/activityimages/Button.png');
+  background-size: 100% 100%;
+  background-color: #efe297;
+  border-radius: 24px;
+  filter: drop-shadow(0 0 5px rgb(255, 255, 255));
+  color: #fff;
+  font-family: 'Abhaya Libre', serif;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  height: 48px; 
+  min-width: 200px;
+}
+
+.continue-button-bg:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.continue-button-bg:active {
+  transform: scale(0.98);
+}
+
 @media (max-width: 768px) {
   .activity-headline {
-    font-size: 1.1rem; /* 18px */
-    line-height: 1.6rem; /* 25.6px */
+    font-size: 1.75rem; /* 28px approx */
+    line-height: 1.8rem; /* 25.6px */
     font-weight: 500;
   }
 }
@@ -111,15 +141,158 @@ body {
   font-size: 1.25rem; /* 20px approx */
   color: #cac798;
   text-shadow: #363636 0px 0px 6px;
-  line-height: 1.6rem; /* 25.6px */
-  font-weight: 700;
+  line-height: 1.8rem; /* 25.6px */
+  font-weight: 300;
   letter-spacing: 0.2px;
 }
 
 @media (max-width: 768px) {
   .activity-paragraph {
-    font-size: 0.875rem; /* 14px */
+    font-size: 1rem; /* 
     line-height: 1.4rem; /* 22.4px */
-    font-weight: 600;
+    font-weight: 200;
   }
+}
+
+/* --- Step 2-3 Revelation Style --- */
+
+.revelation-heading {
+  font-size: 1.25rem; 
+  font-family: 'Abhaya Libre', serif;
+  font-weight: 700; 
+  margin-bottom: 1rem; 
+  color: #fff0b3; 
+}
+
+.revelation-subheading {
+  font-size: 1.125rem; 
+  font-family: 'Abhaya Libre', serif;
+  font-weight: 600; 
+  margin-top: 1.5rem; 
+  margin-bottom: 0.5rem; 
+  color: rgba(255, 255, 255, 0.9); 
+}
+
+.revelation-text p {
+  font-size: 1rem; 
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  line-height: 1.4rem;
+  margin-bottom: 1rem; 
+}
+
+.revelation-list {
+  list-style-type: disc; 
+  font-size: 1rem; 
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  line-height: 1.75rem;
+  padding-left: 1.25rem; 
+  margin-top: 1rem; 
+}
+.revelation-list.space-y-4 > li + li {
+    margin-top: 1rem;
+}
+.revelation-list li {
+  margin-bottom: 0.5rem; /* space-y-2 (approx) */
+}
+
+.revelation-ordered-list {
+  list-style-type: decimal; /* list-decimal */
+  padding-left: 1.25rem; /* pl-5 */
+}
+.revelation-ordered-list > li + li {
+    margin-top: 1rem; /* space-y-4 */
+}
+
+/* Spirits Container */
+.spirits-container > * + * {
+    margin-top: 1rem; /* space-y-4 */
+}
+
+.spirit-item {
+  padding: 0.75rem; 
+  font-size: 1rem; 
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  line-height: 1.4rem;
+  background-color: rgba(255, 255, 255, 0.05); /* bg-white/5 */
+  border-radius: 0.5rem; /* rounded-lg */
+  border-left-width: 2px; /* border-l-2 */
+  border-left-color: rgba(255, 255, 255, 0.5); /* border-white/50 */
+}
+
+.spirit-item-gold {
+  border-left-color: #fff0b3; /* border-[#fff0b3] */
+}
+
+.spirit-title {
+  color: #fff0b3; 
+  display: block;
+}
+
+.spirit-desc {
+  font-size: 0.875rem; /* text-sm */
+  margin-top: 0.25rem; /* mt-1 */
+}
+
+/* Wisdom Styles */
+.wisdom-quote-box {
+  text-align: center; 
+  font-style: italic; 
+  font-size: 1.125rem; 
+  padding-left: 2rem; 
+  padding-right: 2rem;
+  padding-top: 1.5rem; /* py-6 */
+  padding-bottom: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* border-y border-white/10 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem; /* mb-6 */
+  background-color: rgba(255, 255, 255, 0.05); /* bg-white/5 */
+}
+
+.wisdom-source {
+  font-size: 0.875rem; /* text-sm */
+  font-style: normal; /* not-italic */
+  margin-top: 0.5rem; /* mt-2 */
+  display: block; /* block */
+  opacity: 0.7; /* opacity-70 */
+}
+
+/* Tab Buttons */
+.tab-btn {
+  padding: 0.5rem 1rem; 
+  border-radius: 9999px; 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255);
+  font-size: 1rem;
+  font-family: 'Abhaya Libre', serif;
+  font-weight: 500;
+  transition-property: all; /* transition-all */
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(255, 237, 44, 0.8);
+}
+
+.tab-btn.active-tab {
+  font-weight: 700;
+  background-color: #fff2b9 !important;
+  border-color: rgb(255, 255, 255) !important;
+  color: rgb(0, 0, 0) !important;
+  box-shadow: 0 6px 18px rgb(255, 230, 120), inset 0 1px 0 rgb(255, 255, 255);
+}
+
+/* Custom Scrollbar for Content Box */
+.content-box-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+.content-box-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+.content-box-scroll::-webkit-scrollbar-track {
+    background-color: transparent;
 }

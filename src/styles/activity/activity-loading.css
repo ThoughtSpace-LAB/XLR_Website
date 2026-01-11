@@ -1,0 +1,46 @@
+.loader-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100; /* Ensure it is above other elements */
+  pointer-events: none;
+}
+
+.loading-text {
+  font-family: 'Abhaya Libre', serif;
+  font-size: 1.5rem;
+  padding-top: 10vh;
+  color: #fff0b3;
+  text-align: center;
+  min-height: 1.5em;
+  text-shadow: 0 0 10px rgba(255, 240, 179, 0.4);
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.loader {
+  width: 10vw;
+  height: 10vw;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  animation: spin 5s linear infinite;
+  filter: drop-shadow(0 0 4px #ffea0800);
+}
+
+.loader::after {
+  content: '';
+  position: absolute;
+  inset: 1vw;
+  border-radius: 50%;
+  border: 3px solid transparent;
+    filter: drop-shadow(0 0 4px #ffea08);
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
