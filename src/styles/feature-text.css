@@ -1,3 +1,6 @@
+/* Removed @tailwind directives as they are now handled by @import "tailwindcss" in global css */
+@config "../../tailwind.config.js";
+
 /* Feature text styles (moved out of FeaturePage.astro)
    Only contains typography rules used by the Feature section */
 
@@ -16,7 +19,8 @@
 /* Utility class: Use `.responmd` on an element to indicate mobile-scoped content.
   Example: .responmd .foo { ... } will apply inside mobile media queries.
 */
-.responmd { }
+.responmd {
+}
 
 /* Plain fallback media query (safe to use in all browsers) */
 @media (max-width: 768px) {
@@ -41,22 +45,23 @@
 
 .animate-slide-up {
   opacity: 0;
-  animation: slideUpFromBottom 0.8s cubic-bezier(.2,.9,.2,1) forwards;
+  animation: slideUpFromBottom 0.8s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
 }
 
-.animate-slide-up.delay-1 { animation-delay: 0.15s; }
-.animate-slide-up.delay-2 { animation-delay: 0.3s; }
-.animate-slide-up.delay-3 { animation-delay: 0.45s; }
+.animate-slide-up.delay-1 {
+  animation-delay: 0.15s;
+}
+.animate-slide-up.delay-2 {
+  animation-delay: 0.3s;
+}
+.animate-slide-up.delay-3 {
+  animation-delay: 0.45s;
+}
 
-
-
-   
-   
 /* ====== 文字样式区 ====== */
 
-
 .body-medium {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem; /* 16px */
   line-height: 1.6rem; /* 24px */
   font-weight: 500;
@@ -64,16 +69,16 @@
 }
 
 .body-md-highlight {
-    font-family: 'Arial', sans-serif;
-    color: rgba(255, 255, 255, 1);
-    font-size: 0.9rem; /* 14.4px */
-    line-height: 1.2rem; /* 16px */
-    font-weight: 500;
-    letter-spacing: 0.6px;
-    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
-  }
+  font-family: "Arial", sans-serif;
+  color: rgba(255, 255, 255, 1);
+  font-size: 0.9rem; /* 14.4px */
+  line-height: 1.2rem; /* 16px */
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
   .body-md-highlight {
     font-size: 0.8rem; /* 13px */
     line-height: 1.125rem; /* 16px */
@@ -82,9 +87,8 @@
   }
 }
 
-
 .body-large-captalize {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-transform: capitalize;
   font-size: 2rem; /* 32px */
   line-height: 2.8rem; /* 45px */
@@ -100,9 +104,8 @@
   }
 }
 
-
 .text-small {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.9rem; /* 14.4px */
   line-height: 1rem; /* 16px */
@@ -111,7 +114,7 @@
 }
 
 .button-small {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: rgba(255, 255, 255, 1);
   font-size: 0.875rem; /* 14px */
   line-height: 1rem; /* 16px */
@@ -128,7 +131,7 @@
 }
 
 .headline-display {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: rgb(255, 255, 255);
   font-size: 2.5rem; /* 40px */
   line-height: 3.25rem; /* 52px */
@@ -143,10 +146,8 @@
   }
 }
 
-
-
 .headline-large {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 3rem; /* 56px */
   line-height: 4rem; /* 64px */
   font-weight: 600;
@@ -160,16 +161,15 @@
   }
 }
 
-
 .headline-md-highlight {
-    font-family: 'Arial', sans-serif;
-    color: rgba(255, 255, 255, 1);
-    font-size: 2.8rem; /* 32px */
-    line-height: 2.8 rem; /* 48px */
-    font-weight: 550;
-    letter-spacing: 0.8px;
-    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-  }
+  font-family: "Arial", sans-serif;
+  color: rgba(255, 255, 255, 1);
+  font-size: 2.8rem; /* 32px */
+  line-height: 2.8 rem; /* 48px */
+  font-weight: 550;
+  letter-spacing: 0.8px;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+}
 @media (max-width: 768px) {
   .headline-md-highlight {
     font-size: 1.8rem; /* 28.8px */
@@ -179,9 +179,8 @@
   }
 }
 
-
 .headline-medium {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1.9375rem; /* 30px */
   line-height: 2.25rem; /* 36px */
   font-weight: 500;
@@ -197,7 +196,7 @@
 }
 
 .headline-small {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1rem; /* 16px */
   line-height: 1.5rem; /* 20px */
   font-weight: 400;
@@ -214,7 +213,7 @@
 }
 
 .headline-special {
-  font-family: 'Baskervville', serif;
+  font-family: "Baskervville", serif;
   font-size: 2.25rem; /* 36px */
   line-height: 2.5rem; /* 40px */
   font-weight: 400;
@@ -229,9 +228,8 @@
   }
 }
 
-
 .text-medium {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: rgba(255, 255, 255, 0.8);
   font-size: 1rem; /* 16px */
   line-height: 1.2rem; /* 16px */
@@ -248,9 +246,8 @@
   }
 }
 
-
 .body-small {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.875rem; /* 14px */
   line-height: 1.2rem; /* 16px */
@@ -259,7 +256,7 @@
 }
 
 .body-small-highlight {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: rgba(255, 255, 255, 1);
   font-size: 0.9rem; /* 14.4px */
   line-height: 1.6rem; /* 24px */
@@ -268,7 +265,7 @@
 }
 
 .text-small-cyan {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: rgba(161, 252, 255, 0.5);
   font-size: 0.8rem; /* 13px */
   line-height: 1rem; /* 16px */
@@ -277,7 +274,7 @@
 }
 
 .body-special {
-  font-family: 'Baskervville', serif;
+  font-family: "Baskervville", serif;
   font-size: 0.875rem; /* 14px */
   line-height: 1.6rem; /* 24px */
   font-weight: 300;
@@ -292,39 +289,36 @@
 }
 
 .button-md {
-    font-family: 'Roboto', sans-serif;
-    color: rgba(255, 255, 255, 1);
-    font-size: 1rem; /* 16px */
-    line-height: 1rem; /* 16px */
-    font-weight: 400;
-    letter-spacing: 0.8px;
-  }
+  font-family: "Roboto", sans-serif;
+  color: rgba(255, 255, 255, 1);
+  font-size: 1rem; /* 16px */
+  line-height: 1rem; /* 16px */
+  font-weight: 400;
+  letter-spacing: 0.8px;
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
   .button-md {
     font-size: 0.85rem; /* 14px */
     line-height: 0.85rem; /* 16px */
   }
 }
 
+/* ====== 动画类 ====== */
 
-  
-
-  /* ====== 动画类 ====== */
-
-  /* 背景图从小到大浮现动画：从透明 + 缩小 → 不透明 + 原大小 */
-  @keyframes scaleUp {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+/* 背景图从小到大浮现动画：从透明 + 缩小 → 不透明 + 原大小 */
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
-  /* 文字向上从模糊到清晰进入动画 */
+/* 文字向上从模糊到清晰进入动画 */
 @keyframes slideUpBlurToSharp {
   0% {
     opacity: 0;
@@ -392,88 +386,85 @@
   animation-delay: 0.6s;
 }
 
-  
-  /* 背景图动画：从小到大缩放进入 */
-  .animate-scale-up {
-    animation: scaleUp 1s ease-out forwards;
-  }
+/* 背景图动画：从小到大缩放进入 */
+.animate-scale-up {
+  animation: scaleUp 1s ease-out forwards;
+}
 
-  /* 从左滑入动画 */
-  .animate-slide-left {
+/* 从左滑入动画 */
+.animate-slide-left {
+  opacity: 0;
+  animation: slideInFromLeft 0.8s ease-out forwards;
+}
+
+/* Headline variant: includes the per-element translateY so translateY isn't lost by the animation */
+@keyframes slideInFromLeftHead {
+  0% {
     opacity: 0;
-    animation: slideInFromLeft 0.8s ease-out forwards;
+    transform: translateX(-200px) translateY(var(--fg-ty-head, 0px));
   }
-
-  /* Headline variant: includes the per-element translateY so translateY isn't lost by the animation */
-  @keyframes slideInFromLeftHead {
-    0% {
-      opacity: 0;
-      transform: translateX(-200px) translateY(var(--fg-ty-head, 0px));
-    }
-    30% {
-      opacity: 0.3;
-      transform: translateX(-140px) translateY(var(--fg-ty-head, 0px));
-    }
-    70% {
-      opacity: 0.7;
-      transform: translateX(-40px) translateY(var(--fg-ty-head, 0px));
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0) translateY(var(--fg-ty-head, 0px));
-    }
+  30% {
+    opacity: 0.3;
+    transform: translateX(-140px) translateY(var(--fg-ty-head, 0px));
   }
+  70% {
+    opacity: 0.7;
+    transform: translateX(-40px) translateY(var(--fg-ty-head, 0px));
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(var(--fg-ty-head, 0px));
+  }
+}
 
-  .animate-slide-left-head {
+.animate-slide-left-head {
+  opacity: 0;
+  animation: slideInFromLeftHead 0.8s ease-out forwards;
+}
+
+/* Content variant: includes its own translateY variable */
+@keyframes slideInFromLeftContent {
+  0% {
     opacity: 0;
-    animation: slideInFromLeftHead 0.8s ease-out forwards;
+    transform: translateX(-200px) translateY(var(--fg-ty-content, 0px));
   }
-
-  /* Content variant: includes its own translateY variable */
-  @keyframes slideInFromLeftContent {
-    0% {
-      opacity: 0;
-      transform: translateX(-200px) translateY(var(--fg-ty-content, 0px));
-    }
-    30% {
-      opacity: 0.3;
-      transform: translateX(-140px) translateY(var(--fg-ty-content, 0px));
-    }
-    70% {
-      opacity: 0.7;
-      transform: translateX(-40px) translateY(var(--fg-ty-content, 0px));
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0) translateY(var(--fg-ty-content, 0px));
-    }
+  30% {
+    opacity: 0.3;
+    transform: translateX(-140px) translateY(var(--fg-ty-content, 0px));
   }
-
-  .animate-slide-left-content {
-    opacity: 0;
-    animation: slideInFromLeftContent 0.8s ease-out forwards;
+  70% {
+    opacity: 0.7;
+    transform: translateX(-40px) translateY(var(--fg-ty-content, 0px));
   }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(var(--fg-ty-content, 0px));
+  }
+}
 
-  /* 前景文字：滚动速度视差（translateY driven by JS）
+.animate-slide-left-content {
+  opacity: 0;
+  animation: slideInFromLeftContent 0.8s ease-out forwards;
+}
+
+/* 前景文字：滚动速度视差（translateY driven by JS）
      The JS will set `--fg-ty` in px so we apply it here. */
-  .foreground-parallax {
-    will-change: transform;
-  }
+.foreground-parallax {
+  will-change: transform;
+}
 
-  /* Per-element parallax transforms (controlled by JS via --fg-ty-head / --fg-ty-content) */
-  #foregroundText-headline {
-    transform: translateY(var(--fg-ty-head, 0px));
-    will-change: transform;
-  }
+/* Per-element parallax transforms (controlled by JS via --fg-ty-head / --fg-ty-content) */
+#foregroundText-headline {
+  transform: translateY(var(--fg-ty-head, 0px));
+  will-change: transform;
+}
 
-  #foregroundText-content {
-    transform: translateY(var(--fg-ty-content, 0px));
-    will-change: transform;
-  }
+#foregroundText-content {
+  transform: translateY(var(--fg-ty-content, 0px));
+  will-change: transform;
+}
 
-  
-
-  @layer base {
+@layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -529,14 +520,11 @@
   }
 }
 
-  
-
-  @layer base {
+@layer base {
   * {
-    border-color: hsl(var(--border));
+    @apply border-border;
   }
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    @apply bg-background text-foreground;
   }
 }

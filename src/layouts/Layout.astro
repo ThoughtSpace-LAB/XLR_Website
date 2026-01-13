@@ -1,39 +1,44 @@
 ---
-import '~/styles/global.css';
+import '~/styles/tailwind.css';
 import '~/styles/feature-text.css';
 
-// astrowind config removed; use simple defaults
+import { I18N } from 'astrowind:config';
 
+import CommonMeta from '~/components/common/CommonMeta.astro';
+import Favicons from '~/components/Favicons.astro';
 import CustomStyles from '~/components/CustomStyles.astro';
-
+import ApplyColorMode from '~/components/common/ApplyColorMode.astro';
+import Metadata from '~/components/common/Metadata.astro';
+import SiteVerification from '~/components/common/SiteVerification.astro';
+import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 
+// Comment the line below to disable View Transitions
+import { ClientRouter } from 'astro:transitions';
+
+import type { MetaData as MetaDataType } from '~/types';
+
 export interface Props {
-  metadata?: {
-    title?: string;
-    description?: string;
-    ignoreTitleTemplate?: boolean;
-  };
+  metadata?: MetaDataType;
 }
 
 const { metadata = {} } = Astro.props;
-const language = 'en';
-const textDirection = 'ltr';
+const { language, textDirection } = I18N;
 ---
 
 <!doctype html>
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/LOGO.svg" />
-    <title>{metadata.title}</title>
-    <meta name="description" content={metadata.description} />
-
+    <CommonMeta />
+    <Favicons />
     <CustomStyles />
+    <ApplyColorMode />
+    <Metadata {...metadata} />
+    <SiteVerification />
+    <Analytics />
 
     <!-- Comment the line below to disable View Transitions -->
-    <!-- <ClientRouter fallback="swap" /> -->
+    <ClientRouter fallback="swap" />
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight">
