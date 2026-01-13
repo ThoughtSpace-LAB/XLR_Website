@@ -4,6 +4,7 @@ import '~/styles/activity/activity-background.css';
 import '~/styles/feature-text.css';
 import '~/styles/activity/activity-input.css';
 import '~/styles/activity/activity-loading.css';
+import '~/styles/activity/activity-wish.css';
 import heroBg from '~/assets/images/activityimages/activity-mainbg.png';
 import cardBg from '~/assets/images/activityimages/card-BG.jpg';
 import cardwheel from '~/assets/images/activityimages/card-wheel.jpg';
@@ -66,7 +67,7 @@ import button from '~/assets/images/activityimages/Button.png';
           </div>
 
           <div id="email-input" class="nebula-input z-20 py-5 md:w-[40vw] w-[75vw] max-w-93.75 align-center">
-          <input required="" type="text" name="text" autocomplete="off" class="input w-full" required />
+          <input type="email" name="email" autocomplete="email" class="input w-full" required />
           <label class="user-label">Email Address</label>
           <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
           <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
@@ -89,11 +90,12 @@ import button from '~/assets/images/activityimages/Button.png';
       <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center px-4" id="step-2">
         
          <!-- 卡牌背景 Card Background Wrapper -->
-         <div class="relative w-full h-full justify-center overflow-hidden items-center flex" id="card-bg-wrapper">
+         <div class="relative w-full h-full justify-center overflow-hidden items-center flex " id="card-bg-wrapper">
+
             <div class="absolute inset-0 z-0 flex items-center justify-center">
                <img 
                  src={cardBg.src}
-                 class="h-[85vh] object-contain shadow-gray-900 rounded-4xl " 
+                 class="h-[85vh] shadow-gray-900 rounded-4xl " 
                  alt="Card Background" 
                />
             </div>
@@ -107,15 +109,21 @@ import button from '~/assets/images/activityimages/Button.png';
             </div>
 
             <!-- Step 2 文字内容 -->
-            <div class="relative z-10 flex flex-col items-center justify-center h-[90vh] md:w-[25vw] w-[75vw] overflow-hidden" id="step-wrapper">
+            <div class="relative z-10 flex flex-col items-center justify-center h-[90vh] md:w-[30vw] lg:w-[25vw] w-[300px] overflow-hidden" id="step-wrapper">
               <div class="flex w-full h-full transition-transform duration-700 ease-in-out" id="step-2-track">
-                
+
                 <!-- Step 2-1: Number Input and Question -->
                 <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-6" id="step-2-1">
-                  <h1 class="activity-headline text-3xl md:text-4xl text-center">Activity — Step 2</h1>
+                  <a href="#" class="relative z-50 text-white/40 hover:text-white transition-all text-sm uppercase tracking-widest" id="backBtn-step2">
+                  ← Back
+                  </a>
+              <h1 class="activity-headline text-3xl md:text-4xl text-center">Step 2</h1>
+              <h1 class="activity-paragraph text-center px-2">
+                  Write down 2 numbers that resonate with you and ask your question.
+              </h1>
                   <div class="flex flex-col" id="pagewrapper">
-                    <div class="flex flex-row gap-10" id="numbers-inputs">
-                      <div id="number-input-1" class="nebula-input z-20 w-30 md:w-35">
+                    <div class="flex flex-row justify-evenly gap-6" id="numbers-inputs">
+                      <div id="number-input-1" class="nebula-input relative z-20 w-30 md:w-30 lg:w-35">
                         <input required="" type="text" name="text" autocomplete="off" class="input w-full" required />
                         <label class="user-label">Number</label>
                         <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
@@ -126,7 +134,7 @@ import button from '~/assets/images/activityimages/Button.png';
                         <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
                       </div>
 
-                      <div id="number-input-2" class="nebula-input z-20 w-30 md:w-35">
+                      <div id="number-input-2" class="nebula-input relative z-20 w-30 md:w-30 lg:w-35">
                         <input required="" type="text" name="text" autocomplete="off" class="input w-full" required />
                         <label class="user-label">Number</label>
                         <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
@@ -151,13 +159,9 @@ import button from '~/assets/images/activityimages/Button.png';
                     </div>
             
                     <!-- Continue button for Step 2-1 -->
-                    <div class="w-full flex justify-start mt-6">
+                    <div class="w-full flex justify-center mt-6">
                       <a href="#" class="continue-button-bg z-50 relative" id="continueBtn-step2-1">
                         Continue
-                      </a>
-
-                      <a href="#" class="continue-button-bg z-50 relative ml-4" id="backBtn-step2">
-                        Back
                       </a>
                     </div>
                   </div>
@@ -205,6 +209,9 @@ import button from '~/assets/images/activityimages/Button.png';
                 </div>
               </div>
             </div>
+
+            <!-- Step 2-3 Overlay Logic: The Revelation -->
+            <!-- Note: Revelation and Lantern are handled via overlays or top-level slider movements -->
          </div>
       </div>
 
@@ -213,6 +220,60 @@ import button from '~/assets/images/activityimages/Button.png';
     
   </div>
 
+  </div>
+
+  <!-- Step 3 Container: Sky Lantern Wish (Full Screen) -->
+  <div id="step-3" class="fixed inset-0 z-[100] pointer-events-none">
+     <div id="wish-overlay" class="wish-overlay">
+        <div id="lanterns-layer" class="absolute inset-0 pointer-events-none">
+          <div class="lantern-container main-lantern">
+             <div class="lantern">
+                <div class="lantern-fire"></div>
+             </div>
+          </div>
+        </div>
+        
+        <div class="wish-content">
+           <div class="wish-input-wrapper">
+              <div class="nebula-input line-style w-full">
+                <textarea id="user-wish" name="wish" rows="1" class="input w-full resize-none overflow-hidden" placeholder=" "></textarea>
+                <label class="user-label">Write your wish here...</label>
+                <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+                <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+                <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+                <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+                <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+                <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+              </div>
+           </div>
+
+           <div class="quantity-selector">
+              <span>Lanterns (1-20):</span>
+              <button class="qty-btn" id="qty-minus">-</button>
+              <span class="qty-value" id="qty-val">1</span>
+              <button class="qty-btn" id="qty-plus">+</button>
+           </div>
+
+           <h2 class="wish-text">Write your wish and let it soar to the skies!
+           </h2>
+           <div class="wish-buttons">
+              <button class="wish-btn" id="wishBtn-make">Make a Wish</button>
+              <button class="wish-btn" id="wishBtn-exit">Exit</button>
+           </div>
+        </div>
+     </div>
+  </div>
+
+  <!-- Payment Placeholder Overlay -->
+  <div id="payment-overlay" class="payment-overlay">
+      <div class="payment-card">
+          <h2 class="activity-headline text-2xl mb-4">Secure Checkout</h2>
+          <p class="text-white/60 mb-6">Redirecting to payment gateway...</p>
+          <div class="loader-container !relative !h-auto my-8">
+              <div class="loader"></div>
+          </div>
+          <button class="payment-success-btn" id="pay-complete-btn">Simulate Success</button>
+      </div>
   </div>
   </section>
 
@@ -362,7 +423,113 @@ import button from '~/assets/images/activityimages/Button.png';
                cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
                cardWheelImg.classList.add('bottom-[60vh]');
             }
+
+            // Transition to Step 3 after another 10s
+            setTimeout(() => {
+              const windowWrapper = document.getElementById('window-wrapper');
+              const wishOverlay = document.getElementById('wish-overlay');
+              const step3 = document.getElementById('step-3');
+              
+              if (windowWrapper) {
+                windowWrapper.style.opacity = '0';
+                windowWrapper.style.transition = 'opacity 2s ease-in-out';
+              }
+              
+              if (step3) {
+                 step3.classList.remove('pointer-events-none');
+              }
+              
+              if (wishOverlay) {
+                wishOverlay.classList.add('active');
+              }
+            }, 10000);
           }, 5000);
+        });
+      }
+
+      // Wish Overlay Button Handlers
+      const wishBtnExit = document.getElementById('wishBtn-exit');
+      const wishBtnMake = document.getElementById('wishBtn-make');
+      const wishOverlay = document.getElementById('wish-overlay');
+      const step3 = document.getElementById('step-3');
+      const windowWrapper = document.getElementById('window-wrapper');
+      const paymentOverlay = document.getElementById('payment-overlay');
+      const payCompleteBtn = document.getElementById('pay-complete-btn');
+
+      if (wishBtnExit) {
+        wishBtnExit.addEventListener('click', () => {
+          // Go back to Step 2
+          if (wishOverlay) wishOverlay.classList.remove('active');
+          if (step3) step3.classList.add('pointer-events-none');
+          if (windowWrapper) {
+            windowWrapper.style.opacity = '1';
+          }
+        });
+      }
+      
+      if (wishBtnMake) {
+        wishBtnMake.addEventListener('click', () => {
+          if (paymentOverlay) paymentOverlay.classList.add('active');
+        });
+      }
+
+      if (payCompleteBtn) {
+        payCompleteBtn.addEventListener('click', () => {
+           if (paymentOverlay) paymentOverlay.classList.remove('active');
+           // Return to wish screen? User said "支付结束之后跳转回到latern界面"
+           // So just hiding the payment overlay is enough.
+        });
+      }
+
+      // Quantity Selector Logic
+      const qtyMinus = document.getElementById('qty-minus');
+      const qtyPlus = document.getElementById('qty-plus');
+      const qtyVal = document.getElementById('qty-val');
+      const lanternsLayer = document.getElementById('lanterns-layer');
+      let count = 1;
+
+      function spawnLantern() {
+        if (!lanternsLayer) return;
+        const lanternCont = document.createElement('div');
+        lanternCont.className = 'lantern-container extra-lantern animate';
+        
+        // Randomize floating path
+        const startX = Math.random() * 80 + 10; // 10% to 90%
+        const endX = startX + (Math.random() * 20 - 10);
+        const rot = Math.random() * 40 - 20;
+        
+        lanternCont.style.setProperty('--start-x', startX + '%');
+        lanternCont.style.setProperty('--end-x', endX + '%');
+        lanternCont.style.setProperty('--rot', rot + 'deg');
+        
+        lanternCont.innerHTML = `
+          <div class="lantern" style="transform: scale(${0.4 + Math.random() * 0.4})">
+            <div class="lantern-fire"></div>
+          </div>
+        `;
+        
+        lanternsLayer.appendChild(lanternCont);
+        
+        // Cleanup after animation
+        setTimeout(() => lanternCont.remove(), 20000);
+      }
+
+      if (qtyPlus && qtyVal) {
+        qtyPlus.addEventListener('click', () => {
+          if (count < 20) {
+            count++;
+            qtyVal.textContent = count;
+            spawnLantern();
+          }
+        });
+      }
+
+      if (qtyMinus && qtyVal) {
+        qtyMinus.addEventListener('click', () => {
+          if (count > 1) {
+            count--;
+            qtyVal.textContent = count;
+          }
         });
       }
 

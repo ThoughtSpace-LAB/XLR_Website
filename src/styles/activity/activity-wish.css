@@ -1,0 +1,231 @@
+.wish-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s ease-in-out;
+}
+
+.wish-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lantern-container {
+    position: absolute;
+    bottom: -300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 300px;
+    z-index: 105;
+    pointer-events: none;
+    filter: drop-shadow(0 0 20px rgba(255, 157, 0, 0.4));
+}
+
+/* Specific class for the main centered lantern */
+.lantern-container.main-lantern {
+    z-index: 101; /* Behind the content */
+}
+
+.wish-overlay.active .lantern-container.main-lantern {
+    animation: float-to-center 10s ease-out forwards;
+}
+
+/* Background floating lanterns */
+.lantern-container.extra-lantern {
+    z-index: 99;
+}
+
+.lantern-container.extra-lantern.animate {
+    animation: float-away 20s linear forwards;
+}
+
+.lantern {
+    width: 140px;
+    height: 180px;
+    background: linear-gradient(to bottom, #ffc800, #ff4c00);
+    border-radius: 45% 45% 20% 20% / 50% 50% 5% 5%;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 0 60px rgba(255, 157, 0, 0.5), inset 0 0 40px rgba(255, 255, 255, 0.3);
+}
+
+.lantern-fire {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 40px;
+    background: radial-gradient(circle, #fff 20%, #ff0 50%, transparent 80%);
+    border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 30px #fff, 0 0 50px #ff0;
+    animation: flicker 0.2s infinite alternate;
+}
+
+@keyframes float-to-center {
+    0% {
+        bottom: -300px;
+        opacity: 0;
+        transform: translateX(-50%) rotate(-5deg) scale(0.6);
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        bottom: 50%;
+        transform: translate(-50%, 50%) rotate(0deg) scale(1.2);
+        opacity: 0.6;
+    }
+}
+
+@keyframes float-away {
+    0% {
+        bottom: -200px;
+        left: var(--start-x, 50%);
+        opacity: 0;
+        transform: scale(0.4) rotate(var(--rot, 0deg));
+    }
+    10% {
+        opacity: 0.8;
+    }
+    100% {
+        bottom: 120%;
+        left: var(--end-x, 50%);
+        opacity: 0;
+        transform: scale(0.8) rotate(calc(var(--rot, 0deg) + 20deg));
+    }
+}
+
+@keyframes flicker {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+}
+
+.wish-content {
+    position: relative;
+    z-index: 120;
+    text-align: center;
+    color: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.wish-text {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #ffebae;
+    text-shadow: 0 0 10px rgba(255, 235, 174, 0.5);
+    font-family: 'Abhaya Libre', serif;
+}
+
+.wish-input-wrapper {
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 2rem;
+    font-family: 'Abhaya Libre', serif;
+    color: #ffebae;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ffebae;
+    background: transparent;
+    color: #ffebae;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.qty-btn:hover {
+    background: rgba(255, 235, 174, 0.2);
+}
+
+.qty-value {
+    font-size: 1.2rem;
+    min-width: 30px;
+}
+
+.wish-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.wish-btn {
+    padding: 10px 30px;
+    border: 1px solid rgba(255, 235, 174, 0.3);
+    background: transparent;
+    color: #ffebae;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Abhaya Libre', serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.wish-btn:hover {
+    background: rgba(255, 235, 174, 0.1);
+    border-color: #ffebae;
+}
+
+/* Payment Placeholder */
+.payment-overlay {
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.payment-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.payment-card {
+    background: #111;
+    border: 1px solid #333;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    max-width: 400px;
+}
+
+.payment-success-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #ffebae;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+

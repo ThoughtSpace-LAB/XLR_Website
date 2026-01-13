@@ -103,13 +103,13 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-image: url('../../assets/images/activityimages/Button.png');
+  background-image: url('../../assets/images/activityimages/Button.png'), radial-gradient(circle at center, #d2ac47, #f7ef8a, #ae8625, #ac700f);
   background-size: 100% 100%;
-  background-color: #efe297;
   border-radius: 24px;
-  filter: drop-shadow(0 0 5px rgb(255, 255, 255));
-  color: #fff;
+  filter: drop-shadow(0 0 5px rgb(199, 172, 90));
+  color: #64490a;
   font-family: 'Abhaya Libre', serif;
+  font-weight: 500;
   font-size: 1.1rem;
   letter-spacing: 1px;
   cursor: pointer;
@@ -148,8 +148,8 @@ body {
 
 @media (max-width: 768px) {
   .activity-paragraph {
-    font-size: 1rem; /* 
-    line-height: 1.4rem; /* 22.4px */
+    font-size: 1rem; 
+    line-height: 1.3rem;
     font-weight: 200;
   }
 }
