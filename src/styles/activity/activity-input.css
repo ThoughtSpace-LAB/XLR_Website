@@ -31,7 +31,7 @@
   font-size: large;
   font-weight: 500;
   left: 50%;
-  top: 24px; /* Fixed top position to stay with the first line */
+  top: 50%; /* Fixed top position to stay with the first line */
   transform: translate(-50%, -50%);
   pointer-events: none;
   color: #888a6a;

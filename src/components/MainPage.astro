@@ -44,7 +44,7 @@ import '~/styles/feature-text.css';
       </style>
 
       <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('astro:page-load', () => {
           const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               if (entry.isIntersecting) {

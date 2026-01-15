@@ -45,10 +45,6 @@
     };
 
     // 页面加载完成后初始化
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initScrollAnimation);
-    } else {
-      initScrollAnimation();
-    }
+    document.addEventListener('astro:page-load', initScrollAnimation);
   }
 </script>

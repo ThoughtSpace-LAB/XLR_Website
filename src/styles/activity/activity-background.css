@@ -98,6 +98,24 @@ body {
   letter-spacing: 0.6px;
 }
 
+@media (max-width: 768px) {
+  .activity-headline {
+    font-size: 1.75rem; /* 28px approx */
+    line-height: 1.8rem; /* 25.6px */
+    font-weight: 500;
+  }
+}
+
+.activity-paragraph {
+  font-family: 'Abhaya Libre', serif;
+  font-size: 1.25rem; /* 20px approx */
+  color: #cac798;
+  text-shadow: #363636 0px 0px 6px;
+  line-height: 1.8rem; /* 25.6px */
+  font-weight: 300;
+  letter-spacing: 0.2px;
+}
+
 /* Continue Button Style */
 .continue-button-bg {
   display: inline-flex;
@@ -126,24 +144,6 @@ body {
 
 .continue-button-bg:active {
   transform: scale(0.98);
-}
-
-@media (max-width: 768px) {
-  .activity-headline {
-    font-size: 1.75rem; /* 28px approx */
-    line-height: 1.8rem; /* 25.6px */
-    font-weight: 500;
-  }
-}
-
-.activity-paragraph {
-  font-family: 'Abhaya Libre', serif;
-  font-size: 1.25rem; /* 20px approx */
-  color: #cac798;
-  text-shadow: #363636 0px 0px 6px;
-  line-height: 1.8rem; /* 25.6px */
-  font-weight: 300;
-  letter-spacing: 0.2px;
 }
 
 @media (max-width: 768px) {
@@ -197,10 +197,16 @@ body {
 
 .revelation-ordered-list {
   list-style-type: decimal; /* list-decimal */
-  padding-left: 1.25rem; /* pl-5 */
+  font-size: 1rem; 
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  line-height: 1.75rem;
+  padding-left: 1rem; /* pl-5 */
 }
 .revelation-ordered-list > li + li {
     margin-top: 1rem; /* space-y-4 */
+    font-size: 1rem; 
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  line-height: 1.75rem;
 }
 
 /* Spirits Container */
@@ -263,6 +269,8 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2); 
   background-color: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   font-size: 1rem;
   font-family: 'Abhaya Libre', serif;
   font-weight: 500;

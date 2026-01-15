@@ -33,7 +33,7 @@ import '~/styles/pricepagestyle.css';
 
 <script>
   // 当footer页面出现时（pricing section底部进入视线时）缩放到0.9倍
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const priceSection = document.querySelector('.price-page-container') as HTMLElement;
     if (!priceSection) return;
 

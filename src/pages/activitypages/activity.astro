@@ -20,16 +20,25 @@ const metadata = {
   ></div>
 
   <script>
-    const cursor = document.getElementById('custom-cursor');
-    if (cursor) {
-      window.addEventListener('mousemove', (e) => {
-        cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
-      }, { passive: true });
+    let mouseMoveHandler;
+    document.addEventListener('astro:page-load', () => {
+      const cursor = document.getElementById('custom-cursor');
+      if (cursor) {
+        if (mouseMoveHandler) {
+          window.removeEventListener('mousemove', mouseMoveHandler);
+        }
 
-      document.documentElement.style.cursor = 'none';
-    }
+        mouseMoveHandler = (e) => {
+          cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+        };
+
+        window.addEventListener('mousemove', mouseMoveHandler, { passive: true });
+
+        document.documentElement.style.cursor = 'none';
+      }
+    });
   </script>
 
 <SerenaActivity />
-  </div>
+  
 </Layout>

@@ -127,6 +127,13 @@
     font-family: 'Abhaya Libre', serif;
 }
 
+.wish-subtext {
+    display: block;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
 .wish-input-wrapper {
     margin-bottom: 2rem;
     width: 100%;
@@ -140,6 +147,12 @@
     margin-bottom: 2rem;
     font-family: 'Abhaya Libre', serif;
     color: #ffebae;
+}
+
+.qty-value {
+    font-size: 1.2rem;
+    min-width: 30px;
+    color: white;
 }
 
 .qty-btn {
@@ -159,12 +172,6 @@
 .qty-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.5);
-}
-
-.qty-value {
-    font-size: 1.2rem;
-    min-width: 30px;
-    color: white;
 }
 
 /* Wish Note Appearance */
@@ -203,27 +210,6 @@
     border-color: transparent #e6dfc3 transparent transparent;
 }
 
-.donate-btn {
-    padding: 0.5rem 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: transparent;
-    color: white;
-    font-family: 'Abhaya Libre', serif;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    display: none;
-}
-
-.donate-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-}
-
 .wish-buttons {
     display: flex;
     gap: 2rem;
@@ -250,38 +236,7 @@
     border-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Payment Placeholder */
-.payment-overlay {
-    position: fixed;
-    inset: 0;
-    background: black;
-    z-index: 200;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-}
-
-.payment-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.payment-card {
-    background: #111;
-    border: 1px solid #333;
-    padding: 40px;
-    border-radius: 12px;
-    text-align: center;
-    color: white;
-    max-width: 400px;
-}
-
-.payment-success-btn {
-    margin-top: 20px;
+.donate-btn {
     padding: 0.5rem 2rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
@@ -293,10 +248,14 @@
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    display: none;
 }
 
-.payment-success-btn:hover {
+.donate-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
 }
+
+
 
