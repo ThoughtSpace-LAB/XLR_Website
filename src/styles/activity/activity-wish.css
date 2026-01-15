@@ -143,12 +143,12 @@
 }
 
 .qty-btn {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #ffebae;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     background: transparent;
-    color: #ffebae;
-    border-radius: 50%;
+    color: white;
+    border-radius: 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -157,36 +157,97 @@
 }
 
 .qty-btn:hover {
-    background: rgba(255, 235, 174, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .qty-value {
     font-size: 1.2rem;
     min-width: 30px;
+    color: white;
+}
+
+/* Wish Note Appearance */
+.wish-note {
+    background: #fff9e6;
+    color: #4a3b1d;
+    padding: 30px;
+    border-radius: 2px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    font-family: 'Abhaya Libre', serif;
+    font-style: italic;
+    max-width: 350px;
+    margin: 20px auto;
+    position: relative;
+    transform: rotate(-1deg);
+    opacity: 0;
+    display: none;
+    transition: all 0.5s ease-out;
+}
+
+.wish-note.active {
+    opacity: 1;
+    display: block;
+    transform: rotate(0deg) translateY(-10px);
+}
+
+.wish-note::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 30px 30px 0;
+    border-color: transparent #e6dfc3 transparent transparent;
+}
+
+.donate-btn {
+    padding: 0.5rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: white;
+    font-family: 'Abhaya Libre', serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: none;
+}
+
+.donate-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
 }
 
 .wish-buttons {
     display: flex;
     gap: 2rem;
     justify-content: center;
+    align-items: center;
 }
 
 .wish-btn {
-    padding: 10px 30px;
-    border: 1px solid rgba(255, 235, 174, 0.3);
-    background: transparent;
-    color: #ffebae;
+    padding: 0.5rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: white;
     font-family: 'Abhaya Libre', serif;
+    font-size: 1.1rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.1em;
 }
 
 .wish-btn:hover {
-    background: rgba(255, 235, 174, 0.1);
-    border-color: #ffebae;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Payment Placeholder */
@@ -221,11 +282,21 @@
 
 .payment-success-btn {
     margin-top: 20px;
-    padding: 10px 20px;
-    background: #ffebae;
-    color: black;
-    border: none;
+    padding: 0.5rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: white;
+    font-family: 'Abhaya Libre', serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.payment-success-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 

@@ -119,7 +119,7 @@ import button from '~/assets/images/activityimages/Button.png';
                   </a>
               <h1 class="activity-headline text-3xl md:text-4xl text-center">Step 2</h1>
               <h1 class="activity-paragraph text-center px-2">
-                  Write down 2 numbers that resonate with you and ask your question.
+                  Write down 2 lucky numbers that resonate with you and ask your question.
               </h1>
                   <div class="flex flex-col" id="pagewrapper">
                     <div class="flex flex-row justify-evenly gap-6" id="numbers-inputs">
@@ -234,30 +234,40 @@ import button from '~/assets/images/activityimages/Button.png';
         </div>
         
         <div class="wish-content">
-           <div class="wish-input-wrapper">
-              <div class="nebula-input line-style w-full">
-                <textarea id="user-wish" name="wish" rows="1" class="input w-full resize-none overflow-hidden" placeholder=" "></textarea>
-                <label class="user-label">Write your wish here...</label>
-                <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
-                <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
-                <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
-                <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
-                <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
-                <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
-              </div>
+           <div id="wish-input-section">
+             <div class="wish-input-wrapper">
+                <div class="nebula-input line-style w-full">
+                  <textarea id="user-wish" name="wish" rows="1" class="input w-full resize-none overflow-hidden" placeholder=" "></textarea>
+                  <label class="user-label">Write your wish here...</label>
+                  <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+                  <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+                  <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+                  <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+                  <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+                  <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+                </div>
+             </div>
+
+             <div class="quantity-selector">
+                <span>Lanterns (1-20):</span>
+                <button class="qty-btn" id="qty-minus">-</button>
+                <span class="qty-value" id="qty-val">1</span>
+                <button class="qty-btn" id="qty-plus">+</button>
+             </div>
+
+             <h2 class="wish-text">Write your wish and let it soar to the skies!</h2>
+             <div class="wish-buttons">
+                <button class="wish-btn" id="wishBtn-make">Make a Wish</button>
+             </div>
            </div>
 
-           <div class="quantity-selector">
-              <span>Lanterns (1-20):</span>
-              <button class="qty-btn" id="qty-minus">-</button>
-              <span class="qty-value" id="qty-val">1</span>
-              <button class="qty-btn" id="qty-plus">+</button>
+           <!-- Wish Note Display (Paper Paper) -->
+           <div id="wish-note-display" class="wish-note">
+              <p id="wish-note-text"></p>
            </div>
-
-           <h2 class="wish-text">Write your wish and let it soar to the skies!
-           </h2>
-           <div class="wish-buttons">
-              <button class="wish-btn" id="wishBtn-make">Make a Wish</button>
+           
+           <div class="wish-buttons mt-4">
+              <button id="donate-btn" class="donate-btn">Make a Donation</button>
               <button class="wish-btn" id="wishBtn-exit">Exit</button>
            </div>
         </div>
@@ -343,6 +353,18 @@ import button from '~/assets/images/activityimages/Button.png';
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Auto-resize textareas
+      const textareas = document.querySelectorAll('.nebula-input textarea.input');
+      textareas.forEach(textarea => {
+        function autoResize() {
+          textarea.style.height = 'auto'; // Reset height to recalculate
+          textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
+        textarea.addEventListener('input', autoResize);
+        // Initial resize
+        autoResize();
+      });
+
       const sliderTrack = document.getElementById('slider-track');
       const step2Track = document.getElementById('step-2-track');
 
@@ -455,6 +477,11 @@ import button from '~/assets/images/activityimages/Button.png';
       const windowWrapper = document.getElementById('window-wrapper');
       const paymentOverlay = document.getElementById('payment-overlay');
       const payCompleteBtn = document.getElementById('pay-complete-btn');
+      const wishInputSection = document.getElementById('wish-input-section');
+      const wishNoteDisplay = document.getElementById('wish-note-display');
+      const wishNoteText = document.getElementById('wish-note-text');
+      const donateBtn = document.getElementById('donate-btn');
+      const userWishInput = document.getElementById('user-wish');
 
       if (wishBtnExit) {
         wishBtnExit.addEventListener('click', () => {
@@ -464,11 +491,32 @@ import button from '~/assets/images/activityimages/Button.png';
           if (windowWrapper) {
             windowWrapper.style.opacity = '1';
           }
+          // Reset wish note state
+          if (wishInputSection) wishInputSection.style.display = 'block';
+          if (wishNoteDisplay) wishNoteDisplay.classList.remove('active');
+          if (donateBtn) donateBtn.style.display = 'none';
         });
       }
       
       if (wishBtnMake) {
         wishBtnMake.addEventListener('click', () => {
+          const wishValue = (userWishInput as HTMLTextAreaElement)?.value.trim();
+          if (!wishValue) {
+            alert("Please write your wish first.");
+            return;
+          }
+          
+          // Hide input part of section, keep headline or buttons visible. 
+          // Actually user said "combined with the original interface".
+          if (wishInputSection) wishInputSection.style.display = 'none';
+          if (wishNoteText) wishNoteText.textContent = wishValue;
+          if (wishNoteDisplay) wishNoteDisplay.classList.add('active');
+          if (donateBtn) donateBtn.style.display = 'inline-block';
+        });
+      }
+
+      if (donateBtn) {
+        donateBtn.addEventListener('click', () => {
           if (paymentOverlay) paymentOverlay.classList.add('active');
         });
       }
@@ -554,7 +602,7 @@ import button from '~/assets/images/activityimages/Button.png';
             loadingText.style.opacity = '1';
           }, 500); // Matches CSS transition duration
           
-        }, 3000); // Change every 3 seconds
+        }, 3000); // Delay 的时间除以三即可
       }
 
       // ---------------------------------------------------------

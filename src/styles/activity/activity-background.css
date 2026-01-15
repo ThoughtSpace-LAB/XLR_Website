@@ -272,6 +272,15 @@ body {
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .tab-btn {
+    font-size: 1rem; 
+    line-height: 1.3rem;
+    font-weight: 200;
+    padding: 0.2rem 0.6rem; 
+  }
+}
+
 .tab-btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 10px rgba(255, 237, 44, 0.8);

@@ -17,13 +17,21 @@
   transition: all 0.4s ease-out;
 }
 
+.nebula-input textarea.input {
+  text-align: left;
+  min-height: 44px;
+  overflow-y: hidden;
+  resize: none;
+  line-height: 1.4;
+}
+
 .nebula-input .user-label {
   position: absolute;
   font-family: 'Abhaya Libre', serif;
   font-size: large;
   font-weight: 500;
   left: 50%;
-  top: 50%;
+  top: 24px; /* Fixed top position to stay with the first line */
   transform: translate(-50%, -50%);
   pointer-events: none;
   color: #888a6a;
@@ -80,6 +88,7 @@
   font-size: 16px;
   font-family: 'Abhaya Libre', serif;
   left: 0;
+  top: 25px; /* Fixed top position to stay with the first line */
   background: transparent;
   padding: 0;
   transform: translateY(-50%);
@@ -184,7 +193,7 @@
   
   .nebula-input.line-style .user-label {
     left: 0;
-    top: 10px;
+    top: 20px;
   }
   
   .nebula-input.line-style .input:focus ~ .user-label,
