@@ -42,7 +42,7 @@ import button from '~/assets/images/activityimages/Button.png';
             src={activityline.src}
             width={activityline.width}
             height={activityline.height}
-            class="w-full h-[2vh] md:h-[4vh] object-contain drop-shadow-[0_0_10px_rgba(239,226,151,1)]" 
+            class="w-full h-[2vh] md:h-[4vh] object-contain  animation-pulse drop-shadow-[0_0_10px_rgba(239,226,151,1)]" 
             alt="cuttingline"
             />
           </div>
@@ -112,6 +112,10 @@ import button from '~/assets/images/activityimages/Button.png';
                 
                 <!-- Step 2-1: Number Input and Question -->
                 <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-6" id="step-2-1">
+                      <a href="#" class="text-sm relative z-50 inline-flex items-center gap-5 py-1 px-2 bg-white/10 text-white/60 rounded-full hover:bg-white/20 transition-all" id="backBtn-step2">
+                        Back
+                      </a>
+
                   <h1 class="activity-headline text-3xl md:text-4xl text-center">Activity — Step 2</h1>
                   <div class="flex flex-col" id="pagewrapper">
                     <div class="flex flex-row gap-10" id="numbers-inputs">
@@ -151,14 +155,11 @@ import button from '~/assets/images/activityimages/Button.png';
                     </div>
             
                     <!-- Continue button for Step 2-1 -->
-                    <div class="w-full flex justify-start mt-6">
+                    <div class="w-full flex flex-row justify-center  mt-2">
                       <a href="#" class="continue-button-bg z-50 relative" id="continueBtn-step2-1">
                         Continue
                       </a>
 
-                      <a href="#" class="continue-button-bg z-50 relative ml-4" id="backBtn-step2">
-                        Back
-                      </a>
                     </div>
                   </div>
                 </div>
@@ -519,6 +520,23 @@ analysis: `<h3 class="revelation-heading">Analysis of your Question</h3>
          setTabContent('analysis');
       }
       
+      // Auto-resize textarea logic
+      const textareas = document.querySelectorAll('textarea.input');
+      const resizeTextarea = (textarea) => {
+          // Reset height to auto to allow shrinking if text is deleted
+          textarea.style.height = 'auto';
+          // Set new height based on scrollHeight plus border adjustment (2px + 2px)
+          textarea.style.height = (textarea.scrollHeight) + 'px';
+      };
+
+      textareas.forEach(textarea => {
+        // Initial resize for pre-filled content
+        resizeTextarea(textarea);
+        
+        textarea.addEventListener('input', function() {
+          resizeTextarea(this);
+        });
+      });
 
       });
   </script>

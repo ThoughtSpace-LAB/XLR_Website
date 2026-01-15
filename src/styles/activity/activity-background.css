@@ -103,13 +103,17 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-image: url('../../assets/images/activityimages/Button.png');
-  background-size: 100% 100%;
-  background-color: #efe297;
+  /* Layer 1: Button frame/image, Layer 2: Gradient fill underneath */
+  background-image: url('../../assets/images/activityimages/Button.png'), radial-gradient(circle at center, #a47a1e,#a47a1e, #d3a84c);
+  background-size: 100% 100%, 100% 100%;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-color: transparent;
   border-radius: 24px;
-  filter: drop-shadow(0 0 5px rgb(255, 255, 255));
-  color: #fff;
-  font-family: 'Abhaya Libre', serif;
+  filter: drop-shadow(0 0 0px rgb(255, 255, 255), 0 -40px 6px rgb(255, 255, 255));
+  color: #4e380b;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: 700;
   font-size: 1.1rem;
   letter-spacing: 1px;
   cursor: pointer;
@@ -121,7 +125,7 @@ body {
 
 .continue-button-bg:hover {
   transform: scale(1.05);
-  filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  filter: brightness(1.2) drop-shadow(0 0 10px rgb(255, 226, 130));
 }
 
 .continue-button-bg:active {
