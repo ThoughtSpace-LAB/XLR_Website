@@ -34,7 +34,7 @@ import '~/styles/activity/bless/activity-button.css';
     </div>
 
     <!-- 主内容区：包含标题和按钮，z-index 叠层以覆盖背景 -->
-    <div class="w-full py-16 md:py-32 px-8 md:px-16 flex flex-col justify-end items-start gap-6 md:gap-10 relative z-10">
+    <div class="w-full py-8 md:py-32 px-8 md:px-16 flex flex-col justify-end items-start gap-6 md:gap-10 relative z-10">
       <!-- 文字内容：主标题 + 副标题 -->
       <div id="foregroundText" class="w-full md:w-2/5 flex flex-col justify-end items-start gap-3 md:gap-5 foreground-parallax">
         <!-- 主标题：使用 headline-md-highlight 样式，从左浮现 -->
@@ -48,17 +48,17 @@ import '~/styles/activity/bless/activity-button.css';
           Yet, the truest journey returns to You. Destiny is not your master; you are the architect of your own fate.</div>
         </div>
 
-      <div class="w-full flex flex-row gap-6 md:gap-10 relative">
+      <div class="w-full flex flex-row flex-wrap items-center gap-2 md:gap-10 relative">
         <!-- 行动按钮区域：CTA 按钮组 -->
-        <button class="inline-flex justify-center items-center py-2 px-3 md:py-3 md:px-4 bg-white/10 backdrop-blur-sm text-white rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/20 hover:outline hover:outline-white transition-all animate-slide-left z-50" style="animation-delay: 0.4s">
-        <span class="button-md">Begin Experience</span>
+         <a href="/activitypages/activity" class="no-underline" >
+        <button id="activityBtn" class="inline-flex justify-center items-center py-2 px-3 md:py-3 md:px-4 bg-white/10 backdrop-blur-sm text-white rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/10 hover:outline hover:outline-white press:scale-95 press:bg-black/10 transition-all animate-slide-left z-50" style="animation-delay: 0.4s">
+        <span id="activityBtn" >Bless Journey</span>
         <span class="pl-2 inline-flex justify-center">
           <img src={nextIcon} alt="Arrow Right" class="w-5 h-5" />
         </span>
         </button>
-
-      <!-- activitybutton--> 
-        <a id="activityBtn" href="/activitypages/activity" class="button inline-flex items-center" style="animation-delay: 0.4s">
+        </a>
+      <!-- activitybutton--<a id="activityBtn" href="/activitypages/activity" class="button inline-flex items-center animate-slide-left z-50" style="animation-delay: 0.5s">
           <div class="dots_border" aria-hidden="true"></div>
           <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +93,8 @@ import '~/styles/activity/bless/activity-button.css';
         </svg>
         <span class="text_button"> Bless Journey </span>
         
-      </a>
+      </a>> 
+        
       </div>
     </div>
 </section>

@@ -22,18 +22,25 @@
 }
 
 .loader {
-  width: 10vw;
-  height: 10vw;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   border: 3px solid transparent;
   animation: spin 5s linear infinite;
   filter: drop-shadow(0 0 4px #ffea0800);
 }
 
+@media (min-width: 768px) {
+  .loader {
+    width: 80px;
+    height: 80px;
+  }
+}
+
 .loader::after {
   content: '';
   position: absolute;
-  inset: 1vw;
+  inset: 6px;
   border-radius: 50%;
   border: 3px solid transparent;
     filter: drop-shadow(0 0 4px #ffea08);

@@ -22,11 +22,18 @@
     bottom: -300px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    height: 300px;
+    width: 120px;
+    height: 180px;
     z-index: 105;
     pointer-events: none;
     filter: drop-shadow(0 0 20px rgba(255, 157, 0, 0.4));
+}
+
+@media (min-width: 768px) {
+    .lantern-container {
+        width: 200px;
+        height: 300px;
+    }
 }
 
 /* Specific class for the main centered lantern */
@@ -48,13 +55,20 @@
 }
 
 .lantern {
-    width: 140px;
-    height: 180px;
+    width: 80px;
+    height: 110px;
     background: linear-gradient(to bottom, #ffc800, #ff4c00);
     border-radius: 45% 45% 20% 20% / 50% 50% 5% 5%;
     margin: 0 auto;
     position: relative;
     box-shadow: 0 0 60px rgba(255, 157, 0, 0.5), inset 0 0 40px rgba(255, 255, 255, 0.3);
+}
+
+@media (min-width: 768px) {
+    .lantern {
+        width: 140px;
+        height: 180px;
+    }
 }
 
 .lantern-fire {
@@ -120,18 +134,31 @@
 }
 
 .wish-text {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
     color: #ffebae;
     text-shadow: 0 0 10px rgba(255, 235, 174, 0.5);
     font-family: 'Abhaya Libre', serif;
 }
 
+@media (min-width: 768px) {
+    .wish-text {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+}
+
 .wish-subtext {
     display: block;
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin-top: 0.5rem;
     opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+    .wish-subtext {
+        font-size: 1rem;
+    }
 }
 
 .wish-input-wrapper {
@@ -150,9 +177,16 @@
 }
 
 .qty-value {
-    font-size: 1.2rem;
-    min-width: 30px;
+    font-size: 1rem;
+    min-width: 24px;
     color: white;
+}
+
+@media (min-width: 768px) {
+    .qty-value {
+        font-size: 1.2rem;
+        min-width: 30px;
+    }
 }
 
 .qty-btn {
@@ -178,18 +212,28 @@
 .wish-note {
     background: #fff9e6;
     color: #4a3b1d;
-    padding: 30px;
+    padding: 20px;
+    font-size: 0.9rem;
     border-radius: 2px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     font-family: 'Abhaya Libre', serif;
     font-style: italic;
-    max-width: 350px;
-    margin: 20px auto;
+    max-width: 300px;
+    margin: 15px auto;
     position: relative;
     transform: rotate(-1deg);
     opacity: 0;
     display: none;
     transition: all 0.5s ease-out;
+}
+
+@media (min-width: 768px) {
+    .wish-note {
+        padding: 30px;
+        font-size: 1rem;
+        max-width: 350px;
+        margin: 20px auto;
+    }
 }
 
 .wish-note.active {
@@ -212,13 +256,23 @@
 
 .wish-buttons {
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .wish-buttons {
+        flex-direction: row;
+        gap: 2rem;
+    }
 }
 
 .wish-btn {
-    padding: 0.5rem 2rem;
+    width: 100%;
+    padding: 0.75rem 2rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     cursor: pointer;
@@ -226,9 +280,16 @@
     background: transparent;
     color: white;
     font-family: 'Abhaya Libre', serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+}
+
+@media (min-width: 768px) {
+    .wish-btn {
+        width: auto;
+        font-size: 1.1rem;
+    }
 }
 
 .wish-btn:hover {
@@ -245,10 +306,18 @@
     background: transparent;
     color: white;
     font-family: 'Abhaya Libre', serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     display: none;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .donate-btn {
+        font-size: 1.1rem;
+        width: auto;
+    }
 }
 
 .donate-btn:hover {
