@@ -37,6 +37,21 @@ const metadata = {
     <!-- Section 6: Footer -->
     <FooterPage />
     
+    <div 
+      id="custom-cursor" 
+      class="pointer-events-none fixed top-0 left-0 w-3 h-3 bg-white rounded-full mix-blend-difference hidden md:block"
+      style="z-index: 999999; will-change: transform;"
+    ></div>
 
+    <script>
+      const cursor = document.getElementById('custom-cursor');
+      if (cursor) {
+        window.addEventListener('mousemove', (e) => {
+          cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+        }, { passive: true });
+
+        document.documentElement.style.cursor = 'none';
+      }
+    </script>
   </div>
 </Layout>

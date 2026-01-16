@@ -4,6 +4,7 @@ import '~/styles/activity/bless/activity-background.css';
 import '~/styles/feature-text.css';
 import '~/styles/activity/bless/activity-input.css';
 import '~/styles/activity/bless/activity-loading.css';
+import '~/styles/activity/bless/activity-wish.css';
 import heroBg from '~/assets/images/activityimages/bless/activity-mainbg.png';
 import cardBg from '~/assets/images/activityimages/bless/card-BG.jpg';
 import cardwheel from '~/assets/images/activityimages/bless/card-wheel.jpg';
@@ -42,7 +43,7 @@ import button from '~/assets/images/activityimages/bless/Button.png';
             src={activityline.src}
             width={activityline.width}
             height={activityline.height}
-            class="w-full h-[2vh] md:h-[4vh] object-contain  animation-pulse drop-shadow-[0_0_10px_rgba(239,226,151,1)]" 
+            class="w-full h-[2vh] md:h-[4vh] object-contain drop-shadow-[0_0_10px_rgba(239,226,151,1)]" 
             alt="cuttingline"
             />
           </div>
@@ -58,7 +59,7 @@ import button from '~/assets/images/activityimages/bless/Button.png';
               <input type="radio" id="gender-female" name="gender" value="female" required />
               <label class="gender-option" for="gender-female">Female</label>
 
-              <input type="radio" id="gender-male" name="gender" value="male" />
+              <input type="radio" id="gender-male" name="gender" value="male" required />
               <label class="gender-option" for="gender-male">Male</label>
             </div>
             <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
@@ -66,7 +67,7 @@ import button from '~/assets/images/activityimages/bless/Button.png';
           </div>
 
           <div id="email-input" class="nebula-input z-20 py-5 md:w-[40vw] w-[75vw] max-w-93.75 align-center">
-          <input required="" type="text" name="text" autocomplete="off" class="input w-full" required />
+          <input type="email" name="email" autocomplete="email" class="input w-full" required />
           <label class="user-label">Email Address</label>
           <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
           <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
@@ -89,11 +90,11 @@ import button from '~/assets/images/activityimages/bless/Button.png';
       <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center px-4" id="step-2">
         
          <!-- 卡牌背景 Card Background Wrapper -->
-         <div class="relative w-full h-full justify-center overflow-hidden items-center flex" id="card-bg-wrapper">
-            <div class="absolute inset-0 z-0 flex items-center justify-center">
+         <div class="relative w-full h-full flex justify-center items-center overflow-hidden" id="card-bg-wrapper">
+            <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
                <img 
                  src={cardBg.src}
-                 class="h-[85vh] object-contain shadow-gray-900 rounded-4xl " 
+                 class="h-[85vh] w-auto object-contain shadow-[0_0_50px_rgba(0,0,0,0.8)] rounded-4xl" 
                  alt="Card Background" 
                />
             </div>
@@ -102,25 +103,28 @@ import button from '~/assets/images/activityimages/bless/Button.png';
                  src={cardwheel.src}
                  id="card-wheel-img"
                  class="absolute left-1/2 -translate-x-1/2 bottom-0 h-[30vh] object-contain animate-pulse transition-all duration-1000 ease-in-out" 
+                 style="animation-duration: 2s;"
                  alt="Card Wheel" 
                />
             </div>
 
             <!-- Step 2 文字内容 -->
-            <div class="relative z-10 flex flex-col items-center justify-center h-[90vh] md:w-[25vw] w-[75vw] overflow-hidden" id="step-wrapper">
+            <div class="relative z-10 flex flex-col items-center justify-center h-[90vh] md:w-[30vw] lg:w-[25vw] w-[300px] overflow-hidden" id="step-wrapper">
               <div class="flex w-full h-full transition-transform duration-700 ease-in-out" id="step-2-track">
-                
+
                 <!-- Step 2-1: Number Input and Question -->
                 <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-6" id="step-2-1">
-                      <a href="#" class="text-sm relative z-50 inline-flex items-center gap-5 py-1 px-2 bg-white/10 text-white/60 rounded-full hover:bg-white/20 transition-all" id="backBtn-step2">
-                        Back
-                      </a>
-
-                  <h1 class="activity-headline text-3xl md:text-4xl text-center">Activity — Step 2</h1>
+                  <a href="#" class="relative z-50 text-white/40 hover:text-white transition-all text-sm uppercase tracking-widest" id="backBtn-step2">
+                  ← Back
+                  </a>
+              <h1 class="activity-headline text-3xl md:text-4xl text-center" id="Manifestation">Manifestation</h1>
+              <h1 class="activity-paragraph text-center px-2">
+                  Write down 2 lucky numbers that resonate with you and ask your question.
+              </h1>
                   <div class="flex flex-col" id="pagewrapper">
-                    <div class="flex flex-row gap-10" id="numbers-inputs">
-                      <div id="number-input-1" class="nebula-input z-20 w-30 md:w-35">
-                        <input required="" type="text" name="text" autocomplete="off" class="input w-full" required />
+                    <div class="flex flex-row justify-evenly gap-6" id="numbers-inputs">
+                      <div id="number-input-1" class="nebula-input relative z-20 w-30 md:w-30 lg:w-35">
+                        <input type="text" name="text" autocomplete="off" class="input w-full" required />
                         <label class="user-label">Number</label>
                         <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                         <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
@@ -130,8 +134,8 @@ import button from '~/assets/images/activityimages/bless/Button.png';
                         <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
                       </div>
 
-                      <div id="number-input-2" class="nebula-input z-20 w-30 md:w-35">
-                        <input required="" type="text" name="text" autocomplete="off" class="input w-full" required />
+                      <div id="number-input-2" class="nebula-input relative z-20 w-30 md:w-30 lg:w-35">
+                        <input type="text" name="text" autocomplete="off" class="input w-full" required />
                         <label class="user-label">Number</label>
                         <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                         <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
@@ -155,11 +159,10 @@ import button from '~/assets/images/activityimages/bless/Button.png';
                     </div>
             
                     <!-- Continue button for Step 2-1 -->
-                    <div class="w-full flex flex-row justify-center  mt-2">
+                    <div class="w-full flex justify-center mt-6">
                       <a href="#" class="continue-button-bg z-50 relative" id="continueBtn-step2-1">
                         Continue
                       </a>
-
                     </div>
                   </div>
                 </div>
@@ -182,8 +185,8 @@ import button from '~/assets/images/activityimages/bless/Button.png';
                    </div>
                 </div>
                 <!-- Step 2-3: Answer -->
-                <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-6 p-4" id="step-2-3">
-                    <h1 class="activity-headline text-2xl md:text-3xl text-center mb-2">The Revelation</h1>
+                <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 p-4" id="step-2-3">
+                    <h1 class="activity-headline text-2xl md:text-3xl text-center mb-2">Revelation</h1>
                     
                     <!-- Tabs -->
                     <div class="flex flex-wrap gap-2 justify-center w-full max-w-4xl z-50">
@@ -202,10 +205,19 @@ import button from '~/assets/images/activityimages/bless/Button.png';
                         </div>
                     </div>
                     
+                    <!-- Fly to Lantern Button -->
+                    <div class="w-full flex justify-center mt-4">
+                        <button id="goToStep3Btn" class="continue-button-bg z-50 relative">
+                            Bless My Wish
+                        </button>
+                    </div>
 
                 </div>
               </div>
             </div>
+
+            <!-- Step 2-3 Overlay Logic: The Revelation -->
+            <!-- Note: Revelation and Lantern are handled via overlays or top-level slider movements -->
          </div>
       </div>
 
@@ -215,6 +227,55 @@ import button from '~/assets/images/activityimages/bless/Button.png';
   </div>
 
   </div>
+
+  <!-- Step 3 Container: Sky Lantern Wish (Full Screen) -->
+  <div id="step-3" class="fixed inset-0 z-[100] pointer-events-none">
+     <div id="wish-overlay" class="wish-overlay">
+        <div id="lanterns-layer" class="absolute inset-0 pointer-events-none">
+          <div class="lantern-container main-lantern">
+             <div class="lantern">
+                <div class="lantern-fire"></div>
+             </div>
+          </div>
+        </div>
+        
+        <div class="wish-content">
+           <div id="wish-input-section">
+             <div class="wish-input-wrapper">
+                <div class="nebula-input line-style w-full">
+                  <textarea id="user-wish" name="wish" required rows="1" class="input w-full resize-none overflow-hidden" placeholder=" "></textarea>
+                  <label class="user-label">Write your wish here...</label>
+                  <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
+                  <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
+                  <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
+                  <div class="nebula-particle" style="--x:0.7; --y:0.1; --delay:0.2s"></div>
+                  <div class="nebula-particle" style="--x:0.1; --y:-0.7; --delay:0.4s"></div>
+                  <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
+                </div>
+             </div>
+
+             <div class="quantity-selector">
+                <span>Lanterns</span>
+                <button class="qty-btn" id="qty-minus">-</button>
+                <span class="qty-value" id="qty-val">1</span>
+                <button class="qty-btn" id="qty-plus">+</button>
+             </div>
+
+             <h2 class="wish-text">
+               Write your wish and let it soar to the skies!<br/> 
+               <span class="wish-subtext">A one-dollar contribution for each blessing lantern.</span>
+             </h2>
+             <div class="wish-buttons flex gap-4">
+                <button class="wish-btn" id="wishBtn-make">Bless my wish</button>
+                <button class="wish-btn" id="wishBtn-exit">Exit</button>
+             </div>
+           </div>
+
+
+        </div>
+     </div>
+  </div>
+
   </section>
 
   <!-- / STAR ANIMATION -->
@@ -239,7 +300,7 @@ import button from '~/assets/images/activityimages/bless/Button.png';
 
   <script type="module">
     if (typeof window !== 'undefined') {
-      window.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener('astro:page-load', () => {
         const container = document.getElementById('particles');
         if (!container) {
           console.debug('[particles] container not found');
@@ -282,7 +343,19 @@ import button from '~/assets/images/activityimages/bless/Button.png';
   </script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('astro:page-load', () => {
+      // Auto-resize textareas
+      const textareas = document.querySelectorAll('.nebula-input textarea.input') as NodeListOf<HTMLTextAreaElement>;
+      textareas.forEach(textarea => {
+        function autoResize() {
+          textarea.style.height = 'auto'; // Reset height to recalculate
+          textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
+        textarea.addEventListener('input', autoResize);
+        // Initial resize
+        autoResize();
+      });
+
       const sliderTrack = document.getElementById('slider-track');
       const step2Track = document.getElementById('step-2-track');
 
@@ -291,6 +364,19 @@ import button from '~/assets/images/activityimages/bless/Button.png';
       if (continueBtnStep1 && sliderTrack) {
         continueBtnStep1.addEventListener('click', (e) => {
           e.preventDefault();
+
+          const gender = document.querySelector('input[name="gender"]:checked');
+          const email = (document.querySelector('input[name="email"]') as HTMLInputElement);
+          
+          if (!gender) {
+            alert("Please select your gender.");
+            return;
+          }
+          if (!email || !email.value.trim()) {
+            alert("Please enter your email address.");
+            return;
+          }
+
           sliderTrack.style.transform = 'translateX(-100%)';
         });
       }
@@ -335,6 +421,24 @@ import button from '~/assets/images/activityimages/bless/Button.png';
       if (continueBtnStep2_1 && step2Track) {
         continueBtnStep2_1.addEventListener('click', (e) => {
           e.preventDefault();
+
+          const numbers = (document.querySelectorAll('#numbers-inputs input') as NodeListOf<HTMLInputElement>);
+          const question = (document.querySelector('textarea[name="custom-question"]') as HTMLTextAreaElement);
+          
+          let allNumbersFilled = true;
+          numbers.forEach(input => {
+            if (!input.value.trim()) allNumbersFilled = false;
+          });
+          
+          if (!allNumbersFilled) {
+            alert("Please enter your lucky numbers.");
+            return;
+          }
+          if (!question || !question.value.trim()) {
+            alert("Please ask your question.");
+            return;
+          }
+
           step2Track.style.transform = 'translateX(-100%)';
           
           // Trigger Card Animation
@@ -361,9 +465,131 @@ import button from '~/assets/images/activityimages/bless/Button.png';
             }
             if (cardWheelImg) {
                cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
-               cardWheelImg.classList.add('bottom-[60vh]');
+               cardWheelImg.classList.add('bottom-[30vh]','opacity-30');
             }
           }, 5000);
+        });
+      }
+
+      // Step 2-3 -> Step 3 (Fly to Lantern)
+      const goToStep3Btn = document.getElementById('goToStep3Btn');
+      if (goToStep3Btn) {
+        goToStep3Btn.addEventListener('click', () => {
+          const windowWrapper = document.getElementById('window-wrapper');
+          const wishOverlay = document.getElementById('wish-overlay');
+          const step3 = document.getElementById('step-3');
+          
+          if (windowWrapper) {
+            windowWrapper.style.opacity = '0';
+            windowWrapper.style.transition = 'opacity 2s ease-in-out';
+          }
+          
+          if (step3) {
+             step3.classList.remove('pointer-events-none');
+          }
+          
+          if (wishOverlay) {
+            wishOverlay.classList.add('active');
+          }
+        });
+      }
+
+      // Wish Overlay Button Handlers
+      const wishBtnExit = document.getElementById('wishBtn-exit');
+      const wishBtnMake = document.getElementById('wishBtn-make');
+      const wishOverlay = document.getElementById('wish-overlay');
+      const step3 = document.getElementById('step-3');
+      const windowWrapper = document.getElementById('window-wrapper');
+      const wishInputSection = document.getElementById('wish-input-section');
+      const wishNoteDisplay = document.getElementById('wish-note-display');
+      const wishNoteText = document.getElementById('wish-note-text');
+      const donateBtn = document.getElementById('donate-btn');
+      const userWishInput = document.getElementById('user-wish') as HTMLTextAreaElement;
+
+      if (wishBtnExit) {
+        wishBtnExit.addEventListener('click', () => {
+          // Go back to Step 2-1 (Manifestation Page)
+          if (wishOverlay) wishOverlay.classList.remove('active');
+          if (step3) step3.classList.add('pointer-events-none');
+          if (windowWrapper) {
+            windowWrapper.style.opacity = '1';
+          }
+
+          // Navigation back to Manifestation Page
+          if (sliderTrack) sliderTrack.style.transform = 'translateX(-100%)';
+          if (step2Track) step2Track.style.transform = 'translateX(0)';
+
+          // Reset wish note state
+          if (wishInputSection) wishInputSection.style.display = 'block';
+          if (wishNoteDisplay) wishNoteDisplay.classList.remove('active');
+          if (donateBtn) donateBtn.style.display = 'none';
+        });
+      }
+      
+      if (wishBtnMake) {
+        wishBtnMake.addEventListener('click', () => {
+          const wishValue = userWishInput?.value.trim();
+          if (!wishValue) {
+            alert("Please write your wish first.");
+            return;
+          }
+          
+          if (wishInputSection) wishInputSection.style.display = 'none';
+          if (wishNoteText) wishNoteText.textContent = wishValue;
+          if (wishNoteDisplay) wishNoteDisplay.classList.add('active');
+          if (donateBtn) donateBtn.style.display = 'inline-block';
+        });
+      }
+
+      // Quantity Selector Logic
+      const qtyMinus = document.getElementById('qty-minus');
+      const qtyPlus = document.getElementById('qty-plus');
+      const qtyVal = document.getElementById('qty-val');
+      const lanternsLayer = document.getElementById('lanterns-layer');
+      let count = 1;
+
+      function spawnLantern() {
+        if (!lanternsLayer) return;
+        const lanternCont = document.createElement('div');
+        lanternCont.className = 'lantern-container extra-lantern animate';
+        
+        // Randomize floating path
+        const startX = Math.random() * 80 + 10; // 10% to 90%
+        const endX = startX + (Math.random() * 20 - 10);
+        const rot = Math.random() * 40 - 20;
+        
+        lanternCont.style.setProperty('--start-x', startX + '%');
+        lanternCont.style.setProperty('--end-x', endX + '%');
+        lanternCont.style.setProperty('--rot', rot + 'deg');
+        
+        lanternCont.innerHTML = `
+          <div class="lantern" style="transform: scale(${0.4 + Math.random() * 0.4})">
+            <div class="lantern-fire"></div>
+          </div>
+        `;
+        
+        lanternsLayer.appendChild(lanternCont);
+        
+        // Cleanup after animation
+        setTimeout(() => lanternCont.remove(), 20000);
+      }
+
+      if (qtyPlus && qtyVal) {
+        qtyPlus.addEventListener('click', () => {
+          if (count <1000) {
+            count++;
+            qtyVal.textContent = count.toString();
+            spawnLantern();
+          }
+        });
+      }
+
+      if (qtyMinus && qtyVal) {
+        qtyMinus.addEventListener('click', () => {
+          if (count > 1) {
+            count--;
+            qtyVal.textContent = count.toString();
+          }
         });
       }
 
@@ -372,12 +598,12 @@ import button from '~/assets/images/activityimages/bless/Button.png';
       const revelationLoading = document.getElementById('revelation-loading');
 
       // Loading Text Cycle
-      const loadingText = document.getElementById('loading-text');
+      const loadingText = document.getElementById('loading-text') as HTMLElement;
       const messages = ["Casting...", "Interpreting...", "Revealing..."];
       
       let msgIndex = 0;
       if (loadingText) {
-        setInterval(() => {
+        const intervalId = setInterval(() => {
           // Fade out
           loadingText.style.opacity = '0';
           
@@ -388,7 +614,12 @@ import button from '~/assets/images/activityimages/bless/Button.png';
             loadingText.style.opacity = '1';
           }, 500); // Matches CSS transition duration
           
-        }, 3000); // Change every 3 seconds
+        }, 3000); // Delay 的时间除以三即可
+
+        // Clean up on navigation to prevent multiple intervals
+        document.addEventListener('astro:before-preparation', () => {
+          clearInterval(intervalId);
+        }, { once: true });
       }
 
       // ---------------------------------------------------------
@@ -397,7 +628,7 @@ import button from '~/assets/images/activityimages/bless/Button.png';
       const resultContent = document.getElementById('result-content');
       const tabs = document.querySelectorAll('.tab-btn');
 
-      const data = {
+      const data: Record<string, string> = {
 analysis: `<h3 class="revelation-heading">Analysis of your Question</h3>
                    <div class="revelation-text">
                      <p>You asked about the reason why your career has been unsmooth for seven years. This question is specific and contains several key points:</p>
@@ -520,23 +751,6 @@ analysis: `<h3 class="revelation-heading">Analysis of your Question</h3>
          setTabContent('analysis');
       }
       
-      // Auto-resize textarea logic
-      const textareas = document.querySelectorAll('textarea.input');
-      const resizeTextarea = (textarea) => {
-          // Reset height to auto to allow shrinking if text is deleted
-          textarea.style.height = 'auto';
-          // Set new height based on scrollHeight plus border adjustment (2px + 2px)
-          textarea.style.height = (textarea.scrollHeight) + 'px';
-      };
-
-      textareas.forEach(textarea => {
-        // Initial resize for pre-filled content
-        resizeTextarea(textarea);
-        
-        textarea.addEventListener('input', function() {
-          resizeTextarea(this);
-        });
-      });
 
       });
   </script>

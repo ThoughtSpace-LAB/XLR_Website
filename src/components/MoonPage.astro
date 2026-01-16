@@ -77,7 +77,7 @@ const featureCards = [
   import { Application } from '@splinetool/runtime';
 
   // 等待 DOM 加载完成
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     // If there are multiple canvas elements with the same id (responsive
     // variants), pick the one that's currently visible in the layout.
     const canvases = Array.from(document.querySelectorAll('#spline-canvas'));
