@@ -2,6 +2,7 @@ import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { randomUUID } from "node:crypto";
 import { callAdkAgent } from "./adk";
+import { getGcpIdToken } from "../lib/gcp-auth";
 
 const APP_NAME = "SFC_agent";
 
@@ -62,12 +63,35 @@ export const server = {
       preferredLanguage: z.string().default("English"),
       visitCount: z.number().int().min(1).default(1),
     }),
-    handler: async (input) => {
+    handler: async (input, context) => {
+      // 1. 获取环境变量 (兼容 Cloudflare Runtime 和 构建时变量)
+      // 注意：context.locals 只能在 SSR 模式下获取到，如果是纯静态构建可能会出错，需要确保 adapter 模式正确
+      const env = context.locals?.runtime?.env || import.meta.env;
+      
       const appUrl =
-        (import.meta.env.SFC_APP_URL as string | undefined) ??
+        env.SFC_APP_URL ||
+        env.APP_URL ||
+        (import.meta.env.SFC_APP_URL as string | undefined) ||
         (import.meta.env.APP_URL as string | undefined);
+
       if (!appUrl) {
         throw new Error("SFC_APP_URL is not configured.");
+      }
+
+      // 2. 获取 GCP ID Token
+      let idToken: string | null = null;
+      try {
+        // 只有在 Cloudflare 环境下才能拿到 context.locals.runtime.env
+        if (context.locals?.runtime?.env) {
+           console.log("正在获取 GCP ID Token...");
+           idToken = await getGcpIdToken(context.locals.runtime.env, appUrl);
+           console.log("Token 获取成功");
+        } else {
+           console.warn("未检测到 Cloudflare Runtime，跳过 Token 获取 (本地开发环境可能需要手动 Mock)");
+        }
+      } catch (err: any) {
+        console.error("Token 获取失败:", err);
+        throw new Error(`身份认证失败: ${err.message}`);
       }
 
       const nonce = randomUUID();
@@ -84,13 +108,21 @@ export const server = {
         question: input.question,
       });
 
+      // 3. 构造请求头
+      const headers: HeadersInit = {
+        "Content-Type": "application/json",
+      };
+      if (idToken) {
+        headers["Authorization"] = `Bearer ${idToken}`;
+      }
+
+      console.log(`正在请求 Session: ${appUrl}/apps/${APP_NAME}/users/${userId}/sessions/${sessionId}`);
+
       const sessionResponse = await fetch(
         `${appUrl}/apps/${APP_NAME}/users/${userId}/sessions/${sessionId}`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers,
           body: JSON.stringify({
             preferred_language: input.preferredLanguage,
             visit_count: input.visitCount,
@@ -100,14 +132,16 @@ export const server = {
 
       if (!sessionResponse.ok) {
         const errorText = await sessionResponse.text();
-        throw new Error(`Session init failed: ${errorText}`);
+        // 401/403 通常是 Token 问题
+        console.error("Session 初始化失败:", sessionResponse.status, errorText);
+        throw new Error(`Session init failed (${sessionResponse.status}): ${errorText}`);
       }
+
+      console.log("Session 初始化成功，正在调用 Run...");
 
       const runResponse = await fetch(`${appUrl}/run`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers,
         body: JSON.stringify({
           app_name: APP_NAME,
           user_id: userId,
@@ -122,7 +156,8 @@ export const server = {
 
       if (!runResponse.ok) {
         const errorText = await runResponse.text();
-        throw new Error(`Run failed: ${errorText}`);
+        console.error("Run 调用失败:", runResponse.status, errorText);
+        throw new Error(`Run failed (${runResponse.status}): ${errorText}`);
       }
 
       const payload = (await runResponse.json()) as unknown;
