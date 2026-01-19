@@ -1,6 +1,7 @@
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { randomUUID } from "node:crypto";
+import { callAdkAgent } from "./adk";
 
 const APP_NAME = "SFC_agent";
 
@@ -49,6 +50,7 @@ const extractModelText = (payload: unknown): string | null => {
 };
 
 export const server = {
+  callAdkAgent,
   generateRevelation: defineAction({
     input: z.object({
       num1: z.string().min(1),
