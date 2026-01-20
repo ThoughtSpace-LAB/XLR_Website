@@ -1,9 +1,10 @@
-name = "xlr-website"
-compatibility_date = "2024-05-01"
+name = "serenawebsite"
+compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "dist"
 
 [vars]
+SFC_APP_URL = "https://sfc-adk-822219439970.asia-east1.run.app"
 GCP_PROJECT_NUMBER = "822219439970"
 GCP_POOL_ID = "cloudflare-pool"
 GCP_PROVIDER_ID = "cloudflare-oidc"
