@@ -1,10 +1,10 @@
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import { getGcpIdToken } from "../lib/gcp-auth";
 
 export const callAdkAgent = defineAction({
   input: z.object({
     command: z.string(), // 假设你要发给 Agent 的指令
+    idToken: z.string().optional(), // 用户 Google ID Token
   }),
   handler: async (input, context) => {
     // 从 Cloudflare 上下文中获取环境变量
@@ -12,20 +12,19 @@ export const callAdkAgent = defineAction({
     const cloudRunUrl = env.GCP_CLOUD_RUN_URL;
 
     try {
-      console.log("正在进行身份认证...");
-      // 1. 获取谷歌 ID Token
-      const googleIdToken = await getGcpIdToken(env, cloudRunUrl as string);
+      console.log("正在调用 Cloud Run...");
+      
+      // 使用前端传来的 ID Token，不做服务端验证，透传给 Cloud Run
+      const googleIdToken = input.idToken;
 
-      console.log("认证成功，正在调用 Cloud Run...");
-      // 2. 调用 Cloud Run
       const response = await fetch(`${cloudRunUrl}/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // 这里的 Bearer Token 是 Google 签发的合法 ID Token
-          Authorization: `Bearer ${googleIdToken}`,
+          // 这里的 Bearer Token 是用户前端传来的 ID Token
+          // Authorization: `Bearer ${googleIdToken}`,
         },
-        body: JSON.stringify(input),
+        body: JSON.stringify({ command: input.command }),
       });
 
       if (!response.ok) {

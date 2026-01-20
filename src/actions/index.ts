@@ -2,7 +2,6 @@ import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { randomUUID } from "node:crypto";
 import { callAdkAgent } from "./adk";
-import { getGcpIdToken } from "../lib/gcp-auth";
 
 const APP_NAME = "SFC_agent";
 
@@ -68,6 +67,7 @@ export const server = {
       email: z.string().email().optional(),
       preferredLanguage: z.string().default("English"),
       visitCount: z.number().int().min(1).default(1),
+      idToken: z.string().optional(), // .min(1, "Google ID Token is required"), // 暂时注释掉
     }),
     handler: async (input, context) => {
       // 1. 获取环境变量 (兼容 Cloudflare Runtime 和 构建时变量)
@@ -84,24 +84,8 @@ export const server = {
         throw new Error("SFC_APP_URL is not configured.");
       }
 
-      // 2. 获取 GCP ID Token
-      let idToken: string | null = null;
-      try {
-        // 只有在 Cloudflare 环境下才能拿到 context.locals.runtime.env
-        if (context.locals?.runtime?.env) {
-          console.log("正在获取 GCP ID Token...");
-          idToken = await getGcpIdToken(context.locals.runtime.env, appUrl);
-          console.log("Token 获取成功");
-        } else {
-          console.warn(
-            "未检测到 Cloudflare Runtime，跳过 Token 获取 (本地开发环境可能需要手动 Mock)",
-          );
-        }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (err: any) {
-        console.error("Token 获取失败:", err);
-        throw new Error(`身份认证失败: ${err.message}`);
-      }
+      // 2. 使用前端传递的 ID Token
+      const idToken = input.idToken;
 
       const nonce = randomUUID();
       const userId = input.email
@@ -121,9 +105,9 @@ export const server = {
       const headers: HeadersInit = {
         "Content-Type": "application/json",
       };
-      if (idToken) {
-        headers["Authorization"] = `Bearer ${idToken}`;
-      }
+      // if (idToken) {
+      //   headers["Authorization"] = `Bearer ${idToken}`;
+      // }
 
       console.log(
         `正在请求 Session: ${appUrl}/apps/${APP_NAME}/users/${userId}/sessions/${sessionId}`,
