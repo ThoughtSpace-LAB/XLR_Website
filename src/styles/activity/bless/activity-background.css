@@ -5,7 +5,7 @@ body {
 }
 
 /* Import Abhaya Libre from Google Fonts for activity headline */
-@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;700&display=swap");
 
 body {
   background-image: radial-gradient(#021027, #000000);
@@ -40,15 +40,18 @@ body {
   background-image: radial-gradient(
     var(--particle-color),
     var(--particle-color) 10%,
-    rgba(0,0,0,0) 56%
+    rgba(0, 0, 0, 0) 56%
   );
 
   /* place at initial transform so particles don't stack at left */
-  transform: translate3d(var(--move-x, 0vw), var(--move-y-start, 100vh), 0) scale(var(--scale-start, 0.6));
+  transform: translate3d(var(--move-x, 0vw), var(--move-y-start, 100vh), 0)
+    scale(var(--scale-start, 0.6));
 
   /* animate translation (move), and a gentle pulsing opacity */
-  animation: move-frames var(--move-duration, 8s) linear var(--move-delay, 0s) infinite,
-             fade-frames var(--fade-duration, 6s) ease-in-out calc(var(--move-delay, 0s) / 2) infinite;
+  animation:
+    move-frames var(--move-duration, 8s) linear var(--move-delay, 0s) infinite,
+    fade-frames var(--fade-duration, 6s) ease-in-out
+      calc(var(--move-delay, 0s) / 2) infinite;
   will-change: transform, opacity;
   opacity: 0;
   transition: opacity 0.9s ease-in-out;
@@ -59,20 +62,33 @@ body {
 }
 
 @keyframes fade-frames {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes move-frames {
   from {
-    transform: translate3d(var(--move-x, 0vw), var(--move-y-start, 100vh), 0) scale(var(--scale-start, 0.6));
+    transform: translate3d(var(--move-x, 0vw), var(--move-y-start, 100vh), 0)
+      scale(var(--scale-start, 0.6));
   }
   50% {
-    transform: translate3d(var(--move-x, 0vw), calc(var(--move-y-start, 100vh) - 50vh), 0) scale(var(--scale-mid, 1.6));
+    transform: translate3d(
+        var(--move-x, 0vw),
+        calc(var(--move-y-start, 100vh) - 50vh),
+        0
+      )
+      scale(var(--scale-mid, 1.6));
   }
   to {
-    transform: translate3d(var(--move-x, 0vw), var(--move-y-end, -10vh), 0) scale(var(--scale-end, 0.6));
+    transform: translate3d(var(--move-x, 0vw), var(--move-y-end, -10vh), 0)
+      scale(var(--scale-end, 0.6));
   }
 }
 
@@ -89,7 +105,7 @@ body {
 */
 
 .activity-headline {
-  font-family: 'Abhaya Libre', serif;
+  font-family: "Abhaya Libre", serif;
   font-size: 2.5rem; /* 40px approx */
   color: #fdffc1;
   text-shadow: #fdffc1 0px 0px 12px;
@@ -107,7 +123,7 @@ body {
 }
 
 .activity-paragraph {
-  font-family: 'Abhaya Libre', serif;
+  font-family: "Abhaya Libre", serif;
   font-size: 1.25rem; /* 20px approx */
   color: #cac798;
   text-shadow: #363636 0px 0px 6px;
@@ -121,19 +137,23 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-image: url('../../../assets/images/activityimages/bless/Button.png'), radial-gradient(circle at center, #d2ac47, #f7ef8a, #ae8625, #ac700f);
+  background-image:
+    url("../../../assets/images/activityimages/bless/Button.png"),
+    radial-gradient(circle at center, #d2ac47, #f7ef8a, #ae8625, #ac700f);
   background-size: 100% 100%;
   border-radius: 24px;
   filter: drop-shadow(0 0 5px rgb(199, 172, 90));
   color: #64490a;
-  font-family: 'Abhaya Libre', serif;
+  font-family: "Abhaya Libre", serif;
   font-weight: 500;
   font-size: 1.1rem;
   letter-spacing: 1px;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.2s ease, filter 0.2s ease;
-  height: 48px; 
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+  height: 48px;
   min-width: 200px;
 }
 
@@ -148,7 +168,7 @@ body {
 
 @media (max-width: 768px) {
   .activity-paragraph {
-    font-size: 1rem; 
+    font-size: 1rem;
     line-height: 1.3rem;
     font-weight: 200;
   }
@@ -157,39 +177,43 @@ body {
 /* --- Step 2-3 Revelation Style --- */
 
 .revelation-heading {
-  font-size: 1.25rem; 
-  font-family: 'Abhaya Libre', serif;
-  font-weight: 700; 
-  margin-bottom: 1rem; 
-  color: #fff0b3; 
+  font-size: 1.25rem;
+  font-family: "Abhaya Libre", serif;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #fff0b3;
 }
 
 .revelation-subheading {
-  font-size: 1.125rem; 
-  font-family: 'Abhaya Libre', serif;
-  font-weight: 600; 
-  margin-top: 1.5rem; 
-  margin-bottom: 0.5rem; 
-  color: rgba(255, 255, 255, 0.9); 
+  font-size: 1.125rem;
+  font-family: "Abhaya Libre", serif;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .revelation-text p {
-  font-size: 1rem; 
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   line-height: 1.4rem;
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;
 }
 
 .revelation-list {
-  list-style-type: disc; 
-  font-size: 1rem; 
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  list-style-type: disc;
+  font-size: 1rem;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   line-height: 1.75rem;
-  padding-left: 1.25rem; 
-  margin-top: 1rem; 
+  padding-left: 1.25rem;
+  margin-top: 1rem;
 }
 .revelation-list.space-y-4 > li + li {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 .revelation-list li {
   margin-bottom: 0.5rem; /* space-y-2 (approx) */
@@ -197,27 +221,33 @@ body {
 
 .revelation-ordered-list {
   list-style-type: decimal; /* list-decimal */
-  font-size: 1rem; 
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   line-height: 1.75rem;
   padding-left: 1rem; /* pl-5 */
 }
 .revelation-ordered-list > li + li {
-    margin-top: 1rem; /* space-y-4 */
-    font-size: 1rem; 
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin-top: 1rem; /* space-y-4 */
+  font-size: 1rem;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   line-height: 1.75rem;
 }
 
 /* Spirits Container */
 .spirits-container > * + * {
-    margin-top: 1rem; /* space-y-4 */
+  margin-top: 1rem; /* space-y-4 */
 }
 
 .spirit-item {
-  padding: 0.75rem; 
-  font-size: 1rem; 
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   line-height: 1.4rem;
   background-color: rgba(255, 255, 255, 0.05); /* bg-white/5 */
   border-radius: 0.5rem; /* rounded-lg */
@@ -230,7 +260,7 @@ body {
 }
 
 .spirit-title {
-  color: #fff0b3; 
+  color: #fff0b3;
   display: block;
 }
 
@@ -241,10 +271,10 @@ body {
 
 /* Wisdom Styles */
 .wisdom-quote-box {
-  text-align: center; 
-  font-style: italic; 
-  font-size: 1.125rem; 
-  padding-left: 2rem; 
+  text-align: center;
+  font-style: italic;
+  font-size: 1.125rem;
+  padding-left: 2rem;
   padding-right: 2rem;
   padding-top: 1.5rem; /* py-6 */
   padding-bottom: 1.5rem;
@@ -264,15 +294,15 @@ body {
 
 /* Tab Buttons */
 .tab-btn {
-  padding: 0.5rem 1rem; 
-  border-radius: 9999px; 
-  border: 1px solid rgba(255, 255, 255, 0.2); 
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   font-size: 1rem;
-  font-family: 'Abhaya Libre', serif;
+  font-family: "Abhaya Libre", serif;
   font-weight: 500;
   transition-property: all; /* transition-all */
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -282,10 +312,10 @@ body {
 
 @media (max-width: 768px) {
   .tab-btn {
-    font-size: 1rem; 
+    font-size: 1rem;
     line-height: 1.3rem;
     font-weight: 200;
-    padding: 0.2rem 0.6rem; 
+    padding: 0.2rem 0.6rem;
   }
 }
 
@@ -299,17 +329,19 @@ body {
   background-color: #fff2b9 !important;
   border-color: rgb(255, 255, 255) !important;
   color: rgb(0, 0, 0) !important;
-  box-shadow: 0 6px 18px rgb(255, 230, 120), inset 0 1px 0 rgb(255, 255, 255);
+  box-shadow:
+    0 6px 18px rgb(255, 230, 120),
+    inset 0 1px 0 rgb(255, 255, 255);
 }
 
 /* Custom Scrollbar for Content Box */
 .content-box-scroll::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 .content-box-scroll::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
 }
 .content-box-scroll::-webkit-scrollbar-track {
-    background-color: transparent;
+  background-color: transparent;
 }

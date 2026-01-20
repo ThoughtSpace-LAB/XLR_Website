@@ -23,7 +23,9 @@ const extractModelText = (payload: unknown): string | null => {
 
   if (Array.isArray(payload)) {
     for (let i = payload.length - 1; i >= 0; i -= 1) {
-      const item = payload[i] as { content?: { parts?: Array<{ text?: string }> } };
+      const item = payload[i] as {
+        content?: { parts?: Array<{ text?: string }> };
+      };
       const parts = item?.content?.parts;
       if (Array.isArray(parts)) {
         const textPart = parts.find((part) => typeof part?.text === "string");
@@ -40,9 +42,13 @@ const extractModelText = (payload: unknown): string | null => {
     if (Array.isArray(obj.messages)) return extractModelText(obj.messages);
     if (Array.isArray(obj.output)) return extractModelText(obj.output);
     if (Array.isArray(obj.candidates)) return extractModelText(obj.candidates);
-    const content = obj.content as { parts?: Array<{ text?: string }> } | undefined;
+    const content = obj.content as
+      | { parts?: Array<{ text?: string }> }
+      | undefined;
     if (Array.isArray(content?.parts)) {
-      const textPart = content.parts.find((part) => typeof part?.text === "string");
+      const textPart = content.parts.find(
+        (part) => typeof part?.text === "string",
+      );
       if (textPart?.text) return textPart.text;
     }
   }
@@ -67,7 +73,7 @@ export const server = {
       // 1. 获取环境变量 (兼容 Cloudflare Runtime 和 构建时变量)
       // 注意：context.locals 只能在 SSR 模式下获取到，如果是纯静态构建可能会出错，需要确保 adapter 模式正确
       const env = context.locals?.runtime?.env || import.meta.env;
-      
+
       const appUrl =
         env.SFC_APP_URL ||
         env.APP_URL ||
@@ -83,12 +89,15 @@ export const server = {
       try {
         // 只有在 Cloudflare 环境下才能拿到 context.locals.runtime.env
         if (context.locals?.runtime?.env) {
-           console.log("正在获取 GCP ID Token...");
-           idToken = await getGcpIdToken(context.locals.runtime.env, appUrl);
-           console.log("Token 获取成功");
+          console.log("正在获取 GCP ID Token...");
+          idToken = await getGcpIdToken(context.locals.runtime.env, appUrl);
+          console.log("Token 获取成功");
         } else {
-           console.warn("未检测到 Cloudflare Runtime，跳过 Token 获取 (本地开发环境可能需要手动 Mock)");
+          console.warn(
+            "未检测到 Cloudflare Runtime，跳过 Token 获取 (本地开发环境可能需要手动 Mock)",
+          );
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         console.error("Token 获取失败:", err);
         throw new Error(`身份认证失败: ${err.message}`);
@@ -116,7 +125,9 @@ export const server = {
         headers["Authorization"] = `Bearer ${idToken}`;
       }
 
-      console.log(`正在请求 Session: ${appUrl}/apps/${APP_NAME}/users/${userId}/sessions/${sessionId}`);
+      console.log(
+        `正在请求 Session: ${appUrl}/apps/${APP_NAME}/users/${userId}/sessions/${sessionId}`,
+      );
 
       const sessionResponse = await fetch(
         `${appUrl}/apps/${APP_NAME}/users/${userId}/sessions/${sessionId}`,
@@ -127,14 +138,16 @@ export const server = {
             preferred_language: input.preferredLanguage,
             visit_count: input.visitCount,
           }),
-        }
+        },
       );
 
       if (!sessionResponse.ok) {
         const errorText = await sessionResponse.text();
         // 401/403 通常是 Token 问题
         console.error("Session 初始化失败:", sessionResponse.status, errorText);
-        throw new Error(`Session init failed (${sessionResponse.status}): ${errorText}`);
+        throw new Error(
+          `Session init failed (${sessionResponse.status}): ${errorText}`,
+        );
       }
 
       console.log("Session 初始化成功，正在调用 Run...");

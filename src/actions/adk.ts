@@ -1,6 +1,6 @@
-import { defineAction } from 'astro:actions';
-import { z } from 'astro:schema';
-import { getGcpIdToken } from '../lib/gcp-auth';
+import { defineAction } from "astro:actions";
+import { z } from "astro:schema";
+import { getGcpIdToken } from "../lib/gcp-auth";
 
 export const callAdkAgent = defineAction({
   input: z.object({
@@ -8,7 +8,7 @@ export const callAdkAgent = defineAction({
   }),
   handler: async (input, context) => {
     // 从 Cloudflare 上下文中获取环境变量
-    const env = context.locals.runtime.env; 
+    const env = context.locals.runtime.env;
     const cloudRunUrl = env.GCP_CLOUD_RUN_URL;
 
     try {
@@ -23,21 +23,22 @@ export const callAdkAgent = defineAction({
         headers: {
           "Content-Type": "application/json",
           // 这里的 Bearer Token 是 Google 签发的合法 ID Token
-          "Authorization": `Bearer ${googleIdToken}` 
+          Authorization: `Bearer ${googleIdToken}`,
         },
-        body: JSON.stringify(input)
+        body: JSON.stringify(input),
       });
 
       if (!response.ok) {
-         throw new Error(`Agent 返回错误: ${response.status}`);
+        throw new Error(`Agent 返回错误: ${response.status}`);
       }
 
       const data = await response.json();
       return { success: true, data };
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error);
       return { success: false, error: error.message };
     }
-  }
+  },
 });
