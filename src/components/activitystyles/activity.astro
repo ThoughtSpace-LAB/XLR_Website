@@ -266,7 +266,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                <span class="wish-subtext">A one-dollar contribution for each blessing lantern.</span>
              </h2>
              <div class="wish-buttons flex gap-4">
-                <button class="wish-btn" id="wishBtn-make">Bless my wish</button>
+                <button class="wish-btn" id="wishBtn-make">PAY my wish</button>
                 <button class="wish-btn" id="wishBtn-exit">Exit</button>
              </div>
            </div>
@@ -442,7 +442,15 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           }
 
           step2Track.style.transform = 'translateX(-100%)';
-          updateResultData('');
+          
+          // Reset to loading state explicitly
+          data = {
+            analysis: loadingMarkup,
+            spirits: loadingMarkup,
+            interpretation: loadingMarkup,
+            advice: loadingMarkup,
+            wisdom: loadingMarkup,
+          };
           setTabContent('analysis');
           
           // Trigger Card Animation
@@ -467,8 +475,11 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           const emailValue = (document.querySelector('input[name="email"]') as HTMLInputElement | null)?.value || '';
           const hourValue = new Date().getHours().toString();
 
+          const startTime = Date.now();
+          const minAnimationTime = 3000; // Run animation for at least 3 seconds
+
           try {
-            const result = await actions.generateRevelation({
+            const resultPromise = actions.generateRevelation({
               num1: numbers[0]?.value?.trim() || '',
               num2: numbers[1]?.value?.trim() || '',
               time: hourValue,
@@ -478,6 +489,12 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
               preferredLanguage: 'English',
               visitCount: 1,
             });
+
+            // Wait for both the result and the minimum animation time
+            const [result] = await Promise.all([
+              resultPromise,
+              new Promise(resolve => setTimeout(resolve, minAnimationTime))
+            ]);
 
             if (result?.error) {
               updateResultData(result.error.message || 'We could not fetch your revelation. Please try again.');
@@ -492,16 +509,19 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
             updateResultData(message);
           }
 
-          // Auto transition to Step 2-3 after 5s
-          setTimeout(() => {
-            if (step2Track) {
-              step2Track.style.transform = 'translateX(-200%)';
-            }
-            if (cardWheelImg) {
-               cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
-               cardWheelImg.classList.add('bottom-[30vh]','opacity-30');
-            }
-          }, 5000);
+          // Refresh the content view immediately with the new data
+          const currentTabBtn = document.querySelector('.tab-btn.active-tab');
+          const currentTabKey = currentTabBtn ? currentTabBtn.getAttribute('data-tab') : 'analysis';
+          setTabContent(currentTabKey);
+
+          // Transition to Step 2-3
+          if (step2Track) {
+            step2Track.style.transform = 'translateX(-200%)';
+          }
+          if (cardWheelImg) {
+              cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
+              cardWheelImg.classList.add('bottom-[30vh]','opacity-30');
+          }
         });
       }
 
@@ -567,11 +587,11 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
             alert("Please write your wish first.");
             return;
           }
-          
           if (wishInputSection) wishInputSection.style.display = 'none';
           if (wishNoteText) wishNoteText.textContent = wishValue;
           if (wishNoteDisplay) wishNoteDisplay.classList.add('active');
           if (donateBtn) donateBtn.style.display = 'inline-block';
+          window.location.href = 'https://buy.stripe.com/8x200lbs54G61WP94Q2kw00';
         });
       }
 
@@ -681,14 +701,74 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
 
       const formatResponseHtml = (text) => {
         if (!text) return '<p>No response received yet.</p>';
-        const escaped = escapeHtml(text);
-        const html = escaped.replace(/\n/g, '<br />');
-        return `<div class="revelation-text"><p>${html}</p></div>`;
+        
+        // Basic Markdown parsing
+        let html = text
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+          
+        // Bold (**text**)
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        
+        // Italic (*text*)
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        
+        // Headers (### Header)
+        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+        
+        // Process lines for paragraphs and lists
+        const lines = html.split('\n');
+        let processedHtml = '';
+        let inList = false;
+
+        lines.forEach(line => {
+            const trim = line.trim();
+            if (!trim) {
+                if (inList) {
+                    processedHtml += '</ul>';
+                    inList = false;
+                }
+                return; // Skip empty lines or treat as break?
+            }
+            
+            // List items
+            if (trim.startsWith('- ') || trim.startsWith('• ') || trim.startsWith('* ')) {
+                if (!inList) {
+                    processedHtml += '<ul class="list-disc pl-5 my-2">';
+                    inList = true;
+                }
+                const content = trim.substring(1).trim(); // Remove marker
+                processedHtml += `<li class="mb-1">${content}</li>`;
+            } else {
+                if (inList) {
+                    processedHtml += '</ul>';
+                    inList = false;
+                }
+                // Check if it's already a header
+                if (trim.startsWith('<h')) {
+                    processedHtml += trim;
+                } else {
+                    processedHtml += `<p class="mb-2">${trim}</p>`;
+                }
+            }
+        });
+        
+        if (inList) processedHtml += '</ul>';
+
+        return `<div class="revelation-text space-y-2">${processedHtml}</div>`;
       };
 
       const tryParseJson = (text) => {
         if (!text) return null;
-        const trimmed = text.trim();
+        let trimmed = text.trim();
+        // Remove markdown code blocks if present
+        const markdownMatch = trimmed.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
+        if (markdownMatch) {
+            trimmed = markdownMatch[1].trim();
+        }
+
         if (!trimmed.startsWith('{') || !trimmed.endsWith('}')) return null;
         try {
           return JSON.parse(trimmed);
@@ -700,16 +780,32 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
       const normalizeJsonSections = (value) => {
         if (!value || typeof value !== 'object') return null;
         const obj = value as Record<string, unknown>;
-        const analysis = typeof obj['问题拆解'] === 'string' ? obj['问题拆解'] : '';
-        const spiritsArray = Array.isArray(obj['用神信息']) ? obj['用神信息'] : [];
+
+        // Helper to find value by multiple keys
+        const getVal = (keys: string[]) => {
+          for (const k of keys) {
+            if (obj[k] !== undefined) return obj[k];
+          }
+          return undefined;
+        };
+
+        const analysisVal = getVal(['问题拆解', 'analysis']);
+        const spiritsVal = getVal(['用神信息', 'spirits']);
+        const interpretationVal = getVal(['解读', 'interpretation']);
+        const adviceVal = getVal(['建议', 'advice']);
+        const wisdomVal = getVal(['鼓励', 'wisdom']);
+        const oneLineVal = getVal(['一句话结论', 'oneLine']);
+
+        const analysis = typeof analysisVal === 'string' ? analysisVal : '';
+        const spiritsArray = Array.isArray(spiritsVal) ? spiritsVal : [];
         const spirits = spiritsArray
           .filter((item) => typeof item === 'string')
           .map((item) => `• ${item}`)
           .join('\n');
-        const interpretation = typeof obj['解读'] === 'string' ? obj['解读'] : '';
-        const advice = typeof obj['建议'] === 'string' ? obj['建议'] : '';
-        const wisdom = typeof obj['鼓励'] === 'string' ? obj['鼓励'] : '';
-        const oneLine = typeof obj['一句话结论'] === 'string' ? obj['一句话结论'] : '';
+        const interpretation = typeof interpretationVal === 'string' ? interpretationVal : '';
+        const advice = typeof adviceVal === 'string' ? adviceVal : '';
+        const wisdom = typeof wisdomVal === 'string' ? wisdomVal : '';
+        const oneLine = typeof oneLineVal === 'string' ? oneLineVal : '';
 
         if (!analysis && !spirits && !interpretation && !advice && !wisdom && !oneLine) return null;
 

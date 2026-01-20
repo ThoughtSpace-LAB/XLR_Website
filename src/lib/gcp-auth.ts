@@ -15,8 +15,7 @@ export async function getGcpIdToken(
 ): Promise<string> {
   // 1. 获取 Cloudflare OIDC Token
   // 注意：audience 必须和 GCP OIDC Provider 设置的一致
-  // @ts-ignore - Workers runtime specific
-  const cfToken = await env.Fetcher.fetch(
+  const cfToken = await fetch(
     "https://workers.cloudflare.com/oidc/token",
     {
       method: "POST",
