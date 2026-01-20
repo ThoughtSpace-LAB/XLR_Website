@@ -67,7 +67,7 @@ export const server = {
       email: z.string().email().optional(),
       preferredLanguage: z.string().default("English"),
       visitCount: z.number().int().min(1).default(1),
-      idToken: z.string().optional(), // .min(1, "Google ID Token is required"), // 暂时注释掉
+      // idToken: z.string().optional(), // .min(1, "Google ID Token is required"), // 暂时注释掉
     }),
     handler: async (input, context) => {
       // 1. 获取环境变量 (兼容 Cloudflare Runtime 和 构建时变量)
@@ -85,7 +85,7 @@ export const server = {
       }
 
       // 2. 使用前端传递的 ID Token
-      const idToken = input.idToken;
+      // const idToken = input.idToken;
 
       const nonce = randomUUID();
       const userId = input.email
