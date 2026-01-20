@@ -485,6 +485,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           //   return;
           // }
 
+
           try {
             const result = await actions.generateRevelation({
               num1: numbers[0]?.value?.trim() || '',
@@ -505,13 +506,36 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
             } else {
               updateResultData('We could not fetch your revelation. Please try again.');
             }
+
+            // Move to Step 2-3 ONLY after we have a result (or error)
+            setTabContent('analysis'); // Refresh tab content with new data
+            
+            if (step2Track) {
+              step2Track.style.transform = 'translateX(-200%)';
+            }
+            if (cardWheelImg) {
+               cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
+               cardWheelImg.classList.add('bottom-[30vh]','opacity-30');
+            }
+
           } catch (error) {
             console.error('[actions] generateRevelation failed', error);
             const message = error instanceof Error ? error.message : 'We could not fetch your revelation. Please try again.';
             updateResultData(message);
+            
+            // Also move to next step to show error
+            setTabContent('analysis');
+            if (step2Track) {
+              step2Track.style.transform = 'translateX(-200%)';
+            }
+            if (cardWheelImg) {
+               cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
+               cardWheelImg.classList.add('bottom-[30vh]','opacity-30');
+            }
           }
 
-          // Auto transition to Step 2-3 after 5s
+          /* 
+          // Removed fixed timeout
           setTimeout(() => {
             if (step2Track) {
               step2Track.style.transform = 'translateX(-200%)';
@@ -520,7 +544,8 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
                cardWheelImg.classList.add('bottom-[30vh]','opacity-30');
             }
-          }, 5000);
+          }, 5000); 
+          */
         });
       }
 
