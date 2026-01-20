@@ -442,7 +442,15 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           }
 
           step2Track.style.transform = 'translateX(-100%)';
-          updateResultData('');
+          
+          // Reset to loading state explicitly
+          data = {
+            analysis: loadingMarkup,
+            spirits: loadingMarkup,
+            interpretation: loadingMarkup,
+            advice: loadingMarkup,
+            wisdom: loadingMarkup,
+          };
           setTabContent('analysis');
           
           // Trigger Card Animation
