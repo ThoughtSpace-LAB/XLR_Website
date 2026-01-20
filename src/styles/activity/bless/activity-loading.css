@@ -10,7 +10,7 @@
 }
 
 .loading-text {
-  font-family: 'Abhaya Libre', serif;
+  font-family: "Abhaya Libre", serif;
   font-size: 1.5rem;
   padding-top: 10vh;
   color: #fff0b3;
@@ -31,16 +31,20 @@
 }
 
 .loader::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 1vw;
   border-radius: 50%;
   border: 3px solid transparent;
-    filter: drop-shadow(0 0 4px #ffea08);
+  filter: drop-shadow(0 0 4px #ffea08);
   animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

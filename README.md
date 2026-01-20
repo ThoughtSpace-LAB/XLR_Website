@@ -71,6 +71,7 @@ All commands are run from the root of the project, from a terminal:
 - [ ] **Accessibility**: Ensure custom cursor and 3D elements do not hinder accessibility references.
 - [ ] **CSS**: Organize CSS files and add global.css.
 - [ ] **Functional Modules**: Optimize based on the current state of the Serena project, modify SEO, and analyze functionality.
+
 ## 📄 License
 
 This project is private and proprietary.
