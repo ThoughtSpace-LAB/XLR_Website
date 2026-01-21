@@ -1,4 +1,5 @@
 ---
+/* eslint-disable */
 import { Image } from 'astro:assets';
 import '~/styles/activity/bless/activity-background.css';
 import '~/styles/feature-text.css';
@@ -10,7 +11,6 @@ import cardBg from '~/assets/images/activityimages/bless/card-BG.jpg';
 import cardwheel from '~/assets/images/activityimages/bless/card-wheel.jpg';
 import cardshadow from '~/assets/images/activityimages/bless/card-shadow.jpg';
 import activityline from '~/assets/images/activityimages/bless/1activity-line.svg';
-import button from '~/assets/images/activityimages/bless/Button.png';
 ---
 
 <div class="relative">
@@ -300,7 +300,7 @@ import button from '~/assets/images/activityimages/bless/Button.png';
     </div>
   </div>
 
-  <script type="module">
+  <script >
     if (typeof window !== 'undefined') {
       document.addEventListener('astro:page-load', () => {
         const container = document.getElementById('particles');
@@ -344,7 +344,9 @@ import button from '~/assets/images/activityimages/bless/Button.png';
     }
   </script>
 
-  <script>
+  <script >
+    import { actions } from 'astro:actions';
+
     document.addEventListener('astro:page-load', () => {
       // Auto-resize textareas
       const textareas = document.querySelectorAll('.nebula-input textarea.input') as NodeListOf<HTMLTextAreaElement>;
@@ -421,7 +423,7 @@ import button from '~/assets/images/activityimages/bless/Button.png';
       // Step 2-1 -> Step 2-2
       const continueBtnStep2_1 = document.getElementById('continueBtn-step2-1');
       if (continueBtnStep2_1 && step2Track) {
-        continueBtnStep2_1.addEventListener('click', (e) => {
+        continueBtnStep2_1.addEventListener('click', async (e) => {
           e.preventDefault();
 
           const numbers = (document.querySelectorAll('#numbers-inputs input') as NodeListOf<HTMLInputElement>);
@@ -443,6 +445,16 @@ import button from '~/assets/images/activityimages/bless/Button.png';
 
           step2Track.style.transform = 'translateX(-100%)';
           
+          // Reset to loading state explicitly
+          data = {
+            analysis: loadingMarkup,
+            spirits: loadingMarkup,
+            interpretation: loadingMarkup,
+            advice: loadingMarkup,
+            wisdom: loadingMarkup,
+          };
+          setTabContent('analysis');
+          
           // Trigger Card Animation
           const cardPlaceholder = document.getElementById('step2-card-placeholder');
           const cardWheelImg = document.getElementById('card-wheel-img');
@@ -460,16 +472,58 @@ import button from '~/assets/images/activityimages/bless/Button.png';
              }, 300);
           }
 
-          // Auto transition to Step 2-3 after 5s
-          setTimeout(() => {
-            if (step2Track) {
-              step2Track.style.transform = 'translateX(-200%)';
+          // Fetch revelation content via Astro Action
+          const genderValue = (document.querySelector('input[name="gender"]:checked') as HTMLInputElement | null)?.value || 'female';
+          const emailValue = (document.querySelector('input[name="email"]') as HTMLInputElement | null)?.value || '';
+          const hourValue = new Date().getHours().toString();
+
+          const startTime = Date.now();
+          const minAnimationTime = 3000; // Run animation for at least 3 seconds
+
+          try {
+            const resultPromise = actions.generateRevelation({
+              num1: numbers[0]?.value?.trim() || '',
+              num2: numbers[1]?.value?.trim() || '',
+              time: hourValue,
+              gender: genderValue === 'male' ? 'male' : 'female',
+              question: question.value.trim(),
+              email: emailValue || undefined,
+              preferredLanguage: 'English',
+              visitCount: 1,
+            });
+
+            // Wait for both the result and the minimum animation time
+            const [result] = await Promise.all([
+              resultPromise,
+              new Promise(resolve => setTimeout(resolve, minAnimationTime))
+            ]);
+
+            if (result?.error) {
+              updateResultData(result.error.message || 'We could not fetch your revelation. Please try again.');
+            } else if (result?.data?.text) {
+              updateResultData(result.data.text);
+            } else {
+              updateResultData('We could not fetch your revelation. Please try again.');
             }
-            if (cardWheelImg) {
-               cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
-               cardWheelImg.classList.add('bottom-[30vh]','opacity-30');
-            }
-          }, 5000);
+          } catch (error) {
+            console.error('[actions] generateRevelation failed', error);
+            const message = error instanceof Error ? error.message : 'We could not fetch your revelation. Please try again.';
+            updateResultData(message);
+          }
+
+          // Refresh the content view immediately with the new data
+          const currentTabBtn = document.querySelector('.tab-btn.active-tab');
+          const currentTabKey = currentTabBtn ? currentTabBtn.getAttribute('data-tab') : 'analysis';
+          setTabContent(currentTabKey);
+
+          // Transition to Step 2-3
+          if (step2Track) {
+            step2Track.style.transform = 'translateX(-200%)';
+          }
+          if (cardWheelImg) {
+              cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
+              cardWheelImg.classList.add('bottom-[30vh]','opacity-30');
+          }
         });
       }
 
@@ -535,11 +589,11 @@ import button from '~/assets/images/activityimages/bless/Button.png';
             alert("Please write your wish first.");
             return;
           }
-          
           if (wishInputSection) wishInputSection.style.display = 'none';
           if (wishNoteText) wishNoteText.textContent = wishValue;
           if (wishNoteDisplay) wishNoteDisplay.classList.add('active');
           if (donateBtn) donateBtn.style.display = 'inline-block';
+          window.location.href = 'https://buy.stripe.com/8x200lbs54G61WP94Q2kw00';
         });
       }
 
@@ -596,8 +650,8 @@ import button from '~/assets/images/activityimages/bless/Button.png';
       }
 
       // Step 2-2 -> Step 3
-      const continueBtnStep2_2 = document.getElementById('continueBtn-step2-2');
-      const revelationLoading = document.getElementById('revelation-loading');
+      // const continueBtnStep2_2 = document.getElementById('continueBtn-step2-2');
+      // const revelationLoading = document.getElementById('revelation-loading');
 
       // Loading Text Cycle
       const loadingText = document.getElementById('loading-text') as HTMLElement;
@@ -630,98 +684,169 @@ import button from '~/assets/images/activityimages/bless/Button.png';
       const resultContent = document.getElementById('result-content');
       const tabs = document.querySelectorAll('.tab-btn');
 
-      const data: Record<string, string> = {
-analysis: `<h3 class="revelation-heading">Analysis of your Question</h3>
-                   <div class="revelation-text">
-                     <p>You asked about the reason why your career has been unsmooth for seven years. This question is specific and contains several key points:</p>
-                     <ul class="revelation-list">
-                       <li><strong>The Duration:</strong> "Seven years" indicates this is not a short-term issue but likely has deep-seated, long-standing causes.</li>
-                       <li><strong>The Issue:</strong> "Career unsmoothness" covers various aspects such as career development, interpersonal relationships, income, and personal fulfillment.</li>
-                       <li><strong>The Goal:</strong> Seeking the "reason" requires us to analyze from multiple angles—your personal situation, work environment, and interpersonal interactions—to identify exactly what factors have led to your career predicament.</li>
-                     </ul>
-                   </div>`,
-                   
-        spirits: `<h3 class="revelation-heading">Energy Field Information</h3>
-                  <div class="spirits-container">
-                    <div class="spirit-item spirit-item-gold">
-                      <strong class="spirit-title">Self (The Seeker)</strong>
-                      <p class="spirit-desc">Represents your mindset, capabilities, behavioral patterns, and expectations for work in the workplace.</p>
-                    </div>
-                    <div class="spirit-item">
-                      <strong class="spirit-title">Career (Official/Ghost)</strong>
-                      <p class="spirit-desc">Represents your career path, attitude of superiors, challenges, and pressures brought by the job content.</p>
-                    </div>
-                    <div class="spirit-item">
-                      <strong class="spirit-title">Company (Parents)</strong>
-                      <p class="spirit-desc">Represents your company environment, rules and regulations, documentation, and the support or resources the company or superiors can provide.</p>
-                    </div>
-                    <div class="spirit-item">
-                      <strong class="spirit-title">Colleagues (Siblings)</strong>
-                      <p class="spirit-desc">Represents your relationships with colleagues and partners, as well as potential competition and obstacles in the workplace.</p>
-                    </div>
-                    <div class="spirit-item">
-                      <strong class="spirit-title">Wealth (Wife/Wealth)</strong>
-                      <p class="spirit-desc">Represents your salary, benefits, and the actual benefits and resources gained through work.</p>
-                    </div>
-                  </div>`,
+      const loadingMarkup = `<p class="animate-pulse">Loading revelation...</p>`;
+      let data: Record<string, string> = {
+        analysis: loadingMarkup,
+        spirits: loadingMarkup,
+        interpretation: loadingMarkup,
+        advice: loadingMarkup,
+        wisdom: loadingMarkup,
+      };
 
-        interpretation: `<h3 class="revelation-heading">Detailed Interpretation</h3>
-                        <div class="revelation-text">
-                            <p class="mb-4">Based on the numbers “37, 26” you provided, I interpret the overall situation of your current career. The main palace falls on <strong>“Suxi” (Quick Joy)</strong>, while the deep-seated problem and root cause point to <strong>“Kongwang” (Void/Emptiness)</strong>.</p>
-                            
-                            <h4 class="revelation-subheading">Overall Picture</h4>
-                            <p class="mb-4">“Suxi” usually represents joy, speed, and activity. However, combined with your question about “seven years of unsmoothness”, this likely implies that your career surface looks full of changes and opportunities, or you internally always crave quick success and rapid change. But this “speed” often stays on the surface without a solid foundation, causing you to be constantly busy with few substantial breakthroughs. “Kongwang” as the deep issue directly points to the core of your career struggles: many efforts ultimately come to nothing. In these seven years, you may have been constantly trying and running, but the results are often “drawing water with a bamboo basket”, leaving you exhausted and confused.</p>
+      const escapeHtml = (value) =>
+        value
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
 
-                            <h4 class="revelation-subheading">Specific Aspects</h4>
-                            <ul class="revelation-list space-y-4">
-                            <li>
-                                <strong>1. Self (The Seeker):</strong> Active and expressive, but prone to impatience. You may be talkative (Vermilion Bird) which leads to misunderstandings or friction. You might focus too much on superficial communication.
-                            </li>
-                            <li>
-                                <strong>2. Career & Superiors:</strong> The Void aspect suggests unclear direction or lack of stability. Combined with "Flying Serpent", it hints at complex, tricky problems, rumors, or untrustworthy leadership making you feel entangled and fearful.
-                            </li>
-                            <li>
-                                <strong>3. Company Environment:</strong> Surface activity (Suxi) masks internal instability. The "Black Tortoise" warns of opaque management, unfairness, or empty promises from superiors, consuming your trust.
-                            </li>
-                               <li>
-                                <strong>4. Colleagues & Competition:</strong> Tension and conflict (White Tiger). You face fierce, perhaps cutthroat competition and ill-tempered opponents, leading to exhaustion.
-                               </li>
-                               <li>
-                                <strong>5. Wealth:</strong> Also affected by Void—efforts not matching rewards. "Gouchen" implies earnings are limited by rigid systems or legal/contractual complexities.
-                               </li>
-                            </ul>
-                        </div>`,
+      const formatResponseHtml = (text) => {
+        if (!text) return '<p>No response received yet.</p>';
+        
+        // Basic Markdown parsing
+        let html = text
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+          
+        // Bold (**text**)
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        
+        // Italic (*text*)
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        
+        // Headers (### Header)
+        html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+        html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+        
+        // Process lines for paragraphs and lists
+        const lines = html.split('\n');
+        let processedHtml = '';
+        let inList = false;
 
-        advice: `<h3 class="revelation-heading">Strategic Advice</h3>
-                 <div class="revelation-text">
-                     <ol class="revelation-ordered-list">
-                    <li>
-                        <strong>Adjust Mindset, Slow Down:</strong> Stop blindly pursuing quick success; learn to settle and accumulate. Career development is long-term; haste often puts you in a passive position.
-                    </li>
-                    <li>
-                        <strong>Review Career Path:</strong> Seriously consider if your current job suits you and has long-term potential. If the platform cannot provide substantial growth, consider changing direction. Don't waste energy in a "void".
-                    </li>
-                    <li>
-                        <strong>Distinguish Truth:</strong> Learn to observe and avoid unnecessary disputes. Be highly vigilant about "ambiguous" internal company matters, protect your interests, and don't easily trust verbal promises.
-                    </li>
-                    <li>
-                        <strong>Improve Relationships:</strong> Try to build good cooperative relationships to avoid senseless competition. Learn communication skills to resolve conflicts and win support.
-                    </li>
-                    <li>
-                        <strong>Enhance Competitiveness:</strong> Since wealth is blocked, focus on improving your professional skills. Increasing your value will naturally attract better opportunities, breaking the plight of the "void".
-                    </li>
-                    </ol>
-                 </div>`,
-                 
-        wisdom: `<h3 class="revelation-heading">Encouragement</h3>
-                 <div class="revelation-text">
-                    <div class="wisdom-quote-box">
-                    "As heaven maintains vigor through movement, a gentleman should constantly strive for self-perfection."<br>
-                    <span class="wisdom-source">— The I Ching</span>
-                    </div>
-                    <p>The career path is bumpy, but as long as you remain vigorous, never stopping, you can continue to strengthen yourself. Just as Sima Qian, after suffering humiliation, endured and worked hard to complete his masterpiece. Your seven years of hardship are a process of accumulating experience and tempering your character.</p>
-                    <p class="mt-4">Do not be discouraged by the current "void". As long as you maintain the spirit of constant self-improvement and accumulate strength, you will eventually break through the mist and usher in your bright path.</p>
-                 </div>`
+        lines.forEach(line => {
+            const trim = line.trim();
+            if (!trim) {
+                if (inList) {
+                    processedHtml += '</ul>';
+                    inList = false;
+                }
+                return; // Skip empty lines or treat as break?
+            }
+            
+            // List items
+            if (trim.startsWith('- ') || trim.startsWith('• ') || trim.startsWith('* ')) {
+                if (!inList) {
+                    processedHtml += '<ul class="list-disc pl-5 my-2">';
+                    inList = true;
+                }
+                const content = trim.substring(1).trim(); // Remove marker
+                processedHtml += `<li class="mb-1">${content}</li>`;
+            } else {
+                if (inList) {
+                    processedHtml += '</ul>';
+                    inList = false;
+                }
+                // Check if it's already a header
+                if (trim.startsWith('<h')) {
+                    processedHtml += trim;
+                } else {
+                    processedHtml += `<p class="mb-2">${trim}</p>`;
+                }
+            }
+        });
+        
+        if (inList) processedHtml += '</ul>';
+
+        return `<div class="revelation-text space-y-2">${processedHtml}</div>`;
+      };
+
+      const tryParseJson = (text) => {
+        if (!text) return null;
+        let trimmed = text.trim();
+        // Remove markdown code blocks if present
+        const markdownMatch = trimmed.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
+        if (markdownMatch) {
+            trimmed = markdownMatch[1].trim();
+        }
+
+        if (!trimmed.startsWith('{') || !trimmed.endsWith('}')) return null;
+        try {
+          return JSON.parse(trimmed);
+        } catch {
+          return null;
+        }
+      };
+
+      const normalizeJsonSections = (value) => {
+        if (!value || typeof value !== 'object') return null;
+        const obj = value as Record<string, unknown>;
+
+        // Helper to find value by multiple keys
+        const getVal = (keys: string[]) => {
+          for (const k of keys) {
+            if (obj[k] !== undefined) return obj[k];
+          }
+          return undefined;
+        };
+
+        const analysisVal = getVal(['问题拆解', 'analysis']);
+        const spiritsVal = getVal(['用神信息', 'spirits']);
+        const interpretationVal = getVal(['解读', 'interpretation']);
+        const adviceVal = getVal(['建议', 'advice']);
+        const wisdomVal = getVal(['鼓励', 'wisdom']);
+        const oneLineVal = getVal(['一句话结论', 'oneLine']);
+
+        const analysis = typeof analysisVal === 'string' ? analysisVal : '';
+        const spiritsArray = Array.isArray(spiritsVal) ? spiritsVal : [];
+        const spirits = spiritsArray
+          .filter((item) => typeof item === 'string')
+          .map((item) => `• ${item}`)
+          .join('\n');
+        const interpretation = typeof interpretationVal === 'string' ? interpretationVal : '';
+        const advice = typeof adviceVal === 'string' ? adviceVal : '';
+        const wisdom = typeof wisdomVal === 'string' ? wisdomVal : '';
+        const oneLine = typeof oneLineVal === 'string' ? oneLineVal : '';
+
+        if (!analysis && !spirits && !interpretation && !advice && !wisdom && !oneLine) return null;
+
+        const analysisWithSummary = oneLine
+          ? `【一句话结论】\n${oneLine}\n\n${analysis}`.trim()
+          : analysis;
+
+        return {
+          analysis: analysisWithSummary || 'No analysis provided.',
+          spirits: spirits || 'No spirits provided.',
+          interpretation: interpretation || 'No interpretation provided.',
+          advice: advice || 'No advice provided.',
+          wisdom: wisdom || 'No wisdom provided.',
+        };
+      };
+
+      const updateResultData = (text) => {
+        const parsed = tryParseJson(text);
+        const normalized = normalizeJsonSections(parsed);
+
+        if (normalized) {
+          data = {
+            analysis: formatResponseHtml(normalized.analysis),
+            spirits: formatResponseHtml(normalized.spirits),
+            interpretation: formatResponseHtml(normalized.interpretation),
+            advice: formatResponseHtml(normalized.advice),
+            wisdom: formatResponseHtml(normalized.wisdom),
+          };
+          return;
+        }
+
+        const html = formatResponseHtml(text);
+        data = {
+          analysis: html,
+          spirits: html,
+          interpretation: html,
+          advice: html,
+          wisdom: html,
+        };
       };
 
       // Function to set content

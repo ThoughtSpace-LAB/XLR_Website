@@ -42,7 +42,9 @@
   background-color: var(--black-700);
 
   border-radius: var(--border_radius);
-  box-shadow: inset -1px 1px hsl(204, 100%, 28%), inset 1px -1px 2px 0 hsl(221, 100%, 25%),
+  box-shadow:
+    inset -1px 1px hsl(204, 100%, 28%),
+    inset 1px -1px 2px 0 hsl(221, 100%, 25%),
     0px 4px 10px -4px hsla(0 0% 0% / calc(1 - var(--active, 0))),
     0 0 0 calc(var(--active, 0) * 0.3rem) hsl(174, 100%, 50%);
 
@@ -60,11 +62,8 @@
   width: 100%;
   height: 100%;
   background-color: hsla(215, 100%, 50%, 0.755);
-  background-image: radial-gradient(
-      at 51% 89%,
-      rgb(0, 255, 221) 0px,
-      transparent 50%
-    ),
+  background-image:
+    radial-gradient(at 51% 89%, rgb(0, 255, 221) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgb(0, 255, 166) 0px, transparent 50%),
     radial-gradient(at 22% 91%, rgb(0, 255, 251) 0px, transparent 50%);
   background-position: top;

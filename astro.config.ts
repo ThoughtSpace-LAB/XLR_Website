@@ -6,13 +6,15 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import compress from "astro-compress";
+import cloudflare from "@astrojs/cloudflare";
 
 import astrowind from "./vendor/integration";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  output: "static",
+  output: "server",
+  adapter: cloudflare({ mode: "directory" }),
 
   integrations: [
     sitemap(),
@@ -40,7 +42,8 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    plugins: [tailwindcss() as any],
     resolve: {
       alias: {
         "~": path.resolve(__dirname, "./src"),
