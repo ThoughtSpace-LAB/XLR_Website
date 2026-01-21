@@ -1,6 +1,7 @@
 .nebula-input {
   position: relative;
   margin: 10px auto;
+  padding: 5px;
 }
 
 .nebula-input .input {
@@ -90,8 +91,8 @@
 
 .nebula-input.line-style .user-label {
   font-size: 16px;
-  font-family: "Abhaya Libre", serif;
-  left: 0;
+  font-family: 'Abhaya Libre', serif;
+  left: 40%;
   top: 25px; /* Fixed top position to stay with the first line */
   background: transparent;
   padding: 0;
@@ -194,6 +195,11 @@
 }
 
 @media (max-width: 768px) {
+  /* Reduced font size for mobile inputs */
+  .nebula-input .input {
+    font-size: 16px;
+  }
+  
   /* Removed overridden input styles to match desktop new design */
 
   /* Adjustments for line-style on mobile */

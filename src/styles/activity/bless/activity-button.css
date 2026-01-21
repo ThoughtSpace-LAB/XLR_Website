@@ -1,5 +1,6 @@
 .button {
   --black-700: hsla(0 0% 12% / 1);
+  
   --border_radius: 9999px;
   --transtion: 0.3s ease-in-out;
   --offset: 2px;
@@ -13,7 +14,7 @@
 
   transform-origin: center;
 
-  padding: 0.75rem 2rem;
+  padding: 0.5rem 0.75rem;
   background-color: transparent;
 
   border: none;
@@ -21,6 +22,12 @@
   transform: scale(calc(1 + (var(--active, 0) * 0.1)));
 
   transition: transform var(--transtion);
+}
+
+@media (min-width: 768px) {
+  .button {
+    padding: 0.75rem 1rem;
+  }
 }
 
 .button::before {
@@ -119,7 +126,13 @@
   position: relative;
   z-index: 10;
 
-  width: 1.75rem;
+  width: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .button .sparkle {
+    width: 1.75rem;
+  }
 }
 
 .button .sparkle .path {
@@ -174,6 +187,17 @@
   );
   background-clip: text;
 
+  font-family: "Roboto", sans-serif;
   font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  line-height: 1rem;
   color: transparent;
+}
+
+@media (max-width: 768px) {
+  .button .text_button {
+    font-size: 0.85rem;
+    line-height: 0.85rem;
+  }
 }

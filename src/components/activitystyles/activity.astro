@@ -14,11 +14,11 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
 ---
 
 <div class="relative">
-  <a href="/" aria-label="Back to home" class="fixed top-6 right-6 z-50 inline-flex items-center gap-2 py-2 px-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-all">
+  <a href="/" aria-label="Back to home" class="fixed top-4 right-4 md:top-6 md:right-6 z-50 inline-flex items-center gap-2 py-2 px-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-all text-sm md:text-base">
     ← Back
   </a>
 
-  <section id="activity-page" class="min-h-screen w-full flex items-center justify-center bg-black">
+  <section id="activity-page" class="min-h-screen w-full flex items-center justify-center bg-black overflow-hidden relative">
   <div class="w-full h-full absolute inset-0 z-0 opacity-70">
     <img 
       src={heroBg.src}
@@ -29,15 +29,15 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
     />
   </div>
 
-  <div class="relative z-10 flex flex-col items-center justify-center h-[90vh] w-[75vw]" id="window-wrapper">
+  <div class="relative z-10 flex flex-col items-center justify-center h-[90vh] w-[95vw] md:w-[75vw]" id="window-wrapper">
 
   <div class="w-full h-full overflow-hidden flex items-center justify-center" id="slider-window">
     <div class="flex w-full h-full transition-transform duration-700 ease-in-out" id="slider-track">
       
       <!-- Step 1 Container -->
-      <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center" id="step-1">
-        <div class="flex flex-col md:w-[45vw] w-[75vw]" id="pagewrapper">
-          <h1 class="activity-headline text-center mb-4">Begin Your Wishing Journey</h1>
+      <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center px-4" id="step-1">
+        <div class="flex flex-col w-full max-w-xl" id="pagewrapper">
+          <h1 class="activity-headline text-2xl md:text-5xl text-center mb-4">Begin Your Wishing Journey</h1>
           <div class="w-full h-[5vh] md:h-[10vh] relative inset-0 z-0 opacity-90">
             <img 
             src={activityline.src}
@@ -48,14 +48,14 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
             />
           </div>
           
-          <h1 class="activity-paragraph text-center mb-10">
-            Your information is only used to deliver your guidance.<br />
+          <h1 class="activity-paragraph text-center mb-10 px-10 text-sm md:text-base">
+            Your information is only used to deliver your guidance.<br class="hidden md:block" />
             We respect your privacy and your space.
           </h1>
           
           <!-- Gender single-choice (radio-backed) -->
           <div id="gender-input" class="nebula-input flex flex-row w-full items-center justify-center z-20">
-            <div class="gender-options w-[50vw] justify-evenly mx-auto" role="radiogroup" aria-labelledby="gender-label">
+            <div class="gender-options w-full md:w-[50vw] justify-evenly mx-auto" role="radiogroup" aria-labelledby="gender-label">
               <input type="radio" id="gender-female" name="gender" value="female" required />
               <label class="gender-option" for="gender-female">Female</label>
 
@@ -66,7 +66,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
             <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
           </div>
 
-          <div id="email-input" class="nebula-input z-20 py-5 md:w-[40vw] w-[75vw] max-w-93.75 align-center">
+          <div id="email-input" class="nebula-input z-20 py-5 w-[60vw] md:max-w-md mx-auto align-center">
           <input type="email" name="email" autocomplete="email" class="input w-full" required />
           <label class="user-label">Email Address</label>
           <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
@@ -109,23 +109,23 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
             </div>
 
             <!-- Step 2 文字内容 -->
-            <div class="relative z-10 flex flex-col items-center justify-center h-[90vh] md:w-[30vw] lg:w-[25vw] w-[300px] overflow-hidden" id="step-wrapper">
+            <div class="relative z-10 flex flex-col items-center justify-center h-full w-full max-w-md md:w-[30vw] lg:w-[25vw] overflow-hidden px-6" id="step-wrapper">
               <div class="flex w-full h-full transition-transform duration-700 ease-in-out" id="step-2-track">
 
                 <!-- Step 2-1: Number Input and Question -->
-                <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-6" id="step-2-1">
-                  <a href="#" class="relative z-50 text-white/40 hover:text-white transition-all text-sm uppercase tracking-widest" id="backBtn-step2">
+                <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 md:gap-6" id="step-2-1">
+                  <a href="#" class="relative z-50 text-white/40 hover:text-white transition-all text-xs md:text-sm uppercase tracking-widest" id="backBtn-step2">
                   ← Back
                   </a>
-              <h1 class="activity-headline text-3xl md:text-4xl text-center" id="Manifestation">Manifestation</h1>
-              <h1 class="activity-paragraph text-center px-2">
-                  Write down 2 lucky numbers that resonate with you and ask your question.
+              <h1 class="activity-headline text-2xl md:text-4xl text-center" id="Manifestation">Manifestation</h1>
+              <h1 class="activity-paragraph text-center px-2 text-sm md:text-base">
+                  Write down 2 lucky numbers and ask your question.
               </h1>
-                  <div class="flex flex-col" id="pagewrapper">
-                    <div class="flex flex-row justify-evenly gap-6" id="numbers-inputs">
-                      <div id="number-input-1" class="nebula-input relative z-20 w-30 md:w-30 lg:w-35">
+                  <div class="flex flex-col w-full" id="pagewrapper">
+                    <div class="flex flex-row justify-evenly gap-4 md:gap-6" id="numbers-inputs">
+                      <div id="number-input-1" class="nebula-input relative z-20 w-1/3 md:w-30 lg:w-35">
                         <input type="text" name="text" autocomplete="off" class="input w-full" required />
-                        <label class="user-label">Number</label>
+                        <label class="user-label">No.1</label>
                         <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                         <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
                         <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
@@ -134,9 +134,9 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                         <div class="nebula-particle" style="--x:0.6; --y:0.4; --delay:0.6s"></div>
                       </div>
 
-                      <div id="number-input-2" class="nebula-input relative z-20 w-30 md:w-30 lg:w-35">
+                      <div id="number-input-2" class="nebula-input relative z-20 w-1/3 md:w-30 lg:w-35">
                         <input type="text" name="text" autocomplete="off" class="input w-full" required />
-                        <label class="user-label">Number</label>
+                        <label class="user-label">No.2</label>
                         <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                         <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
                         <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
@@ -147,9 +147,9 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                     </div>
               
                     <!-- Custom Question (Line Style) -->
-                    <div id="custom-question-input" class="nebula-input line-style z-20 w-full">
-                      <textarea required name="custom-question" rows="1" class="input w-full resize-none overflow-hidden" placeholder=" "></textarea>
-                      <label class="user-label">Ask your question...</label>
+                    <div id="custom-question-input" class="nebula-input line-style flex flex-col justify-center items-center z-20 w-full mt-2">
+                      <textarea required name="custom-question" rows="1" class=" input justify-center items-center w-[70vw] md:w-full overflow-hidden" placeholder=" "></textarea>
+                      <label class="user-label px-8">   Ask your question...</label>
                       <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                       <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
                       <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
@@ -168,7 +168,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                 </div>
 
                 <!-- Step 2-2: Card Selection (Placeholder for now) -->
-                <div class="relative w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-6" id="step-2-2">
+                <div class="relative w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 md:gap-6" id="step-2-2">
                    
                    <!-- Loader currently visible constantly in step 2-2 -->
                    <div class="loader-container">
@@ -176,38 +176,38 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                       <div id="loading-text" class="loading-text">Casting...</div>
                    </div>
 
-                   <div id="step2-card-placeholder" class="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-8 opacity-0 blur-md translate-y-[100px] transition-all duration-1000 ease-out">
+                   <div id="step2-card-placeholder" class="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 md:gap-8 opacity-0 blur-md translate-y-[100px] transition-all duration-1000 ease-out">
                       <img 
                       src={cardshadow.src}
-                      class="h-[50vh] object-contain rounded-4xl" 
+                      class="h-[40vh] md:h-[50vh] object-contain rounded-4xl" 
                       alt="Card Shadow" 
                       />
                    </div>
                 </div>
                 <!-- Step 2-3: Answer -->
-                <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 p-4" id="step-2-3">
-                    <h1 class="activity-headline text-2xl md:text-3xl text-center mb-2">Revelation</h1>
+                <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 p-2 md:p-4" id="step-2-3">
+                    <h1 class="activity-headline text-xl md:text-3xl text-center mb-1">Revelation</h1>
                     
                     <!-- Tabs -->
-                    <div class="flex flex-wrap gap-2 justify-center w-full max-w-4xl z-50">
-                        <button class="tab-btn active-tab" data-tab="analysis">Analysis</button>
-                        <button class="tab-btn" data-tab="spirits">Spirits</button>
-                        <button class="tab-btn" data-tab="interpretation">Interpretation</button>
-                        <button class="tab-btn" data-tab="advice">Advice</button>
-                        <button class="tab-btn" data-tab="wisdom">Wisdom</button>
+                    <div class="flex flex-wrap gap-1.5 md:gap-2 justify-center w-full max-w-4xl z-50">
+                        <button class="tab-btn active-tab text-xs md:text-sm px-2.5 py-1" data-tab="analysis">Analysis</button>
+                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="spirits">Spirits</button>
+                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="interpretation">Interp.</button>
+                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="advice">Advice</button>
+                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="wisdom">Wisdom</button>
                     </div>
 
                     <!-- Content Box -->
-                    <div class="w-full max-w-4xl h-[50vh] bg-black/40 backdrop-blur-md border border-white/10 rounded-xl p-6 overflow-y-auto content-box-scroll z-50 shadow-2xl">
-                        <div id="result-content" class="text-white/90 text-lg leading-relaxed font-serif">
+                    <div class="w-full max-w-4xl h-[45vh] md:h-[50vh] bg-black/40 backdrop-blur-md border border-white/10 rounded-xl p-4 md:p-6 overflow-y-auto content-box-scroll z-50 shadow-2xl">
+                        <div id="result-content" class="text-white/90 text-sm md:text-lg leading-relaxed font-serif">
                             <!-- Content will be injected here -->
                             <p class="animate-pulse">Loading revelation...</p>
                         </div>
                     </div>
                     
                     <!-- Fly to Lantern Button -->
-                    <div class="w-full flex justify-center mt-4">
-                        <button id="goToStep3Btn" class="continue-button-bg z-50 relative">
+                    <div class="w-full flex justify-center mt-2 md:mt-4">
+                        <button id="goToStep3Btn" class="continue-button-bg z-50 relative text-sm md:text-base">
                             Bless My Wish
                         </button>
                     </div>
@@ -239,11 +239,11 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           </div>
         </div>
         
-        <div class="wish-content">
-           <div id="wish-input-section">
-             <div class="wish-input-wrapper">
+        <div class="wish-content px-4 py-8">
+           <div id="wish-input-section" class="w-full max-w-[80vw] mx-auto">
+             <div class="wish-input-wrapper mb-6">
                 <div class="nebula-input line-style w-full">
-                  <textarea id="user-wish" name="wish" required rows="1" class="input w-full resize-none overflow-hidden" placeholder=" "></textarea>
+                  <textarea id="user-wish" name="wish" required rows="1" class="input w-full resize-none overflow-hidden text-lg md:text-xl" placeholder=" "></textarea>
                   <label class="user-label">Write your wish here...</label>
                   <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                   <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
@@ -254,20 +254,22 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                 </div>
              </div>
 
-             <div class="quantity-selector">
-                <span>Lanterns</span>
-                <button class="qty-btn" id="qty-minus">-</button>
-                <span class="qty-value" id="qty-val">1</span>
-                <button class="qty-btn" id="qty-plus">+</button>
+             <div class="quantity-selector flex items-center justify-center gap-4 mb-6">
+                <span class="text-white/60 uppercase tracking-widest text-xs md:text-sm">Lanterns</span>
+                <div class="flex items-center gap-3">
+                  <button class="qty-btn" id="qty-minus">-</button>
+                  <span class="qty-value text-xl md:text-2xl text-white font-serif min-w-[2ch] text-center" id="qty-val">1</span>
+                  <button class="qty-btn" id="qty-plus">+</button>
+                </div>
              </div>
 
-             <h2 class="wish-text">
+             <h2 class="wish-text text-lg md:text-2xl text-center text-white/90 font-serif leading-snug mb-8">
                Write your wish and let it soar to the skies!<br/> 
-               <span class="wish-subtext">A one-dollar contribution for each blessing lantern.</span>
+               <span class="wish-subtext block mt-2 text-xs md:text-sm text-white/40 uppercase tracking-widest">A one-dollar contribution for each blessing lantern.</span>
              </h2>
-             <div class="wish-buttons flex gap-4">
-                <button class="wish-btn" id="wishBtn-make">PAY my wish</button>
-                <button class="wish-btn" id="wishBtn-exit">Exit</button>
+             <div class="wish-buttons flex flex-col gap-4">
+                <button class="wish-btn w-auto px-8 py-3" id="wishBtn-make">Bless my wish</button>
+                <button class="wish-btn w-auto px-8 py-3 variant-outline" id="wishBtn-exit">Exit</button>
              </div>
            </div>
 

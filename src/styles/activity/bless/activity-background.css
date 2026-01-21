@@ -116,7 +116,7 @@ body {
 
 @media (max-width: 768px) {
   .activity-headline {
-    font-size: 1.75rem; /* 28px approx */
+    font-size: 1.5rem; /* 28px approx */
     line-height: 1.8rem; /* 25.6px */
     font-weight: 500;
   }
@@ -130,6 +130,15 @@ body {
   line-height: 1.8rem; /* 25.6px */
   font-weight: 300;
   letter-spacing: 0.2px;
+}
+
+
+@media (max-width: 768px) {
+  .activity-headline {
+    font-size: 1.5rem; /* 28px approx */
+    line-height: 1.8rem; /* 25.6px */
+    font-weight: 500;
+  }
 }
 
 /* Continue Button Style */
@@ -168,7 +177,7 @@ body {
 
 @media (max-width: 768px) {
   .activity-paragraph {
-    font-size: 1rem;
+    font-size: 0.875rem; 
     line-height: 1.3rem;
     font-weight: 200;
   }
@@ -344,4 +353,34 @@ body {
 }
 .content-box-scroll::-webkit-scrollbar-track {
   background-color: transparent;
+}
+
+/* Mobile Responsive Tweaks for Revelation */
+@media (max-width: 768px) {
+  .revelation-heading {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .revelation-subheading {
+    font-size: 0.9rem;
+    margin-top: 1.25rem;
+  }
+  .revelation-text p, 
+  .revelation-list, 
+  .revelation-ordered-list {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+  }
+  .spirit-item {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .spirit-desc {
+    font-size: 0.7rem;
+  }
+  .wisdom-quote-box {
+    padding: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
 }
