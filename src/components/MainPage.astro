@@ -5,6 +5,11 @@ import Starfield from './widgets/mainpage/Starfield.astro';
 import '~/styles/landingpageparagraph.css';
 import '~/styles/mainpage-container.css';
 import '~/styles/feature-text.css';
+
+import { useTranslations } from '~/i18n/utils';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <section class="relative min-h-[550vh] md:min-h-[600vh] w-full" id="mainPage">
@@ -61,18 +66,18 @@ import '~/styles/feature-text.css';
 
       <div id="loader" class="relative w-full flex flex-col items-center justify-center ">
         <div class="relative text-center flex flex-col bg-blend-color-dodge">
-              <div class="headline-small">Serena helps you to find the answer to</div>     
+              <div class="headline-small">{t('main.loader.prefix')}</div>     
               <div class="loader">
-                <p>Your</p>
+                <p>{t('main.loader.your')}</p>
                 <div class="words">
                 <span class="word"> </span>
-                <span class="word">Wealth</span>
-                <span class="word">Friends</span>
-                <span class="word">Career</span>
+                <span class="word">{t('main.loader.word.wealth')}</span>
+                <span class="word">{t('main.loader.word.friends')}</span>
+                <span class="word">{t('main.loader.word.career')}</span>
                 </div>
               </div>
               <div class="mt-4 w-full text-center text-lg tracking-widest font-semibold mix-blend-difference text-white">
-                 And the most important one —— Yourself
+                 {t('main.loader.suffix')}
               </div>
       </div>
       </div>
@@ -98,14 +103,13 @@ import '~/styles/feature-text.css';
                 <div class="flex flex-col justify-center items-center w-full h-full gap-4 px-4">
                 
                   <div class="subtitle relative">
-                    <span>MODEL I. </span>
-                    <span class="highlight">THE INSIGHT</span>
+                    <span>{t('main.model1.title')} </span>
+                    <span class="highlight">{t('main.model1.subtitle')}</span>
                   </div>
 
                    <div id="prompt">
-                    <div class="relative flex headline-small text-white/40 py-2 ">SCOPE</div>
-                    <p class="relative flex body-small-highlight">Immediate clarity on daily life and current situations. Insights for the upcoming week, up to one month.<br />
-                    Best for everyday errands, short trips, and daily decisions.</p><br />
+                    <div class="relative flex headline-small text-white/40 py-2 ">{t('main.card.scope')}</div>
+                    <p class="relative flex body-small-highlight" set:html={t('main.model1.desc')}></p><br />
                   </div>
 
                 </div>
@@ -113,10 +117,10 @@ import '~/styles/feature-text.css';
                 <div class="absolute top-0 flex flex-row justify-center gap-[10%] w-[100%] h-[100%]">
                 <div class="relative flex flex-col justify-center h-auto ">
                   <p class="title-num">70% </p>
-                  <p class="title">Precision</p></div>
+                  <p class="title">{t('main.card.precision')}</p></div>
                 <div class="relative flex flex-col justify-center h-auto ">
                   <p class="title-num">60% </p>
-                  <p class="title">Resonance</p></div>
+                  <p class="title">{t('main.card.resonance')}</p></div>
                 </div>
                 <div class="glowing-elements">
                   <div class="glow-1"></div>
@@ -156,14 +160,13 @@ import '~/styles/feature-text.css';
                 <div class="flex flex-col justify-center items-center w-full h-full gap-4 px-4">
                 
                   <div class="subtitle relative">
-                    <span>MODEL II. </span>
-                    <span class="highlight">THE ORACLE</span>
+                    <span>{t('main.model2.title')} </span>
+                    <span class="highlight">{t('main.model2.subtitle')}</span>
                   </div>
 
                    <div id="prompt">
-                    <div class="relative flex headline-small text-white/40 py-2 ">SCOPE</div>
-                    <p class="relative flex body-small-highlight">Deep architectural analysis of your life and major ventures.A visionary look into the next 12 months.<br />
-                    Requires a state of devotion and a quiet mind. Inquire only when the matter is of true weight.</p><br />
+                    <div class="relative flex headline-small text-white/40 py-2 ">{t('main.card.scope')}</div>
+                    <p class="relative flex body-small-highlight" set:html={t('main.model2.desc')}></p><br />
                   </div>
 
                 </div>
@@ -171,10 +174,10 @@ import '~/styles/feature-text.css';
                 <div class="absolute top-0 flex flex-row justify-center gap-[10%] w-[100%] h-[100%]">
                 <div class="relative flex flex-col justify-center h-auto ">
                   <p class="title-num">99% </p>
-                  <p class="title">Precision</p></div>
+                  <p class="title">{t('main.card.precision')}</p></div>
                 <div class="relative flex flex-col justify-center h-auto ">
                   <p class="title-num">80% </p>
-                  <p class="title">Resonance</p></div>
+                  <p class="title">{t('main.card.resonance')}</p></div>
                 </div>
                 <div class="glowing-elements">
                   <div class="glow-1"></div>

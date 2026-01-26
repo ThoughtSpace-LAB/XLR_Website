@@ -477,7 +477,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           const emailValue = (document.querySelector('input[name="email"]') as HTMLInputElement | null)?.value || '';
           const hourValue = new Date().getHours().toString();
 
-          const startTime = Date.now();
+          // const startTime = Date.now();
           const minAnimationTime = 3000; // Run animation for at least 3 seconds
 
           try {
@@ -693,13 +693,13 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
         wisdom: loadingMarkup,
       };
 
-      const escapeHtml = (value) =>
-        value
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
+      // const escapeHtml = (value) =>
+      //   value
+      //     .replace(/&/g, '&amp;')
+      //     .replace(/</g, '&lt;')
+      //     .replace(/>/g, '&gt;')
+      //     .replace(/"/g, '&quot;')
+      //     .replace(/'/g, '&#39;');
 
       const formatResponseHtml = (text) => {
         if (!text) return '<p>No response received yet.</p>';

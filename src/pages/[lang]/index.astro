@@ -1,0 +1,14 @@
+---
+export const prerender = true;
+import HomeContent from '~/components/HomeContent.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } },
+  ];
+}
+
+const { lang } = Astro.params;
+---
+<HomeContent lang={lang} />

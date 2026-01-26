@@ -2,22 +2,26 @@
 import '~/styles/feature-text.css';
 import ScrollAnimationScript from '~/components/common/ScrollAnimationScript.astro';
 import MoonPageCard from '~/components/widgets/moonpage/MoonPageCard.astro';
+import { useTranslations } from '~/i18n/utils';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 
 const featureCards = [
   {
-    subtitle: 'Foresight Beyond the Moment',
-    title: 'Sense the Hidden',
-    description: 'This system helps you notice what others overlook. Whether it\'s a business about to shift, a partner growing distant, or a plan losing energy, it lets you see the quiet premonitions of what\'s to come.',
+    subtitle: t('moon.card.01.subtitle'),
+    title: t('moon.card.01.title'),
+    description: t('moon.card.01.desc'),
   },
   {
-    subtitle: 'Discover the Door Behind the Wall',
-    title: 'Life Foresight',
-    description: 'This feature illuminates those hidden openings — a career pivot, an unexpected connection, a decision that could turn failure into freedom. It helps you recognize that destiny often hides behind detours.',
+    subtitle: t('moon.card.02.subtitle'),
+    title: t('moon.card.02.title'),
+    description: t('moon.card.02.desc'),
   },
   {
-    subtitle: 'Move Ahead of Time',
-    title: 'Reveal Opportunities',
-    description: 'This feature allows you to plan with awareness — to choose your timing, your alliances, your moments of silence. In love, in business, in every crossroad, you can act not reactively, but with composure and clarity.',
+    subtitle: t('moon.card.03.subtitle'),
+    title: t('moon.card.03.title'),
+    description: t('moon.card.03.desc'),
   },
 ];
 ---
@@ -26,10 +30,10 @@ const featureCards = [
   <!-- Header -->
   <div class="flex flex-col items-center gap-[2rem] md:px-[10vw] px-[5vw] md:py-[30px] py-[100px]">
     <p class="headline-large text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent animate-slide-up-blur">
-      What will be seen
+      {t('moon.header')}
     </p>
     <p class="headline-small text-center leading-[24px] md:leading-[26px] font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] max-w-[80vw] animate-slide-up-blur-delay-1">
-      A clear reading of your energy, revealing the patterns, timing, and guidance shaping your next steps.
+      {t('moon.subheader')}
     </p>
   </div>
 

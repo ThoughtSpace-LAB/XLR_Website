@@ -58,7 +58,7 @@ import logoIcon from '~/assets/icons/LOGO.svg?url';
         // Show menu content
         menu.classList.remove('hidden');
         // Force reflow
-        menu.offsetHeight;
+        void menu.offsetHeight;
         menu.classList.add('opacity-100');
         menu.classList.remove('opacity-0');
         
