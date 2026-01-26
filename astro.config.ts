@@ -14,7 +14,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   output: "server",
-  adapter: cloudflare({ mode: "directory" }),
+  adapter: cloudflare(),
+
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "zh"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 
   integrations: [
     sitemap(),

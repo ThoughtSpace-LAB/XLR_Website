@@ -8,25 +8,28 @@ import '~/styles/feature-text.css';
 import FeaturePageCard1 from '~/components/widgets/featurepage/FeaturePageCard1.astro';
 import FeaturePageCard2 from '~/components/widgets/featurepage/FeaturePageCard2.astro';
 import FeaturePageCard3 from '~/components/widgets/featurepage/FeaturePageCard3.astro';
+import { useTranslations } from '~/i18n/utils';
 
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 
 const howItWorksSteps = [
   {
     num: '01',
-    title: 'The Intent',
-    description: 'Anchoring your intent into the cosmic data stream. Simply ask your question to begin the alignment process. Our interface connects directly to celestial algorithms.',
+    title: t('feature.steps.01.title'),
+    description: t('feature.steps.01.desc'),
     visualId: 'chat',
   },
   {
     num: '02',
-    title: 'Energy Analysis',
-    description: 'Our AI engine weaves ancient algorithms with real-time star charts to calculate your unique spiritual coordinates, processing thousands of celestial data points.',
+    title: t('feature.steps.02.title'),
+    description: t('feature.steps.02.desc'),
     visualId: 'analysis',
   },
   {
     num: '03',
-    title: 'The Revelation',
-    description: 'Clarity revealed through a personalized spiritual reading, delivered with crystal clear insight. Your destiny mapped out in high fidelity resolution.',
+    title: t('feature.steps.03.title'),
+    description: t('feature.steps.03.desc'),
     visualId: 'card',
   },
 ];
@@ -37,10 +40,10 @@ const howItWorksSteps = [
   <!-- Header -->
   <div class="flex flex-col items-center gap-[2rem] md:px-[10vw] px-[5vw] md:py-[30px] lg:py-[100px] h-fit-content">
     <p class="headline-large text-center bg-gradient-to-r from-white via-[#cefafe] to-[#a2f4fd] bg-clip-text text-transparent animate-slide-up-blur">
-      How It Works
+      {t('feature.header')}
     </p>
     <p class="headline-small text-center h-fit-content leading-[24px] md:leading-[26px] font-medium tracking-[0.4px] text-[rgba(206,250,254,0.6)] max-w-[80vw] animate-slide-up-blur-delay-1">
-      A seamless journey from question to cosmic revelation, powered by the fusion of ancient wisdom and artificial intelligence.
+      {t('feature.subheader')}
     </p>
   </div>
 
@@ -81,7 +84,7 @@ const howItWorksSteps = [
       <!-- Right Column: Sticky Card -->
       <div class="relative w-[560px] flex-shrink-0">
         <div class="relative h-[300vh]">
-          <FeaturePageStickyCard />
+          <FeaturePageStickyCard lang={lang} />
         </div>
       </div>
     </div>

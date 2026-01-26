@@ -2,6 +2,10 @@
 import iconX from '~/assets/icons/icon-x.svg?url';
 import iconInstagram from '~/assets/icons/icon-instagram.svg?url';
 import iconLinkedin from '~/assets/icons/icon-linkedin.svg?url';
+import { useTranslations } from '~/i18n/utils';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <footer class="bg-black px-5 md:px-20 py-10 md:py-30 flex flex-col items-center justify-end">
@@ -13,7 +17,7 @@ import iconLinkedin from '~/assets/icons/icon-linkedin.svg?url';
           <span class="text-xl leading-[26px] font-medium tracking-[0.4px] text-white">SERENA</span>
         </div>
         <p class="text-[15px] leading-[18px] font-medium tracking-[0.4px] text-white/50">
-          We turn personal energy insights into clear, practical guidance that helps people make aligned decisions and move forward with confidence.
+          {t('footer.description')}
         </p>
       </div>
       
@@ -31,7 +35,7 @@ import iconLinkedin from '~/assets/icons/icon-linkedin.svg?url';
       </nav>
 
       <p class="text-sm font-medium leading-[1.45] tracking-[-0.07px] text-white/50">
-        copyright 2025 @SERENA
+        {t('footer.copyright')}
       </p>
     </div>
 
@@ -39,19 +43,19 @@ import iconLinkedin from '~/assets/icons/icon-linkedin.svg?url';
     <div class="flex gap-10">
       <nav class="flex flex-col gap-2 w-[130px]">
         <div class="pb-4">
-          <span class="text-xl leading-[22px] font-semibold tracking-[0.6px] text-white">Features</span>
+          <span class="text-xl leading-[22px] font-semibold tracking-[0.6px] text-white">{t('footer.nav.features')}</span>
         </div>
-        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Core features</a>
-        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Pro experience</a>
-        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Integrations</a>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">{t('footer.link.core')}</a>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">{t('footer.link.pro')}</a>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">{t('footer.link.integrations')}</a>
       </nav>
 
       <nav class="flex flex-col gap-2 w-[130px]">
         <div class="pb-4">
-          <span class="text-xl leading-[22px] font-semibold tracking-[0.6px] text-white">Support</span>
+          <span class="text-xl leading-[22px] font-semibold tracking-[0.6px] text-white">{t('footer.nav.support')}</span>
         </div>
-        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Contact</a>
-        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">Support</a>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">{t('footer.link.contact')}</a>
+        <a href="#" class="text-sm leading-[22px] font-semibold tracking-[0.4px] text-white/50 hover:text-white transition-colors">{t('footer.link.help')}</a>
       </nav>
     </div>
   </div>

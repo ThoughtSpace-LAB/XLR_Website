@@ -4,6 +4,11 @@ import iconSend from '~/assets/icons/icon-send.svg?url';
 import visualcard2raw from '~/assets/icons/VisualCard2.svg?raw';
 import visualcard3raw from '~/assets/icons/VisualCard3.svg?raw';
 import '~/styles/feature-text.css';
+
+import { useTranslations } from '~/i18n/utils';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <div class="sticky top-[calc(50vh-400px)] w-[560px] h-[800px] bg-white/[0.03] rounded-3xl border border-white/15 shadow-[0px_20px_40px_0px_rgba(0,0,0,0.2),inset_0px_0px_40px_0px_rgba(9,168,146,0.1)] overflow-hidden lg:block hidden">
@@ -23,14 +28,14 @@ import '~/styles/feature-text.css';
       <div class="flex flex-col gap-6">
         <div class="flex justify-start">
           <div class="bg-white/10 flex justify-start rounded-tr-[10px] rounded-bl-[10px] rounded-br-[10px] p-3 animate-float-2">
-            <p class="text-small">What do the stars say about my career path this month?</p>
+            <p class="text-small">{t('feature.card.question')}</p>
           </div>
         </div>
         <div class="flex justify-end">
           <div class="bg-[rgba(9,168,146,0.3)] border border-[rgba(9,168,146,0.5)] rounded-tl-[10px] rounded-bl-[10px] rounded-br-[10px] p-3 animate-float-2">
             <div class="flex items-center gap-2">
               <img src={iconLoader} alt="loader" class="w-4 h-4 animate-pulse" loading="lazy" decoding="async" />
-              <span class="text-small text-[#cefafe] animate-pulse">Aligning with cosmic data...</span>
+              <span class="text-small text-[#cefafe] animate-pulse">{t('feature.card.aligning')}</span>
             </div>
           </div>
         </div>
@@ -38,7 +43,7 @@ import '~/styles/feature-text.css';
       <!-- Typing bubbles (start typing when chat enters viewport) -->
       <div class="flex justify-center p-6 pointer-events-none overflow-visible bubble-container">
         <div class="flex flex-col items-center space-y-3">
-          <div class="bubble text-center body-small max-w-[360px]" data-text="Let SERENA unlock ancient wisdom and map out your destiny blueprint in high-fidelity resolution.">
+          <div class="bubble text-center body-small max-w-[360px]" data-text={t('feature.card.bubble')}>
             <span class="bubble-text"></span><span class="cursor" aria-hidden="true"></span>
           </div>
         </div>
