@@ -1,5 +1,6 @@
 .nebula-input {
   position: relative;
+  width: 100%;
   margin: 10px auto;
   padding: 5px;
 }
@@ -32,13 +33,12 @@
   font-size: large;
   font-weight: 500;
   left: 50%;
-  top: 50%; /* Fixed top position to stay with the first line */
+  top: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
   color: #888a6a;
   transition: all 0.4s ease-out;
   background: #00000f;
-  padding: 0 5px;
   white-space: nowrap;
 }
 
@@ -92,11 +92,11 @@
 .nebula-input.line-style .user-label {
   font-size: 16px;
   font-family: 'Abhaya Libre', serif;
-  left: 40%;
-  top: 25px; /* Fixed top position to stay with the first line */
+  left: 50%;
+  top: 50%;
   background: transparent;
   padding: 0;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
 }
 
 .nebula-input.line-style .input:focus ~ .user-label,
@@ -208,8 +208,9 @@
   }
 
   .nebula-input.line-style .user-label {
-    left: 0;
-    top: 20px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .nebula-input.line-style .input:focus ~ .user-label,

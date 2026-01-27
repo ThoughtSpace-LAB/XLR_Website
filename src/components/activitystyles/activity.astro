@@ -109,7 +109,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
             </div>
 
             <!-- Step 2 文字内容 -->
-            <div class="relative z-10 flex flex-col items-center justify-center h-full w-full max-w-md md:w-[30vw] lg:w-[25vw] overflow-hidden px-6" id="step-wrapper">
+            <div class="relative z-10 flex flex-col items-center justify-center h-full w-[75vw] max-w-[300px] md:w-[30vw] lg:w-[25vw] overflow-hidden" id="step-wrapper">
               <div class="flex w-full h-full transition-transform duration-700 ease-in-out" id="step-2-track">
 
                 <!-- Step 2-1: Number Input and Question -->
@@ -149,7 +149,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                     <!-- Custom Question (Line Style) -->
                     <div id="custom-question-input" class="nebula-input line-style flex flex-col justify-center items-center z-20 w-full mt-2">
                       <textarea required name="custom-question" rows="1" class=" input justify-center items-center w-[70vw] md:w-full overflow-hidden" placeholder=" "></textarea>
-                      <label class="user-label px-8">   Ask your question...</label>
+                      <label class="user-label px-8">Ask your question...</label>
                       <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                       <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
                       <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
@@ -168,12 +168,12 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                 </div>
 
                 <!-- Step 2-2: Card Selection (Placeholder for now) -->
-                <div class="relative w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 md:gap-6" id="step-2-2">
+                <div class="relative w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 md:gap-6 px-5" id="step-2-2">
                    
                    <!-- Loader currently visible constantly in step 2-2 -->
                    <div class="loader-container">
                       <div class="loader"></div>
-                      <div id="loading-text" class="loading-text">Casting...</div>
+                      <div id="loading-text" class="loading-text w-full max-w-md md:w-[30vw] lg:w-[25vw]">Casting...</div>
                    </div>
 
                    <div id="step2-card-placeholder" class="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 md:gap-8 opacity-0 blur-md translate-y-[100px] transition-all duration-1000 ease-out">
@@ -655,7 +655,15 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
 
       // Loading Text Cycle
       const loadingText = document.getElementById('loading-text') as HTMLElement;
-      const messages = ["Casting...", "Interpreting...", "Revealing..."];
+      const messages = [
+        "<strong style='font-size: 1em;line-height: 1;'>Be Specific</strong><br/><span style='font-size: 0.8em; line-height: 1;'>Provide clear context, including your role and others involved, to help the universe pin-point your energy.</span>",
+        "<strong style='font-size: 1em;line-height: 1;'>Focus on Yourself</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Only ask questions that directly relate to your own path and immediate experiences.</span>",
+        "<strong style='font-size: 1em;line-height: 1;'>Ask About the Near Term</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Seek guidance for events occurring within the next three months for maximum accuracy.</span>",
+        "<strong style='font-size: 1em;line-height: 1;'>Seek Quick Clarity</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Perfect for Yes/No outcomes, finding lost items, or judging the favorability of sudden news.</span>",
+        "<strong style='font-size: 1em;line-height: 1;'>One Question at a Time</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Each consultation should focus on a single event to ensure a clear and unclouded response.</span>",
+        "<strong style='font-size: 1em;line-height: 1;'>Center Your Intent</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Approach the oracle with a firm belief and a clear mind; sincerity strengthens your cosmic link.</span>",
+        "<strong style='font-size: 1em;line-height: 1;'>Find Stillness</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Sit in a quiet environment and avoid consulting while walking, running, or multitasking.</span>"
+      ];
       
       let msgIndex = 0;
       if (loadingText) {
@@ -665,7 +673,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           
           setTimeout(() => {
             msgIndex = (msgIndex + 1) % messages.length;
-            loadingText.textContent = messages[msgIndex];
+            loadingText.innerHTML = messages[msgIndex];
             // Fade in
             loadingText.style.opacity = '1';
           }, 500); // Matches CSS transition duration

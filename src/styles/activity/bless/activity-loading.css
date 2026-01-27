@@ -13,9 +13,11 @@
   font-family: "Abhaya Libre", serif;
   font-size: 1.5rem;
   padding-top: 10vh;
+  padding-right: 2vw;
+  padding-left: 2vw;
   color: #fff0b3;
   text-align: center;
-  min-height: 1.5em;
+  line-height: 1.2;
   text-shadow: 0 0 10px rgba(255, 240, 179, 0.4);
   opacity: 1;
   transition: opacity 0.25s ease;
