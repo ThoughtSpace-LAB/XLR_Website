@@ -1,0 +1,130 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import ProductCard from '~/components/widgets/pricepage/ProductCard.astro';
+
+const products = [
+  {
+    id: 1,
+    name: '九宫八卦',
+    price: '300',
+    range: '科学识别房子中不同位置带来的风险',
+    details: {
+      action: '识别',
+      identify: 'Yes',
+      utilize: 'No',
+      customize: 'No',
+      purpose: '科学识别房子中不同位置带来的风险',
+      useCase: '选房子 / 改善已有住宅能量',
+      caseStudy: '通过中国风水中的九个能量方位，勘测住所当中哪些维度正在泄漏能量；比如：假设坎的位置如果出现问题，住久后可能会导致肾虚，以及现金流出现突如其来的问题；如果改正，则可以在原有的基础上增加肾功能，同时增加现金流'
+    }
+  },
+  {
+    id: 2,
+    name: '大游歌+小游歌',
+    price: '2000',
+    range: '预售1000份 - 如何科学识别和利用空间中的能量',
+    details: {
+      action: '识别 + 利用',
+      identify: 'Yes',
+      utilize: 'Yes',
+      customize: 'No',
+      purpose: '利用；如何科学识别+利用空间中的能量',
+      useCase: '办公室、工厂、谈判室或其他空间',
+      caseStudy: '通过建筑风水学，更好的利用不同空间中的能量，让不同的空间位置发挥最佳的能量状态；比如书房的风水用于提升精力和注意力，卧室的风水降低紧张度更易入眠，工作台的风水更容易带来订单成交和财运'
+    }
+  },
+  {
+    id: 3,
+    name: '亲自体验：元辰宫',
+    price: '3000',
+    range: '尝鲜价 - 亲眼看到自己的"内在房屋"',
+    details: {
+      action: '深度体验',
+      identify: 'Yes',
+      utilize: 'Yes',
+      customize: 'No',
+      purpose: '"如果你的\'内在房屋\'破败不堪，你在现实中永远无法拥有主权。" 你可以亲眼看到自己的财物房子的情况，这不是魔术与魔法，这是另一个世界的信息；像三毛一样进入你的潜意识控制室。这不是幻觉，是实时修改你生命底层的视觉化界面。',
+      useCase: '个人深度体验与潜意识探索',
+      caseStudy: '进入潜意识的可视化界面，实时修改生命底层的视觉化界面，获得对自我内在世界的直观认知和改变能力'
+    }
+  },
+  {
+    id: 4,
+    name: '东西四宅',
+    price: '4000',
+    range: '针对特定的人进行科学的风水精细化匹配',
+    details: {
+      action: '完整定制',
+      identify: 'Yes',
+      utilize: 'Yes',
+      customize: 'Yes',
+      purpose: '针对特定的人进行科学的风水精细化匹配。本质是这个人的命运是否和所住环境的能量真实匹配',
+      useCase: '学业、事业、感情、财富、身体健康',
+      caseStudy: 'A住进入房子中生意和往常一样，B进入同样的房子中，不仅升职加薪，而且突然中彩票。比如命中今年没有桃花但是有财，那么住在桃花多的房子里也并不能带来桃花，住在增加财富的房子里会增加数倍财富'
+    }
+  },
+  {
+    id: 5,
+    name: '亲自体验：观落阴',
+    price: '20000',
+    range: '尝鲜价 - 可以和逝去的亲人对话',
+    details: {
+      action: '终极体验',
+      identify: 'Yes',
+      utilize: 'Yes',
+      customize: 'Yes',
+      purpose: '可以和逝去的亲人对话。"信息从未消失，它只是进入了你的访问黑名单。" 物理世界是一张稀疏的网，而 DDA 是让你潜入网底的潜水钟。去取回那些被时间"冷冻"的核心数据，关闭那些正在耗尽你生命能量的"未决进程"。',
+      useCase: '生命连接与深层疗愈',
+      caseStudy: '与逝去的亲人进行深度对话与信息交换，闭合生命中的遗憾与未决事项，获得灵性的解放与生命的重新整合'
+    }
+  }
+];
+---
+
+<Layout title="Feng Shui Products - SERENA">
+  <section id="products-page" class="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-black via-slate-900 to-black relative overflow-hidden">
+    <!-- 背景装饰 -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-7xl px-4 md:px-8 py-20">
+      <!-- 顶部文字区域 -->
+      <div class="mb-20 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-white mb-6 tracking-wide">
+          FENG SHUI <span class="font-semibold">PRODUCTS</span>
+        </h1>
+        <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          从基础学习到深度体验，选择最适合你的风水服务方案。悬停卡片可查看详细信息。
+        </p>
+      </div>
+
+      <!-- 产品卡片网格 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        {products.map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </div>
+
+      <!-- 底部说明 -->
+      <div class="mt-20 text-center">
+        <p class="text-white/40 text-sm mb-4">
+          所有课程均由专业师资团队精心设计。支持一对一定制服务。
+        </p>
+        <p class="text-white/30 text-xs">
+          点击卡片背面的"立即支付"按钮进行报名和支付。
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  #products-page {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+</style>

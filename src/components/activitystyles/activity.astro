@@ -167,6 +167,49 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                   </div>
                 </div>
 
+                <!-- Step 2-1b: Choose Calculation Model -->
+                <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 md:gap-6" id="step-2-1b">
+                  <a href="#" class="relative z-50 text-white/40 hover:text-white transition-all text-xs md:text-sm uppercase tracking-widest" id="backBtn-step2-1b">
+                  ← Back
+                  </a>
+              <h1 class="activity-headline text-2xl md:text-4xl text-center">Choose Path</h1>
+              <h1 class="activity-paragraph text-center px-2 text-sm md:text-base">
+                  Select the model for your revelation.
+              </h1>
+                  <div class="flex flex-col w-full" id="pagewrapper">
+                    <div class="flex flex-col gap-3 md:gap-4 w-full">
+                      <!-- Model 1 Button -->
+                      <button class="model-option-btn flex flex-col items-start gap-1.5 md:gap-2 p-4 md:p-5 rounded-lg border border-white/20 hover:border-gold/80 hover:bg-white/[0.2] press transition-all duration-300 z-20 text-left overflow-hidden group relative" id="model-luca">
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        <div class="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-500 pointer-events-none" style="box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0), 0 0 20px rgba(212, 175, 55, 0); filter: drop-shadow(0 0 0px rgba(212, 175, 55, 0));" id="model-luca-glow"></div>
+                        <div class="relative">
+                          <h2 class="text-sm md:text-base font-medium text-white/95">LUCA</h2>
+                          <p class="text-xs md:text-xs text-white/60 hover:text-white">Luck + Calculation</p>
+                          <p class="text-xs md:text-xs text-white/50 mt-1">Predict minor events within a month. For immediate, minor matters. Best for quick binary outcomes or daily forecasts (e.g., "Will it rain?").</p>
+                        </div>
+                      </button>
+
+                      <!-- Model 2 Button -->
+                      <button class="model-option-btn flex flex-col items-start gap-1.5 md:gap-2 p-4 md:p-5 rounded-lg border border-white/20 hover:border-gold/80 hover:bg-white/[0.2] transition-all duration-300 z-20 text-left overflow-hidden group relative" id="model-zora">
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        <div class="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-500 pointer-events-none" style="box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0), 0 0 20px rgba(212, 175, 55, 0); filter: drop-shadow(0 0 0px rgba(212, 175, 55, 0));" id="model-zora-glow"></div>
+                        <div class="relative">
+                          <h2 class="text-sm md:text-base font-medium text-white/95">ZORA</h2>
+                          <p class="text-xs md:text-xs text-white/60">Zodiac + Aura</p>
+                          <p class="text-xs md:text-xs text-white/50 mt-1">Predict events within six months. For complex, long-term trajectories. It tracks the shifting dynamics of a situation and identifies the strategic key to a breakthrough.</p>
+                        </div>
+                      </button>
+                    </div>
+            
+                    <!-- Continue button for Step 2-1b -->
+                    <div class="w-full flex justify-center mt-6">
+                      <a href="#" class="continue-button-bg z-50 relative" id="continueBtn-step2-1b-placeholder">
+                        Continue
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Step 2-2: Card Selection (Placeholder for now) -->
                 <div class="relative w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 md:gap-6 px-5" id="step-2-2">
                    
@@ -393,9 +436,9 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           // Check if we are in Step 2-2 (translated)
           const currentTransform = step2Track.style.transform;
           
-          if (currentTransform === 'translateX(-100%)') {
-             // Go back to Step 2-1
-             step2Track.style.transform = 'translateX(0)';
+          if (currentTransform === 'translateX(-200%)') {
+             // Go back to Step 2-1b from Step 2-2
+             step2Track.style.transform = 'translateX(-100%)';
              
              // Reset Step 2-2 card animation
              const cardPlaceholder = document.getElementById('step2-card-placeholder');
@@ -413,6 +456,10 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                 }, 500); // Reset after transition back
              }
 
+          } else if (currentTransform === 'translateX(-100%)') {
+             // Go back to Step 2-1 from Step 2-1b
+             step2Track.style.transform = 'translateX(0)';
+             
           } else {
              // Go back to Step 1
              sliderTrack.style.transform = 'translateX(0)';
@@ -420,7 +467,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
         });
       }
 
-      // Step 2-1 -> Step 2-2
+      // Step 2-1 -> Step 2-1b
       const continueBtnStep2_1 = document.getElementById('continueBtn-step2-1');
       if (continueBtnStep2_1 && step2Track) {
         continueBtnStep2_1.addEventListener('click', async (e) => {
@@ -444,7 +491,76 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           }
 
           step2Track.style.transform = 'translateX(-100%)';
+        });
+      }
+
+      // Step 2-1b -> Step 2-2 (Model Selection)
+      const modelLucaBtn = document.getElementById('model-luca');
+      const modelZoraBtn = document.getElementById('model-zora');
+      const modelLucaGlow = document.getElementById('model-luca-glow');
+      const modelZoraGlow = document.getElementById('model-zora-glow');
+      let selectedModel: string | null = null;
+      
+      if (modelLucaBtn) {
+        modelLucaBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          selectedModel = 'luca';
+          modelLucaBtn.classList.add('border-white/50', 'bg-white/[0.05]');
           
+          // Activate golden glow effect
+          if (modelLucaGlow) {
+            modelLucaGlow.style.opacity = '1';
+            modelLucaGlow.style.boxShadow = 'inset 0 0 20px rgba(212, 175, 55, 0.4), 0 0 30px rgba(212, 175, 55, 0.6)';
+            modelLucaGlow.style.filter = 'drop-shadow(0 0 15px rgba(212, 175, 55, 0.8))';
+          }
+          
+          if (modelZoraBtn) {
+            modelZoraBtn.classList.remove('border-white/50', 'bg-white/[0.05]');
+          }
+          if (modelZoraGlow) {
+            modelZoraGlow.style.opacity = '0';
+            modelZoraGlow.style.boxShadow = 'inset 0 0 0 1px rgba(212, 175, 55, 0), 0 0 20px rgba(212, 175, 55, 0)';
+            modelZoraGlow.style.filter = 'drop-shadow(0 0 0px rgba(212, 175, 55, 0))';
+          }
+        });
+      }
+
+      if (modelZoraBtn) {
+        modelZoraBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          selectedModel = 'zora';
+          modelZoraBtn.classList.add('border-white/50', 'bg-white/[0.05]');
+          
+          // Activate golden glow effect
+          if (modelZoraGlow) {
+            modelZoraGlow.style.opacity = '1';
+            modelZoraGlow.style.boxShadow = 'inset 0 0 20px rgba(212, 175, 55, 0.4), 0 0 30px rgba(212, 175, 55, 0.6)';
+            modelZoraGlow.style.filter = 'drop-shadow(0 0 15px rgba(212, 175, 55, 0.8))';
+          }
+          
+          if (modelLucaBtn) {
+            modelLucaBtn.classList.remove('border-white/50', 'bg-white/[0.05]');
+          }
+          if (modelLucaGlow) {
+            modelLucaGlow.style.opacity = '0';
+            modelLucaGlow.style.boxShadow = 'inset 0 0 0 1px rgba(212, 175, 55, 0), 0 0 20px rgba(212, 175, 55, 0)';
+            modelLucaGlow.style.filter = 'drop-shadow(0 0 0px rgba(212, 175, 55, 0))';
+          }
+        });
+      }
+      
+      const continueBtnStep2_1b = document.getElementById('continueBtn-step2-1b-placeholder');
+      if (continueBtnStep2_1b && step2Track) {
+        continueBtnStep2_1b.addEventListener('click', async (e) => {
+          e.preventDefault();
+
+          if (!selectedModel) {
+            alert("Please select a calculation model.");
+            return;
+          }
+
+          step2Track.style.transform = 'translateX(-200%)';
+        
           // Reset to loading state explicitly
           data = {
             analysis: loadingMarkup,
@@ -473,11 +589,12 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           }
 
           // Fetch revelation content via Astro Action
+          const numbers = (document.querySelectorAll('#numbers-inputs input') as NodeListOf<HTMLInputElement>);
+          const question = (document.querySelector('textarea[name="custom-question"]') as HTMLTextAreaElement);
           const genderValue = (document.querySelector('input[name="gender"]:checked') as HTMLInputElement | null)?.value || 'female';
           const emailValue = (document.querySelector('input[name="email"]') as HTMLInputElement | null)?.value || '';
           const hourValue = new Date().getHours().toString();
 
-          // const startTime = Date.now();
           const minAnimationTime = 3000; // Run animation for at least 3 seconds
 
           try {
@@ -518,7 +635,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
 
           // Transition to Step 2-3
           if (step2Track) {
-            step2Track.style.transform = 'translateX(-200%)';
+            step2Track.style.transform = 'translateX(-300%)';
           }
           if (cardWheelImg) {
               cardWheelImg.classList.remove('bottom-1/2', 'translate-y-1/2');
@@ -526,6 +643,16 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           }
         });
       }
+
+      // Step 2-1b Back Button
+      const backBtnStep2_1b = document.getElementById('backBtn-step2-1b');
+      if (backBtnStep2_1b && step2Track) {
+        backBtnStep2_1b.addEventListener('click', (e) => {
+          e.preventDefault();
+          step2Track.style.transform = 'translateX(0)';
+        });
+      }
+
 
       // Step 2-3 -> Step 3 (Fly to Lantern)
       const goToStep3Btn = document.getElementById('goToStep3Btn');

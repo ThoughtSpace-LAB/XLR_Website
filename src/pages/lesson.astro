@@ -1,0 +1,160 @@
+---
+import Layout from '~/layouts/Layout.astro';
+
+const lessons = [
+  {
+    id: 1,
+    title: '九宫八卦',
+    price: '300',
+    description: '科学识别房子中不同位置带来的风水风险',
+    features: ['识别', '能量识别', '基础课程'],
+  },
+  {
+    id: 2,
+    title: '大游歌+小游歌',
+    price: '2000',
+    description: '如何科学识别和利用空间中的能量',
+    features: ['识别', '利用', '进阶课程'],
+  },
+  {
+    id: 3,
+    title: '亲自体验：元辰宫',
+    price: '3000',
+    description: '亲眼看到自己的"内在房屋"，修改生命底层视觉化界面',
+    features: ['体验课程', '深度服务', '限定服务'],
+  },
+  {
+    id: 4,
+    title: '东西四宅',
+    price: '4000',
+    description: '针对特定个人进行科学的风水精细化匹配',
+    features: ['定制化', '高级课程', '完整服务'],
+  }
+];
+---
+
+<Layout title="Feng Shui Lessons - SERENA">
+  <section id="lesson-page" class="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-black via-slate-900 to-black relative overflow-hidden">
+    <!-- 背景装饰 -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-7xl px-4 md:px-8 py-20">
+      <!-- 顶部文字区域 -->
+      <div class="mb-20 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-white mb-6 tracking-wide">
+          FENG SHUI <span class="font-semibold">LESSONS</span>
+        </h1>
+        <p class="text-white/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          选择适合你的课程，开始能量之旅。从基础认知到深度体验，我们为每一个阶段的你准备了完整的解决方案。
+        </p>
+      </div>
+
+      <!-- 课程卡片网格 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {lessons.map((lesson) => (
+          <div class="group relative h-96 cursor-pointer perspective">
+            <div class="lesson-card w-full h-full transition-transform duration-500">
+              <!-- 正面 -->
+              <div class="lesson-card-front absolute w-full h-full bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 p-6 flex flex-col justify-between overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none rounded-2xl"></div>
+                
+                <div class="relative z-10">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 class="text-xl md:text-2xl font-semibold text-white mb-2">
+                        {lesson.title}
+                      </h3>
+                      <p class="text-white/70 text-sm md:text-base leading-relaxed">
+                        {lesson.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="relative z-10">
+                  <div class="flex items-end justify-between">
+                    <div>
+                      <p class="text-white/60 text-xs mb-1">课程价格</p>
+                      <p class="text-3xl md:text-4xl font-light text-white">
+                        ${lesson.price}
+                      </p>
+                    </div>
+                    <button class="px-6 py-2 bg-white/20 hover:bg-white/30 border border-white/40 rounded-full text-white text-sm font-medium transition-all duration-300 backdrop-blur">
+                      详情
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 背面 -->
+              <div class="lesson-card-back absolute w-full h-full bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl border border-white/20 p-6 flex flex-col justify-between overflow-hidden [transform:rotateY(180deg)]">
+                <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none rounded-2xl"></div>
+                
+                <div class="relative z-10">
+                  <h4 class="text-sm font-semibold text-white/80 mb-4 uppercase tracking-wider">
+                    课程特色
+                  </h4>
+                  <div class="space-y-3">
+                    {lesson.features.map((feature) => (
+                      <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400"></div>
+                        <span class="text-white/70 text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div class="relative z-10 pt-4 border-t border-white/10">
+                  <button class="w-full py-2 bg-gradient-to-r from-blue-500/80 to-cyan-500/80 hover:from-blue-600 hover:to-cyan-600 rounded-full text-white font-medium transition-all duration-300 text-sm">
+                    立即报名
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 底部说明 -->
+      <div class="mt-20 text-center">
+        <p class="text-white/40 text-sm">
+          每个课程都由专业师资团队精心设计，结合理论与实践，帮助你深入理解并有效利用风水能量。
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  #lesson-page {
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .perspective {
+    perspective: 1000px;
+  }
+
+  .lesson-card {
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+
+  .lesson-card-front,
+  .lesson-card-back {
+    backface-visibility: hidden;
+  }
+
+  .lesson-card-back {
+    transform: rotateY(180deg);
+  }
+
+  .group:hover .lesson-card {
+    transform: rotateY(180deg);
+  }
+</style>

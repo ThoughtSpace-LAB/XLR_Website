@@ -17,6 +17,7 @@ import logoIcon from '~/assets/icons/LOGO.svg?url';
       <div class="hidden md:flex justify-center items-center gap-16">
         <a href="#feature" class="brand-navi-letter hover:underline">FEATURE</a>
         <a href="#price" class="brand-navi-letter hover:underline">PRICE</a>
+        <a href="#lesson" class="brand-navi-letter hover:underline nav-lesson">LESSON</a>
         <a href="#certification" class="brand-navi-letter hover:underline">CERTIFICATION</a>
         <button class="w-24 h-9 flex justify-center items-center bg-black/80 rounded-full shadow-[inset_0px_2px_4px_0px_rgba(0,0,0,0.05)] hover:bg-white/20 hover:outline hover:outline-white transition-all">
           <span class="text-center brand-navi-letter">LOG IN</span>
@@ -81,10 +82,26 @@ import logoIcon from '~/assets/icons/LOGO.svg?url';
     });
   };
 
+  // Lesson 链接导航处理
+  const setupLessonLink = () => {
+    const lessonLink = document.querySelector('.nav-lesson');
+    if (lessonLink) {
+      lessonLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/lesson';
+      });
+    }
+  };
+
   // Initial setup
   setupMobileMenu();
+  setupLessonLink();
+  
   // Handle view transitions if applicable
-  document.addEventListener('astro:after-swap', setupMobileMenu);
+  document.addEventListener('astro:after-swap', () => {
+    setupMobileMenu();
+    setupLessonLink();
+  });
 </script>
 
 <style>
