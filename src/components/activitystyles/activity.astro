@@ -423,6 +423,13 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
             alert("Please enter your email address.");
             return;
           }
+          
+          // Validate email format (@xxx.com)
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email.value.trim())) {
+            alert("Please enter a valid email address (e.g., user@example.com).");
+            return;
+          }
 
           sliderTrack.style.transform = 'translateX(-100%)';
         });
