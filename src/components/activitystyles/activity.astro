@@ -605,6 +605,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           const minAnimationTime = 3000; // Run animation for at least 3 seconds
 
           try {
+            // Use the same action for both models, just pass different model parameter
             const resultPromise = actions.generateRevelation({
               num1: numbers[0]?.value?.trim() || '',
               num2: numbers[1]?.value?.trim() || '',
@@ -614,6 +615,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
               email: emailValue || undefined,
               preferredLanguage: 'English',
               visitCount: 1,
+              model: selectedModel === 'zora' ? 'zora' : 'luca',
             });
 
             // Wait for both the result and the minimum animation time
@@ -907,6 +909,14 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
       const tryParseJson = (text) => {
         if (!text) return null;
         let trimmed = text.trim();
+        
+        // Handle ZORA format: greeting + JSON
+        // Look for JSON object starting with { and ending with }
+        const jsonMatch = trimmed.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          trimmed = jsonMatch[0];
+        }
+        
         // Remove markdown code blocks if present
         const markdownMatch = trimmed.match(/^```(?:json)?\s*([\s\S]*?)\s*```$/i);
         if (markdownMatch) {
@@ -925,41 +935,61 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
         if (!value || typeof value !== 'object') return null;
         const obj = value as Record<string, unknown>;
 
-        // Helper to find value by multiple keys
-        const getVal = (keys: string[]) => {
-          for (const k of keys) {
-            if (obj[k] !== undefined) return obj[k];
-          }
-          return undefined;
-        };
+        // Direct JSON key mapping - Chinese keys to English field names
+        // Support both LUCA and ZORA field names
+        const questionVal = obj['你的问题是'];
+        const analysisVal = obj['问题拆解'] || obj['analysis'];
+        const spiritsVal = obj['用神信息'] || obj['spirits'];
+        const interpretationVal = obj['解读'] || obj['interpretation'];
+        const comprehensiveVal = obj['综合判断']; // ZORA specific
+        const adviceVal = obj['建议'] || obj['advice'];
+        const wisdomVal = obj['鼓励'] || obj['wisdom'];
+        const oneLineVal = obj['一句话结论'] || obj['oneLine'];
+        const oneLineAdviceVal = obj['一句话建议']; // ZORA specific
 
-        const analysisVal = getVal(['问题拆解', 'analysis']);
-        const spiritsVal = getVal(['用神信息', 'spirits']);
-        const interpretationVal = getVal(['解读', 'interpretation']);
-        const adviceVal = getVal(['建议', 'advice']);
-        const wisdomVal = getVal(['鼓励', 'wisdom']);
-        const oneLineVal = getVal(['一句话结论', 'oneLine']);
-
-        const analysis = typeof analysisVal === 'string' ? analysisVal : '';
+        // Process analysis (string)
+        let analysis = typeof analysisVal === 'string' ? analysisVal : '';
+        
+        // Prepend question context if available (ZORA)
+        if (typeof questionVal === 'string' && questionVal) {
+          analysis = `【你的问题】\n${questionVal}\n\n${analysis}`;
+        }
+        
+        // Process spirits (array of strings)
         const spiritsArray = Array.isArray(spiritsVal) ? spiritsVal : [];
         const spirits = spiritsArray
           .filter((item) => typeof item === 'string')
           .map((item) => `• ${item}`)
           .join('\n');
-        const interpretation = typeof interpretationVal === 'string' ? interpretationVal : '';
-        const advice = typeof adviceVal === 'string' ? adviceVal : '';
+        
+        // Process interpretation and append comprehensive judgment if available (ZORA)
+        let interpretation = typeof interpretationVal === 'string' ? interpretationVal : '';
+        if (typeof comprehensiveVal === 'string' && comprehensiveVal) {
+          interpretation = interpretation 
+            ? `${interpretation}\n\n【综合判断】\n${comprehensiveVal}`
+            : `【综合判断】\n${comprehensiveVal}`;
+        }
+        
+        // Process advice and prepend one-line advice if available (ZORA)
+        let advice = typeof adviceVal === 'string' ? adviceVal : '';
+        if (typeof oneLineAdviceVal === 'string' && oneLineAdviceVal) {
+          advice = `【一句话建议】\n${oneLineAdviceVal}\n\n${advice}`;
+        }
+        
         const wisdom = typeof wisdomVal === 'string' ? wisdomVal : '';
         const oneLine = typeof oneLineVal === 'string' ? oneLineVal : '';
 
+        // Return null if all fields are empty
         if (!analysis && !spirits && !interpretation && !advice && !wisdom && !oneLine) return null;
 
+        // Prepend one-line summary to analysis if available
         const analysisWithSummary = oneLine
           ? `【一句话结论】\n${oneLine}\n\n${analysis}`.trim()
           : analysis;
 
         return {
           analysis: analysisWithSummary || 'No analysis provided.',
-          spirits: spirits || 'No spirits provided.',
+          spirits: spirits || 'No spirits information available.',
           interpretation: interpretation || 'No interpretation provided.',
           advice: advice || 'No advice provided.',
           wisdom: wisdom || 'No wisdom provided.',

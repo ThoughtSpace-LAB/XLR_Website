@@ -1,7 +1,7 @@
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { randomUUID } from "node:crypto";
-import { callAdkAgent } from "./adk";
+import { callAdkAgent, callSfcAgent, initSfcSession } from "./adk";
 
 const APP_NAME = "SFC_agent";
 
@@ -67,6 +67,7 @@ export const server = {
       email: z.string().email().optional(),
       preferredLanguage: z.string().default("English"),
       visitCount: z.number().int().min(1).default(1),
+      model: z.enum(["luca", "zora"]).default("luca"), // Model selection
       // idToken: z.string().optional(), // .min(1, "Google ID Token is required"), // 暂时注释掉
     }),
     handler: async (input, context) => {
@@ -74,6 +75,56 @@ export const server = {
       // 注意：context.locals 只能在 SSR 模式下获取到，如果是纯静态构建可能会出错，需要确保 adapter 模式正确
       const env = context.locals?.runtime?.env || import.meta.env;
 
+      const nonce = randomUUID();
+
+      // ZORA uses a different endpoint and format
+      if (input.model === "zora") {
+        const zoraApiUrl =
+          env.ZORA_APP_URL ||
+          (import.meta.env.ZORA_APP_URL as string | undefined) ||
+          "https://sfc-adk-ly-822219439970.asia-east1.run.app"; // fallback
+        
+        // ZORA uses short prefixes
+        const userId = input.email
+          ? `u_${input.email.replace(/[^a-zA-Z0-9]/g, "_")}`
+          : `u_${nonce}`;
+        const sessionId = `s_${nonce}`;
+        
+        // ZORA uses a simpler format: "num1 num2 gender question"
+        const genderText = input.gender === "male" ? "男" : "女";
+        const zoraPrompt = `${input.num1} ${input.num2} ${genderText} ${input.question}`;
+
+        // Initialize session for ZORA
+        await initSfcSession({
+          apiUrl: zoraApiUrl,
+          appName: APP_NAME,
+          userId,
+          sessionId,
+          preferredLanguage: input.preferredLanguage,
+          visitCount: input.visitCount,
+        });
+
+        const payload = await callSfcAgent({
+          apiUrl: zoraApiUrl,
+          appName: APP_NAME,
+          userId,
+          sessionId,
+          prompt: zoraPrompt,
+        });
+
+        const text = extractModelText(payload)?.trim() ?? "";
+
+        if (!text) {
+          throw new Error("ZORA returned an empty response.");
+        }
+
+        return {
+          text,
+          raw: payload,
+        };
+      }
+
+      // LUCA model (original logic)
       const appUrl =
         env.SFC_APP_URL ||
         env.APP_URL ||
@@ -84,10 +135,7 @@ export const server = {
         throw new Error("SFC_APP_URL is not configured.");
       }
 
-      // 2. 使用前端传递的 ID Token
-      // const idToken = input.idToken;
-
-      const nonce = randomUUID();
+      // LUCA uses full prefixes
       const userId = input.email
         ? `user_${input.email.replace(/[^a-zA-Z0-9]/g, "_")}`
         : `user_${nonce}`;
@@ -101,63 +149,26 @@ export const server = {
         question: input.question,
       });
 
-      // 3. 构造请求头
-      const headers: HeadersInit = {
-        "Content-Type": "application/json",
-      };
-      // if (idToken) {
-      //   headers["Authorization"] = `Bearer ${idToken}`;
-      // }
-
-      console.log(
-        `正在请求 Session: ${appUrl}/apps/${APP_NAME}/users/${userId}/sessions/${sessionId}`,
-      );
-
-      const sessionResponse = await fetch(
-        `${appUrl}/apps/${APP_NAME}/users/${userId}/sessions/${sessionId}`,
-        {
-          method: "POST",
-          headers,
-          body: JSON.stringify({
-            preferred_language: input.preferredLanguage,
-            visit_count: input.visitCount,
-          }),
-        },
-      );
-
-      if (!sessionResponse.ok) {
-        const errorText = await sessionResponse.text();
-        // 401/403 通常是 Token 问题
-        console.error("Session 初始化失败:", sessionResponse.status, errorText);
-        throw new Error(
-          `Session init failed (${sessionResponse.status}): ${errorText}`,
-        );
-      }
-
-      console.log("Session 初始化成功，正在调用 Run...");
-
-      const runResponse = await fetch(`${appUrl}/run`, {
-        method: "POST",
-        headers,
-        body: JSON.stringify({
-          app_name: APP_NAME,
-          user_id: userId,
-          session_id: sessionId,
-          new_message: {
-            role: "user",
-            parts: [{ text: prompt }],
-          },
-          streaming: false,
-        }),
+      // Initialize session for LUCA
+      await initSfcSession({
+        apiUrl: appUrl,
+        appName: APP_NAME,
+        userId,
+        sessionId,
+        preferredLanguage: input.preferredLanguage,
+        visitCount: input.visitCount,
       });
 
-      if (!runResponse.ok) {
-        const errorText = await runResponse.text();
-        console.error("Run 调用失败:", runResponse.status, errorText);
-        throw new Error(`Run failed (${runResponse.status}): ${errorText}`);
-      }
+      // Call LUCA API
+      const payload = await callSfcAgent({
+        apiUrl: appUrl,
+        appName: APP_NAME,
+        userId,
+        sessionId,
+        prompt,
+        useSnakeCase: true, // LUCA uses snake_case
+      });
 
-      const payload = (await runResponse.json()) as unknown;
       const text = extractModelText(payload)?.trim() ?? "";
 
       if (!text) {
