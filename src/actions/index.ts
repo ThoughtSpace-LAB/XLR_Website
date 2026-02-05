@@ -94,22 +94,14 @@ export const server = {
         const genderText = input.gender === "male" ? "男" : "女";
         const zoraPrompt = `${input.num1} ${input.num2} ${genderText} ${input.question}`;
 
-        // Initialize session for ZORA
-        await initSfcSession({
-          apiUrl: zoraApiUrl,
-          appName: APP_NAME,
-          userId,
-          sessionId,
-          preferredLanguage: input.preferredLanguage,
-          visitCount: input.visitCount,
-        });
-
+        // ZORA doesn't need session initialization, call API directly
         const payload = await callSfcAgent({
           apiUrl: zoraApiUrl,
           appName: APP_NAME,
           userId,
           sessionId,
           prompt: zoraPrompt,
+          useSnakeCase: false, // ZORA uses camelCase
         });
 
         const text = extractModelText(payload)?.trim() ?? "";
