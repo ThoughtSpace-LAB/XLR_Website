@@ -90,9 +90,9 @@ export const server = {
           : `u_${nonce}`;
         const sessionId = `s_${nonce}`;
         
-        // ZORA uses a simpler format: "num1 num2 gender question"
-        const genderText = input.gender === "male" ? "男" : "女";
-        const zoraPrompt = `${input.num1} ${input.num2} ${genderText} ${input.question}`;
+        // ZORA format: uses Chinese punctuation like LUCA
+        const genderText = input.gender === "male" ? "男生" : "女生";
+        const zoraPrompt = `${input.num1}，${input.num2}，${input.time}点，${genderText}，${input.question.trim()}`;
 
         // Initialize ZORA session before calling API
         await initZoraSession({
