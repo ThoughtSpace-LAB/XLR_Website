@@ -2,6 +2,11 @@
 import Layout from '~/layouts/Layout.astro';
 import SerenaActivity from '~/components/activitystyles/activity.astro';
 import '~/styles/feature-text.css';
+import { defaultLang } from '~/i18n/utils';
+
+// Get language from URL query parameter or use default
+const url = new URL(Astro.request.url);
+const lang = (url.searchParams.get('lang') || defaultLang) as 'en' | 'zh' | 'zh-tw' | 'ja' | 'ko';
 
 const metadata = {
   title: 'Activity — SERENA',
@@ -39,6 +44,6 @@ const metadata = {
     });
   </script>
 
-<SerenaActivity />
+<SerenaActivity lang={lang} />
   
 </Layout>

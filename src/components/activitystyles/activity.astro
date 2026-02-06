@@ -11,11 +11,15 @@ import cardBg from '~/assets/images/activityimages/bless/card-BG.jpg';
 import cardwheel from '~/assets/images/activityimages/bless/card-wheel.jpg';
 import cardshadow from '~/assets/images/activityimages/bless/card-shadow.jpg';
 import activityline from '~/assets/images/activityimages/bless/1activity-line.svg';
+import { useTranslations } from '~/i18n/utils';
+
+const { lang = 'en' } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <div class="relative">
   <a href="/" aria-label="Back to home" class="fixed top-4 right-4 md:top-6 md:right-6 z-50 inline-flex items-center gap-2 py-2 px-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-all text-sm md:text-base">
-    ← Back
+    ← {t('activity.back')}
   </a>
 
   <section id="activity-page" class=" h-[100vh] w-full flex items-center justify-center bg-black relative">
@@ -37,7 +41,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
       <!-- Step 1 Container -->
       <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center px-4" id="step-1">
         <div class="flex flex-col w-full max-w-xl" id="pagewrapper">
-          <h1 class="activity-headline text-2xl md:text-5xl text-center mb-4">Begin Your Wishing Journey</h1>
+          <h1 class="activity-headline text-2xl md:text-5xl text-center mb-4">{t('activity.step1.headline')}</h1>
           <div class="w-full h-[5vh] md:h-[10vh] relative inset-0 z-0 opacity-90">
             <img 
             src={activityline.src}
@@ -48,19 +52,17 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
             />
           </div>
           
-          <h1 class="activity-paragraph text-center mb-10 px-10 text-sm md:text-base">
-            Your information is only used to deliver your guidance.<br class="hidden md:block" />
-            We respect your privacy and your space.
+          <h1 class="activity-paragraph text-center mb-10 px-10 text-sm md:text-base" set:html={t('activity.step1.privacy')}>
           </h1>
           
           <!-- Gender single-choice (radio-backed) -->
           <div id="gender-input" class="nebula-input flex flex-row w-full items-center justify-center z-20">
             <div class="gender-options w-full md:w-[50vw] justify-evenly mx-auto" role="radiogroup" aria-labelledby="gender-label">
               <input type="radio" id="gender-female" name="gender" value="female" required />
-              <label class="gender-option" for="gender-female">Female</label>
+              <label class="gender-option" for="gender-female">{t('activity.step1.gender.female')}</label>
 
               <input type="radio" id="gender-male" name="gender" value="male" required />
-              <label class="gender-option" for="gender-male">Male</label>
+              <label class="gender-option" for="gender-male">{t('activity.step1.gender.male')}</label>
             </div>
             <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
             <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
@@ -68,7 +70,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
 
           <div id="email-input" class="nebula-input z-20 py-5 w-[60vw] md:max-w-md mx-auto align-center">
           <input type="email" name="email" autocomplete="email" class="input w-full" required />
-          <label class="user-label">Email Address</label>
+          <label class="user-label">{t('activity.step1.email')}</label>
           <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
           <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
           <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
@@ -80,7 +82,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
           <!-- Continue button -->
           <div class="w-full flex items-center justify-center mt-6">
             <a href="#" class="continue-button-bg z-50 relative" id="continueBtn-step1">
-              Continue
+              {t('activity.step1.continue')}
             </a>
           </div>
         </div>
@@ -115,17 +117,17 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                 <!-- Step 2-1: Number Input and Question -->
                 <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 md:gap-6" id="step-2-1">
                   <a href="#" class="relative z-50 text-white/40 hover:text-white transition-all text-xs md:text-sm uppercase tracking-widest" id="backBtn-step2">
-                  ← Back
+                  ← {t('activity.back')}
                   </a>
-              <h1 class="activity-headline text-2xl md:text-4xl text-center" id="Manifestation">Manifestation</h1>
+              <h1 class="activity-headline text-2xl md:text-4xl text-center" id="Manifestation">{t('activity.step2.manifestation')}</h1>
               <h1 class="activity-paragraph text-center px-2 text-sm md:text-base">
-                  Write down 2 lucky numbers and ask your question.
+                  {t('activity.step2.instruction')}
               </h1>
                   <div class="flex flex-col w-full" id="pagewrapper">
                     <div class="flex flex-row justify-evenly gap-4 md:gap-6" id="numbers-inputs">
                       <div id="number-input-1" class="nebula-input relative z-20 w-1/3 md:w-30 lg:w-35">
                         <input type="text" name="text" autocomplete="off" class="input w-full" required />
-                        <label class="user-label">No.1</label>
+                        <label class="user-label">{t('activity.step2.number1')}</label>
                         <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                         <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
                         <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
@@ -136,7 +138,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
 
                       <div id="number-input-2" class="nebula-input relative z-20 w-1/3 md:w-30 lg:w-35">
                         <input type="text" name="text" autocomplete="off" class="input w-full" required />
-                        <label class="user-label">No.2</label>
+                        <label class="user-label">{t('activity.step2.number2')}</label>
                         <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                         <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
                         <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
@@ -149,7 +151,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                     <!-- Custom Question (Line Style) -->
                     <div id="custom-question-input" class="nebula-input line-style flex flex-col justify-center items-center z-20 w-full mt-2">
                       <textarea required name="custom-question" rows="1" class=" input justify-center items-center w-[70vw] md:w-full overflow-hidden" placeholder=" "></textarea>
-                      <label class="user-label px-8">Ask your question...</label>
+                      <label class="user-label px-8">{t('activity.step2.question')}</label>
                       <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                       <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
                       <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
@@ -161,7 +163,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                     <!-- Continue button for Step 2-1 -->
                     <div class="w-full flex justify-center mt-6">
                       <a href="#" class="continue-button-bg z-50 relative" id="continueBtn-step2-1">
-                        Continue
+                        {t('activity.step1.continue')}
                       </a>
                     </div>
                   </div>
@@ -170,11 +172,11 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                 <!-- Step 2-1b: Choose Calculation Model -->
                 <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 md:gap-6" id="step-2-1b">
                   <a href="#" class="relative z-50 text-white/40 hover:text-white transition-all text-xs md:text-sm uppercase tracking-widest" id="backBtn-step2-1b">
-                  ← Back
+                  ← {t('activity.back')}
                   </a>
-              <h1 class="activity-headline text-2xl md:text-4xl text-center">Choose Path</h1>
+              <h1 class="activity-headline text-2xl md:text-4xl text-center">{t('activity.step2b.headline')}</h1>
               <h1 class="activity-paragraph text-center px-2 text-sm md:text-base">
-                  Select the model for your revelation.
+                  {t('activity.step2b.instruction')}
               </h1>
                   <div class="flex flex-col w-full" id="pagewrapper">
                     <div class="flex flex-col gap-3 md:gap-4 w-full">
@@ -183,9 +185,9 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                         <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                         <div class="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-500 pointer-events-none" style="box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0), 0 0 20px rgba(212, 175, 55, 0); filter: drop-shadow(0 0 0px rgba(212, 175, 55, 0));" id="model-luca-glow"></div>
                         <div class="relative">
-                          <h2 class="text-sm md:text-base font-medium text-white/95">LUCA</h2>
-                          <p class="text-xs md:text-xs text-white/60 hover:text-white">Luck + Calculation</p>
-                          <p class="text-xs md:text-xs text-white/50 mt-1">Predict minor events within a month. For immediate, minor matters. Best for quick binary outcomes or daily forecasts (e.g., "Will it rain?").</p>
+                          <h2 class="text-sm md:text-base font-medium text-white/95">{t('activity.step2b.luca.title')}</h2>
+                          <p class="text-xs md:text-xs text-white/60 hover:text-white">{t('activity.step2b.luca.subtitle')}</p>
+                          <p class="text-xs md:text-xs text-white/50 mt-1">{t('activity.step2b.luca.desc')}</p>
                         </div>
                       </button>
 
@@ -194,9 +196,9 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                         <div class="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                         <div class="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-500 pointer-events-none" style="box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0), 0 0 20px rgba(212, 175, 55, 0); filter: drop-shadow(0 0 0px rgba(212, 175, 55, 0));" id="model-zora-glow"></div>
                         <div class="relative">
-                          <h2 class="text-sm md:text-base font-medium text-white/95">ZORA</h2>
-                          <p class="text-xs md:text-xs text-white/60">Zodiac + Aura</p>
-                          <p class="text-xs md:text-xs text-white/50 mt-1">Predict events within six months. For complex, long-term trajectories. It tracks the shifting dynamics of a situation and identifies the strategic key to a breakthrough.</p>
+                          <h2 class="text-sm md:text-base font-medium text-white/95">{t('activity.step2b.zora.title')}</h2>
+                          <p class="text-xs md:text-xs text-white/60">{t('activity.step2b.zora.subtitle')}</p>
+                          <p class="text-xs md:text-xs text-white/50 mt-1">{t('activity.step2b.zora.desc')}</p>
                         </div>
                       </button>
                     </div>
@@ -204,7 +206,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                     <!-- Continue button for Step 2-1b -->
                     <div class="w-full flex justify-center mt-6">
                       <a href="#" class="continue-button-bg z-50 relative" id="continueBtn-step2-1b-placeholder">
-                        Continue
+                        {t('activity.step1.continue')}
                       </a>
                     </div>
                   </div>
@@ -216,7 +218,15 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                    <!-- Loader currently visible constantly in step 2-2 -->
                    <div class="loader-container">
                       <div class="loader"></div>
-                      <div id="loading-text" class="loading-text w-full max-w-md md:w-[30vw] lg:w-[25vw]">Casting...</div>
+                      <div id="loading-text" class="loading-text w-full max-w-md md:w-[30vw] lg:w-[25vw]" data-messages={JSON.stringify([
+                        `<strong style='font-size: 1em;line-height: 1;'>${t('activity.loading.tip1.title')}</strong><br/><span style='font-size: 0.8em; line-height: 1;'>${t('activity.loading.tip1.desc')}</span>`,
+                        `<strong style='font-size: 1em;line-height: 1;'>${t('activity.loading.tip2.title')}</strong><br/><span style='font-size: 0.8em;line-height: 1;'>${t('activity.loading.tip2.desc')}</span>`,
+                        `<strong style='font-size: 1em;line-height: 1;'>${t('activity.loading.tip3.title')}</strong><br/><span style='font-size: 0.8em;line-height: 1;'>${t('activity.loading.tip3.desc')}</span>`,
+                        `<strong style='font-size: 1em;line-height: 1;'>${t('activity.loading.tip4.title')}</strong><br/><span style='font-size: 0.8em;line-height: 1;'>${t('activity.loading.tip4.desc')}</span>`,
+                        `<strong style='font-size: 1em;line-height: 1;'>${t('activity.loading.tip5.title')}</strong><br/><span style='font-size: 0.8em;line-height: 1;'>${t('activity.loading.tip5.desc')}</span>`,
+                        `<strong style='font-size: 1em;line-height: 1;'>${t('activity.loading.tip6.title')}</strong><br/><span style='font-size: 0.8em;line-height: 1;'>${t('activity.loading.tip6.desc')}</span>`,
+                        `<strong style='font-size: 1em;line-height: 1;'>${t('activity.loading.tip7.title')}</strong><br/><span style='font-size: 0.8em;line-height: 1;'>${t('activity.loading.tip7.desc')}</span>`
+                      ])}>{t('activity.loading.casting')}</div>
                    </div>
 
                    <div id="step2-card-placeholder" class="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 md:gap-8 opacity-0 blur-md translate-y-[100px] transition-all duration-1000 ease-out">
@@ -229,29 +239,29 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
                 </div>
                 <!-- Step 2-3: Answer -->
                 <div class="w-full h-full flex-shrink-0 flex flex-col items-center justify-center gap-4 p-2 md:p-4" id="step-2-3">
-                    <h1 class="activity-headline text-xl md:text-3xl text-center mb-1">Revelation</h1>
+                    <h1 class="activity-headline text-xl md:text-3xl text-center mb-1">{t('activity.revelation.title')}</h1>
                     
                     <!-- Tabs -->
                     <div class="flex flex-wrap gap-1.5 md:gap-2 justify-center w-full max-w-4xl z-50">
-                        <button class="tab-btn active-tab text-xs md:text-sm px-2.5 py-1" data-tab="analysis">Analysis</button>
-                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="spirits">Spirits</button>
-                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="interpretation">Interp.</button>
-                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="advice">Advice</button>
-                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="wisdom">Wisdom</button>
+                        <button class="tab-btn active-tab text-xs md:text-sm px-2.5 py-1" data-tab="analysis">{t('activity.revelation.tab.analysis')}</button>
+                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="spirits">{t('activity.revelation.tab.spirits')}</button>
+                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="interpretation">{t('activity.revelation.tab.interpretation')}</button>
+                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="advice">{t('activity.revelation.tab.advice')}</button>
+                        <button class="tab-btn text-xs md:text-sm px-2.5 py-1" data-tab="wisdom">{t('activity.revelation.tab.wisdom')}</button>
                     </div>
 
                     <!-- Content Box -->
                     <div class="w-full max-w-4xl h-[45vh] md:h-[50vh] bg-black/40 backdrop-blur-md border border-white/10 rounded-xl p-4 md:p-6 overflow-y-auto content-box-scroll z-50 shadow-2xl">
                         <div id="result-content" class="text-white/90 text-sm md:text-lg leading-relaxed font-serif">
                             <!-- Content will be injected here -->
-                            <p class="animate-pulse">Loading revelation...</p>
+                            <p class="animate-pulse">{t('activity.revelation.loading')}</p>
                         </div>
                     </div>
                     
                     <!-- Fly to Lantern Button -->
                     <div class="w-full flex justify-center mt-2 md:mt-4">
                         <button id="goToStep3Btn" class="continue-button-bg z-50 relative text-sm md:text-base">
-                            Bless My Wish
+                            {t('activity.revelation.button')}
                         </button>
                     </div>
 
@@ -287,7 +297,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
              <div class="wish-input-wrapper mb-6">
                 <div class="nebula-input line-style w-full">
                   <textarea id="user-wish" name="wish" required rows="1" class="input w-full resize-none overflow-hidden text-lg md:text-xl" placeholder=" "></textarea>
-                  <label class="user-label">Write your wish here...</label>
+                  <label class="user-label">{t('activity.wish.input')}</label>
                   <div class="nebula-particle" style="--x:0.2; --y:-0.4; --delay:0.1s"></div>
                   <div class="nebula-particle" style="--x:0.5; --y:-0.2; --delay:0.3s"></div>
                   <div class="nebula-particle" style="--x:0.3; --y:0.3; --delay:0.5s"></div>
@@ -298,7 +308,7 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
              </div>
 
              <div class="quantity-selector flex items-center justify-center gap-4 mb-6">
-                <span class="text-white/60 uppercase tracking-widest text-xs md:text-sm">Lanterns</span>
+                <span class="text-white/60 uppercase tracking-widest text-xs md:text-sm">{t('activity.wish.lanterns')}</span>
                 <div class="flex items-center gap-3">
                   <button class="qty-btn" id="qty-minus">-</button>
                   <span class="qty-value text-xl md:text-2xl text-white font-serif min-w-[2ch] text-center" id="qty-val">1</span>
@@ -307,12 +317,12 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
              </div>
 
              <h2 class="wish-text text-lg md:text-2xl text-center text-white/90 font-serif leading-snug mb-8">
-               Write your wish and let it soar to the skies!<br/> 
-               <span class="wish-subtext block mt-2 text-xs md:text-sm text-white/40 uppercase tracking-widest">A one-dollar contribution for each blessing lantern.</span>
+               {t('activity.wish.headline')}<br/> 
+               <span class="wish-subtext block mt-2 text-xs md:text-sm text-white/40 uppercase tracking-widest">{t('activity.wish.subtext')}</span>
              </h2>
              <div class="wish-buttons flex flex-col gap-4">
-                <button class="wish-btn w-auto px-8 py-3" id="wishBtn-make">Bless my wish</button>
-                <button class="wish-btn w-auto px-8 py-3 variant-outline" id="wishBtn-exit">Exit</button>
+                <button class="wish-btn w-auto px-8 py-3" id="wishBtn-make">{t('activity.wish.bless')}</button>
+                <button class="wish-btn w-auto px-8 py-3 variant-outline" id="wishBtn-exit">{t('activity.wish.exit')}</button>
              </div>
            </div>
 
@@ -791,18 +801,27 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
 
       // Loading Text Cycle
       const loadingText = document.getElementById('loading-text') as HTMLElement;
-      const messages = [
-        "<strong style='font-size: 1em;line-height: 1;'>Be Specific</strong><br/><span style='font-size: 0.8em; line-height: 1;'>Provide clear context, including your role and others involved, to help the universe pin-point your energy.</span>",
-        "<strong style='font-size: 1em;line-height: 1;'>Focus on Yourself</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Only ask questions that directly relate to your own path and immediate experiences.</span>",
-        "<strong style='font-size: 1em;line-height: 1;'>Ask About the Near Term</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Seek guidance for events occurring within the next three months for maximum accuracy.</span>",
-        "<strong style='font-size: 1em;line-height: 1;'>Seek Quick Clarity</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Perfect for Yes/No outcomes, finding lost items, or judging the favorability of sudden news.</span>",
-        "<strong style='font-size: 1em;line-height: 1;'>One Question at a Time</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Each consultation should focus on a single event to ensure a clear and unclouded response.</span>",
-        "<strong style='font-size: 1em;line-height: 1;'>Center Your Intent</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Approach the oracle with a firm belief and a clear mind; sincerity strengthens your cosmic link.</span>",
-        "<strong style='font-size: 1em;line-height: 1;'>Find Stillness</strong><br/><span style='font-size: 0.8em;line-height: 1;'>Sit in a quiet environment and avoid consulting while walking, running, or multitasking.</span>"
-      ];
+      let messages: string[] = [];
+      
+      // Get messages from data attribute
+      if (loadingText) {
+        const messagesAttr = loadingText.getAttribute('data-messages');
+        if (messagesAttr) {
+          try {
+            messages = JSON.parse(messagesAttr);
+          } catch (e) {
+            console.error('Failed to parse messages:', e);
+            // Fallback to default
+            messages = ["Casting..."];
+          }
+        }
+      }
       
       let msgIndex = 0;
-      if (loadingText) {
+      if (loadingText && messages.length > 0) {
+        // Set initial message
+        loadingText.innerHTML = messages[0];
+        
         const intervalId = setInterval(() => {
           // Fade out
           loadingText.style.opacity = '0';
@@ -828,7 +847,8 @@ import activityline from '~/assets/images/activityimages/bless/1activity-line.sv
       const resultContent = document.getElementById('result-content');
       const tabs = document.querySelectorAll('.tab-btn');
 
-      const loadingMarkup = `<p class="animate-pulse">Loading revelation...</p>`;
+      // Get loading text from the DOM (already translated in HTML)
+      const loadingMarkup = resultContent?.innerHTML || `<p class="animate-pulse">Loading...</p>`;
       let data: Record<string, string> = {
         analysis: loadingMarkup,
         spirits: loadingMarkup,
