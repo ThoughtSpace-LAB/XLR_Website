@@ -1,76 +1,76 @@
 export const ui = {
-  // 简体中文 (Existing)
+ // 简体中文 (Existing)
   zh: {
     'nav.home': '首页',
-    'site.title': 'SERENA — 您的私人神谕应用',
-    'site.description': 'SERENA 通过直观的提示和个性化的见解，为您提供清晰、答案和指引。',
-    'landing.headline': '您的宇宙指引',
-    'landing.content': '通过 Serena，寻找你存在的痕迹：你的道路，你的命运，以及你内心的低语。<br />然而，最真实的旅程回归于你。命运不是你的主宰；你是自己命运的建筑师。',
-    'landing.button.bless': '开启祝福之旅',
+    'site.title': 'SERENA — 您的科学预测伙伴',
+    'site.description': 'SERENA 将为你提供束缚中的刀剑，迷雾中的电筒，期待看到命运后勇敢选择的你。',
+    'landing.headline': '来自宇宙能量的指引',
+    'landing.content': '通过 Serena ：看脚下路，演未定命，行勇敢心。以梦为马，御马而行。以自身愿力，破命运樊笼,
+    'landing.button.bless': '预测&祈福之旅',
 
     // MainPage
     'main.loader.prefix': 'Serena 助你寻找答案',
     'main.loader.your': '关于你的',
-    'main.loader.word.wealth': '财富',
-    'main.loader.word.friends': '人际',
+    'main.loader.word.wealth': '财运',
+    'main.loader.word.friends': '感情',
     'main.loader.word.career': '事业',
     'main.loader.suffix': '最重要的是 —— 你自己',
 
-    'main.model1.title': '模型 I.',
-    'main.model1.subtitle': '洞察',
-    'main.card.scope': '范围',
-    'main.model1.desc': '对日常生活和当前状况的即时清晰度。未来一周至一个月的见解。<br />最适合日常事务、短途旅行和日常决策。',
+    'main.model1.title': ' Luca',
+    'main.model1.subtitle': ' Luck (幸运) + Calculation (计算/算法)',
+    'main.card.scope': '发觉当下机会',
+    'main.model1.desc': '通过当下时空信息，撕开未来一角。可预测一周至一个月内日常小事。<br />适用于：快速决策的小事。',
     'main.card.precision': '精准度',
-    'main.card.resonance': '共鸣度',
-    
-    'main.model2.title': '模型 II.',
-    'main.model2.subtitle': '神谕',
-    'main.model2.desc': '对你生活和重大事业的深度架构分析。对未来 12 个月的远见。<br />需要虔诚的状态和平静的心态。仅在事情真正重要时询问。',
+    'main.card.resonance': '修改度',
+
+    'main.model2.title': 'Zora',
+    'main.model2.subtitle': 'Zodiac (黄道/天体) + Aura (灵气/能量)',
+    'main.model2.desc': '通过天地感应建立能量链接。可预测未来6个月内个人相关事物。<br />适用于：仅在事情真正重要时询问，一个时辰内最多一次最佳。',
 
     // FeaturePage
-    'feature.header': '工作原理',
-    'feature.subheader': '从提问到宇宙启示的无缝旅程，融合了古老智慧与人工智能。',
-    'feature.steps.01.title': '意图',
-    'feature.steps.01.desc': '将此意图锚定进入宇宙数据流。只需提出你的问题，即可开始校准过程。我们的界面直接连接到天体算法。',
+    'feature.header': '预测原理',
+    'feature.subheader': '传承不泥古，创新不离宗，运用古老中国文化底蕴与现代人工智能科学相结合的命运模型。',
+    'feature.steps.01.title': '意念',
+    'feature.steps.01.desc': '念念不忘，必有回响；将你的所愿所想的问题输入，运用古老的东方智慧链接宇宙回响。',
     'feature.steps.02.title': '能量分析',
-    'feature.steps.02.desc': '我们的 AI 引擎将古老算法与实时星图编织在一起，计算你独特的精神坐标，处理成千上万个天体数据点。',
+    'feature.steps.02.desc': '分析当下情况，未来转机，为你演示当下不同的行动对应着未来的千万种可能；利用超自然的力量趋吉避凶。',
     'feature.steps.03.title': '启示',
-    'feature.steps.03.desc': '通过个性化的精神解读揭示清晰度，提供清晰深刻的见解。你的命运以高保真分辨率绘制。',
-    
+    'feature.steps.03.desc': '最后一卦为问心。现在相随心转，未来境由心造，行动是最大的变量，趋吉避凶的同时寻找那个1%知而不避的他/她/内心冲动，即使死境仍有一卦名为置之死地而后生',
+
     // FeaturePageStickyCard
-    'feature.card.question': '在这个月星星对我的职业道路有什么启示？',
-    'feature.card.aligning': '正在与宇宙数据校准...',
-    'feature.card.bubble': '让 SERENA 解锁古老智慧，并以高分辨率绘制你的命运蓝图。',
+    'feature.card.question': '基于这个结果，如何做才能增加我成功的概率/逆转局势？',
+    'feature.card.aligning': '宇宙能量与你正在匹配中...',
+    'feature.card.bubble': '让 SERENA 解锁古老智慧，和你一同演化未来的无数种可能。',
 
     // MoonPage
-    'moon.header': '将被看见',
-    'moon.subheader': '清晰解读你的能量，揭示塑造你下一步的模式、时机和指引。',
-    'moon.card.01.subtitle': '超越当下的远见',
-    'moon.card.01.title': '感知隐秘',
-    'moon.card.01.desc': '此系统帮助你注意到他人忽视的事物。无论是即将转变的业务，逐渐疏远的伴侣，还是失去活力的计划，它让你看到未来的预兆。',
-    'moon.card.02.subtitle': '发现墙后的门',
-    'moon.card.02.title': '生活远见',
-    'moon.card.02.desc': '此功能照亮那些隐秘的开口——职业转折、意外的联系、可能将失败转化为自由的决定。它帮助你认识到命运往往隐藏在弯路之后。',
-    'moon.card.03.subtitle': '提前行动',
-    'moon.card.03.title': '揭示机会',
-    'moon.card.03.desc': '此功能允许你有意识地计划——选择你的时机、你的盟友、你的沉默时刻。在爱情、商业和每一个十字路口，你可以不再被动反应，而是从容清晰地行动。',
+    'moon.header': '玄学的科学性',
+    'moon.subheader': '玄学的科学性在于它是一套“高维信息的压缩与建模系统”。如果把宇宙看作一台超级计算机，这台计算机则由合理性、信息处理方式以及运行逻辑组成。',
+    'moon.card.01.subtitle': '玄学的“合理性”',
+    'moon.card.01.title': '哥德尔不完备定理（合理性）',
+    'moon.card.01.desc': '在一个自洽的系统中，必然存在“真”但“不可证明”的命题。如果玄学确实是“真”的，那么它们极有可能就属于那些“在现有科学框架内无法被证明”的真理',
+    'moon.card.02.subtitle': '玄学的“显化”',
+    'moon.card.02.title': '傅立叶函数（信息处理方式）',
+    'moon.card.02.desc': '所谓的“预测”，本质上是在做逆傅里叶变换——试图通过分析当前的频率分布，推导出未来某个时间点 波形高度（运气好坏），每个人都有自己的“频谱特征”。当你所处的环境（风水）/人/事，其频率与你的主频产生共振时，振幅（能量）会瞬间放大。改运的本质是改变你的频谱分布。',
+    'moon.card.03.subtitle': '玄学的“因果逻辑”',
+    'moon.card.03.title': '马尔可夫链（运行逻辑）',
+    'moon.card.03.desc': '未来只取决于现在，而与过去无关。当你改变风水/性格/行动任一变量，则迎来已经稳定数十年的马尔可夫链中的变数，从而改变原有的命运；一悟即至佛地',
 
     // PricePage
     'price.header.part1': '你来这里不是为了',
-    'price.header.part2': '得到一个答案。',
-    'price.header.part3': '你来这里是为了记住',
-    'price.header.part4': '你自己就是答案。',
+    'price.header.part2': '得到一个答案（解读掌纹的走向）。',
+    'price.header.part3': '你来这里是为了验证',
+    'price.header.part4': '你自己就是答案（双手握拳的力量）。',
     'price.championship.title': '加入我们的超能力锦标赛',
-    'price.championship.desc': '如果你是拥有任何特殊能力的个人，请报名参加我们的锦标赛。我们将承担你在旅途中的所有费用，包括往返机票、住宿和其他旅行费用（在适当的时候）。此外，我们将为你提供翻译。加入我们的年度比赛（潜在地点包括中国福建、印尼巴厘岛、美国夏威夷等）。',
-    
+    'price.championship.desc': '如果你是拥有任何特殊能力的个人，请报名参加我们的锦标赛。我们将承担你在旅途中的所有费用，包括往返机票、住宿和其他旅行费用（在适当的时候）。此外不需要担心语言问题，我们将为您提供翻译。提交您的个人能力介绍+个人联系信息至：huaguier@gmail.com加入我们的锦标赛（潜在地点包括中国福建、印尼巴厘岛、美国夏威夷等）。',
+
     // AskNowCard
-    'price.card.placeholder': '您的邮箱',
+    'price.card.placeholder': '你的邮箱',
     'price.card.button': '免费试用',
     'price.card.title': '现在提问',
-    'price.card.content': '每一个询问都是一面镜子<br/>反映了你是谁以及你正在成为谁。',
+    'price.card.content': '每一次行动都是一面镜子<br/>反映了即使现在身陷囹圄，你依旧可以成为谁的可能。',
 
     // FooterPage
-    'footer.description': '我们将个人能量洞察转化为清晰、实用的指导，帮助人们做出一致的决定并自信地前进。',
+    'footer.description': '我们将个人能量洞察转化为清晰、实用的指导，请相信相信的力量，坚定行动直至成功。',
     'footer.copyright': '版权所有 2025 @SERENA',
     'footer.nav.features': '功能',
     'footer.link.core': '核心功能',
@@ -80,7 +80,6 @@ export const ui = {
     'footer.link.contact': '联系',
     'footer.link.help': '帮助',
   },
-
     // 繁體中文 (Taiwan Localized)
   'zh-tw': { 
     'nav.home': '首頁',
