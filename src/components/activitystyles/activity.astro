@@ -15,10 +15,13 @@ import { useTranslations } from '~/i18n/utils';
 
 const { lang = 'en' } = Astro.props;
 const t = useTranslations(lang);
+
+// Determine home URL based on language
+const homeUrl = lang === 'en' ? '/' : `/${lang}/`;
 ---
 
 <div class="relative">
-  <a href="/" aria-label="Back to home" class="fixed top-4 right-4 md:top-6 md:right-6 z-50 inline-flex items-center gap-2 py-2 px-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-all text-sm md:text-base">
+  <a href={homeUrl} aria-label="Back to home" class="fixed top-4 right-4 md:top-6 md:right-6 z-50 inline-flex items-center gap-2 py-2 px-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-all text-sm md:text-base">
     ← {t('activity.back')}
   </a>
 
