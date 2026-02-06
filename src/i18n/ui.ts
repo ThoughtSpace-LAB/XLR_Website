@@ -5,7 +5,7 @@ export const ui = {
     'site.title': 'SERENA — 您的科学预测伙伴',
     'site.description': 'SERENA 将为你提供束缚中的刀剑，迷雾中的电筒，期待看到命运后勇敢选择的你。',
     'landing.headline': '来自宇宙能量的指引',
-    'landing.content': '通过 Serena ：看脚下路，演未定命，行勇敢心。以梦为马，御马而行。以自身愿力，破命运樊笼,
+    'landing.content': '通过 Serena ：看脚下路，演未定命，行勇敢心。以梦为马，御马而行。以自身愿力，破命运樊笼。',
     'landing.button.bless': '预测&祈福之旅',
 
     // MainPage
@@ -136,6 +136,7 @@ export const ui = {
     'activity.wish.bless': '祝福我的愿望',
     'activity.wish.exit': '离开',
   },
+
     // 繁體中文 (Taiwan Localized)
   'zh-tw': { 
     'nav.home': '首頁',
