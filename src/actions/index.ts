@@ -1,7 +1,7 @@
 import { defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { randomUUID } from "node:crypto";
-import { callAdkAgent, callSfcAgent, initSfcSession } from "./adk";
+import { callAdkAgent, callSfcAgent, initSfcSession, initZoraSession } from "./adk";
 
 const APP_NAME = "SFC_agent";
 
@@ -94,7 +94,15 @@ export const server = {
         const genderText = input.gender === "male" ? "男" : "女";
         const zoraPrompt = `${input.num1} ${input.num2} ${genderText} ${input.question}`;
 
-        // ZORA doesn't need session initialization, call API directly
+        // Initialize ZORA session before calling API
+        await initZoraSession({
+          apiUrl: zoraApiUrl,
+          appName: APP_NAME,
+          userId,
+          sessionId,
+        });
+
+        // Call ZORA API
         const payload = await callSfcAgent({
           apiUrl: zoraApiUrl,
           appName: APP_NAME,

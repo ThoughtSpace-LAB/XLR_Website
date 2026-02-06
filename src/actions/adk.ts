@@ -99,7 +99,7 @@ export const callSfcAgent = async (params: {
   }
 };
 
-// Initialize session for LUCA model
+// Initialize session for LUCA model (snake_case)
 export const initSfcSession = async (params: {
   apiUrl: string;
   appName: string;
@@ -138,6 +138,44 @@ export const initSfcSession = async (params: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Session initialization error:", error);
+    throw error;
+  }
+};
+
+// Initialize session for ZORA model (camelCase)
+export const initZoraSession = async (params: {
+  apiUrl: string;
+  appName: string;
+  userId: string;
+  sessionId: string;
+}) => {
+  const { apiUrl, appName, userId, sessionId } = params;
+
+  try {
+    console.log(`正在初始化 ZORA Session: ${apiUrl}/apps/${appName}/users/${userId}/sessions/${sessionId}`);
+
+    const response = await fetch(
+      `${apiUrl}/apps/${appName}/users/${userId}/sessions/${sessionId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}), // ZORA might need empty body or different params
+      },
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("ZORA Session 初始化失败:", response.status, errorText);
+      throw new Error(`ZORA Session init failed (${response.status}): ${errorText}`);
+    }
+
+    console.log("ZORA Session 初始化成功");
+    return true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    console.error("ZORA Session initialization error:", error);
     throw error;
   }
 };
