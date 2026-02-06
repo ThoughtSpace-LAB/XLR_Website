@@ -49,33 +49,24 @@ export const callSfcAgent = async (params: {
   userId: string;
   sessionId: string;
   prompt: string;
-  useSnakeCase?: boolean; // LUCA uses snake_case, ZORA uses camelCase
+  useSnakeCase?: boolean; // Both LUCA and ZORA use snake_case
 }) => {
-  const { apiUrl, appName, userId, sessionId, prompt, useSnakeCase = false } = params;
+  const { apiUrl, appName, userId, sessionId, prompt, useSnakeCase = true } = params;
 
   try {
     console.log(`正在调用 SFC Agent API: ${apiUrl}/run`);
 
-    const payload = useSnakeCase
-      ? {
-          app_name: appName,
-          user_id: userId,
-          session_id: sessionId,
-          new_message: {
-            role: "user",
-            parts: [{ text: prompt }],
-          },
-          streaming: false,
-        }
-      : {
-          appName,
-          userId,
-          sessionId,
-          newMessage: {
-            role: "user",
-            parts: [{ text: prompt }],
-          },
-        };
+    // Both LUCA and ZORA use snake_case format
+    const payload = {
+      app_name: appName,
+      user_id: userId,
+      session_id: sessionId,
+      new_message: {
+        role: "user",
+        parts: [{ text: prompt }],
+      },
+      streaming: false,
+    };
 
     const response = await fetch(`${apiUrl}/run`, {
       method: "POST",
@@ -142,14 +133,15 @@ export const initSfcSession = async (params: {
   }
 };
 
-// Initialize session for ZORA model (camelCase)
+// Initialize session for ZORA model (snake_case)
 export const initZoraSession = async (params: {
   apiUrl: string;
   appName: string;
   userId: string;
   sessionId: string;
+  preferredLanguage?: string;
 }) => {
-  const { apiUrl, appName, userId, sessionId } = params;
+  const { apiUrl, appName, userId, sessionId, preferredLanguage = "Chinese" } = params;
 
   try {
     console.log(`正在初始化 ZORA Session: ${apiUrl}/apps/${appName}/users/${userId}/sessions/${sessionId}`);
@@ -161,7 +153,9 @@ export const initZoraSession = async (params: {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({}), // ZORA might need empty body or different params
+        body: JSON.stringify({
+          preferred_language: preferredLanguage,
+        }),
       },
     );
 

@@ -100,6 +100,7 @@ export const server = {
           appName: APP_NAME,
           userId,
           sessionId,
+          preferredLanguage: input.preferredLanguage || "Chinese",
         });
 
         // Call ZORA API
@@ -109,7 +110,7 @@ export const server = {
           userId,
           sessionId,
           prompt: zoraPrompt,
-          useSnakeCase: false, // ZORA uses camelCase
+          useSnakeCase: true, // ZORA also uses snake_case
         });
 
         const text = extractModelText(payload)?.trim() ?? "";
