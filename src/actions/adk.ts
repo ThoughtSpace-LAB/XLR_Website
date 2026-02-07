@@ -56,17 +56,31 @@ export const callSfcAgent = async (params: {
   try {
     console.log(`正在调用 SFC Agent API: ${apiUrl}/run`);
 
-    // Both LUCA and ZORA use snake_case format
-    const payload = {
-      app_name: appName,
-      user_id: userId,
-      session_id: sessionId,
-      new_message: {
-        role: "user",
-        parts: [{ text: prompt }],
-      },
-      streaming: false,
-    };
+    let payload: any;
+
+    if (useSnakeCase) {
+      payload = {
+        app_name: appName,
+        user_id: userId,
+        session_id: sessionId,
+        new_message: {
+          role: "user",
+          parts: [{ text: prompt }],
+        },
+        streaming: false,
+      };
+    } else {
+      payload = {
+        appName: appName,
+        userId: userId,
+        sessionId: sessionId,
+        newMessage: {
+          role: "user",
+          parts: [{ text: prompt }],
+        },
+        streaming: false,
+      };
+    }
 
     const response = await fetch(`${apiUrl}/run`, {
       method: "POST",
@@ -140,8 +154,9 @@ export const initZoraSession = async (params: {
   userId: string;
   sessionId: string;
   preferredLanguage?: string;
+  visitCount?: number;
 }) => {
-  const { apiUrl, appName, userId, sessionId, preferredLanguage = "Chinese" } = params;
+  const { apiUrl, appName, userId, sessionId, preferredLanguage = "Chinese", visitCount = 1 } = params;
 
   try {
     console.log(`正在初始化 ZORA Session: ${apiUrl}/apps/${appName}/users/${userId}/sessions/${sessionId}`);
@@ -154,7 +169,8 @@ export const initZoraSession = async (params: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          preferred_language: preferredLanguage,
+          preferredLanguage: preferredLanguage,
+          visitCount: visitCount,
         }),
       },
     );
