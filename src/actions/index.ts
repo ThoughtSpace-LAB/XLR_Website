@@ -71,9 +71,8 @@ export const server = {
       // idToken: z.string().optional(), // .min(1, "Google ID Token is required"), // 暂时注释掉
     }),
     handler: async (input, context) => {
-      // 1. 获取环境变量 (兼容 Cloudflare Runtime 和 构建时变量)
-      // 注意：context.locals 只能在 SSR 模式下获取到，如果是纯静态构建可能会出错，需要确保 adapter 模式正确
-      const env = context.locals?.runtime?.env || import.meta.env;
+      // 1. 获取环境变量 (使用 import.meta.env 兼容 Vercel)
+      const env = import.meta.env;
 
       const nonce = randomUUID();
 

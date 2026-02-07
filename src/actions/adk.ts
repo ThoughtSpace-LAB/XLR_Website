@@ -7,8 +7,8 @@ export const callAdkAgent = defineAction({
     // idToken: z.string().optional(), // 用户 Google ID Token
   }),
   handler: async (input, context) => {
-    // 从 Cloudflare 上下文中获取环境变量
-    const env = context.locals.runtime.env;
+    // 从 Vercel/Node 环境中获取环境变量
+    const env = import.meta.env;
     const cloudRunUrl = env.GCP_CLOUD_RUN_URL;
 
     try {

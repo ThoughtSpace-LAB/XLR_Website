@@ -6,7 +6,8 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import compress from "astro-compress";
-import cloudflare from "@astrojs/cloudflare";
+
+import vercel from "@astrojs/vercel/serverless";
 
 import astrowind from "./vendor/integration";
 
@@ -14,7 +15,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   output: "server",
-  adapter: cloudflare(),
+  adapter: vercel({
+    maxDuration: 60,
+  }),
 
   i18n: {
     defaultLocale: "en",
