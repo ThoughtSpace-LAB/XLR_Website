@@ -82,13 +82,21 @@ export const callSfcAgent = async (params: {
       };
     }
 
+    // ZORA/LUCA agent can take 60-120s to respond; set generous timeout
+    const controller = new AbortController();
+    const timeoutMs = 180_000; // 3 minutes
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
     const response = await fetch(`${apiUrl}/run`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       const errorText = await response.text();
@@ -99,6 +107,10 @@ export const callSfcAgent = async (params: {
     return await response.json();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
+    if (error?.name === 'AbortError') {
+      console.error('SFC Agent API timeout: request exceeded 3 minutes');
+      throw new Error('The AI agent took too long to respond. Please try again.');
+    }
     console.error("SFC Agent API error:", error);
     throw error;
   }

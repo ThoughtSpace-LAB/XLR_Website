@@ -616,24 +616,42 @@ const homeUrl = lang === 'en' ? '/' : `/${lang}/`;
           const hourValue = new Date().getHours().toString();
 
           const minAnimationTime = 3000; // Run animation for at least 3 seconds
+          const MAX_RETRIES = 2; // Retry up to 2 times on network errors
+
+          // Helper: call generateRevelation with retry on network errors
+          async function callWithRetry(params: Parameters<typeof actions.generateRevelation>[0], retries = MAX_RETRIES) {
+            for (let attempt = 0; attempt <= retries; attempt++) {
+              try {
+                return await actions.generateRevelation(params);
+              } catch (err: any) {
+                const isNetworkError = err?.message === 'Failed to fetch' || err?.message?.includes('fetch');
+                if (isNetworkError && attempt < retries) {
+                  console.warn(`[actions] Attempt ${attempt + 1} failed (network), retrying in 2s...`);
+                  await new Promise(r => setTimeout(r, 2000));
+                  continue;
+                }
+                throw err;
+              }
+            }
+          }
 
           try {
             // Use the same action for both models, just pass different model parameter
-            const resultPromise = actions.generateRevelation({
+            const actionParams = {
               num1: numbers[0]?.value?.trim() || '',
               num2: numbers[1]?.value?.trim() || '',
               time: hourValue,
-              gender: genderValue === 'male' ? 'male' : 'female',
+              gender: (genderValue === 'male' ? 'male' : 'female') as 'male' | 'female',
               question: question.value.trim(),
               email: emailValue || undefined,
               preferredLanguage: 'English',
               visitCount: 1,
-              model: selectedModel === 'zora' ? 'zora' : 'luca',
-            });
+              model: (selectedModel === 'zora' ? 'zora' : 'luca') as 'luca' | 'zora',
+            };
 
             // Wait for both the result and the minimum animation time
             const [result] = await Promise.all([
-              resultPromise,
+              callWithRetry(actionParams),
               new Promise(resolve => setTimeout(resolve, minAnimationTime))
             ]);
 
@@ -645,9 +663,9 @@ const homeUrl = lang === 'en' ? '/' : `/${lang}/`;
               updateResultData('We could not fetch your revelation. Please try again.');
             }
           } catch (error) {
-            console.error('[actions] generateRevelation failed', error);
+            console.error('[actions] generateRevelation failed after retries', error);
             const message = error instanceof Error ? error.message : 'We could not fetch your revelation. Please try again.';
-            updateResultData(message);
+            updateResultData(message + '\n\nPlease check your network and try again.');
           }
 
           // Refresh the content view immediately with the new data
