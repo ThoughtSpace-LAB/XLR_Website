@@ -16,7 +16,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   output: "server",
   adapter: vercel({
-    maxDuration: 60,
+    maxDuration: 300,
   }),
 
   i18n: {
