@@ -1038,61 +1038,103 @@ const homeUrl = lang === 'en' ? '/' : `/${lang}/`;
       };
 
       const updateResultData = async (text) => {
-        const parsed = tryParseJson(text);
-        const normalized = normalizeJsonSections(parsed);
+        let parsed = tryParseJson(text);
         const wrapper = document.getElementById('main-wrapper');
         const currentLang = wrapper?.getAttribute('data-lang') || 'en';
         const shouldTranslate = currentLang !== 'zh' && currentLang !== 'zh-CN';
 
-        // Helper to translate an array of strings
-        // Returns original array if translation fails or is skipped
-        const performTranslation = async (texts: string[]) => {
-            if (!shouldTranslate) return texts;
+        // Translate specific fields within the parsed object BEFORE normalization
+        // This ensures individual fields (like "analysis", "advice") are translated separately
+        // so that structural line breaks added in normalizeJsonSections are preserved.
+        if (parsed && typeof parsed === 'object' && shouldTranslate) {
             try {
-              // Create a timeout promise that rejects after 5 seconds
-              const timeoutPromise = new Promise((_, reject) => 
-                setTimeout(() => reject(new Error('Translation timed out')), 5000)
-              );
+                // Fields to check in the JSON object (covers both legacy Chinese keys and English keys)
+                const keysToTranslate = [
+                    '你的问题是', 'question',
+                    '问题拆解', 'analysis', 'analysisVal',
+                    '解读', 'interpretation', 'interpretationVal',
+                    '综合判断', 'comprehensive',
+                    '建议', 'advice', 'adviceVal',
+                    '鼓励', 'wisdom', 'wisdomVal',
+                    '一句话结论', 'oneLine', 'oneLineVal',
+                    '一句话建议'
+                ];
+                // Note: 'spirits' / '用神信息' handles arrays separately below
 
-              // Race the translation against the timeout
-              const { data: transData, error: transError } = await Promise.race([
-                 actions.translate({
-                   texts: texts,
-                   targetLang: currentLang
-                 }),
-                 timeoutPromise
-              ]) as any; // Cast to avoid type issues with race result
-              
-              if (!transError && transData?.translations) {
-                 return transData.translations;
-              } else {
-                 console.error('[translation] failed or API error:', transError);
-                 return texts;
-              }
-            } catch (err) {
-              // This catches both the timeout rejection and any other network errors
-              console.warn('[translation] skipped due to error/timeout (showing original text):', err);
-              return texts;
+                let texts = [];
+                // Map to track where each text came from to put it back
+                let fillBackMap = []; 
+
+                const addText = (obj, key) => {
+                    const val = obj[key];
+                    if (typeof val === 'string' && val.trim().length > 0) {
+                        fillBackMap.push({ obj, key, type: 'simple', index: texts.length });
+                        texts.push(val);
+                    } else if (Array.isArray(val)) {
+                        val.forEach((v, i) => {
+                            if (typeof v === 'string' && v.trim().length > 0) {
+                                fillBackMap.push({ obj, key, type: 'array', arrayIndex: i, index: texts.length });
+                                texts.push(v);
+                            }
+                        });
+                    }
+                };
+
+                // 1. Gather texts from simple keys
+                keysToTranslate.forEach(k => {
+                    if (Object.prototype.hasOwnProperty.call(parsed, k)) {
+                        addText(parsed, k);
+                    }
+                });
+                
+                // 2. Gather texts from array keys (spirits)
+                ['用神信息', 'spirits'].forEach(k => {
+                     if (Object.prototype.hasOwnProperty.call(parsed, k)) {
+                        addText(parsed, k);
+                    }
+                });
+
+                if (texts.length > 0) {
+                    // Create a timeout promise that rejects after 5 seconds
+                    const timeoutPromise = new Promise((_, reject) => 
+                        setTimeout(() => reject(new Error('Translation timed out')), 8000)
+                    );
+
+                    const { data: transData, error: transError } = await Promise.race([
+                        actions.translate({
+                            texts,
+                            targetLang: currentLang
+                        }),
+                        timeoutPromise
+                    ]) as any;
+                    
+                    if (!transError && transData?.translations) {
+                        fillBackMap.forEach(item => {
+                            const translated = transData.translations[item.index];
+                            if (item.type === 'simple') {
+                                item.obj[item.key] = translated;
+                            } else if (item.type === 'array') {
+                                item.obj[item.key][item.arrayIndex] = translated;
+                            }
+                        });
+                    } else {
+                        console.error('[translation] failed or error:', transError);
+                    }
+                }
+            } catch (e) {
+                console.warn('[translation] skipped due to error:', e);
             }
-        };
+        }
+
+        const normalized = normalizeJsonSections(parsed);
 
         if (normalized) {
-          let finalData = { ...normalized };
-          const keys = ['analysis', 'spirits', 'interpretation', 'advice', 'wisdom'];
-          
-          const valuesToTranslate = keys.map(k => normalized[k]);
-          const translatedValues = await performTranslation(valuesToTranslate);
-          
-          keys.forEach((key, index) => {
-             finalData[key] = translatedValues[index];
-          });
-
           data = {
-            analysis: formatResponseHtml(finalData.analysis),
-            spirits: formatResponseHtml(finalData.spirits),
-            interpretation: formatResponseHtml(finalData.interpretation),
-            advice: formatResponseHtml(finalData.advice),
-            wisdom: formatResponseHtml(finalData.wisdom),
+            analysis: formatResponseHtml(normalized.analysis),
+            spirits: formatResponseHtml(normalized.spirits),
+            interpretation: formatResponseHtml(normalized.interpretation),
+            advice: formatResponseHtml(normalized.advice),
+            wisdom: formatResponseHtml(normalized.wisdom),
           };
           return;
         }
