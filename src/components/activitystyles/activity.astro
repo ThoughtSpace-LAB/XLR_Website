@@ -20,7 +20,7 @@ const t = useTranslations(lang);
 const homeUrl = lang === 'en' ? '/' : `/${lang}/`;
 ---
 
-<div class="relative">
+<div class="relative" id="main-wrapper" data-lang={lang}>
   <a href={homeUrl} aria-label="Back to home" class="fixed top-4 right-4 md:top-6 md:right-6 z-50 inline-flex items-center gap-2 py-2 px-3 bg-white/10 text-white rounded-full hover:bg-white/20 transition-all text-sm md:text-base">
     ← {t('activity.back')}
   </a>
@@ -656,16 +656,16 @@ const homeUrl = lang === 'en' ? '/' : `/${lang}/`;
             ]);
 
             if (result?.error) {
-              updateResultData(result.error.message || 'We could not fetch your revelation. Please try again.');
+              await updateResultData(result.error.message || 'We could not fetch your revelation. Please try again.');
             } else if (result?.data?.text) {
-              updateResultData(result.data.text);
+              await updateResultData(result.data.text);
             } else {
-              updateResultData('We could not fetch your revelation. Please try again.');
+              await updateResultData('We could not fetch your revelation. Please try again.');
             }
           } catch (error) {
             console.error('[actions] generateRevelation failed after retries', error);
             const message = error instanceof Error ? error.message : 'We could not fetch your revelation. Please try again.';
-            updateResultData(message + '\n\nPlease check your network and try again.');
+            await updateResultData(message + '\n\nPlease check your network and try again.');
           }
 
           // Refresh the content view immediately with the new data
@@ -1037,22 +1037,72 @@ const homeUrl = lang === 'en' ? '/' : `/${lang}/`;
         };
       };
 
-      const updateResultData = (text) => {
+      const updateResultData = async (text) => {
         const parsed = tryParseJson(text);
         const normalized = normalizeJsonSections(parsed);
+        const wrapper = document.getElementById('main-wrapper');
+        const currentLang = wrapper?.getAttribute('data-lang') || 'en';
+        const shouldTranslate = currentLang !== 'zh' && currentLang !== 'zh-CN';
+
+        // Helper to translate an array of strings
+        // Returns original array if translation fails or is skipped
+        const performTranslation = async (texts: string[]) => {
+            if (!shouldTranslate) return texts;
+            try {
+              // Create a timeout promise that rejects after 5 seconds
+              const timeoutPromise = new Promise((_, reject) => 
+                setTimeout(() => reject(new Error('Translation timed out')), 5000)
+              );
+
+              // Race the translation against the timeout
+              const { data: transData, error: transError } = await Promise.race([
+                 actions.translate({
+                   texts: texts,
+                   targetLang: currentLang
+                 }),
+                 timeoutPromise
+              ]) as any; // Cast to avoid type issues with race result
+              
+              if (!transError && transData?.translations) {
+                 return transData.translations;
+              } else {
+                 console.error('[translation] failed or API error:', transError);
+                 return texts;
+              }
+            } catch (err) {
+              // This catches both the timeout rejection and any other network errors
+              console.warn('[translation] skipped due to error/timeout (showing original text):', err);
+              return texts;
+            }
+        };
 
         if (normalized) {
+          let finalData = { ...normalized };
+          const keys = ['analysis', 'spirits', 'interpretation', 'advice', 'wisdom'];
+          
+          const valuesToTranslate = keys.map(k => normalized[k]);
+          const translatedValues = await performTranslation(valuesToTranslate);
+          
+          keys.forEach((key, index) => {
+             finalData[key] = translatedValues[index];
+          });
+
           data = {
-            analysis: formatResponseHtml(normalized.analysis),
-            spirits: formatResponseHtml(normalized.spirits),
-            interpretation: formatResponseHtml(normalized.interpretation),
-            advice: formatResponseHtml(normalized.advice),
-            wisdom: formatResponseHtml(normalized.wisdom),
+            analysis: formatResponseHtml(finalData.analysis),
+            spirits: formatResponseHtml(finalData.spirits),
+            interpretation: formatResponseHtml(finalData.interpretation),
+            advice: formatResponseHtml(finalData.advice),
+            wisdom: formatResponseHtml(finalData.wisdom),
           };
           return;
         }
 
-        const html = formatResponseHtml(text);
+        // Fallback for non-JSON response (Plain text)
+        let finalText = text;
+        const [translatedText] = await performTranslation([text]);
+        finalText = translatedText;
+
+        const html = formatResponseHtml(finalText);
         data = {
           analysis: html,
           spirits: html,

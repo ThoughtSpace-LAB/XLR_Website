@@ -182,4 +182,59 @@ export const server = {
       };
     },
   }),
+  translate: defineAction({
+    input: z.object({
+      texts: z.array(z.string()),
+      targetLang: z.string(),
+    }),
+    handler: async ({ texts, targetLang }) => {
+      const apiKey = import.meta.env.GOOGLE_TRANSLATE_API_KEY;
+      if (!apiKey) {
+        throw new Error("GOOGLE_TRANSLATE_API_KEY is not configured.");
+      }
+
+      // Google Translate API v2
+      // const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+      const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+
+      try {
+        // Increase default timeout for fetch if running locally behind proxies
+        // Or simply use standard fetch
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s backend timeout
+
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            q: texts,
+            target: targetLang,
+            format: "text", // or 'html' if we want to preserve formatting, but input is markdown/text
+          }),
+          signal: controller.signal,
+        });
+        
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Translation API failed: ${response.status} ${errorText}`);
+        }
+
+        const data = await response.json();
+        // Response format: { data: { translations: [ { translatedText: "..." }, ... ] } }
+        
+        const translations = data.data.translations.map((t: any) => t.translatedText);
+        return { translations };
+        
+      } catch (error) {
+        console.error("Translation error:", error);
+        // Fallback: return original texts marked as failed (or throw to let UI handle)
+        // Throwing allows the client to decide whether to show original or error.
+        throw error;
+      }
+    },
+  }),
 };
